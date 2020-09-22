@@ -1,0 +1,343 @@
+﻿@model HRTool.Models.BulkActions.AllDataList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="page-title">
+    Bulk Action
+    
+</h1>
+
+
+ 
+<div class="md-card">
+    <center>
+        <div class="table-responsive profile-table">
+            <table class="table-bordered display table style2 table-striped  dataTable" style="margin-bottom:0px;">
+                <thead>
+                    <tr class="tblHeading">
+                        <th>Action</th>
+                        <th>Discription</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                        @*<div class="material-switch">
+                            <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" />
+                            <label for="someSwitchOptionSuccess" class="label-success"></label>
+                        </div>*@
+                        @Html.RadioButtonFor(m => m.SchadulId, Model.SchadulId,new {Name = "grp",@id = "SchadulId" })
+                        <a id="headerSch">Schedule  </a>
+
+
+                    </td>
+                    <td>
+                        Schedule work for one or more resources
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.TimesheetId, Model.TimesheetId, new { Name = "grp", @id = "TimesheetId" })
+                        <a id="headerTimesheet">Timesheet</a>
+                    </td>
+                    <td>
+                        Book timesheet for one or more resources for one or more days
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.TravelId, Model.TravelId, new { Name = "grp", @id = "TravelId" })
+                        <a id="headerTravel">Travel</a>
+                    </td>
+                    <td>
+                        Book travel for one or more resources
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.BenifitId, Model.BenifitId, new { Name = "grp", @id = "BenifitId" })&nbsp;&nbsp
+                        <a id="headerBenefit">Benefit</a>
+                    </td>
+                    <td>
+                        Update one or more resourcebenefit
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.ActivityTypeId, Model.ActivityTypeId, new { Name = "grp", @id = "ActivityTypeId" })&nbsp;&nbsp
+                        <a id="headerActivity">Activity Type</a>
+                    </td>
+                    <td>Assign resources to a new Activity Type</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SalaryId, Model.SalaryId, new { Name = "grp", @id = "SalaryId" })&nbsp;&nbsp
+                        <a id="headerSalary">Salary</a>
+                    </td>
+                    <td>Update one or more resourcesalary</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.AccessSetupId, Model.AccessSetupId, new { Name = "grp", @id = "AccessSetupId" })&nbsp;&nbsp
+                        <a id="headerAccessSetUp">Access Setup</a>
+                    </td>
+                    <td>Assign multiple resources to a specific access setup</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.HolidayEntitlementsThisYearId, Model.HolidayEntitlementsThisYearId, new { Name = "grp", @id = "HolidayEntiYearId" })&nbsp;&nbsp
+                        <a id="headerEntiThisYear">Holiday Entitlements (This Year)</a>
+                    </td>
+                    <td>Adjust holiday entitlements for the current year (January 2016 - December 2016)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.HolidayEntitlementsNextYearId, Model.HolidayEntitlementsNextYearId, new { Name = "grp", @id = "HolidayEntitNextYearId" })&nbsp;&nbsp
+                        <a id="headerEntiNextYear">Holiday Entitlements (Next Year)</a>
+                    </td>
+                    <td>Adjust holiday entitlements for next year (January 2017 - December 2017)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.TrainingId, Model.TrainingId, new { Name = "grp", @id = "TrainingId" })&nbsp;&nbsp
+                        <a id="headerTraining">Training</a>
+                    </td>
+                    <td>Assign resources to a new training course</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.SendCVResumeId, Model.SendCVResumeId, new { Name = "grp", @id = "SendCVResumeId" })&nbsp;&nbsp
+                        <a id="headerResumeCV">Send CV/Resume</a>
+                    </td>
+                    <td>Send to one or more customers Resume/CV for one or more resource</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.HolidayAccrualsId, Model.HolidayAccrualsId, new { Name = "grp", @id = "HolidayAccrualsId", disabled = "disabled" })&nbsp;&nbsp
+                        <a id="headerHoliday">Holiday Accruals</a>
+                    </td>
+                    <td>Calculate and update holidays accrued by adding hours worked</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.BookHolidayId, Model.BookHolidayId, new { Name = "grp", @id = "BookHolidayId" })&nbsp;&nbsp
+                        <a id="headerHolidayBook">Book Holiday</a>
+                    </td>
+                    <td>Book holiday leave for one or more resources</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.ResourceSettingsId, Model.ResourceSettingsId, new { Name = "grp", @id = "ResourceSettingsId" })&nbsp;&nbsp
+                        <a id="headerResoureSett">Resource Settings</a>
+                    </td>
+                    <td>Update one or more resource settings</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.UploadResourcesId, Model.UploadResourcesId, new { Name = "grp", @id = "UploadResourcesId" })&nbsp;&nbsp
+                        <a id="headerUploadRes">Upload Resources</a>
+                    </td>
+                    <td>Upload multiple resource profile – customers included</td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div id="searchData">
+
+    <div class="md-card">
+        <div class="form-group">
+            <table class="table-bordered display table style2 table-striped  dataTable" style="margin-bottom:0px;">
+                <thead>
+                    <tr class="tblHeading">
+                        <th>Business Name</th>
+                        <th>Division Name</th>
+                        <th>Pool Name</th>
+                        <th>Function Name</th>
+                        <th>Job Title</th>
+                        <th>Country Of Residence</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                                <select class="form-control" id="busId">
+                                    @foreach (var business in Model.BusinesList)
+                                     {
+                                        <option value="@business.Value" @(business.Selected ? "Selected" : "")>@business.Text</option>
+                                    }
+                                </select>    
+                                        
+                        @*@Html.DropDownListFor(m => m.BusinessName,
+            new SelectList(ViewBag.BusinessList, "Id", "Name"),
+            "Select Bussiness",
+            new { @class = "form-control", @id = "busId" })*@
+                        @*@onchange = "fillDiv(busId)"*@
+                    </td>
+                    <td>
+                        <select class="form-control" id="divsionID">
+                            <option value="0">--Select--</option>
+                            @foreach (var division in Model.DivisionList)
+                            {
+                                <option value="@division.Value" @(division.Selected ? "Selected" : "")>@division.Text</option>
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(m => m.DivisionName,
+              new SelectList(ViewBag.DivisionList, "Id", "Name"),
+              "Select Division",
+              new { @class = "form-control", @id = "divsionID" })*@
+                    </td>
+                    <td>
+                        <select class="form-control" id="poolID">
+                            <option value="0">--Select--</option>
+                            @foreach (var pool in Model.PoolList)
+                            {
+                                <option value="@pool.Value" @(pool.Selected ? "Selected" : "")>@pool.Text</option>
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(m => m.PoolName,
+             new SelectList(ViewBag.PoolList, "Id", "Name"),
+            "Select Pool",
+            new { @class = "form-control", @id = "poolID" })*@
+                    </td>
+                    <td>
+                        <select class="form-control" id="functionID">
+                            <option value="0">--Select--</option>
+                            @foreach (var function in Model.FunctionList)
+                            {
+                                <option value="@function.Value" @(function.Selected ? "Selected" : "")>@function.Text</option>
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(m => m.FunctionName,
+            new SelectList(ViewBag.FunctionList, "Id", "Name"),
+            "Select Function",
+            new { @class = "form-control", @id = "functionID" })*@
+                    </td>
+
+                    <td>
+                        
+                        <select class="form-control" id="jobID">
+                            <option value="0">--Select--</option>
+                            @foreach (var jobtitle in Model.JobTitleList)
+                            {
+                                <option value="@jobtitle.Value" @(jobtitle.Selected ? "Selected" : "")>@jobtitle.Text</option>
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(m => m.JobTitle,
+            new SelectList("Id", "Name"),
+            "Select JobTitle",
+            new { @class = "form-control", @id = "jobID" })*@
+                    </td>
+                    <td>                        
+                        <select class="form-control" id="countryID">
+                            <option value="0">--Select--</option>
+                            @foreach (var countryList in Model.GetCountryList)
+                            {
+                                <option value="@countryList.Value" @(countryList.Selected ? "Selected" : "")>@countryList.Text</option>
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(m => m.CountryOfR,
+            new SelectList("Id", "Name"),
+            "Select Country",
+            new { @class = "form-control", @id = "countryID" })*@
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>  
+ <center>
+        <button class="btn btn-primary" id="btnDisplay" type="submit"   name="search" value="Search">Search</button>
+     <button class="btn btn-danger" id="btnClearFilter" type="submit"   name="Clear" value="Clear" >Clear</button>
+
+
+        
+
+        <div class="">@Html.CheckBox("select employee", false, new { @id = "checkAll" })</div>
+       <div id="serdata" class="md-card">
+            <div class="accordion_container">
+            </div>
+        </div>
+        <div id="empData">
+            <a class="btn btn-success btn-circle  btn-add-EmployeeBenefit" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" onclick="serchEmployeeData()"><i class="fa fa-plus"></i></a>
+        </div>
+        <div id="EmployeeBenefitModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div id="hideHeadder">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                           <h4 class="modal-title">Add Employee Information</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="EmployeeBenefitBody">
+
+                    </div>
+                    <div id="hideFooter">
+                    <div class="modal-footer" id="divfooter">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-Training">Save</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>*@
+                    </div></div>
+                </div>
+
+            </div>
+        </div>
+        @*<div id="btnBulkAction">
+            <input id="btnOpenView" class="table-btns" type="submit" name="OpenView" value="Bulk Action" />
+        </div>*@
+    </center>
+<script>
+        var bulkAction = {
+            getEmpResult: '@Url.Action("GetAllEmployeeResult", "BulkActions")',
+            getSearchList:'@Url.Action("getSerchList", "BulkActions")',
+            fillJob:'@Url.Action("getEmployeeJobTitle", "BulkActions")',
+            fillCountry:'@Url.Action("getEmployeeCountry","BulkActions")',
+            getfunction:'@Url.Action("getFunction", "BulkActions")',
+            getPool:'@Url.Action("getPool", "BulkActions")',
+            filDiv: '@Url.Action("getDivision","BulkActions")',
+            getSchedul: '@Url.Action("AddEdit_Scheduling", "BulkActions")',
+            BindState: '@Url.Action("BindStateDropdown", "BulkActions")',
+            BindCity: '@Url.Action("BindCityDropdown", "BulkActions")',
+            BindAirport: '@Url.Action("BindAirportDropdown", "BulkActions")',
+            getTravel: '@Url.Action("GetAllEmployeeTravelLeave", "BulkActions")',
+            saveTravel: '@Url.Action("AddEdit_TravelLeave","BulkActions")',
+            getTimesheetData:'@Url.Action("getTimesheetData", "BulkActions")',
+            getTimeSheetDetails: '@Url.Action("GetAllTimeSheetDetail", "BulkActions")',
+            AddEditTimeSheet: '@Url.Action("SaveData_TimeSheet", "BulkActions")',
+            getBenifit: '@Url.Action("GetAllBenifitsDetail", "BulkActions")',
+            SaveBenifit: '@Url.Action("AddEditBenifitsData", "BulkActions")',
+            getSalary: '@Url.Action("GetAllSalaryDetail", "BulkActions")',
+            AddEditSalary: '@Url.Action("AddEditSalaryData", "BulkActions")',
+            getCur: '@Url.Action("GetIdCurr", "BulkActions")',
+            getActivityType: '@Url.Action("GetAllActivityTypeDetail", "BulkActions")',
+            AddEditActivityType: '@Url.Action("AddEditActivityTypeData", "BulkActions")',
+            getHolidayThisYear: '@Url.Action("GetAllHolidayThisYear", "BulkActions")',
+            AddEditHolidayThisYear: '@Url.Action("AddEditEmpHoliday", "BulkActions")',
+            getHolidayNextYear: '@Url.Action("GetAllHolidayNextYear", "BulkActions")',
+            AddEditHolidayNextYear: '@Url.Action("AddEditEmpNextHoliday", "BulkActions")',
+            getTrainingList: '@Url.Action("GetAllTrainingDetail", "BulkActions")',
+            getTrainingFiledType: '@Url.Action("GetAllTrainingAddFiledDetail", "BulkActions")',
+            AddEditTraining: '@Url.Action("AddEditTriningData", "BulkActions")',
+            getholiday: '@Url.Action("getHoliday", "BulkActions")',
+            saveBookHoliday: '@Url.Action("SaveBookHoliday", "BulkActions")',
+            SaveSalary: '@Url.Action("SaveSalaryTemp", "BulkActions")',
+            SaveSalarytDeductionTemp: '@Url.Action("SaveSalarytDeductionTemp", "BulkActions")',
+            SaveSalarytDeduction: '@Url.Action("SaveSalarytDeduction", "BulkActions")',
+            SaveEntitlement: '@Url.Action("SaveSalaryEntitlementTemp", "BulkActions")',
+            SaveSalaryEntitlement: '@Url.Action("SaveSalarytEntitlement", "BulkActions")',
+            getBulkResourceFile: '@Url.Action("getBulkResourceFile", "BulkActions")',
+            FileUpload: '@Url.Action("FileUploadData", "BulkActions")',
+            validateResourcefile: '@Url.Action("validateResourceFile", "BulkActions")',
+            SendResumeCVTocustomer: '@Url.Action("SendResumeCVToCustomer", "BulkActions")',
+            sendResumecv: '@Url.Action("sendResumeCV", "BulkActions")',
+            getBulkemployeesetting: '@Url.Action("getBulkEmployeeSetting", "BulkActions")',
+            saveEmplSetting: '@Url.Action("saveEmployeeSetting", "BulkActions")',
+            getBulkAccessSetup: '@Url.Action("getBulkAccesssetup", "BulkActions")',
+            saveBulkAspnetrole: '@Url.Action("saveBulkAspnetRole", "BulkActions")',
+            saveSalarytEntitTemp: '@Url.Action("SaveSalarytEntitTemp", "BulkActions")',
+
+        }
+</script>
+<script src="~/JS/BulkAction/BulkActionJs.js"></script>

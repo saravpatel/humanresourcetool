@@ -1,0 +1,159 @@
+﻿@model HRTool.Models.Resources.EmployeeDocumentListModel
+@{
+       Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+
+<div id="DocumentModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title DocumentTitle">Add Document</h4>
+            </div>
+            <div class="modal-body" align="right" id="AddDocumentBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btn-submit-Document">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="DocumentSignatureModal" class="modal fade signature-popup-main" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title DocumentSignatureTitle">Employee Signature</h4>
+            </div>
+            <div class="modal-body" align="right" id="AddSignatureBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-Signature-Close" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success btn-Signature-Edit" id="btn-submit-Signature">Sign</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<h1 class="page-title">
+    Document List
+    <small>View company documents or upload a new one.</small>
+</h1>
+
+ 
+     
+           
+                <div id="tableDiv">
+                    <input type="hidden" id="Employee_ID" value="@Model.EmployeeID" />
+                    <div class="table-btns">
+                        <a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                        <button class="btn btn-info btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="DocumentModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                            <thead>
+                                <tr class="tblHeading">
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Document/Link</th>
+                                    <th>Category</th>
+                                    <th>Business</th>
+                                    <th>Division</th>
+                                    <th>Pool</th>
+                                    <th>Function</th>
+                                    <th>Created Date</th>
+                                    <th>Sign</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.EmployeeList)
+                                {
+                                    <tr id="@item.Id" class="dataTr">
+                                        <td>@item.Type</td>
+                                        @if (@item.Type == "Document")
+                                        {
+                                            <td>@item.Description</td>
+                                        }
+                                        else if (@item.Type == "Link")
+                                        {
+                                            <td>@item.LinkDisplayText</td>
+                                        }
+                                        @if (@item.Type == "Document")
+                                        {
+                                            <td><a href="~/Upload/Resources/EmployeeDocument/@item.DocumentPath" target="_blank" download="@item.DocumentOriginalPath">@item.DocumentOriginalPath</a></td>
+                                        }
+                                        else if (@item.Type == "Link")
+                                        {
+                                            <td><a href="@item.LinkURL" target="_blank">@item.LinkURL</a></td>
+                                        }
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.Business</td>
+                                        <td>@item.Division</td>
+                                        <td>@item.Pool</td>
+                                        <td>@item.Function</td>
+                                        <td>@item.CreateDate</td>
+                                        <td>@item.Signature</td>
+                                        <td>
+                                            @if (item.SignatureRequire == true && item.Signed == false)
+                                            {
+                                                <button class="btn btn-primary btn-Pending-Signature" onclick="btnPendingSignature(@item.Id)" data-toggle="modal" data-target="#DocumentSignatureModal">Pending</button>
+                                            }
+                                            @if (item.SignatureRequire == true && item.Signed == true)
+                                            {
+                                                <button class="btn btn-primary btn-Signed-Signature" onclick="btnSignedSignature(@item.Id)" data-toggle="modal" data-target="#DocumentSignatureModal">Signed</button>
+
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th><input type="text" class="form-control" placeholder="Type"></th>
+                                    <th><input type="text" class="form-control" placeholder="Description"></th>
+                                    <th><input type="text" class="form-control" placeholder="Name"></th>
+                                    <th><input type="text" class="form-control" placeholder="Category"></th>
+                                    <th><input type="text" class="form-control" placeholder="Business"></th>
+                                    <th><input type="text" class="form-control" placeholder="Division"></th>
+                                    <th><input type="text" class="form-control" placeholder="Pool"></th>
+                                    <th><input type="text" class="form-control" placeholder="Function"></th>
+                                    <th><input type="text" class="form-control" placeholder="Created"></th>
+                                    <th><input type="text" class="form-control" placeholder="Signature"></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>                            
+                        </table>
+                    </div>
+            </div>        
+
+<script type="text/javascript">
+    var constantDocument =
+        {
+            Index: '@Url.Action("Index", "EmployeeDocument")',
+            Open: '@Url.Action("AddDocument", "EmployeeDocument")',
+            AddEdit: '@Url.Action("SaveDocument", "EmployeeDocument")',
+            ImageData: '@Url.Action("ImageData", "EmployeeDocument")',
+            bindDiv: '@Url.Action("bindDivisionList", "EmployeeDocument")',
+            bindpool: '@Url.Action("bindPoolList", "EmployeeDocument")',
+            bindFuncation: '@Url.Action("bindFuncationList", "EmployeeDocument")',
+            deleteDocument: '@Url.Action("DeleteDocument", "EmployeeDocument")',
+            Signature: '@Url.Action("PendingSignature", "EmployeeDocument")',
+            SignatureSigned: '@Url.Action("SignedSignature", "EmployeeDocument")',
+            SaveSignature:'@Url.Action("SaveSignature", "EmployeeDocument")'
+        }
+</script>
+<script src="~/JS/Resources/Document/EmployeeDocumentJS.js"></script>

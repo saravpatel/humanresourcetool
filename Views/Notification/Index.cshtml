@@ -1,0 +1,509 @@
+﻿@model List<HRTool.Models.Notification.AllNotificationList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .menu_section {
+        margin-top: 0;
+    }
+</style>
+<div lang="en" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths uk-notouch wf-roboto-n4-active wf-sourcecodepro-n7-active wf-sourcecodepro-n4-active wf-roboto-n5-active wf-roboto-n3-active wf-roboto-n7-active wf-roboto-i4-active wf-active page_loaded app_initialized" document-events="" ng-app="altairApp" ng-click="onClick($event)" ng-keyup="onKeyUp($event)" ng-class="{
+        'page_loading': pageLoading,
+        'page_loaded': pageLoaded,
+        'app_initialized': appInitialized &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error'))
+}">
+    <div>
+        <style type="text/css">
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+                display: none !important;
+            }
+
+            ng\:form {
+                display: block;
+            }
+
+            .ng-animate-shim {
+                visibility: hidden;
+            }
+
+            .ng-anchor {
+                position: absolute;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title page-title="" ng-bind="page_title" class="ng-binding">Altair Admin - Mailbox</title>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="mobile-web-app-capable" content="yes">
+        <!-- FAVICON -->
+        <link rel="icon" type="image/png" href="~/assets/img/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="~/assets/img/favicon-32x32.png" sizes="32x32">
+        <!-- flag icons -->
+        <link rel="stylesheet" href="~/assets/icons/flags/flags.min.css" media="all">
+        <!-- JS -->
+        <!-- common functions -->
+        <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" type="text/javascript" async=""></script>
+        <script src="~/assets/js/common.min.js"></script>
+        <!-- ANGULAR -->
+        <script src="~/assets/js/angular_common.min.js"></script>
+
+        @*<script src="assets/js/altair_app.min.js"></script>*@
+
+        <!-- altair_app.js:-->
+        <script src="~/app/app.js"></script>
+        <script src="~/app/app.factory.js"></script>
+        <script src="~/app/app.service.js"></script>
+
+        <!-- main stylesheet -->
+        <script src="~/bower_components/uikit/js/uikit.min.js"></script>
+        <script src="~/bower_components/uikit/js/components/accordion.min.js"></script>
+        <script src="~/bower_components/uikit/js/components/nestable.min.js"></script>
+        <script src="~/assets/js/custom/uikit_beforeready.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="~/bower_components/uikit/css/uikit.almost-flat.min.css">
+        <link rel="stylesheet" href="~/assets/css/main.min.css" media="all" id="main_stylesheet">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_a.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_b.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_c.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_d.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_e.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_f.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_g.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_h.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_i.min.css">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/themes/_theme_dark.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700%7CRoboto:400,300,500,700,400italic&amp;subset=latin,latin" media="all">
+        <link type="text/css" rel="stylesheet" href="~/assets/css/style_switcher.min.css">
+        <script src="~/app/shared/style_switcher/style_switcher.js" async=""></script>
+    </div>
+    <div ng-class="{
+    'sidebar_main_active': primarySidebarActive &amp;&amp; !miniSidebarActive &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_main_open': primarySidebarOpen &amp;&amp; !miniSidebarActive &amp;&amp; !slimSidebarActive &amp;&amp; !topMenuActive &amp;&amp; largeScreen &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_mini': miniSidebarActive &amp;&amp; largeScreen &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_slim sidebar_slim_inactive': slimSidebarActive &amp;&amp; largeScreen &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_main_hiding': primarySidebarHiding,
+    'sidebar_secondary_active': secondarySidebarActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'top_bar_active': toBarActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'page_heading_active': pageHeadingActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'header_double_height': headerDoubleHeightActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'main_search_active': mainSearchActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'header_full': fullHeaderActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'boxed_layout': boxedLayoutActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'login_page': $state.is('login'),
+    'error_page': $state.includes('error'),
+    'uk-height-1- 1': page_full_height,
+    'footer_active': footerActive,
+    'main_search_persistent': mainSearchPersistent
+}" content-sidebar="" class="sidebar_main_open">
+        <h1 class="page-title">
+            Notifications
+            
+            <small>All messages.</small>
+        </h1>
+
+        <script type="text/javascript">
+            angular
+                    .module('altairApp')
+                    .controller('mailboxCtrl', [
+                            '$rootScope',
+                            '$scope',
+                            '$timeout',
+                            'variables',
+                            function ($rootScope, $scope, $timeout, variables) {
+                                var $mailbox = $('#mailbox');
+                                // select message
+                                $mailbox
+                                        .on('ifChanged', '.select_message', function() {
+                                            $(this).is(':checked') ? $(this).closest('li').addClass('md-card-list-item-selected') : $(this).closest('li').removeClass('md-card-list-item-selected');
+                                        });
+                                // select all messages
+                                $('#mailbox_select_all').on('ifChanged', function() {
+                                    var $this = $(this);
+                                    $mailbox.find('.select_message').each(function() {
+                                        $this.is(':checked') ? $(this).iCheck('check') : $(this).iCheck('uncheck');
+                                    })
+                                });
+                                // show message details
+                                $mailbox.on('click', '.md-card-list ul > li', function(e) {
+
+                                    if (!$(e.target).closest('.md-card-list-item-menu').length && !$(e.target).closest('.md-card-list-item-select').length) {
+
+                                        var $this = $(this);
+                                        if (!$this.hasClass('item-shown')) {
+                                            // get height of clicked message
+                                            var el_min_height = $this.height() + $this.children('.md-card-list-item-content-wrapper').actual("height");
+                                            // hide opened message
+                                            $mailbox.find('.item-shown').velocity("reverse", {
+                                                begin: function (elements) {
+                                                    $(elements).removeClass('item-shown').children('.md-card-list-item-content-wrapper').hide().velocity("reverse");
+                                                }
+                                            });
+                                            // show message
+                                            $this.velocity({
+                                                marginTop: 40,
+                                                marginBottom: 40,
+                                                marginLeft: - 20,
+                                                marginRight: - 20,
+                                                minHeight: el_min_height
+                                            }, {
+                                                duration: 300,
+                                                easing: variables.easing_swiftOut,
+                                                begin: function (elements) {
+                                                    $(elements).addClass('item-shown');
+                                                },
+                                                complete: function (elements) {
+                                                    // show: message content, reply form
+                                                    $(elements).children('.md-card-list-item-content-wrapper').show().velocity({
+                                                        opacity: 1
+                                                    });
+                                                    // scroll to message
+                                                    var container = $('body'),
+                                                            scrollTo = $(elements);
+                                                    container.animate({
+                                                        scrollTop: scrollTo.offset().top - $('#page_content').offset().top - 8
+                                                    }, 1000, variables.bez_easing_swiftOut);
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                });
+                                // hide message on: outside click, esc button
+                                $(document).on('click keydown', function(e) {
+                                    if (
+                                            (!$(e.target).closest('li.item-shown').length) || e.which == 27
+                                            ) {
+                                        $mailbox.find('.item-shown').velocity("reverse", {
+                                            begin: function(elements) {
+                                                $(elements).removeClass('item-shown').children('.md-card-list-item-content-wrapper').hide().velocity("reverse");
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                    ]);
+                    
+    </script>
+
+        <div id="main_view" ng-class="{'uk-height-1-1': page_full_height }" class="ng-scope">
+            <!-- restricted main content -->
+            <div ng-class="{ 'uk-height-1-1': page_full_height }" class="ng-scope">
+                <div ui-view="" autoscroll="false" ng-class="{ 'uk-height-1-1': page_full_height }" class="ng-scope">
+                    <div id="" class="ng-scope padding-left-30">
+                        <div id="page_content_inner">
+                            <div ng-controller="mailboxCtrl" class="md-card-list-wrapper" id="mailbox">
+                                <div class="uk-width-large-10-12 uk-container-center">
+                                    <div class="md-card-list">
+                                        @{
+                                            int Count = 0;
+                                        }
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            string NotificationTitle = string.Empty;
+                                            if (item.Header == "TimeSheet Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has been submitted timesheet to waiting for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You submitted timesheet have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You submitted timesheet have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Scheduling Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has been scheduled to work from " + item.StartDate + " to " + item.EndDate + " and waiting for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You work schedule from " + item.StartDate + "  to " + item.EndDate + " have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You work schedule from " + item.StartDate + "  to " + item.EndDate + " have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Travel Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted a travel request for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You travel request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You travel request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Annual Leave Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted a holidays request for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You Annual Leave request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You Annual Leave request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Other Leave Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted Other Leave request for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You Other Leave request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You Other Leave request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Training Request")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " is requesting name of training training from " + item.StartDate + " to " + item.EndDate + " and waiting for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You training request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You training request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Training Request Worker")
+                                            {
+                                                NotificationTitle = item.Title + " " + item.Name + "has requested for a" + item.ApproveStatus + "for you to attend.";
+                                            }
+                                            else if (item.Header == "New Vacancy")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted vacancy for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You training request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You training request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Uplift Submission")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has been uplifted  from " + item.StartDate + " to " + item.EndDate + "  and waiting for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "Uplift submission rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "Uplift submission approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Skill Endorsement")
+                                            {
+
+                                                NotificationTitle = "Well done!" + item.Title + " " + item.Name + "has endorsed you.";
+                                            }
+                                            else if (item.Header == "New Resource")
+                                            {
+                                                NotificationTitle = item.Title + " " + item.Name + " has joined your team.";
+                                            }
+                                            else if (item.Header == "Document")
+                                            {
+                                                NotificationTitle = item.Title + " " + item.Name + " a new Document has been posted into your document section";
+                                            }
+                                            else if (item.Header == "Sick Leave")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted Sick Leave request for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You Sick Leave request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You Sick Leave request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Maternity/Paternity Leave")
+                                            {
+                                                if (item.ApproveStatus.Trim() == "Pending")
+                                                {
+                                                    NotificationTitle = item.Title + " " + item.Name + " has submitted Mat/Pat Leave request for your approval";
+                                                }
+                                                else if (item.ApproveStatus.Trim() == "Reject")
+                                                {
+                                                    NotificationTitle = "You Mat/Pat Leave request have been rejected";
+                                                }
+                                                else
+                                                {
+                                                    NotificationTitle = "You Mat/Pat Leave request have been approved";
+                                                }
+                                            }
+                                            else if (item.Header == "Skill Added")
+                                            {
+                                                NotificationTitle = item.Title + " " + item.Name + "has added a new skill.";
+
+                                            }
+                                            else if (item.Header == "Delete employee")
+                                            {
+                                                NotificationTitle = item.Title + " " + item.Name + " has left your team.";
+                                            }
+                                            else if (item.Header == "New Document")
+                                            {
+                                                NotificationTitle = "A new Document has been posted into your document section";
+                                            }
+                                            else if (item.Header == "New Vacancy Posted")
+                                            {
+                                                NotificationTitle = "A " + item.ApproveStatus + "has been created and posted settled with the" + item.vacancyLink;
+                                            }
+
+                                            else if (item.Header == "New Applicant")
+                                            {
+                                                NotificationTitle = item.Name + "has applied for the position of" + item.ApproveStatus;
+                                            }
+
+                                            else if (item.Header == "Document Signature")
+                                            {
+                                                NotificationTitle = "There is a document waiting to be signed by you";
+                                            }
+
+                                            <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" hierarchical-slide="">
+                                                <!-- ngRepeat: message in messages -->
+                                                <li on-last-repeat="" id="NotificationLink" class="ng-scope" style="animation-delay: 0ms;animation-delay: 0ms; margin: 1px 0px!important;" onclick="GetNotificationDetails(@item.Detailid,'@item.EmployeeId','@item.Header','@Count')">
+                                                    @*<div class="md-card-list-item-menu" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                                            <a href="#" class="md-icon material-icons"></a>
+                                                            <div class="uk-dropdown uk-dropdown-small">
+                                                                <ul class="uk-nav">
+                                                                    <li><a href="#"><i class="material-icons"></i> Reply</a></li>
+                                                                    <li><a href="#"><i class="material-icons"></i> Archive</a></li>
+                                                                    <li><a href="#"><i class="material-icons"></i> Delete</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>*@
+                                                    @*<span class="md-card-list-item-date ng-binding">08 Dec</span>*@
+                                                    <div class="md-card-list-item-select">
+                                                        @*<div class="icheckbox_md">
+                                                                <input type="checkbox" id="chknotification_@item.id" name="chknotification" class="select_message ng-pristine ng-untouched ng-valid ng-empty" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                                                <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="md-card-list-item-avatar-wrapper">
+                                                        <!-- ngIf: message.sender_avatar -->
+                                                        @if (item.ImagePath == null)
+                                                        {
+                                                            <span class="md-card-list-item-avatar md-bg-cyan-600" ng-if="!message.sender_avatar">@item.Initials</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="md-card-list-item-avatar ng-scope" alt="" src="@Url.Content(item.ImagePath)">
+                                                        }
+                                                    </div>
+                                                    <div class="md-card-list-item-sender">
+                                                        <!-- ngIf: message.verified --><span class="ng-binding ng-scope">
+                                                            @*<a id="header_@item.id">@item.Title @item.Name @item.Header</a>*@
+                                                            <a id="header_@item.id">@NotificationTitle</a>
+                                                        </span><!-- end ngIf: message.verified -->
+                                                        <!-- ngIf: !message.verified -->
+                                                    </div>
+                                                    <div class="md-card-list-item-content-wrapper">
+                                                        <div class="md-card-list-item-content ng-binding" id="NotificationDetails_@item.Detailid-@Count">
+
+                                                        </div>
+                                                    </div>
+                                                </li><!-- end ngRepeat: message in messages -->
+                                            </ul>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        load();
+
+    })
+    function GetNotificationDetails(Detailsid, EmployeeID, Header, index) {
+        $.ajax(
+              {
+                  url: '@Url.Action("GetNotificationDetailsByKey", "Notification")',
+                  data: {
+                      EmployeeID: EmployeeID,
+                      Header: Header,
+                      DetailsId : Detailsid
+                  },
+                  type: "POST",
+                  success: function (data) {
+                      $('#NotificationDetails_' + Detailsid + '-' + index).html('');
+                      $('#NotificationDetails_' + Detailsid + '-' + index).html(data);
+
+                      //$("li[id='NotificationLink']").removeAttr("style");
+                      //$("li[id='NotificationLink']").css('margin','1px 0px');
+
+
+                  }
+              });
+    }
+    function load() {
+        $.ajax(
+            {
+                url: '@Url.Content("~/Notification/loadstringdata")',
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                data: {},
+                type: "GET",
+                success: function (data) {
+                    $("#content").append(data);
+                    // window.location = '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text;
+                }
+            });
+    }
+    //    $('a').click(function () {
+
+    @*$.ajax({
+            type: 'POST',
+            url: '@Url.Content("~/Approve/Index")',
+            data: {
+            },
+            success: function (result) {
+            }
+        });*@
+    //        window.location.href = '/Approve/Index';
+
+    //      });
+
+</script>

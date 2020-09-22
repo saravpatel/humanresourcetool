@@ -1,0 +1,39 @@
+﻿@model HRTool.Models.Settings.BradfordFactorViewModel
+
+<input type="hidden" id="BradfordFactorId" value="@Model.Id" />
+<table class="table style4">
+    <thead>
+        <tr>
+            <th>TRIGGER POINT</th>
+            <th>LOWER VALUE</th>
+            <th>UPPER VALUE</th>
+            <th>ALERT</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><input size="1" type="number" value="@Model.LowerValue1" id="LowerValue1" name="LowerValue1" class="form-control" placeholder="Lower Value 1" /></td>
+            <td><input size="1" type="number" value="@Model.UpperValue1" id="UpperValue1" name="UpperValue1" class="form-control" placeholder="Upper Value 1" /></td>
+            <td><input type="text" value="@Model.Alert1" id="Alert1" name="Alert1" class="form-control" placeholder="Alert 1" /></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input size="1" type="number" value="@Model.LowerValue2" id="LowerValue2" name="LowerValue2" class="form-control" placeholder="Lower Value 2" /></td>
+            <td><input size="1" type="number" value="@Model.UpperValue2" id="UpperValue2" name="UpperValue2" class="form-control" placeholder="Upper Value 2" /></td>
+            <td><input type="text" value="@Model.Alert2" id="Alert2" name="Alert2" class="form-control" placeholder="Alert 2" /></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><input size="1" type="number" value="@Model.LowerValue3" id="LowerValue3" name="LowerValue3" class="form-control" placeholder="Lower Value 3" /></td>
+            <td><input size="1" type="number" value="@Model.UpperValue3" id="UpperValue3" name="UpperValue3" class="form-control" placeholder="Upper Value 3" /></td>
+            <td><input type="text" value="@Model.Alert3" id="Alert3" name="Alert3" class="form-control" placeholder="Alert 3" /></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><input size="1" type="number" value="@Model.LowerValue4" id="LowerValue4" name="LowerValue4" class="form-control" placeholder="Lower Value 4" /></td>
+            <td><input size="1" type="number" value="@Model.UpperValue4" id="UpperValue4" name="UpperValue4" class="form-control" placeholder="Upper Value 4" /></td>
+            <td><input type="text" value="@Model.Alert4" id="Alert4" name="Alert4" class="form-control" placeholder="Alert 4" /></td>
+        </tr>
+    </tbody>
+</table>

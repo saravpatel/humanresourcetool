@@ -1,0 +1,36 @@
+﻿@model HRTool.Models.commonViewModel
+@{
+    ViewBag.Title = "Case Log";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+   
+</style>
+<div id="page_content_inner">
+   
+
+    <h1 class="page-title">
+        Case Management
+        <small>Manage case details for employees.</small>
+    </h1>
+<div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("List", "AdminCaseLog")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var constantAdminCaseLog = {
+        addEdit: '@Url.Action("AddEditAdminCaseLog", "AdminCaseLog")',
+        saveData: '@Url.Action("SaveData", "AdminCaseLog")',
+        ImageUrl: '@Url.Action("ImageData", "AdminCaseLog")',
+        userId: '@Model.UserId',
+        userFullName: '@Model.Name',
+        DeleteData: '@Url.Action("DeleteData", "AdminCaseLog")',
+    }
+</script>
+<script src="~/JS/Admin/AdminCaseLog/AdminCaseLogJS.js"></script>

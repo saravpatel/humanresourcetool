@@ -1,0 +1,389 @@
+﻿@model HRTool.Models.Admin.TMSApplicantViewModel
+   @{
+       var IsUploadCoverLetter = Model.VacancyDetails.MustUploadCoverLetter == true ? 1 : 0;
+       var IsUploadResumeOrCV = Model.VacancyDetails.MustUploadResumeCV == true ? 1 : 0;
+       var IsQuestion1On = Model.VacancyDetails.Question1On == true ? 1 : 0;
+       var IsQuestion2On = Model.VacancyDetails.Question2On == true ? 1 : 0;
+       var IsQuestion3On = Model.VacancyDetails.Question3On == true ? 1 : 0;
+       var IsQuestion4On = Model.VacancyDetails.Question4On == true ? 1 : 0;
+       var IsQuestion5On = Model.VacancyDetails.Question5On == true ? 1 : 0;
+}
+<div id="wizard" class="swMain">
+    <ul class="tablistnew three">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Personal
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Questions
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span>Done
+            </a>
+        </li>
+    </ul>
+    <input type="hidden" value="@Model.Id" id="ApplicantHiddenId" />
+    <input type="hidden" value="@Model.VacancyDetails.Id" id="ApplicantVacancyId" />
+    <input type="hidden" value="@IsUploadCoverLetter" id="hiddenUploadCoverLetter" />
+    <input type="hidden" value="@IsUploadResumeOrCV" id="hiddenUploadResumeOrCV" />
+
+    <input type="hidden" value="@IsQuestion1On" id="hiddenOuestion1On" />
+    <input type="hidden" value="@IsQuestion2On" id="hiddenOuestion2On" />
+    <input type="hidden" value="@IsQuestion3On" id="hiddenOuestion3On" />
+    <input type="hidden" value="@IsQuestion4On" id="hiddenOuestion4On" />
+    <input type="hidden" value="@IsQuestion5On" id="hiddenOuestion5On" />
+    <div id="step-1">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="FirstName">First Name*</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txt_FirstName" value="@Model.FirstName" data-toggle="tooltip" data-placement="right" name="FirstName" title="First Name" required>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-FirstName" style="display:none;" data-valmsg-for="FirstName" data-valmsg-replace="true">The Fist Name is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="LastName">Last Name*</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txt_LastName" value="@Model.LastName" data-toggle="tooltip" data-placement="right" name="LastName" title="Last Name" required>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-LastName" style="display:none;" data-valmsg-for="LastName" data-valmsg-replace="true">The Last Name is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Email">Email*</label>
+            </div>
+            <div class="col-md-6">
+                <input type="email" class="form-control" id="txt_Email" value="@Model.Email" data-toggle="tooltip" data-placement="right" name="Email" title="Email" required>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Email" style="display:none;" data-valmsg-for="Email" data-valmsg-replace="true">The Valid Email is required.</span>
+                <span class="field-validation-error" id="lbl-error-EmailExist" style="display:none;" data-valmsg-for="Email" data-valmsg-replace="true">This Email is AllReady Exist.</span>
+                <span class="field-validation-error" id="lbl-error-EmailValid" style="display:none;" data-valmsg-for="Email" data-valmsg-replace="true">This Email is Not Valid.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="GenderList">Gender</label>
+            </div>
+            <div class="col-md-6">
+                @foreach (var items in Model.GenderList)
+                {
+                    if (Model.GenderName == items.Value)
+                    {
+                        <label class="radio-btn selectGender">
+                            <input type="radio" checked="checked" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                            <span>@items.Text</span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="radio-btn">
+                            <input type="radio" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                            <span>@items.Text</span>
+                        </label>
+                    }
+                }
+
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-GenderList" style="display:none;" data-valmsg-for="GenderList" data-valmsg-replace="true">The Gender Name is required.</span>
+            </div>
+        </div>
+
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="dateOfBirth">Date Of Birth*</label>
+            </div>
+            <div class="col-md-6">
+                @*@if (Model.Dob != "")
+                    {*@
+                <input type="text" class="form-control mrg-btm datepicker" id="txt_DateOfBitrh" value="@Model.DateOfBirth" data-toggle="tooltip" data-placement="right" name="dateOfBirth" title="Date Of Birth">
+                @*}
+                    else{
+                    <input type="text" class="form-control mrg-btm datepicker" id="dateOfBirth" data-toggle="tooltip" name="dateOfBirth" title="Date Of Birth">
+                    }*@
+
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-dateOfBirth" style="display:none;" data-valmsg-for="dateOfBirth" data-valmsg-replace="true">The Date Of Birth is required.</span>
+                <span class="field-validation-error" id="lbl-error-validdateOfBirth" style="display:none;" data-valmsg-for="dateOfBirth" data-valmsg-replace="true">Please Select The Valid Date Of Birth.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="HouseNumber">House Number</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="txt_HouseNumber" data-toggle="tooltip" data-placement="right" name="HouseNumber" title="HouseNumber" required>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="PostalCode">Postal Code</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" max="10" class="form-control" id="txt_PostalCode" value="@Model.PostalCode" data-toggle="tooltip" data-placement="right" name="PostalCode" title="Postal Code" required>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="md-btn md-btn-primary btn-find-address" id="FindAddress">Find Address</button>
+
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-PostCode" style="display:none;" data-valmsg-for="PostCode" data-valmsg-replace="true">The PostCode is required.</span>
+            </div>
+        </div>
+
+        @*<div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Address">Address</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="AddressText" data-toggle="tooltip" data-placement="right" value="@Model.Address" name="Address" title="Address" required>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Address" style="display:none;" data-valmsg-for="Address" data-valmsg-replace="true">The Address is required.</span>
+            </div>
+        </div>*@
+
+        <div class="row marbot10">
+            <label class="col-md-3">Address</label>
+            <div class="col-md-6">
+                <textarea name="Address" class="form-control textarea-resizeNone" id="AddressText" data-toggle="tooltip" data-placement="right">@Model.Address</textarea>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Address" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">The Address is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="OtherContactDetails">Phone Numbers (Other Contact Details)</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txt_OtherContactDetails" value="@Model.OtherContactDetails" data-toggle="tooltip" data-placement="right" name="OtherContactDetails" title="Other Contact Details" required>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-OtherContactDetails" style="display:none;" data-valmsg-for="OtherContactDetails" data-valmsg-replace="true">The Other Contact Details is required.</span>
+            </div>
+        </div>
+        <input type="hidden" id="SelectSetpId" value="@Model.StatusID" />
+    </div>
+
+    <div id="step-2">
+        @if (Model.VacancyDetails.MustUploadCoverLetter)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="CoverLetter">Cover Letter*</label>
+                </div>
+                <div class="col-md-3">
+                    <label class="uploadBrowse" id="CoverLetterName">@Model.CoverLetterPathOriginal</label>
+                    <input type="hidden" id="txt_CoverLetterName" value="@Model.CoverLetterPath" />
+                </div>
+                <div class="col-md-3 text-right">
+                    <label type="file" for="CoverLetterfileToUpload" class="btn btn-success md-btn-small">BROWSE</label>
+                    <input type="file" id="CoverLetterfileToUpload" style="display: none">
+
+                </div>
+                <div>
+                    <a id="removeCoverLetter">Remove File</a>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-CoverLetter" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The Cover Letter is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.ApplicationFormPath != "")
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="DownloadApplicationForm">Download Application Form</label>
+                </div>
+                <div class="col-md-3">
+                    @*<label class="uploadBrowse" id="CoverLetterName">@Model.CoverLetterPathOriginal</label>
+                        <input type="hidden" id="txt_CoverLetterName" value="@Model.CoverLetterPath" />*@
+                </div>
+                <div class="col-md-3 text-right">
+                    @*<label type="file" for="CoverLetterfileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">BROWSE</label>
+                        <input type="file" id="CoverLetterfileToUpload" style="display: none">*@
+                    <a href="~/Upload/AdminVacancy/@Model.DownloadApplicationFormLink" id="DownloadLink" class="md-btn md-btn-primary md-btn-small" target="_blank">Download</a>
+
+                </div>
+                <div class="col-md-3">
+                    @*<span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>*@
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="UploadApplicationForm">Upload Application Form*</label>
+                </div>
+                <div class="col-md-3">
+                    <label class="uploadBrowse" id="UploadApplicationFormName">@Model.UploadApplicationFormPathOriginal</label>
+                    <input type="hidden" id="txt_UploadApplicationFormName" value="@Model.UploadApplicationFormPath" />
+                </div>
+                <div class="col-md-3 text-right">
+                    <label type="file" for="UploadApplicationFormfileToUpload" class="btn btn-success md-btn-small">BROWSE</label>
+                    <input type="file" id="UploadApplicationFormfileToUpload" style="display: none">
+                </div>
+                <div>
+                    <a id="removeApplicationForm">Remove File</a>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-UploadApplicationForm" style="display:none;" data-valmsg-for="UploadApplicationForm" data-valmsg-replace="true">The Upload Application Form is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.MustUploadResumeCV)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="ResumePath">Resume/CV*</label>
+                </div>
+                <div class="col-md-3">
+                    <label class="uploadBrowse" id="ResumePathName">@Model.ResumePathOriginal</label>
+                    <input type="hidden" id="txt_ResumePathName" value="@Model.ResumePath" />
+                </div>
+                <div class="col-md-3 text-right">
+                    <label type="file" for="ResumePathNamefileToUpload" class="btn btn-success md-btn-small">BROWSE</label>
+                    <input type="file" id="ResumePathNamefileToUpload" style="display: none">
+                </div>
+                <div>
+                    <a id="removeUploadResumeCV">Remove File</a>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-ResumePathName" style="display:none;" data-valmsg-for="ResumePathName" data-valmsg-replace="true">The Resume Path is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.Question1On)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="Question1Answer">@Model.VacancyDetails.Question1Text</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txt_Question1Answer" value="@Model.Question1Answer" onclick="removeValidationForQue1()" data-toggle="tooltip" data-placement="right" name="Question1Answer" title="Question1 Answer" required>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Question1Answer" style="display:none;" data-valmsg-for="Question1Answer" data-valmsg-replace="true">The Question1 Answer is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.Question2On)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="Question2Answer">@Model.VacancyDetails.Question2Text</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txt_Question2Answer" value="@Model.Question2Answer" data-toggle="tooltip" data-placement="right" name="Question2Answer" title="Question1 Answer" required>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Question2Answer" style="display:none;" data-valmsg-for="Question2Answer" data-valmsg-replace="true">The Question2 Answer is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.Question3On)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="Question3Answer">@Model.VacancyDetails.Question3Text</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txt_Question3Answer" value="@Model.Question3Answer" data-toggle="tooltip" data-placement="right" name="Question3Answer" title="Question1 Answer" required>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Question3Answer" style="display:none;" data-valmsg-for="Question3Answer" data-valmsg-replace="true">The Question3 Answer is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.Question4On)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="Question4Answer">@Model.VacancyDetails.Question4Text</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txt_Question4Answer" value="@Model.Question4Answer" data-toggle="tooltip" data-placement="right" name="Question4Answer" title="Question1 Answer" required>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Question4Answer" style="display:none;" data-valmsg-for="Question4Answer" data-valmsg-replace="true">The Question4 Answer is required.</span>
+                </div>
+            </div>
+        }
+        @if (Model.VacancyDetails.Question5On)
+        {
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="Question5Answer">@Model.VacancyDetails.Question5Text</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txt_Question5Answer" value="@Model.Question5Answer" data-toggle="tooltip" data-placement="right" name="Question5Answer" title="Question1 Answer" required>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Question5Answer" style="display:none;" data-valmsg-for="Question5Answer" data-valmsg-replace="true">The Question5 Answer is required.</span>
+                </div>
+            </div>
+        }
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="SourceList">Source</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-SourceId" class="form-control">
+                    @foreach (var item in Model.SourceList)
+                    {
+                        if (Model.SourceID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-HiringLeadList" style="display:none;" data-valmsg-for="HiringLeadList" data-valmsg-replace="true">Source is required.</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="step-3">
+        <div>
+            Thank you
+        </div>
+    </div>
+</div>
+<script>
+    function removeValidationForQue1() {
+        $("#lbl-error-Question1Answer").hide();
+    }
+</script>

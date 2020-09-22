@@ -1,0 +1,55 @@
+﻿@model HRTool.Models.Settings.ObjectiveOfEmployeePerformance
+<input type="hidden" value="@Model.EmployeeId" id="Hiddemn_EmployeeId" />
+<input type="hidden" value="@Model.EmpPerformanceId" id="EmpPerId" />
+<input type="hidden" value="@Model.Id" id="GoalId"/>
+<div class="row marbot10">
+    <div class="form-group">        
+        <label class="control-label col-md-2">Goal</label>
+        <div class="col-md-10">
+           <input type="text" class="form-control" id="GoalName" value="@Model.GoalName"/>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageforGoal" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none">Goal is Required.</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">        
+        <label class="control-label col-md-2">Description</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="GoalDescription" value="@Model.GoalDescription"/>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageforDescription" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none">Description is Required.</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-2">Due Date</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control mrg-btm datepicker" id="GoalDueDate" value="@Model.DueDate"/>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none">Due Date is Required.</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <h3 class="text-center">Progress</h3>
+    <div class="form-group">
+
+        <div class=" col-md-2">
+            <label class="control-label">Unit</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control col-md-6" id="GoalUnitValue" max="50" value="@Model.UnitPercent" />
+        </div>
+        <div class="col-md-2">
+            <label class="control-label col-md-2">Max</label>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control col-md-4" id="GoalProgressMax" min="0" max="100" value="100" />
+        </div>
+    </div>
+</div>

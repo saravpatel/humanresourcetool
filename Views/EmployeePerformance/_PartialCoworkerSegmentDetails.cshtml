@@ -1,0 +1,167 @@
+﻿@model HRTool.Models.Settings.SegmentViewModel
+<style>
+    .btn-border {
+        border: 3px solid #2b3643 !important;
+    }
+
+    .active {
+        background-color: #36c6d3 !important;
+    }
+
+    .over-btnTest {
+        background-color: #4caf50;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 23px;
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+        border: 1px solid #4caf50;
+        margin-left: 20px;
+    }
+</style>
+<br />
+<br />
+
+
+
+
+<div class="col-md-12" align="center">
+
+    @*<input type="hidden" value="@Model.Id" id="PerCusDetailId" />
+    <input type="hidden" value="@Model.JsonQuestionString" id="QuestJSONString" />
+    <input type="hidden" value="@Model.IsJobRoleCustomer" id="IsJobroleCustomer" />
+    <input type="hidden" value="@Model.Id" id="CustomerJsonDetailID" />
+    <input type="hidden" id="EmployeePerfromceDetailID" value="@Model.EmpPerDetailId" />*@
+    @if (Model.Flag == 2)
+    {
+        if (Model.OverallScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Overall Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <select class="form-control" id="drpOverAllScore">
+                        @foreach (var item in Model.OverallScoreList)
+                        {
+                            <option value="@item.Value" selected="selected">@item.Value</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" id="drpOverAllScore" disabled>
+                        @foreach (var item in Model.OverallScoreList)
+                        {
+                            <option value="@item.Value">@item.Value</option>
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Overall Score is required</span>
+            </div>
+        }
+        if (Model.CoreScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Core Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <select class="form-control" id="drpCoreScore">
+                        @foreach (var item in Model.CoreScoreList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" id="drpCoreScore" disabled>
+                        @foreach (var item in Model.CoreScoreList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Core Score is required</span>
+            </div>
+        }
+
+        if (Model.JobRoleScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Job Role Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <select class="form-control" id="drpJobRoleScore">
+                        @foreach (var item in Model.JobRoleScoreList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" id="drpJobRoleScore" disabled>
+                        @foreach (var item in Model.JobRoleScoreList)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Job Role Score is required</span>
+            </div>
+        }
+        <div class="col-md-offset-3 col-sm-6 ">
+            <label for="normal_working">Comments</label>
+            @if (Model.IsActivePastFlag == 1)
+            {
+                <textarea class="form-control textarea-resizeNone" id="OverviewComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments">@Model.Comments</textarea>
+            }
+            else
+            {
+                <textarea class="form-control textarea-resizeNone" id="OverviewComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments" value="@Model.Comments" disabled></textarea>
+            }
+        </div>
+        <div class="col-md-12">
+            @if (Model.IsActivePastFlag == 1)
+            {
+                <button id="btn-SaveCustomerReviewDetails" onclick="saveEmployeePerformanceDetails(@Model.Flag)" class="btn btn-success" value="Submit">Submit</button>
+            }
+            else
+            {
+            }
+        </div>
+    }
+    else if (Model.Flag == 1)
+    {
+        for (int i = 1; i <= Model.TotalCoreQuestionList; i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag);">@i</button>
+        }
+    }
+    else if (Model.Flag == 0)
+    {
+        for (int i = 1; i <= Model.TotalJobroleQuestionList; i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag);">@i</button>
+        }
+    }
+    <div id="QuestionDetails"></div>
+</div>
+<script>
+    var saveCusto = {
+        saveCustomerInviteDetails: '@Url.Action("saveCustomerInviteDetails", "EmployeePerformance")',
+    }
+</script>
+<script>
+    displayProgressbar();
+    function displayProgressbar() {
+        $(".Question_Score").ionRangeSlider({
+            type: "single",
+            min: 0,
+            max: 5
+        });
+    }
+
+</script>
+

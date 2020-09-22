@@ -1,0 +1,474 @@
+﻿@model HRTool.Models.Admin.TMSVacancyJobDetailsViewModel
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+    #page_content_inner {
+        margin-top: 5px;
+    }
+    div.editable {
+        width: 100%;
+        
+    }
+</style>
+
+<link href="~/ion.rangeSlider-2.1.7/ion.rangeSlider-2.1.7/css/normalize.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/main.min.css" media="all">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/bootstrap.cerulean.css" />
+
+<link href="~/Scripts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/custom.css" media="all">
+<link rel="stylesheet" href="~/Content/Site.css" media="all">
+<link href="~/Zebra_Dialog-master/css/default/zebra_dialog.css" rel="stylesheet" />
+<link href="~/Zebra_Datepicker-master/public/css/default.css" rel="stylesheet" />
+<link href="~/Content/smart_wizard.css" rel="stylesheet" />
+
+<div id="ApplyModel" data-backdrop="static" class="modal fade lg-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title ApplyTitle">Add Applicant</h4>
+                    </div>
+                    <div class="modal-body" id="ApplyJobBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-success" id="btn-submit-Steps">ADD</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="topbarhead">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1">
+            <img src="~/img/logo_main.png" alt="" width="140"> 
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="container">
+    <br />
+    <div id="page_content_inner" class="col-md-10 col-md-offset-1" style="padding-top: 0 !important;">
+        <br />
+        <br />
+        <div class="md-card">
+            <br />
+            <div >
+                <div class="vacancydetailpage">
+                    <div clas="row">
+                        <div class="col-md-8">
+                            <h1 class="VacancyDetailTitle">@Model.Title</h1>
+                            <br/>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+                                    @Model.JobDescription
+                                    </script>*@
+
+                                    <label id="destinationElement"></label>
+                                    @*<label>@Model.JobDescription</label>*@
+
+                                    @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+</div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                            <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+            @Model.JobDescription
+            </script>*@
+
+                                <label id="destinationElement"></label>
+                                @*<label>@Model.JobDescription</label>*@
+
+                                @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+                            </div>
+                             <div class="desc">
+                                @*<div class="editable">@Model.JobDescription</div>*@
+                                @Html.Raw(Model.JobDescription)
+                                @*<script type="text/html" id="templateFr">
+                                    @Model.JobDescription
+                                    </script>*@
+
+                                    <label id="destinationElement"></label>
+                                    @*<label>@Model.JobDescription</label>*@
+
+                                    @*<div class="tablewid">
+                <table style="width: 70%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="editable">@Model.JobDescription</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>*@
+</div>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="hidden" id="JobVacancyID" value="@Model.Id" />
+                            <div class="divapply">
+                                <div id="divApplyNowTop" class="top">
+                                    <button id="btnApply" class="btn btn-success buttonapply jobapply" data-toggle="modal" data-target="#ApplyModel">Apply for this job</button>
+                                </div>
+                                <div id="divApplyNowWidget" class="info">
+                                    <label>Link to this job</label>
+                                    <input type="text" id="txt_Link" class="text" disabled="disabled">
+                                    <label>Share this job</label>
+                                     
+                                        <ul class="list-inline list-group" id="atstbx" style="margin-bottom: 0px;padding-left: 6px;">
+                                            
+                                                <li class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                                                <li class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                                                <li class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></li>
+                                                <li class="googleplus"><i class="fa fa-google-plus" aria-hidden="true"></i> </li>
+                                             
+                                        </ul>
+                                        
+                                </div>
+                            </div>
+                            <div class="divapply">
+                                <div class="info">
+                                    <label>Location</label>
+                                    <p>@Model.Location</p>
+                                </div>
+                            </div>
+                            <div class="divapply">
+                                <div class="info">
+                                    <label>Business/Division/Pool or Function</label>
+                                    <h5>@Model.Business/@Model.Division/@Model.Pool &amp; @Model.Function</h5>
+                                </div>
+                            </div>
+                            <div class="divapply">
+                                <div class="info">
+                                    <label>Salary</label>
+                                    <p>@Model.Salary per month</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p class="text-center">© @DateTime.Now.Year - Evolution</p>
+</footer>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/Ajjquery.smartWizard.js"></script>
+<script src="~/JS/SmartWizard/jquery.smartWizard.min.js"></script>
+<script src="~/JS/SmartWizard/jquery.smartWizard.js"></script>
+
+<script src="~/Scripts/jquery.smartWizard.js"></script>
+<link href="~/assets/css/progress-wizard.min.css" rel="stylesheet" />
+
+<script src="~/jquery_selectlist/scripts/jquery.selectlist.min.js"></script>
+<script src="~/Zebra_Dialog-master/javascript/zebra_dialog.js"></script>
+<script src="~/Zebra_Datepicker-master/public/javascript/zebra_datepicker.js"></script>
+<script src="~/JS/mustache.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var ConstantJob =
+        {
+            Open:'@Url.Action("JobDetails", "TMSVacancy")',
+            Add: '@Url.Action("AddApplicant", "TMSVacancy")',
+            EmailCheck:'@Url.Action("Emailcheck", "TMSVacancy")',
+            FileUpload: '@Url.Action("FileUploadData", "TMSVacancy")',
+            getDescription:'@Url.Action("getDescription", "TMSVacancy")',
+        }
+</script>
+<script>
+   //// terst();
+   // function terst()
+   // {
+   //     vacId=$("#JobVacancyID").val();
+   //     $.ajax({
+   //         url: ConstantJob.getDescription,
+   //         data: { VacancyId: vacId },
+   //         success: function (data) {
+   //             debugger;
+   //             var textD = JSON.stringify(data.JobDescription);               
+   //             var templateWithData = Mustache.to_html(textD, {
+   //                 RootTag: textD
+   //             });
+   //                 $("#destinationElement").empty().html(templateWithData);
+   //         }
+   //     });
+   // }
+
+</script>
+
+<script src="~/JS/Job/VacancyApplyJS.js"></script>

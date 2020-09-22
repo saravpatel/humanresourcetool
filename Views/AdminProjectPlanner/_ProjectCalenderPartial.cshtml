@@ -1,0 +1,677 @@
+﻿@model HRTool.Models.Admin.AdminProjectPlannerYearModel
+@using HRTool.CommanMethods;
+@{
+    int count = 1;
+    var Take = 0;
+    var IsSchdule = Model.IsSchedule == true ? 1 : 0;
+    var IsTravel = Model.IsTravel == true ? 1 : 0;
+    var IsTimeSheet = Model.IsTimeSheet == true ? 1 : 0;
+    var IsUplift = Model.IsUplift == true ? 1 : 0;
+    var className = Model.IsSchedule ? "schedulingIcon" : Model.IsTravel ? "travelSheetIcon" : Model.IsTimeSheet ? "timeSheetIcon" : "upliftSheetIcon";
+}
+
+<style type="text/css">
+    .schedulingIcon{
+    display: block;
+    opacity: 0.5;
+    position: relative;
+    height: 45px;
+    background: #D9EDF7 url(./img/planner/icnscheduling1.png) no-repeat center center;
+    cursor: pointer;
+    background-size: 22px;
+}
+    .timeSheetIcon{
+            display: block;
+    opacity: 0.5;
+    position: relative;
+    height: 45px;
+    background: #DFF0D8 url(./img/planner/icntimesheets.png) no-repeat center center;
+    cursor: pointer;
+    background-size: 22px;
+    }
+    .travelSheetIcon{
+        display: block;
+    opacity: 0.5;
+    position: relative;
+    height: 45px;
+    background: #D9EDF7 url(./img/planner/icntravel.png) no-repeat center center;
+    cursor: pointer;
+    background-size: 24px;
+    }
+    .upliftSheetIcon{
+        display: block;
+    opacity: 0.5;
+    position: relative;
+    height: 45px;
+    background: #D9EDF7 url(./img/planner/icnuplift1.png) no-repeat center center;
+    cursor: pointer;
+    background-size: 22px;
+    }
+</style>
+<div id="ProjectCalanderMonth">
+<input type="hidden" value="@IsSchdule" id="hdnSchedule" />
+<input type="hidden" value="@IsTravel" id="hdnTravel"/>
+<input type="hidden" value="@IsTimeSheet" id="hdnTimeSheet" />
+<input type="hidden" value="@IsUplift" id="hdnUplift" />
+<input type="hidden" value="@Model.isExistWorkPattern" id="isWorkpatternExistModel" />
+<input type="hidden" value="@Model.isExistWorkPatternLeave" id="isWorkpatternLeave" /><br/>
+<div class="planner_calendar_header">
+    <div class="changemonth">
+        <a href="#" class="changemonth_previous" onclick="ChangePreviousMonth(@Model.YearId,@IsSchdule ,@IsTravel,@IsTimeSheet,@IsUplift)">
+            <span class="fa fa-chevron-left"></span>
+        </a>
+        <span>January @Model.YearId - December @Model.YearId</span>
+        <a href="#" class="changemonth_next" onclick="ChangeNextMonth(@Model.YearId,@IsSchdule ,@IsTravel,@IsTimeSheet,@IsUplift)">
+            <span class="fa fa-chevron-right"></span>
+        </a>
+    </div>
+</div>
+ <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title tabbable-line tab-full">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+
+                        @if (Model.IsSchedule)
+                        {
+                             <a id="ScheduleProjrctPlannerLink">Scheduling</a> 
+                        }
+                        else
+                        {
+                             <a id="ScheduleProjrctPlannerLink" onclick="GetAllSchedulingLeave(@Model.YearId,1,0,0,0)">Scheduling</a> 
+                        }
+                    </li>
+                    <li>
+                      @if (Model.IsTravel)
+                      {
+                       <a id="TravelProjrctPlannerLink" href="#">Travel</a>
+                      }
+                      else
+                      {
+                         <a id="TravelProjrctPlannerLink" onclick="GetAllTravelLeave(@Model.YearId,0,1,0,0)">Travel</a> 
+                      }
+                    </li>
+
+
+                    <li>
+                        @if (Model.IsTimeSheet && SessionProxy.IsCustomer == false)
+                        {
+                             <a id="TimesheetProjrctPlannerLink">Timesheet</a> 
+                        }
+                        else if (SessionProxy.IsCustomer == false)
+                        {
+                           <a  id="TimesheetProjrctPlannerLink" onclick="GetAllTimeSheetLeave(@Model.YearId,0,0,1,0)">Timesheet</a>
+                        }
+                    </li>
+                    <li>
+                        @if (Model.IsUplift)
+                        {
+                        <a id="UpliftProjrctPlannerLink" href="#">Uplift</a>
+                        }
+                        else
+                        {
+                            <a id="UpliftProjrctPlannerLink" onclick="GetAllUpliftLeave(@Model.YearId,0,0,0,1)">Uplift</a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+ 
+<div class="clearfix"></div>
+
+<div class="panelcompany plannerMain_company">
+    <div class="tablescompany">
+
+        @foreach (var item in Model.listOfMonthModel)
+            {
+                count = 1;
+                Take = 0;
+                <section class="month col-md-4 col-xs-12 col-lg-4 col-sm-6" id="month_@item.MonthId">
+                    
+                <table class="FixedTablesAdminProject">
+                    <thead>
+                        <tr>
+                            @if (Model.IsTimeSheet == true)
+                            {
+                                <th colspan="2" onclick="FilterByMonth(@IsSchdule,@IsTravel,@IsTimeSheet,@IsUplift,@Model.YearId,@item.MonthId)">
+                                    <a href="#">@item.MonthName</a>
+                                </th>
+                                <th colspan="5">
+                                    <span id="timesheetMonthCount_@item.MonthId"></span>
+                                </th>
+                            }
+                            @if (Model.IsUplift == true)
+                            {
+                                <th colspan="2">
+                                    <a href="#" onclick="FilterByMonth(@IsSchdule,@IsTravel,@IsTimeSheet,@IsUplift,@Model.YearId,@item.MonthId)">@item.MonthName</a>
+                                </th>
+                                <th colspan="5"><span id="upliftMonthCount_@item.MonthId"></span></th>
+
+                            }
+                            @if (Model.IsSchedule == true)
+                            {
+                                <th colspan="2"><a href="#" onclick="FilterByMonth(@IsSchdule,@IsTravel,@IsTimeSheet,@IsUplift,@Model.YearId,@item.MonthId)">@item.MonthName</a>
+                                </th>
+                                <th colspan="5">
+                                    <span id="scheduleMonthCount_@item.MonthId" ></span>
+                                </th>
+                            }
+                            @if (Model.IsTravel == true)
+                            {
+                                <th colspan="2" onclick="FilterByMonth(@IsSchdule,@IsTravel,@IsTimeSheet,@IsUplift,@Model.YearId,@item.MonthId)">
+                                    <a href="#" id="TravelMonth">@item.MonthName</a>
+                                </th>
+                                <th colspan="5">
+                                    <span id="travelMonthCount_@item.MonthId"></span>
+                                </th>
+                            }
+
+                        </tr>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @for (int i = 0; i < item.listOfDayModel.FirstOrDefault().StartDay; i++)
+                            {
+                                <td class="add">
+                                    <span> </span>
+                                </td>
+                                Take = 7 - item.listOfDayModel.FirstOrDefault().StartDay;
+                            }
+                            @foreach (var itemDay in item.listOfDayModel.Take(Take))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+                                           @*<a data-toggle="popover" class="@className" onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown">
+                                            </a>
+                                               @if (className == "schedulingIcon")
+                                               {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                               }
+                                               else if (className == "travelSheetIcon")
+                                               {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>
+                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                               }
+                                               else if (className == "timeSheetIcon")
+                                               {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                               }
+                                               else if (className == "upliftSheetIcon")
+                                               {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                               }
+
+                                        </div>
+                                        @*<span class="@className" >@itemDay.DayId</span>*@
+                                    }
+                                    else
+                                    {
+                                        if (className == "schedulingIcon")
+                                        {
+                                            <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "travelSheetIcon")
+                                        {
+                                            <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "timeSheetIcon")
+                                        {
+                                            <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "upliftSheetIcon")
+                                        {
+                                            <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }                                           @*<span>@itemDay.DayId</span>*@
+                                        
+                                    }
+                                </td>
+                                
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var itemDay in item.listOfDayModel.Skip(Take).Take(7))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+                                        
+                                        @*<a data-toggle="popover" class="@className " onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown">
+                                            </a>
+                                            @if (className == "schedulingIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                    <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "travelSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>
+                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "timeSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "upliftSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        if (className == "schedulingIcon")
+                                        {
+                                            <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "travelSheetIcon")
+                                        {
+                                            <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "timeSheetIcon")
+                                        {
+                                            <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "upliftSheetIcon")
+                                        {
+                                            <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var itemDay in item.listOfDayModel.Skip(Take + 7).Take(7))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown">
+                                            </a>
+                                            @if (className == "schedulingIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                    <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "travelSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>                         
+                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "timeSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+
+                                            }
+                                            else if (className == "upliftSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1,0);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                        </div>
+                                            @*<a data-toggle="popover" class="@className" onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@                                       
+                                    }
+                                    else
+                                    {
+                                        @*<span>@itemDay.DayId</span>*@
+                                        if (className == "schedulingIcon")
+                                        {
+                                            <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "travelSheetIcon")
+                                        {
+                                            <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "timeSheetIcon")
+                                        {
+                                            <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                         }
+                                        else if (className == "upliftSheetIcon")
+                                        {
+                                            <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var itemDay in item.listOfDayModel.Skip(Take + 14).Take(7))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown">
+                                            </a>
+                                            @if (className == "schedulingIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                    <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "travelSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "timeSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+
+                                            }
+                                            else if (className == "upliftSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                        </div>
+                                            @*<a data-toggle="popover" class="@className" onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@                                      
+                                    }
+                                    else
+                                    {
+                                        @*<span>@itemDay.DayId</span>*@
+                                    if (className == "schedulingIcon")
+                                    {
+                                        <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "travelSheetIcon")
+                                    {
+                                        <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "timeSheetIcon")
+                                    {
+                                        <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "upliftSheetIcon")
+                                    {
+                                        <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                    }
+                                    
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var itemDay in item.listOfDayModel.Skip(Take + 21).Take(7))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+
+                                            @*<a data-toggle="popover" data-target="#my-popover-content" class="@className" onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@
+                                        @*<a data-toggle="popover" data-target="#anotherDiv_@itemDay.DayId" class="@className" data-content="Some content inside the popover"></a>
+                                        <div id="anotherDiv_@itemDay.DayId">
+                                            <input type="button" value="Scheduling" id="btnScheduling" />
+                                            <input type="button" value="Drilldown" id="btndrilldown" />
+                                        </div>*@
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown" >
+                                            </a>
+                                            @if (className == "schedulingIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                    <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "travelSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "timeSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "upliftSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                                @*<span>@itemDay.DayId</span>*@
+                                    if (className == "schedulingIcon")
+                                    {
+                                        <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "travelSheetIcon")
+                                    {
+                                        <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "timeSheetIcon")
+                                    {
+                                        <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                    }
+                                    else if (className == "upliftSheetIcon")
+                                    {
+                                        <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                    }
+                                    </td>
+                            }
+                        </tr>
+
+                        <tr>
+                            @foreach (var itemDay in item.listOfDayModel.Skip(Take + 28).Take(7))
+                            {
+                                <td class="add">
+                                    @if (itemDay.IsSheduling || itemDay.IsTimeSheet || itemDay.IsTravel || itemDay.IsUplift)
+                                    {
+
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle @className" id="dropdownMenu1" data-toggle="dropdown">
+                                            </a>
+                                            @if (className == "schedulingIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Scheduling</a></li>
+                                                    <li><a href="#" onclick="DrillDownData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "travelSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Travel</a></li>
+                                                    <li><a href="#" onclick="TravelDrillDownData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "timeSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Timesheet</a></li>
+                                                    <li><a href="#" onclick="TTimesheetDrillDownData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                            else if (className == "upliftSheetIcon")
+                                            {
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">Uplift</a></li>
+                                                    <li><a href="#" onclick="UpliftDrillDownData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,1);">Drilldown</a></li>
+                                                </ul>
+                                            }
+                                        </div>
+                                            @*<a data-toggle="popover" class="@className" onclick="getProjectPlannerData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId);" data-content="Some content inside the popover"></a>*@
+                                    }
+                                    else
+                                    {
+                                        @*<span>@itemDay.DayId</span>*@
+                                        if (className == "schedulingIcon")
+                                        {
+                                            <span class="text-center scheduling"  data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="SchedulingData(@IsSchdule,@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "travelSheetIcon")
+                                        {
+                                            <span class="icnTravel" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TravelData(@IsTravel,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if(className== "timeSheetIcon")
+                                        {
+                                            <span class="icnTimesheet" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="TimesheetData(@IsTimeSheet,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                        else if (className == "upliftSheetIcon")
+                                        {
+                                            <span class="icnuplift" data-id="0" data-yearid="@itemDay.YearId" data-monthid="@itemDay.MonthId" data-dayid="@itemDay.DayId" onclick="UpliftData(@IsUplift,@itemDay.YearId,@itemDay.MonthId,@itemDay.DayId,0,0);">@itemDay.DayId</span>
+                                        }
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        }
+    </div>
+</div>
+    </div>
+
+<div id="EmployeeBenefitModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div id="hideHeadder">
+                <div class="modal-header">
+                    <h4 class="modal-title">Scheduling</h4>
+                    <button style="margin-top:-25px;" type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+            </div>
+            <div class="modal-body" id="EmployeeBenefitBody">
+            </div>
+            <div id="hideFooter">
+                <div class="modal-footer" id="divfooter">
+                    <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_Scheduling">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_TravelLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Travel</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_TravelLeaveBody">
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>               
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_TimeSheetModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">TimeSheet</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_TimeSheetBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_UpliftModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Uplift</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_UpliftBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>

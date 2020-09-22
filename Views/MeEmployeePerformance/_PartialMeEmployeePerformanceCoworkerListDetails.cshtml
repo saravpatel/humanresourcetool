@@ -1,0 +1,173 @@
+﻿@model HRTool.Models.Resources.Coworker
+<link href="~/Content/awesomplete.css" rel="stylesheet" />
+<html>
+<body>
+    <br />
+    <div class="table-btns">
+        <a class="btn btn-success btn-circle  btn-add-Coworker-For-Review" title="Add Partitipants" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddCoworker"><i class="material-icons">add</i></a>
+        <label class="pull-right" style="font-weight:bold">@Model.TotalInvitedCoworker</label>
+    </div>
+    <div class="modal fade" id="AddCoworker" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h3 class="modal-title salaryTitle text-center" id="myModalLabel">Invite Reviewers</h3>
+                    <h6 class="modal-title salaryTitle text-center" id="myModalLabel">Invite other employee to complete 360° feedback for this employee.</h6>
+
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body" id="AddGeneralSkillsBody">
+                    <div style="text-align: center !important" class="margin-bot10">
+                        <input type="hidden" id="selectID" />
+                        <label style="font-weight:bold">Select Employee:</label><input type="text" class="awesomplete form-control" style="width:350px" id="empNameTextDetail" size="70" placeholder="Employee Name" />
+                    </div>
+                    <div class="form-inline text-center">
+                        <button class="btn btn-primary" id="btnSendEmailToInvitee" onclick="sendEmailtoCoworker(@Model.IsActivePastFlag)">
+                            Invitation BY Email
+                        </button>
+                        <input type="text" id="txtnameUsername" class="form-control" style="width:150px" placeholder="Name&Surname" />
+                        <input type="text" id="txtEmail" class="form-control" style="width:150px" placeholder="Email-ID" />
+                    </div>
+
+                </div>
+                <br>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-success" id="btn-submit-AddCoworkerDetail">Send</button>*@
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.TotalInvitedCoworker == "")
+    {
+        <div class="text-center">
+
+            <h3>
+                <i class="fa fa-info fa-2x" aria-hidden="true"></i>
+                <br /> No Participants Found
+            </h3>
+            <h6>No employees have  participated in 360° performance review</h6>
+        </div>
+    }
+    else
+    {
+        <table id="CustomerListtable" class="table-bordered display table style2 table-striped">
+            <thead class="tblHeading">
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CoworkerInviteList)
+                {
+
+                    <tr style="font-weight:bold" id="@item.coworkerId" class="dataTr">
+                        <td>
+                            @item.EmpName
+                        </td>
+                        <td>
+                            @if (item.Status == "Invited")
+                            {
+                                @item.Status
+                            }
+                            else if (item.Status == "Declined")
+                            {
+                                @item.Status
+                            }
+                            else
+                            {
+                                <a class="btn-link" style="cursor: pointer;" onclick="getCoworkerResponse(@item.Id)">@item.Status</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+
+</html>
+
+<script>
+    var constantvar = {
+        getEmp: '@Url.Action("getEmplyeeUserList", "MeEmployeePerformance")',
+        SendEmailToInvitees: '@Url.Action("SendEmailToInvitees", "MeEmployeePerformance")',
+        CoWorkerQueDetailsForMe: '@Url.Action("CoWorkerQueDetailsForMe", "MeEmployeePerformance")',
+    }
+</script>
+<script>
+    function getCoworkerResponse(Id) {
+        debugger;
+        //$.ajax({
+        //    url: constantvar.CoWorkerQueDetailsForMe,
+        //    data: { Id: "", PerCoworkerId: Id },
+        //    success: function (response) {
+        //        debugger;
+        //        $('#CoworkerDetails').html();
+        //        $('#CoworkerDetails').html(response);
+
+        //    }
+        //})
+        var link = '@Url.Action("CoWorkerQueDetailsForMe", "MeEmployeePerformance", new { Id = "", PerCoworkerId = "replace" })';
+        link = link.replace("replace", Id);
+        var win = window.open(link, '_blank');
+        win.focus();
+
+    }
+    searchUserListData();
+    function searchUserListData() {
+        debugger;
+        var listData = [];
+        $.ajax({
+            url: constantvar.getEmp,
+            data: {},
+            success: function (data) {
+                debugger;
+                $.each(data.EmployeesUserList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                var input = document.getElementById("empNameTextDetail");
+                debugger;
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                    filter: function (text, input) {
+                        return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
+                    },
+                    replace: function (text) {
+                        var before = this.input.value.match(/^.+,\s*|/)[0];
+                        this.input.value = before + text + ", ";
+
+                    }
+                });
+                awesomplete.list = listData;
+                $('#empNameTextDetail').change(function () {
+                    var eid = [];
+                    value = $('#empNameTextDetail').val();
+                    var x = new Array();
+                    debugger;
+                    x = value.split(", ");
+                    for (var i = 0; i < data.EmployeesUserList.length; i++) {
+                        for (var j = 0; j < x.length; j++) {
+                            if (x[j] == data.EmployeesUserList[i].Text) {
+                                eid.push(data.EmployeesUserList[i].Value);
+                            }
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+
+            }
+        });
+    }
+
+
+</script>

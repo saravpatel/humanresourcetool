@@ -1,0 +1,102 @@
+﻿@model HRTool.Models.Resources.EmployeePerformanceViewModel
+@{
+    ViewBag.Title = "EmployeePerformance";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+<input type="hidden" value="@Model.EmployeeId" id="Hiddemn_EmployeeId" />
+
+<div id="StartNewPerformanceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Performance Review</h4>
+            </div>
+            <div class="modal-body" id="StartNewPerformanceTaskBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btn-saveReview">Start Review</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="CoDetailsView">    
+</div>
+
+<form>
+    <div class="optionblue employeeperformanceform">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active ActiveReview">
+                <a href="#">
+                    <span class="icnactivereview"></span>
+                    <span class="title">Active Reviews</span>
+                </a>
+            </li>
+            <li class="PastReview">
+                <a href="#">
+                    <span class="icnpastreview"></span>
+                    <span class="title">Past Reviews</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div id="page_content_inner" class="ActiveReviewDiv">
+                    <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                        <div class="md-card-content" id="ActiveReviewHTML">
+                            @Html.Action("ActiveReviews", "EmployeePerformance", new { Model.EmployeeId })
+                        </div>
+                    </div>
+                </div>
+                <div id="page_content_inner" class="PastReviewDiv" style="display:none;">
+                    <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                        <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                            <div class="md-card-content" id="PastReviewHTML">
+                                @Html.Action("PastReviews", "EmployeePerformance", new { Model.EmployeeId })
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var constantEmpPerformance = {
+        StartNewReview: '@Url.Action("StartNewReview", "EmployeePerformance")',
+        saveReview: '@Url.Action("SaveNewReview", "EmployeePerformance")',
+        SaveNewReview: '@Url.Action("SaveNewReview", "EmployeePerformance")',
+        getReviewDetails: '@Url.Action("getReviewDetails", "EmployeePerformance")',
+        InviteCoworkerForFeedback: '@Url.Action("InviteCoworkerForFeedback", "EmployeePerformance")',
+        SendMailToCoworker: '@Url.Action("SendMailToCoworker", "EmployeePerformance")',
+        InviteCustomerForFeedback: '@Url.Action("InviteCustomerForFeedback", "EmployeePerformance")',
+        SendMailToCustomer: '@Url.Action("SendMailToCustomer", "EmployeePerformance")',
+        UpdateCoWorkerCoreScore: '@Url.Action("UpdateCoWorkerCoreScore", "EmployeePerformance")',
+        GetEmployeeSegmentsDetailsById: '@Url.Action("GetEmployeeSegmentsDetailsById", "EmployeePerformance")',
+        saveEmployeePerformanceDetails: '@Url.Action("saveEmployeePerformanceDetails", "EmployeePerformance")',
+        sendMailtoshareperformnce: '@Url.Action("sendMailtoshareperformnce", "EmployeePerformance")',
+        sendMailtoUnshareperformnce: '@Url.Action("sendMailtoUnshareperformnce", "EmployeePerformance")',
+        SavecloseEmployeePerformanceReview: '@Url.Action("SavecloseEmployeePerformanceReview", "EmployeePerformance")',
+        GetEmployeeSegmentData: '@Url.Action("GetEmployeeSegmentData", "EmployeePerformance")',
+        getQuestionDataByID: '@Url.Action("getQuestionDataByID", "EmployeePerformance")',
+        EmployeeObjectiveOfPerformance: '@Url.Action("EmployeeObjectiveOfPerformance", "EmployeePerformance")',
+        saveEmployeePerformanceGoal: '@Url.Action("saveEmployeePerformanceGoal", "EmployeePerformance")',
+        ViewPerformanceObjectiveProgress: '@Url.Action("ViewPerformanceObjectiveProgress", "EmployeePerformance")',
+        GoalImageData: '@Url.Action("GoalImageData", "EmployeePerformance")',
+        SavePerfromanceGoalDocument: '@Url.Action("SavePerfromanceGoalDocument", "EmployeePerformance")',
+        GetGoalComment: '@Url.Action("GetGoalComment", "EmployeePerformance")',
+        SaveGoalComment: '@Url.Action("SaveGoalComment", "EmployeePerformance")',
+        FilterByGoalStatus: '@Url.Action("FilterByGoalStatus", "EmployeePerformance")',
+        GetGoalChart: '@Url.Action("GetGoalChart", "EmployeePerformance")',
+        UpdateGoalChart: '@Url.Action("UpdateGoalChart", "EmployeePerformance")',
+        CheckEmployeeReviewExist: '@Url.Action("CheckEmployeeReviewExist", "EmployeePerformance")',
+
+    }
+</script>
+
+<script src="~/JS/Resources/Performance/EmployeePerformanceJS.js"></script>

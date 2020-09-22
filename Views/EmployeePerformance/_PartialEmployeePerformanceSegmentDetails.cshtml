@@ -1,0 +1,318 @@
+﻿@model HRTool.Models.Settings.SegmentViewModel
+
+<style>
+    .btn-border {
+        border: 3px solid #2b3643 !important;
+    }
+
+    .active {
+        background-color: #36c6d3 !important;
+    }
+
+    .over-btnTest {
+        background-color: #4caf50;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 23px;
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+        border: 1px solid #4caf50;
+        margin-left: 20px;
+    }
+</style>
+<br />
+<br />
+
+
+
+
+<div class="col-md-12" align="center">
+
+    <input type="hidden" value="@Model.Id" id="PerCusDetailId" />
+    <input type="hidden" value="@Model.JsonQuestionString" id="QuestJSONString" />
+    <input type="hidden" value="@Model.IsJobRoleCustomer" id="IsJobroleCustomer" />
+    <input type="hidden" value="@Model.Id" id="CustomerJsonDetailID" />
+    <input type="hidden" id="EmployeePerfromceDetailID" value="@Model.EmpPerDetailId" />
+    <label typeof="hidden" id="lblOverview" style="display:none">@Model.performanceEmployeeDetailslist</label>
+    <label typeof="hidden" id="lblOriginalCoreSeg" style="display:none">@Model.coreSegOriginalData</label>
+    <label typeof="hidden" id="lblOriginalJobRole" style="display:none">@Model.JobRoleOriginalData</label>
+    <label typeof="hidden" id="lblCoreSeg" style="display:none">@Model.coreSegData</label>
+    <label typeof="hidden" id="lblJobRole" style="display:none">@Model.jobRoleSegData</label>
+    @if (Model.Flag == 2)
+    {
+        if (Model.OverallScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Overall Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {<i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                <select class="form-control" id="drpOverAllScore">
+                    <option>--Select Overall Score--</option>
+                    @foreach (var item in Model.OverallScoreList)
+                        {
+                            if (item.Value == Model.OverAllScore)
+                            {
+                            <option value="@item.Value" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Value">@item.Value</option>
+
+                        }
+                        @*<option value="@item.Value" selected="selected">@item.Value</option>*@
+                    }
+                </select>
+                }
+                else
+                {
+                    <i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                    <select class="form-control" id="drpOverAllScore" disabled>
+                        <option>--Select Overall Score--</option>
+                        @foreach (var item in Model.OverallScoreList)
+                        {
+                            if (item.Value == Model.OverAllScore)
+                            {
+                                <option value="@item.Value" selected="selected">@item.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Value</option>
+
+                            }
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="Label_Overall" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Overall Score is required</span>
+            </div>
+        }
+        if (Model.CoreScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Core Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                    <select class="form-control" id="drpCoreScore">
+                        <option>--Select CoreScoreList--</option>
+
+                        @foreach (var item in Model.CoreScoreList)
+                        {
+                            if (item.Value == Model.CoreScore)
+                            {
+                                <option value="@item.Key" selected="selected">@item.Value</option>
+
+                            }
+                            else
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                            @*<option value="@item.Key" selected="selected">@item.Value</option>*@
+                        }
+                    </select>
+                }
+                else
+                {
+                    <i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                    <select class="form-control" id="drpCoreScore" disabled>
+                        <option>--Select CoreScoreList--</option>
+                        @foreach (var item in Model.CoreScoreList)
+                        {
+                            if (item.Value == Model.CoreScore)
+                            {
+                                <option value="@item.Key" selected="selected">@item.Value</option>
+
+                            }
+                            else
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Core Score is required</span>
+            </div>
+        }
+
+        if (Model.JobRoleScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working">Job Role Score</label>
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                    <select class="form-control" id="drpJobRoleScore">
+                        <option>--Select JobRoleScoreList--</option>
+                        @foreach (var item in Model.JobRoleScoreList)
+                        {
+                            @*<option value="@item.Key" selected="selected">@item.Value</option>*@
+                            @*<option value="@item.Key" selected="selected">@item.Value</option>*@
+                        if (item.Value == Model.JobRoleScore)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <i class="glyphicon glyphicon-asterisk" aria-hidden="true" style="color:red"></i>
+                    <select class="form-control" id="drpJobRoleScore" disabled>
+                        <option>--Select JobRoleScoreList--</option>
+                        @foreach (var item in Model.JobRoleScoreList)
+                        {
+                            if (item.Value == Model.JobRoleScore)
+                            {
+                                <option value="@item.Key" selected="selected">@item.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        }
+                    </select>
+                }
+                <span class="field-validation-error" id="label_jobrole" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Job Role Score is required</span>
+            </div>
+        }
+        <div class="col-md-offset-3 col-sm-6 ">
+            <label class="control-label col-md-3">Comments</label>
+            @if (Model.IsActivePastFlag == 1)
+            {
+                <textarea class="form-control textarea-resizeNone" id="OverviewComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments">@Model.Comments</textarea>
+            }
+            else
+            {
+                <textarea class="form-control textarea-resizeNone" id="OverviewComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments" value="@Model.Comments" disabled></textarea>
+            }
+        </div>
+        <div class="col-md-12">
+            @if (Model.IsActivePastFlag == 1)
+            {
+                <button id="btn-SaveCustomerReviewDetails" onclick="saveEmployeePerformanceDetails(@Model.Flag,@Model.IsActivePastFlag)" class="btn btn-success" value="Submit">Submit</button>
+            }
+            else
+            {
+            }
+        </div>
+    }
+    else if (Model.Flag == 1)
+    {
+        for (int i = 1; i <= Model.TotalCoreQuestionList; i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag,1);">@i</button>
+        }
+    }
+    else if (Model.Flag == 0)
+    {
+        for (int i = 1; i <= Model.TotalJobroleQuestionList; i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag,1);">@i</button>
+        }
+    }
+    <div id="QuestionDetails"></div>
+</div>
+<script>
+    var saveCusto = {
+        saveCustomerInviteDetails: '@Url.Action("saveCustomerInviteDetails", "EmployeePerformance")',
+    }
+    $(document).ajaxComplete(function () {
+
+        if (@Model.performanceEmployeeDetailslist != 0) {
+            $('li button.performanceoverview').css("display", "")
+        }
+        else
+        {
+            if($('li button.performanceoverview').css("display") == "inline-block")
+            {
+                $('li button.performanceoverview').css("display", "")
+            }
+            else
+            {
+            $('li button.performanceoverview').css("display", "none")
+            }
+        }
+        var valuecoreseg = $('#lblCoreSeg').text();
+        var tempCoreseg = new Array();
+        tempCoreseg = valuecoreseg.split(',');
+
+        var valuejobroleseg = $('#lblJobRole').text();
+        var tempjobroleseg = new Array();
+        tempjobroleseg = valuejobroleseg.split(',');
+
+        var valueOriginalCoreSeg = $('#lblOriginalCoreSeg').text();
+        var tempOriginalCoreSeg = new Array();
+        tempOriginalCoreSeg = valueOriginalCoreSeg.split(',');
+
+        var valueOriginalJobRole = $('#lblOriginalJobRole').text();
+        var tempOriginalJobRole = new Array();
+        tempOriginalJobRole = valueOriginalJobRole.split(',');
+        
+
+
+        for (var i = 0; i < tempOriginalCoreSeg.length; i++) {
+
+            //$('#performancecoreseg_'+i).each(function ()
+            //{
+            if(tempOriginalCoreSeg[i] == tempCoreseg[i])
+            {
+                $('#performancecoreseg_' + i).css("display", "")
+            }
+            else
+            {
+                $('#performancecoreseg_' + i).css("display", "none")
+
+            }
+            //var attr = $('#performancecoreseg_' + i).attr("buttoncore");
+            //if (valuecoreseg.includes(attr)) {
+            //    $('#performancecoreseg_' + i).css("display", "")
+            //}
+
+            //});
+        }
+        for (var i = 0; i < tempOriginalJobRole.length; i++) {
+            if(tempOriginalJobRole[i] == tempjobroleseg[i])
+            {
+                $('#performancejobroleseg_' + i).css("display", "")
+            }
+            else
+            {
+                $('#performancejobroleseg_' + i).css("display", "none")
+            }
+            //var attr = $('#performancejobroleseg_' + i).attr("buttonjobrole");
+            //if (valuejobroleseg.includes(attr)) {
+            //    $('#performancejobroleseg_' + i).css("display", "")
+            //}
+        }
+        var total = valueOriginalJobRole.split(',').length + valueOriginalCoreSeg.split(',').length + @Model.performanceEmployeeDetailslist.Count();
+        var total1 = $(".performancejobroleseg[style='display:none']").length + $(".performancecoreseg[style='display:none']").length + $(".performanceoverview[style='display:none']").length;
+        if(total1 == 0)
+        {
+            total1 = total1 + total;
+        }
+        if(total1 == total)
+        {
+            if($('#UnShareReview').css('display') == "none")
+            {
+                $('#ShareReview').css('display','')
+            }
+        }
+        else
+        {
+            $('#ShareReview').css('display','none')
+
+        }});
+    displayProgressbar();
+    function displayProgressbar() {
+        $(".Question_Score").ionRangeSlider({
+            type: "single",
+            min: 0,
+            max: 5
+        });
+    }
+
+</script>

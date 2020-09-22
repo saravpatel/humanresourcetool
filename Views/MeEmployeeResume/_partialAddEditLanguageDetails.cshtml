@@ -1,0 +1,124 @@
+﻿@model HRTool.Models.Resources.EmployeeLanguagesViewModel
+
+<input type="hidden" id="LanguageId" value="@Model.Id" />
+<input type="hidden" id="Employeeid" value="@Model.EmployeeID" />
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="LanguageList">Language</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-LanguageId" class="form-control">
+            @foreach (var item in Model.LanguageList)
+            {
+                if (Model.LanguageID.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-LanguageList" style="display:none;" data-valmsg-for="LanguageList" data-valmsg-replace="true">Language is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="SpeakingList">Speaking</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-SpeakingId" class="form-control">
+            @foreach (var item in Model.SpeakingList)
+            {
+                if (Model.SpeakingID.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-SpeakingList" style="display:none;" data-valmsg-for="SpeakingList" data-valmsg-replace="true">Speaking language is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="ListeningList">Listening</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-ListeningId" class="form-control">
+            @foreach (var item in Model.ListeningList)
+            {
+                if (Model.ListeningID.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-ListeningList" style="display:none;" data-valmsg-for="ListeningList" data-valmsg-replace="true">Listening Language is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="WritingList">Writing</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-WritingId" class="form-control">
+            @foreach (var item in Model.WritingList)
+            {
+                if (Model.WritingID.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-WritingList" style="display:none;" data-valmsg-for="WritingList" data-valmsg-replace="true">Writing Language is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="ReadingList">Reading</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-ReadingId" class="form-control">
+            @foreach (var item in Model.ReadingList)
+            {
+                if (Model.ReadingID.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-ReadingList" style="display:none;" data-valmsg-for="ReadingList" data-valmsg-replace="true">Reading Language is required.</span>
+    </div>
+</div>

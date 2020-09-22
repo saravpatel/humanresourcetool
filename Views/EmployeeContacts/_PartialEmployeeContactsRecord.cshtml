@@ -1,0 +1,269 @@
+﻿@model HRTool.Models.Resources.EmployeeContactViewModel
+<input type="hidden" id="EmployeeID" value="@Model.EmployeeId" />
+
+<div class="md-card">
+    <div >
+        
+        <div class="row marbot10">
+            <label class="col-md-3">Country*</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpCountry">
+                    @foreach (var Country in Model.CountryList)
+                    {
+                        <option value="@Country.Value" @(Country.Selected ? "Selected" : "")> @Country.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidCountry" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">State*</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpState">
+                    @foreach (var State in Model.StateList)
+                    {
+                        <option value="@State.Value" @(State.Selected ? "Selected" : "")>@State.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidState" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Town*</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpTown">
+                    @foreach (var Town in Model.TownList)
+                    {
+                        <option value="@Town.Value" @(Town.Selected ? "Selected" : "")>@Town.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidTown" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Airport</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpAirport">
+                    @foreach (var Airport in Model.AirportList)
+                    {
+                        <option value="@Airport.Value" @(Airport.Selected ? "Selected" : "")>@Airport.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidAirport" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">House Number</label>
+            <div class="col-md-3" data-toggle="tooltip" data-placement="right" title="House Number">
+                @Html.TextBoxFor(m => m.HouseNumber, new { @class = "form-control",type = "number",min = 0 })
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-House" style="display:none;" data-valmsg-for="Comment" data-valmsg-replace="true">House Number is required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Postcode</label>
+            <div class="col-md-3" data-toggle="tooltip" data-placement="right" title="Postcode">
+                @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" ,maxwhitespaces = "1", blockonlywhitespaces = "" })
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary" id="FindAddressContact">Find Address</button>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-PostCode" data-valmsg-for="lbl-PostCode" data-valmsg-replace="true" style="display:none">Post Code Is Required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Address</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Address">
+                @Html.TextAreaFor(m => m.Address, new { @class = "form-control textarea-resizeNone" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.Address)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Work Phone</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Work Phone">
+                @Html.TextBoxFor(m => m.WorkPhone, new { @class = "form-control", type = "number", min = "0", max = "12", step = "1" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.WorkPhone)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Work Mobile</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Work Mobile">
+                @Html.TextBoxFor(m => m.WorkMobile, new { @class = "form-control", type = "number", min = "0", max = "12", step = "1" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.WorkMobile)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Personal Phone</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Personal Phone">
+                @Html.TextBoxFor(m => m.PersonalPhone, new { @class = "form-control", type = "number", min = "0", max = "12", step = "1" })
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidPersonalPhone" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Personal Mobile</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Personal Mobile">
+                @Html.TextBoxFor(m => m.PersonalMobile, new { @class = "form-control", type = "number", min = "0", max = "12", step = "1" })
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidPersonalMobile" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Personal Email</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Personal Email">
+                @Html.TextBoxFor(model => model.PersonalEmail, new { @class = "form-control", placeholder = "Email@Test.com", type = "email" })
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidPersonalEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <h4 class="CompanyTitle">Bank Details</h4>
+        <div class="row marbot10">
+            <label class="col-md-3">Account Name</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Account Name">
+                @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.AccountName)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Account Number</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Account Number">
+                @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control", type = "number", min = "0", max = "30", step = "0.01" })
+
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.AccountNumber)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Name</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Bank Name">
+                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.BankName)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Code</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Bank Code">
+                @Html.TextBoxFor(m => m.BankCode, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.BankCode)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">IBAN Number</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="IBAN Number">
+                @Html.TextBoxFor(m => m.IBAN_Number, new { @class = "form-control", type = "text" })
+
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.IBAN_Number)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">SWIFT Code</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="IBAN Number">
+                @Html.TextBoxFor(m => m.SWIF_Code, new { @class = "form-control", type = "text" })
+
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.SWIF_Code)
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Address</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Bank Address">
+                @Html.TextAreaFor(m => m.BankAddress, new { @class = "form-control textarea-resizeNone" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.BankAddress)
+            </div>
+        </div>
+      
+        <div class="row marbot10">
+            <label class="col-md-3">Other Account Information</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Other Account Information">
+                @Html.TextAreaFor(m => m.OtherAccountInformation, new { @class = "form-control textarea-resizeNone" })
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(m => m.OtherAccountInformation)
+            </div>
+        </div>
+       
+       
+        <div class="row marbot10">
+            <label class="col-md-3">Emergency Contacts</label>
+            <div class="col-md-6">
+                <div id="tableDiv">
+                    @Html.Action("EmergencyContactsList", "EmployeeContacts", new { Id = Model.Id })
+                </div>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <button type="submit" class="md-btn md-btn-success setting_btn" id="SaveContactRecord">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $("#HouseNumber").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#PersonalPhone").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#WorkMobile").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#AccountNumber").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#WorkPhone").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#PersonalMobile").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

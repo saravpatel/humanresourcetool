@@ -1,0 +1,138 @@
+﻿@model IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>
+@{
+    var List = Model;
+    int i = 0;
+}
+<style>
+    td:nth-child(1) {
+        width: 30px;
+        text-align: center;
+    }
+
+    td:nth-child(3) {
+        width: 100px;
+        text-align: center;
+    }
+
+    .displayClass {
+        display: none !important;
+    }
+</style>
+<table class="table-bordered display table style2 dataTable no-footer main_table" id="example">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Menu Name</th>
+            <th class="role_checkbox"><input type="checkbox" id="selectAll" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(x => x.submenuId == 0))
+        {
+            i = i + 1;
+            <tr id="table_@item.submenuId" class="@(item.submenuId == 0 ? "" : "displayClass")" data-parentid="@(item.submenuId == 0 ? "0" : item.submenuId.ToString())">
+                <td>
+                    @if (Model.Where(x => x.submenuId == item.menuId).Count() > 0)
+                    {
+                        <i class="fa fa-plus-square openTr" style="cursor: pointer; font-size: 20px;" data-id="@item.menuId"></i>
+                    }
+                </td>
+
+                <td>
+                    @item.menuName
+                </td>
+
+                <td>
+                    @if (item.isAlreadyAssign)
+                    {
+                        <input type="checkbox" class="checkbox" checked="checked" id="@item.menuId">
+                    }
+                    else
+                    {
+                        <input type="checkbox" class="checkbox" id="@item.menuId">
+                    }
+                </td>
+            </tr>
+
+            if (Model.Where(x => x.submenuId == item.menuId).ToList().Count > 0)
+            {
+                @Html.Partial("_BindSubmenuListTable", new Tuple<IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>, int>(Model, item.menuId))
+            }
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(".main_table").on("click", '.openTr', function () {
+        var id = $(this).attr('data-Id');
+        $(this).addClass('fa-minus-square');
+        $(this).addClass('closeTr');
+        $(this).removeClass('fa-plus-square');
+        $(this).removeClass('openTr');
+        $('tr[data-parentid="' + id + '"]').removeClass('displayClass')
+    });
+
+    $(".main_table").on("click", '.closeTr', function () {
+        var id = $(this).attr('data-Id');
+        $(this).removeClass('fa-minus-square');
+        $(this).removeClass('closeTr');
+        $(this).addClass('fa-plus-square');
+        $(this).addClass('openTr');
+        $('tr[data-parentid="' + id + '"]').addClass('displayClass')
+    });
+
+    $(".main_table").on("change", '#selectAll', function () {
+        if ($(this).is(":checked")) {
+            $.each($('td').find(".checkbox"), function (index, item) {
+                $(this).prop('checked', 'checked');
+            });
+        }
+        else {
+            $.each($('td').find(".checkbox"), function (index, item) {
+                $(this).prop('checked', '');
+            });
+        }
+    });
+
+    $(".main_table").on("change", '.checkbox', function () {
+        var isuncheck = false;
+        $.each($('td').find(".checkbox"), function (index, item) {
+            if (!$(this).prop('checked')) {
+                isuncheck = true;
+            }
+        });
+        if (isuncheck) {
+            $("#selectAll").prop('checked', '');
+        }
+        else {
+            $("#selectAll").prop('checked', 'checked');
+        }
+
+        $.ajax({
+            url: '@Url.Action("returnselectedOrunselectedMenuId", "RolesManagement")',
+            data: { MenuId: $(this).attr('id') },
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    if (item.Text == "un") {
+                        $(".main_table").find("#" + item.Value).prop('checked', '');
+                    }
+                    else {
+                        $(".main_table").find("#" + item.Value).prop('checked', 'checked');;
+                    }
+                });
+
+                var isuncheck = false;
+                $.each($('td').find(".checkbox"), function (index, item) {
+                    if (!$(this).prop('checked')) {
+                        isuncheck = true;
+                    }
+                });
+                if (isuncheck) {
+                    $("#selectAll").prop('checked', '');
+                }
+                else {
+                    $("#selectAll").prop('checked', 'checked');
+                }
+            }
+        });
+    });
+</script>

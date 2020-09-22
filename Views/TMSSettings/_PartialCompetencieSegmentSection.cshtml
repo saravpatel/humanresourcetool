@@ -1,0 +1,106 @@
+﻿@model HRTool.Models.Settings.TMSSettingsViewModel
+<style>
+    colorpicker.less:236 .colorpicker.colorpicker-visible {
+        z-index: 999999 !important;
+    }
+</style>
+<div class="segments-box">
+    <div class="color-st blue"></div>
+    <h4 class="heading_a">Competencies</h4>
+    <div class="performance-grid">
+        <div class="cf nestable-lists">
+            <div class="dd CompetencieSegmentNestable" style="width:100%">
+                <ul id="mainPageCompetencieSegmentList" class="dd-list" data-uk-nestable="{maxDepth:0}">
+                    @foreach (var item in Model.CompentecyList.OrderBy(x => x.SortId))
+                    {
+                        <li class="ui-state-default" data-id='@item.Id' id='@item.Id'>
+                            <div class="uk-nestable-panel">
+                                <div class="rowsm">
+                                    <div class="col-md-1 col1">
+                                        <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapCompData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                        <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapCompData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                    </div><div class="col-md-11 col11">
+                                        <span class="ui-icon-arrowthick-2-n-s sortable-number" style="float:left;margin-left:0; font-weight: bold;">@item.SortId &nbsp;<b class="liComName">@item.CompetencyName</b></span><div class="compet steps_icon"><a onclick="editCompetency(@item.Id)" data-toggle="modal" data-target="#CompetencieSegmentModel" style="position: inherit;display: initial;margin-right: 10px;margin-left: 10px;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a><a onclick="deleteCom(@item.Id)" style="position: inherit; display: initial;"><i class="material-icons uk-text-danger" style="position: inherit; display: initial;">delete</i></a></div><p class="description">
+                                            @item.Description<input type="hidden" class="AddCompetencyName" id="AddName_@item.Id" value='@item.CompetencyName'>
+                                            <input type="hidden" class="AddDescripetion" id="AddDescription_@item.Id" value='@item.Description'>
+                                            <input type="hidden" class="CompetencyAddID" value="@item.Id">
+                                            <input type="hidden" class="CompetencySortID" value="@item.SortId">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div data-toggle="modal" data-target="#CompetencieSegmentModel">
+            <button class="btn btn-info" onclick="btnAddCompetency()" id="CompetencieSegmentclass" style="width:100%">Add Competencie</button>
+        </div>
+    </div>
+</div>
+<div id="CompetencieSegmentModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelComClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title competencyTitle">Add Competency</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row marbot10">
+                            <div class="form-group">
+                                <input type="hidden" id="addCompetencyID" value="" />
+                                <label class="col-md-3">Competency Name*</label>
+                                <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Values Of the Cost">
+                                    <input type="text" name="CompetencyName" id="txt_CompetencyName" value="" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="field-validation-error" id="validationmessageCompetencyName" data-valmsg-for="CompetencyName" data-valmsg-replace="true" style="display:none">Competency Name Is Require.</span>
+                                    <span class="field-validation-error" id="ExistCompetencyName" data-valmsg-for="CompetencyName" data-valmsg-replace="true" style="display:none">This Competency Name Is Exist.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row marbot10">
+                            <div class="form-group">
+                                <label class="col-md-3">Competency Description</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control textarea-resizeNone" id="txt_CDescription" placeholder="Description"></textarea>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btn-submit-Competencies">ADD</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script>
+        var updateOutput = function (e) {
+            var list = e.length ? e : $(e.target),
+                    output = list.data('output');
+            if (window.JSON) {
+                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+            }
+            else {
+                output.val('JSON browser support required for this demo.');
+            }
+        };
+        $(document).ready(function () {
+            $('.CompetencieSegmentNestable').nestable({
+                maxDepth: 1,
+            });
+            function changeTable() {
+            }
+            updateOutput($('.CompetencieSegmentNestable').data('output', $('.CompetencieSegmentNestable-output')));
+        });
+    </script>*@
+

@@ -1,0 +1,85 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+@using HRTool.CommanMethods;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .ZebraDialogOverlay {
+        z-index: 9999999;
+    }
+
+    .ZebraDialog {
+        z-index: 9999999;
+    }
+</style>
+<div id="page_content_inner">
+    
+        
+        
+
+        <h1 class="page-title">
+            Resource List
+            <p><small>Below is a list of all accessible resources. You can rearrange the order of display by clicking on the column headers at the top.</small> <p/>
+        </h1>
+  <div class="clearfix"></div>
+    
+    <div class="pad-botom">
+
+        @if (SessionProxy.IsCustomer)
+        {
+            @*<button class="btn btn-success resbtn workers active" id="AddWorkerresource">Workers</button>
+    <span><button class="btn btn-primary resbtn customers" id="AddCustomersresourece">Customers</button></span>*@
+        }
+        else
+        {
+            <button class="btn btn-success resbtn workers active" id="AddWorkerresource">Workers</button>
+            <span><button class="btn btn-primary resbtn customers" id="AddCustomersresourece">Customers</button></span>
+
+        }
+    </div>
+
+    @*<a href="@Url.Action("Index", "EmployeeContacts", new { EmployeeId = "169f91f4-79ec-4168-b24e-7abdd60a4c79" })">Go to Detail</a>*@
+    <div id="tableDivResourceList">
+        @Html.Action("ResoureList", "Employee",new { EmpId=SessionProxy.UserId})
+    </div>
+    <div id="tableDivCustomerList">
+
+    </div>
+</div>
+<script src="~/JS/Resources/MainResoureJs.js"></script>
+<script>
+    var constantSetResoure = {
+        SaveResoure: '@Url.Action("AddResoureRecord", "Employee")',
+        addEdit: '@Url.Action("AddEditProjectSet", "Employee")',
+        DeleteProjectUrl: '@Url.Action("DeleteProjectRecord", "Employee")',
+        bindDiv: '@Url.Action("bindDivisionList", "Employee")',
+        bindpool: '@Url.Action("bindPoolList", "Employee")',
+        bindFuncation: '@Url.Action("bindFuncationList", "Employee")',
+        BindStateUrl: '@Url.Action("BindStateDropdown", "Employee")',
+        BindCityIDUrl: '@Url.Action("BindCityDropdown", "Employee")',
+        BindAirPortIDUrl: '@Url.Action("BindAirportDropdown", "Employee")',
+        CustomerResource: '@Url.Action("CustomerList", "Employee")',
+        WorkerResource: '@Url.Action("ResoureList", "Employee")',
+        DeleteProjectUrl: '@Url.Action("DeleteRecord", "Employee")',
+        redirectURL: '@Url.Action("Index", "EmployeeOverView", new { EmployeeId = "newId" })',
+        redirectURLEditCustomer: '@Url.Action("Index", "EmployeeProfile", new { EmployeeId = "newId" })',
+        redirectUrlCustomer:'@Url.Action("Index", "EmployeeResume",new { EmployeeId = "newId" })',
+        AddEditCoustomer: '@Url.Action("AddEditCusomerSet", "Employee")',
+        SaveCoustomer: '@Url.Action("AddCoustomerRecord", "Employee")',
+        DeleteWorkerlist: '@Url.Action("DeleteWorkerRecord", "Employee")',
+        DeleteCoustomerlist: '@Url.Action("DeleteCoustomerRecord", "Employee")',
+        copyrecordUrl: '@Url.Action("CopyRecord", "Employee")',
+        AddNewTask: '@Url.Action("AddNewTaskRecord", "Employee")',
+        ShowAddNewTaskUrl: '@Url.Action("ShowAddNewTask", "Employee")',
+        DeleteaskUrl: '@Url.Action("DeteteTask", "Employee")',
+        UploadImage: '@Url.Action("UploadImage","Employee")',
+        ExportExcelUrl: '@Url.Action("ExportExcel", "Employee")',
+        HelpCalculate: '@Url.Action("HelpMeCalculate","Employee")',
+        validSSo: '@Url.Action("validateSSo", "Employee")',
+        validEmaiId: '@Url.Action("validEmaiId", "Employee")',
+        getEmp: '@Url.Action("getEmpCopyData", "Employee")',
+
+    };
+</script>

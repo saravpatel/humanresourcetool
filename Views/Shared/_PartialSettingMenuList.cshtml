@@ -1,0 +1,232 @@
+﻿@model HRTool.Models.Settings.SettingMenuViewModel
+
+<div class="profile-usermenu">
+    <ul class="nav">
+        @if (Model.Settings_TMS)
+        {
+            <li title="TMS" class="active">
+                <a href="@Url.Action("Index", "TMSSettings")" class="tms">
+                    TMS
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Projects)
+        {
+            <li title="Project">
+                <a href="@Url.Action("Index", "Project")" class="projects">
+                    Project
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Performance)
+        {
+            <li title="Performance">
+                <a href="@Url.Action("Index", "PerformanceSetting")" class="performance">
+                    Performance
+                </a>
+            </li>
+        }
+        @if (Model.Settings_TechnicalSkillsSet)
+        {
+            <li title="Technical Skills Set">
+                <a href="@Url.Action("Index", "TechnicalSkillsSet")" class="technicalskillsset">
+                    Technical Skills Set
+                </a>
+            </li>
+        }
+        @if (Model.Settings_GeneralSkillsSet)
+        {
+            <li title="Technical Skills Set">
+                <a href="@Url.Action("Index", "GeneralSkillsSet")" class="generalskillsset">
+                    General Skills Set
+                </a>
+            </li>
+        }
+        @if (Model.Settings_AddSkills)
+        {
+            <li title="Add Skills">
+                <a href="@Url.Action("Index", "AddSkills")" class="addskills">
+                    Add Skills
+                </a>
+            </li>
+        }
+        @if (Model.Settings_ActivityType)
+        {
+            <li title="Activity Type">
+                <a href="@Url.Action("Index", "ActivityType")" class="activitylist">
+                    Activity Type
+                </a>
+            </li>
+        }
+        @if (Model.Settings_AddCmpCustomer)
+        {
+            <li title="Add Cmp Customer">
+                <a href="@Url.Action("Index", "CompanyCustomer")" class="addcustomers">
+                    Add Cmp Customer
+                </a>
+            </li>
+        }
+        @if (Model.Settings_AddAssets)
+        {
+            <li title="Add Assets">
+                <a href="@Url.Action("Index", "AddAssets")" class="assettypes">
+                    Add Asset
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Timesheet)
+        {
+            <li title="TimeSheet">
+                <a href="@Url.Action("Index", "TimeSheetSettings")" class="timesheet">
+                    TimeSheet
+                </a>
+            </li>
+        }
+        @if (Model.Settings_HolidaysAbsence)
+        {
+            <li title="holidays & Absence">
+                <a href="@Url.Action("Index", "HolidaySettings")" class="holidaysNabsence">
+                    Holidays & Absence
+                </a>
+            </li>
+
+        }
+        @if (Model.Settings_Currency)
+        {
+            <li title="Currency Converter">
+                <a href="@Url.Action("Index", "CurrencyConverter")" class="currency">
+                    Currency
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Administrators)
+        {
+            <li title="Administrators">
+                <a href="#" class="administrators disable">
+                    Administrators
+                </a>
+            </li>
+        }
+        @if (Model.Settings_EmailSettings)
+        {
+            <li title="Email Settings">
+                <a href="@Url.Action("Index", "EmailSettings")" class="emailsettings">
+                    Email Settings
+                </a>
+            </li>
+        }
+        @if (Model.Settings_API)
+        {
+            <li title="Api">
+                <a href="#" class="api disable">
+                    Api
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Company)
+        {
+            <li title="Company">
+                <a href="@Url.Action("Index", "Company")" class="company">
+                    Company
+                </a>
+            </li>
+        }
+        @if (Model.Settings_CompanyStructure)
+        {
+            <li title="Company Structure">
+                <a href="@Url.Action("Index", "CompanyStructure")" class="biz">
+                    Company Structure
+                </a>
+            </li>
+        }
+        @if (Model.Settings_License)
+        {
+            <li title="License">
+                <a href="#" class="license disable">
+                    License
+                </a>
+            </li>
+        }
+        @if (Model.Settings_Mobile)
+        {
+            <li title="Mobile">
+                <a href="@Url.Action("Index", "MobileSetting")" class="mobile">
+                    Mobile
+                </a>
+            </li>
+        }
+        @if (Model.Settings_CreateRole)
+        {
+            <li title="Assign Role">
+                <a href="@Url.Action("CreateRole", "RolesManagement")" class="administrators">
+                    Create Role
+                </a>
+            </li>
+        }
+        @if (Model.Settings_AssignRole)
+        {
+            <li title="Assign Role">
+                <a href="@Url.Action("AssignRole", "RolesManagement")" class="administrators">
+                    Assign Role
+                </a>
+            </li>
+        }
+        @*@if (Model.Settings_RoleManagement)
+        {
+            <li title="Role Management">
+                <a href="@Url.Action("Index", "RolesManagement")" class="administrators">
+                    Role Management
+                </a>
+            </li>
+        }*@
+        @if (Model.Settings_OtherSettings)
+        {
+            <li title="Other Settings">
+                <a href="@Url.Action("Index", "OtherSetting")" class="alllists">
+                    Other Settings
+                </a>
+            </li>
+        }
+        @*@if (Model.Settings_SystemSettings)
+            {
+                <li title="System Settings">
+                    <a href="@Url.Action("Index", "SysetmSetting")" class="alllists">
+                        System Settings
+                    </a>
+                </li>
+            }*@
+    </ul>
+</div>
+<script>
+    onSettingNaviation();
+    function onSettingNaviation() {
+        debugger;
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".profile-usermenu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.profile-usermenu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    }
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".page-sidebar-menu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href === '/TMSSettings') {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    })
+
+</script>

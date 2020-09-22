@@ -1,0 +1,594 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_SickLeaves
+
+@{
+    int comments = 1;
+}
+<style>
+    .Display {
+        display: none;
+    }
+</style>
+<div id="SickLeavewizard" class="swMain">
+    <ul class="tablistnew five">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Options
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span> Return to work
+            </a>
+        </li>
+        <li>
+            <a href="#step-4" class="s4">
+                <span>4</span> Comments
+            </a>
+        </li>
+        <li>
+            <a href="#step-5" class="s5">
+                <span>5</span> Document
+            </a>
+        </li>
+    </ul>
+
+
+    <div id="step-1">
+        <input type="hidden" id="SickLeaveID" value="@Model.Id" />
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+
+        <div class="row marbot10">
+            <div class="col-md-12">
+                <span class="icheck-inline icheck-inline-custome text-center col-md-3">
+                    <label class="inline-label">
+                        @if (Model.IsADayOrMore != true)
+                        {
+                            <input type="radio" name="lessThanADay" id="adayormore" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="lessThanADay" id="adayormore" class="Sick_leave_radio" checked="checked">
+                        }
+                        A day or more
+                    </label>
+                </span>
+
+                <span class="icheck-inline icheck-inline-custome text-center col-md-3">
+                    <label class="inline-label">
+                        @if (Model.IsHalfDay != true)
+                        {
+                            <input type="radio" name="lessThanADay" id="Ishalfday" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="lessThanADay" id="Ishalfday" class="Sick_leave_radio" checked="checked">
+                        }
+                        1/2 Day
+                    </label>
+                </span>
+
+                <span class="icheck-inline icheck-inline-custome  text-center col-md-3">
+                    <label class="inline-label">
+                        @if (Model.IsHours != true)
+                        {
+                            <input type="radio" name="lessThanADay" id="Ishours" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="lessThanADay" id="Ishours" class="Sick_leave_radio" checked="checked">
+                        }
+                        1/4 Day
+                    </label>
+                </span>
+
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="ReasonSickLeaveList">Reason*</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-ReasonSickLeaveList" class="form-control">
+                    @foreach (var item in Model.ReasonSickLeaveList)
+                    {
+                        if (Model.Reason.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ReasonSickLeaveList" style="display:none;" data-valmsg-for="ReasonSickLeaveList" data-valmsg-replace="true">Reason is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StartDate">Start Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="StartDate" data-valmsg-replace="true">Start Date is required.</span>
+            </div>
+        </div>
+
+        <div id="div_SickADayOrMore" class="@(Model.IsADayOrMore == true ? "Display" : "")">
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="EndDate">End Date *</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="EndDate" data-valmsg-replace="true">End Date is required.</span>
+                    <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="EndDate" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Duration</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" value="@Model.DurationDays" id="txt_Duration" class="form-control" readonly="readonly" />
+                </div>
+                <div class="col-md-4" style="padding-left:0px;">
+                    <label style="margin-top:5px;">Days</label>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="div_HalfDayOrHours" class="@(Model.IsADayOrMore == false ? "Display" : "")">
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="PartOfDay">Part Of Day</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="drp-PartOfDay" class="form-control">
+                        @foreach (var item in Model.TimeList)
+                        {
+                            if (Model.PartOfDay == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div id="div_IsHalfDay" class="IsHalfDay row marbot10 @(Model.IsHalfDay == true ? "Display" : "")">
+
+                <div class="col-md-3">
+                    <label class="control-label" for="Duration">Duration</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" value="0.50" id="txt_DurationHours" class="form-control" readonly="readonly" />
+                </div>
+                <div class="col-md-4" style="padding-left:0px;">
+                    <label style="margin-top:5px;">Working days</label>
+                </div>
+                <div class="col-md-3">
+                    @*<span class="field-validation-error" id="lbl-error-DurationHours" style="display:none;" data-valmsg-for="DurationHours" data-valmsg-replace="true">Please select valid time.</span>*@
+                </div>
+            </div>
+            <div id="div_IsHours" class="IsHours row marbot10" @(Model.IsHours == true ? "Display" : "")>
+                <div class="col-md-3">
+                    <label class="control-label" for="Duration">Duration</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" value="0.25" id="txt_DurationHours" class="form-control" readonly="readonly" />
+                </div>
+                <div class="col-md-4" style="padding-left:0px;">
+                    <label style="margin-top:5px;">Working days</label>
+                </div>
+                <div class="col-md-3">
+                    @*<span class="field-validation-error" id="lbl-error-DurationHours" style="display:none;" data-valmsg-for="DurationHours" data-valmsg-replace="true">Please select valid time.</span>*@
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Emergency Leave</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.EmergencyLeave == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_EmergencyLeave" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_EmergencyLeave">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="step-2">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Confirmed By HR</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.ConfirmedbyHR == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_ConfirmedByHR" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_ConfirmedByHR">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Self Certification Form Required</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.SelfCertificationFormRequired == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_SelfCertificationFormRequired" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_SelfCertificationFormRequired">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+
+        <div id="div_SelfCertificationFormRequired" class="@(Model.SelfCertificationFormRequired == true ? "" :"Display")">
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="ReceivedDate">Self Certificate Received Date</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.SelfCertificateReceivedDate" id="txt_SelfCertificateReceivedDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-SelfCertificateReceivedDate" style="display:none;" data-valmsg-for="ReceivedDate" data-valmsg-replace="true">Start Date is required.</span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Back To Work Interview Required</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.BackToWorkInterviewRequired == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_BackToWorkInterviewRequired" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_BackToWorkInterviewRequired">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+
+        <div id="div_BackToWorkInterviewRequired" class="@(Model.BackToWorkInterviewRequired == true ? "" :"Display")">
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="InterviewDate">Interview Date</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.InterviewDate" id="txt_InterviewDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-InterviewDate" style="display:none;" data-valmsg-for="InterviewDate" data-valmsg-replace="true">Interview Date is required.</span>
+                </div>
+            </div>
+
+            <div class="row marbot10 ">
+                <label class="col-md-3">Interview Conducted By</label>
+                <div class="col-md-6">
+                    <input type="text" name="InterviewConductedBy" class="form-control" id="txt_InterviewConductedBy" value="@Model.InterviewConductedBy" placeholder="Interview Conducted By">
+                    <span class="form-control-bar"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-InterviewConductedBy" data-valmsg-for="InterviewConductedBy" data-valmsg-replace="true" style="display:none"></span>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row marbot10">
+            <div class="col-md-9">
+                <span class="icheck-inline icheck-inline-custome text-center">
+                    <label class="inline-label">
+                        @if (Model.IsPaid != true)
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Paid" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Paid" class="Sick_leave_radio" checked="checked">
+                        }
+                        Paid
+                    </label>
+                </span>
+
+                <span class="icheck-inline icheck-inline-custome text-center">
+                    <label class="inline-label">
+                        @if (Model.IsPaidatotherrate != true)
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Paidatotherrate" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Paidatotherrate" class="Sick_leave_radio" checked="checked">
+                        }
+                        Paid at other rate
+                    </label>
+                </span>
+
+                <span class="icheck-inline icheck-inline-custome  text-center">
+                    <label class="inline-label">
+                        @if (Model.IsUnpaid != true)
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Unpaid" class="Sick_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="PaidOrUnPaid" id="Unpaid" class="Sick_leave_radio" checked="checked">
+                        }
+                        Unpaid
+                    </label>
+                </span>
+
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="step-3">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="DoctorConsulted">Doctor Consulted</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.DoctorConsulted == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_DoctorConsulted" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_DoctorConsulted">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div id="div_DoctorConsulted" class="@(Model.DoctorConsulted == true ? "" :"Display")">
+
+            <div class="row marbot10 ">
+                <label class="col-md-3">Doctor's Name</label>
+                <div class="col-md-6">
+                    <input type="text" name="DoctorName" class="form-control" id="txt_DoctorName" value="@Model.DoctorName" placeholder="Doctor's Name Conducted By">
+                    <span class="form-control-bar"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-DoctorName" data-valmsg-for="DoctorName" data-valmsg-replace="true" style="display:none"></span>
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="DateOfVisit">Date Of Visit</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.DateOfVisit" id="txt_DateOfVisit" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-DateOfVisit" style="display:none;" data-valmsg-for="DateOfVisit" data-valmsg-replace="true">Date Of Visit is required.</span>
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="PartOfDay">Part Of Day</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="drp-Timeofvisit" class="form-control">
+                        @foreach (var item in Model.TimeList)
+                        {
+                            if (Model.TimeOfVisit == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="MedicalCertificateIssuedDate">Medical Certificate Issued Date*</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.MedicalCertificateIssuedDate" id="txt_MedicalCertificateIssuedDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-MedicalCertificateIssuedDate" style="display:none;" data-valmsg-for="MedicalCertificateIssuedDate" data-valmsg-replace="true">Medical Certificate Issued Date is required.</span>
+                    <span class="field-validation-error" id="lbl-error-MedicalCertificateVisit" style="display:none;" data-valmsg-for="MedicalCertificateIssuedDate" data-valmsg-replace="true">Issued Date is Less than Visit Date.</span>
+                    <span class="field-validation-error" id="lbl-error-MedicalCertificateDate" style="display:none;" data-valmsg-for="MedicalCertificateIssuedDate" data-valmsg-replace="true">Please Select Valid Medical Certificate Issued Date.</span>
+                </div>
+
+            </div>
+
+            <div class="row marbot10">
+                <label class="col-md-3">Doctor's Advice</label>
+                <div class="col-md-6">
+                    <textarea placeholder="Doctor's Advice" name="DoctorAdvice" class="form-control textarea-resizeNone" id="txt_DoctorAdvice">@Model.DoctorAdvice</textarea>
+                    <span class="form-control-bar"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-DoctorAdvice" data-valmsg-for="DoctorAdvice" data-valmsg-replace="true" style="display:none"></span>
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <label class="col-md-3">Medication Prescribed</label>
+                <div class="col-md-6">
+                    <textarea placeholder="Medication Prescribed" name="MedicationPrescribed" class="form-control textarea-resizeNone" id="txt_MedicationPrescribed">@Model.MedicationPrescribed</textarea>
+                    <span class="form-control-bar"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-MedicationPrescribed" data-valmsg-for="MedicationPrescribed" data-valmsg-replace="true" style="display:none"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="div_DoctorNotConsulte" class="@(Model.DoctorConsulted == true ? "Display" : "")">
+
+            <div class="row marbot10">
+                <label class="col-md-3">Why Doctor Not Consulted</label>
+                <div class="col-md-6">
+                    <textarea placeholder="Why Doctor Not Consulted" name="WhyDoctorNotConsulted" class="form-control textarea-resizeNone" id="txt_WhyDoctorNotConsulted">@Model.WhyDoctorNotConsulted</textarea>
+                    <span class="form-control-bar"></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-WhyDoctorNotConsulted" data-valmsg-for="WhyDoctorNotConsulted" data-valmsg-replace="true" style="display:none"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="DoctorConsulted">Was the sickness due to accident at work or an industrial desease?</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.IsDuaToAccident == true)
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_IsDuaToAccident" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="form-control form-control-toil" name="toil" id="check_IsDuaToAccident">
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="step-4">
+        <div id="CommentList">
+            @foreach (var item in Model.CommentList)
+            {
+                <div class="seccomments row" id="comment_@comments" data-commentid="0">
+                    <div class="col-lg-10">
+                        <p>
+                            <span class="black postedby">@item.commentBy</span> -
+                        </p>
+                        <span class="sickComments">
+                            @Html.Raw(item.comment.ToString())
+                        </span>
+                        <span class="commentTime">@item.commentTime</span>
+                        @*<div class="sickComments" data-commentstring="@item.comment"></div>*@
+                    </div><div class="col-lg-2" style=""><i class="fa fa-pencil editComment"></i><i class="fa fa-trash-o deleteComment"></i></div>
+                </div>
+                comments = comments + 1;
+            }
+        </div>
+        <div>
+            <div id="froala-editor"></div>
+            <button class="md-btn md-btn-primary" id="btnAddComment" style="margin-top:5px;float:right;"><i class="fa fa-plus"></i> Add Comment</button>
+            <button class="md-btn md-btn-primary" data-editid="" id="btnEditComment" style="margin-top:5px;float:right;display:none;"><i class="fa fa-pencil"></i> Edit Comment</button>
+        </div>
+    </div>
+
+    <div id="step-5">
+        <div class="browse-attach">
+            <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        </div>
+
+        <div id="filesList">
+            @foreach (var item in Model.DocumentList)
+            {
+                <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+
+</div>
+

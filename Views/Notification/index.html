@@ -1,0 +1,276 @@
+﻿<html lang="en" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths uk-notouch wf-roboto-n4-active wf-sourcecodepro-n7-active wf-sourcecodepro-n4-active wf-roboto-n5-active wf-roboto-n3-active wf-roboto-n7-active wf-roboto-i4-active wf-active page_loaded app_initialized" document-events="" ng-app="altairApp" ng-click="onClick($event)" ng-keyup="onKeyUp($event)" ng-class="{
+        'page_loading': pageLoading,
+        'page_loaded': pageLoaded,
+        'app_initialized': appInitialized &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error'))
+}">
+<head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+        <meta charset="UTF-8">
+        <title page-title="" ng-bind="page_title" class="ng-binding">Altair Admin - Mailbox</title>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <!-- FAVICON -->
+        <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32">
+
+        <!-- flag icons -->
+        <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
+
+        <!-- JS -->
+        <!-- common functions -->
+        <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" type="text/javascript" async=""></script><script src="assets/js/common.min.js"></script>
+
+        <!-- ANGULAR -->
+        <script src="assets/js/angular_common.min.js"></script>
+        <!-- altairApp combined
+        <script src="assets/js/altair_app.min.js"></script>
+        -->
+        <!-- altair_app.js:-->
+        <script src="app/app.js"></script>
+        <script src="app/app.factory.js"></script>
+        <script src="app/app.service.js"></script>
+
+
+        <!-- main stylesheet -->
+        <script src="Views/Notification/bower_components/uikit/js/uikit.min.js"></script>
+        <script src="Views/Notification/bower_components/uikit/js/components/accordion.min.js"></script>
+        <script src="Views/Notification/bower_components/uikit/js/components/nestable.min.js"></script>
+        <script src="Views/Notification/assets/js/custom/uikit_beforeready.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="Views/Notification/bower_components/uikit/css/uikit.almost-flat.min.css">
+        <link rel="stylesheet" href="Views/Notification/assets/css/main.min.css" media="all" id="main_stylesheet">
+
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_a.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notificationassets/css/themes/_theme_b.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_c.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_d.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_e.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_f.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_g.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_h.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_i.min.css">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/themes/_theme_dark.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700%7CRoboto:400,300,500,700,400italic&amp;subset=latin,latin" media="all">
+        <link type="text/css" rel="stylesheet" href="Views/Notification/assets/css/style_switcher.min.css">
+        <script src="Views/Notification/app/shared/style_switcher/style_switcher.js" async=""></script>
+
+    </head>
+    <body ng-class="{
+    'sidebar_main_active': primarySidebarActive &amp;&amp; !miniSidebarActive &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_main_open': primarySidebarOpen &amp;&amp; !miniSidebarActive &amp;&amp; !slimSidebarActive &amp;&amp; !topMenuActive &amp;&amp; largeScreen &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_mini': miniSidebarActive &amp;&amp; largeScreen &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_slim sidebar_slim_inactive': slimSidebarActive &amp;&amp; largeScreen &amp;&amp; !topMenuActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'sidebar_main_hiding': primarySidebarHiding,
+    'sidebar_secondary_active': secondarySidebarActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'top_bar_active': toBarActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'page_heading_active': pageHeadingActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'header_double_height': headerDoubleHeightActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'main_search_active': mainSearchActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'header_full': fullHeaderActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'boxed_layout': boxedLayoutActive &amp;&amp; (!$state.is('login') &amp;&amp; !$state.includes('error')),
+    'login_page': $state.is('login'),
+    'error_page': $state.includes('error'),
+    'uk-height-1- 1': page_full_height,
+    'footer_active': footerActive,
+    'main_search_persistent': mainSearchPersistent
+}" content-sidebar="" class="sidebar_main_open top_bar_active">
+
+
+        <script type="text/javascript">
+            angular
+                    .module('altairApp')
+                    .controller('mailboxCtrl', [
+                            '$rootScope',
+                            '$scope',
+                            '$timeout',
+                            'variables',
+                            function ($rootScope, $scope, $timeout, variables) {
+                            var $mailbox = $('#mailbox');
+                            // select message
+                            $mailbox
+                                    .on('ifChanged', '.select_message', function() {
+                                    $(this).is(':checked') ? $(this).closest('li').addClass('md-card-list-item-selected') : $(this).closest('li').removeClass('md-card-list-item-selected');
+                                    });
+                            // select all messages
+                            $('#mailbox_select_all').on('ifChanged', function() {
+                            var $this = $(this);
+                            $mailbox.find('.select_message').each(function() {
+                            $this.is(':checked') ? $(this).iCheck('check') : $(this).iCheck('uncheck');
+                            })
+                            });
+                            // show message details
+                            $mailbox.on('click', '.md-card-list ul > li', function(e) {
+
+                            if (!$(e.target).closest('.md-card-list-item-menu').length && !$(e.target).closest('.md-card-list-item-select').length) {
+
+                            var $this = $(this);
+                            if (!$this.hasClass('item-shown')) {
+                            // get height of clicked message
+                            var el_min_height = $this.height() + $this.children('.md-card-list-item-content-wrapper').actual("height");
+                            // hide opened message
+                            $mailbox.find('.item-shown').velocity("reverse", {
+                            begin: function (elements) {
+                            $(elements).removeClass('item-shown').children('.md-card-list-item-content-wrapper').hide().velocity("reverse");
+                            }
+                            });
+                            // show message
+                            $this.velocity({
+                            marginTop: 40,
+                                    marginBottom: 40,
+                                    marginLeft: - 20,
+                                    marginRight: - 20,
+                                    minHeight: el_min_height
+                            }, {
+                            duration: 300,
+                                    easing: variables.easing_swiftOut,
+                                    begin: function (elements) {
+                                    $(elements).addClass('item-shown');
+                                    },
+                                    complete: function (elements) {
+                                    // show: message content, reply form
+                                    $(elements).children('.md-card-list-item-content-wrapper').show().velocity({
+                                    opacity: 1
+                                    });
+                                    // scroll to message
+                                    var container = $('body'),
+                                            scrollTo = $(elements);
+                                    container.animate({
+                                    scrollTop: scrollTo.offset().top - $('#page_content').offset().top - 8
+                                    }, 1000, variables.bez_easing_swiftOut);
+                                    }
+                            });
+                            }
+                            }
+
+                            });
+                            // hide message on: outside click, esc button
+                            $(document).on('click keydown', function(e) {
+                            if (
+                                    (!$(e.target).closest('li.item-shown').length) || e.which == 27
+                                    ) {
+                            $mailbox.find('.item-shown').velocity("reverse", {
+                            begin: function(elements) {
+                            $(elements).removeClass('item-shown').children('.md-card-list-item-content-wrapper').hide().velocity("reverse");
+                            }
+                            });
+                            }
+                            });
+                            }
+                    ])
+                    ;
+        </script>
+
+
+
+
+
+
+        <div id="main_view" ng-class="{'uk-height-1-1': page_full_height }" class="ng-scope">   
+            <!-- restricted main content -->
+            <div ng-class="{ 'uk-height-1-1': page_full_height }" class="ng-scope">
+                <div ui-view="" autoscroll="false" ng-class="{ 'uk-height-1-1': page_full_height }" class="ng-scope">    
+
+                    <div id="page_content" class="ng-scope">
+                        <div id="page_content_inner">
+
+                            <div ng-controller="mailboxCtrl" class="md-card-list-wrapper" id="mailbox">
+                                <div class="uk-width-large-8-10 uk-container-center">
+
+                                    <div class="md-card-list">
+                                        <div class="md-card-list-header heading_list">All messages</div>
+                                        <div class="md-card-list-header md-card-list-header-combined heading_list" style="display: none">All Messages</div>
+                                        <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" hierarchical-slide="">
+                                            <!-- ngRepeat: message in messages -->
+                                            <li on-last-repeat="" class="ng-scope" style="animation-delay: 0ms;">
+                                                <div class="md-card-list-item-menu" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                                    <a href="#" class="md-icon material-icons"></a>
+                                                    <div class="uk-dropdown uk-dropdown-small">
+                                                        <ul class="uk-nav">
+                                                            <li><a href="#"><i class="material-icons"></i> Reply</a></li>
+                                                            <li><a href="#"><i class="material-icons"></i> Archive</a></li>
+                                                            <li><a href="#"><i class="material-icons"></i> Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <span class="md-card-list-item-date ng-binding">08 Dec</span>
+                                                <div class="md-card-list-item-select">
+                                                    <div class="icheckbox_md"><input type="checkbox" class="select_message ng-pristine ng-untouched ng-valid ng-empty" icheck="" ng-model="messsage_select" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                </div>
+                                                <div class="md-card-list-item-avatar-wrapper">
+                                                    <!-- ngIf: message.sender_avatar -->
+                                                    <!-- ngIf: !message.sender_avatar --><span class="md-card-list-item-avatar md-bg-cyan-600" ng-if="!message.sender_avatar">ES</span><!-- end ngIf: !message.sender_avatar -->
+                                                </div>
+                                                <div class="md-card-list-item-sender">
+                                                    <!-- ngIf: message.verified --><span class="ng-binding ng-scope">Elyse Swift</span><!-- end ngIf: message.verified -->
+                                                    <!-- ngIf: !message.verified -->
+                                                </div>
+                                                <div class="md-card-list-item-subject">
+                                                    <div class="md-card-list-item-sender-small">
+                                                        <!-- ngIf: message.verified --><span ng-if="message.verified" class="ng-binding ng-scope">Elyse Swift</span><!-- end ngIf: message.verified -->
+                                                        <!-- ngIf: !message.verified -->
+                                                    </div>
+                                                    <span class="ng-binding">Eaque ab fuga corrupti ut enim tempora dolorem.</span>
+                                                </div>
+                                                <div class="md-card-list-item-content-wrapper">
+                                                    <div class="md-card-list-item-content ng-binding">
+                                                        Quod rerum et dolores neque animi et magni ex hic rerum qui omnis minima aliquam iusto deleniti consectetur fuga et nihil voluptatem magni qui corrupti animi dolores facilis nulla voluptatem dolore aut doloremque adipisci sunt aut ut deleniti dolores sunt quaerat dolorum facere autem deserunt possimus dolorum consequatur est quidem sint velit nihil aut et voluptates maxime labore recusandae ullam veniam vero eos harum ipsam eos necessitatibus quia esse soluta in nisi sapiente occaecati cumque quam ut hic assumenda error repudiandae et repellat praesentium autem ipsam et consectetur illum rerum perferendis mollitia nihil possimus dignissimos ut aut vel facilis illum voluptatum magni aliquam quia dolores sequi sapiente totam in tempore harum veniam enim vero odit.
+                                                    </div>
+                                                    <form class="md-card-list-item-reply ng-pristine ng-valid">
+                                                        <div class="form-control-wrapper"><label for="mailbox_reply_0">Reply to <span class="ng-binding">Elyse Swift</span></label><textarea class="form-control form-control-full ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty form-control-processed" id="mailbox_reply_0" cols="30" rows="4" form-control="" ng-model="message_reply"></textarea><span class="form-control-bar "></span></div>
+
+                                                        <button class="md-btn md-btn-flat md-btn-flat-primary">Send</button>
+                                                    </form>
+                                                </div>
+                                            </li><!-- end ngRepeat: message in messages -->
+                                            <li on-last-repeat="" class="ng-scope" style="animation-delay: 100ms;">
+                                                <div class="md-card-list-item-menu" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                                    <a href="#" class="md-icon material-icons"></a>
+                                                    <div class="uk-dropdown uk-dropdown-small">
+                                                        <ul class="uk-nav">
+                                                            <li><a href="#"><i class="material-icons"></i> Reply</a></li>
+                                                            <li><a href="#"><i class="material-icons"></i> Archive</a></li>
+                                                            <li><a href="#"><i class="material-icons"></i> Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <span class="md-card-list-item-date ng-binding">08 Dec</span>
+                                                <div class="md-card-list-item-select">
+                                                    <div class="icheckbox_md"><input type="checkbox" class="select_message ng-pristine ng-untouched ng-valid ng-empty" icheck="" ng-model="messsage_select" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                </div>
+                                                <div class="md-card-list-item-avatar-wrapper">
+                                                    <!-- ngIf: message.sender_avatar -->
+                                                    <!-- ngIf: !message.sender_avatar --><span class="md-card-list-item-avatar md-bg-green-600">CD</span><!-- end ngIf: !message.sender_avatar -->
+                                                </div>
+                                                <div class="md-card-list-item-sender">
+                                                    <!-- ngIf: message.verified --><span class="ng-binding ng-scope">Claudia Deckow</span><!-- end ngIf: message.verified -->
+                                                    <!-- ngIf: !message.verified -->
+                                                </div>
+                                                <div class="md-card-list-item-subject">
+                                                    <div class="md-card-list-item-sender-small">
+                                                        <!-- ngIf: message.verified --><span class="ng-binding ng-scope">Claudia Deckow</span><!-- end ngIf: message.verified -->
+                                                        <!-- ngIf: !message.verified -->
+                                                    </div>
+                                                    <span class="ng-binding">Similique quos ea architecto repellendus dolorum unde quis.</span>
+                                                </div>
+                                                <div class="md-card-list-item-content-wrapper">
+                                                    <div class="md-card-list-item-content ng-binding">
+                                                        Magnam animi exercitationem repellendus facere minima maxime voluptatem iusto doloribus enim perspiciatis non ducimus fuga quas dolor odio voluptate facere ipsum incidunt earum a necessitatibus in iusto repudiandae ad sed sed dolorem dolor quod quos doloribus sint minima ut reprehenderit consectetur qui voluptatem odio dicta aut rem sunt rem nostrum molestias voluptatem ducimus expedita reprehenderit doloremque animi consequatur eum iste nihil natus natus asperiores commodi neque minus accusantium illum sit quo ab modi incidunt in omnis iusto iusto laboriosam mollitia et consequatur maiores qui error blanditiis aut ut dolorem quis nulla et nulla dolore.
+                                                    </div>
+                                                    <form class="md-card-list-item-reply ng-pristine ng-valid">
+                                                        <div class="form-control-wrapper"><label for="mailbox_reply_1">Reply to <span class="ng-binding">Claudia Deckow</span></label><textarea class="form-control form-control-full ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty form-control-processed" id="mailbox_reply_1" cols="30" rows="4" form-control="" ng-model="message_reply"></textarea><span class="form-control-bar "></span></div>
+
+                                                        <button class="md-btn md-btn-flat md-btn-flat-primary">Send</button>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

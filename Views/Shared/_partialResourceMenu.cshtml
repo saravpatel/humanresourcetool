@@ -1,0 +1,234 @@
+﻿@model HRTool.Models.Employee.EmployeeMenuModel
+
+<div class="profile-userpic">
+    @if (!string.IsNullOrEmpty(Model.EmployeeImage))
+    {
+        <img src="~/Upload/Resources/@Model.EmployeeImage" id="imgPicture" class="center-block img-responsive" />
+    }
+    else
+    {
+        <img id="imgPicture" class="center-block img-responsive" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+    }
+
+
+    <div class="profile-usertitle">
+        <div id="hName" class="profile-usertitle-name">@Model.EmployeeName</div>
+        <div id="spnRole" class="profile-usertitle-job">@Model.Jobtilte</div>
+
+    </div>
+
+</div>
+
+
+
+
+
+@*<div class="imgprofile">
+    @if (!string.IsNullOrEmpty(Model.EmployeeImage))
+    {
+        <img src="~/Upload/Resources/@Model.EmployeeImage" id="imgPicture" class="center-block img-responsive" />
+    }
+    else
+    {
+        <img id="imgPicture" class="center-block img-responsive" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+    }
+
+    <h6  class="ng-binding center-block"></h6>
+    <div class="typeuser">
+        <span class="accessuser">@Model.Jobtilte</span>
+        <span  class="accessuser hide" ></span>
+    </div>
+</div>*@
+
+
+
+<div class="profile-usermenu">
+<ul class="nav">
+@if (Model.Resources_OverView)
+{
+
+        <li class="active">
+            <a href="@Url.Action("Index", "EmployeeOverView", new { EmployeeId = Model.Id })">
+                <i  class="fa fa-home"></i>Overview
+            </a>
+        </li>
+}
+@if (Model.Resources_Planner)
+{
+        <li>
+
+            <a href="@Url.Action("Index", "EmployeePlanner", new { EmployeeId = Model.Id })">
+                <i class="fa fa-calendar"></i>Planner
+            </a>
+
+            </li>
+}
+@if (Model.Resources_ProjectPlanner)
+{ 
+
+    <li>
+        <a href="@Url.Action("Index", "EmployeeProjectPlanner", new { EmployeeId = Model.Id })">
+            <i class="fa fa-line-chart"></i>Project Planner
+        </a>
+
+    </li>
+        }
+@if (Model.Resources_Performance)
+{
+
+    <li>
+
+        <a href="@Url.Action("EmployeePerformance", "EmployeePerformance", new { EmployeeId = Model.Id })">
+            <i class="fa fa-bar-chart"></i>Performance
+        </a>
+
+    </li>
+}
+@if (Model.Resources_SkillsEndorsement)
+{
+
+    <li title="Planner">
+
+        <a href="@Url.Action("Index", "EmployeeSkillsEndorsement", new { EmployeeId = Model.Id })" class="skillsEndorsement">
+            <i class="fa fa-briefcase"></i>Skills Endorsement</a>
+
+    </li>
+
+}
+@*@if (Model.Resources_Skills)
+{
+    <li title="Planner">
+        <a href="" disabled>
+            <i class="fa fa-pencil"></i> Skills</a>
+    </li>     
+}*@
+@if (Model.Resources_Training)
+{
+
+
+    <li title="Planner">
+
+                <a href="@Url.Action("Index", "EmployeeTraining", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-book"></i>Training</a>
+
+            </li>
+}
+@if (Model.Resources_Documents)
+{
+            <li title="Planner">
+
+                <a href="@Url.Action("Index", "EmployeeDocument", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-file"></i>Documents</a>
+
+            </li>
+
+}
+@if (Model.Resources_Resume_CV)
+{
+
+
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeResume", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-file"></i>Resume/CV</a>
+
+            </li>
+}
+@if (Model.Resources_Profile)
+{
+
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeProfile", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-user"></i>Profile
+                </a>
+
+            </li>
+}
+@if (Model.Resources_Employment)
+{
+
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeEmployment", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-users"></i>Employment
+                </a>
+
+            </li>
+
+}
+@if (Model.Resources_Contacts)
+{
+
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeContacts", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-address-card"></i>contact
+                </a>
+
+            </li>
+}
+@if (Model.Resources_Benefits)
+{
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeBenefits", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-inr"></i>Benifits
+                </a>
+
+            </li>
+}
+@if (Model.Resources_Caselog)
+{
+            <li>
+
+                <a href="@Url.Action("Index", "EmployeeCases", new { EmployeeId = Model.Id })">
+                    <i class="fa fa-list-ol"></i>CaseLog
+                </a>
+
+            </li>
+}
+    </ul>
+</div>
+
+<script>
+    onResourecMenuNaviation();
+    function onResourecMenuNaviation() {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".profile-usermenu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.profile-usermenu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href.substring(0, href.indexOf('?')) === path) {
+                $('.profile-usermenu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    }
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".page-sidebar-menu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href === '/Resources') {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    })
+    
+</script>
+
+
+
+
+ 

@@ -1,0 +1,16 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+
+<div class="row marbot10">
+    <label class="col-md-3">Select Customer’s Company</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="CoustomerCompanyListrecord">
+            @foreach (var Title in Model.CoustomerCompanyList)
+            {
+                <option value="@Title.Value">@Title.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>

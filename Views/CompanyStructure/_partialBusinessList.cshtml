@@ -1,0 +1,105 @@
+﻿@model HRTool.Models.Settings.CompanyStructureViewModel
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  " data-toggle="modal" data-target="#addBusiness" onclick="btnaddbusiness()" title="Add Business"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-business" data-toggle="modal" data-target="#addBusiness" title="Edit" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-business" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+</div>
+<table id="example" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Created</th>
+        </tr>
+    </thead>   
+    <tbody>
+        @foreach (var item in Model.businessLists)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Name</td>
+                <td>@item.CreatedDate</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th><input type="text" class="form-control SearchName" placeholder="Name"></th>
+            <th><input type="text" class="form-control SearchCreatedDate" placeholder="Created Date"></th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="addBusiness" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title businessTitle" id="myModalLabel">
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="row marbot10">
+                    <div class="col-md-2">
+                        <label class="control-label" for="BusinessName">Business Name*</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="hidden" id="business_Id" />
+                        <input type="text" class="form-control" id="businessText" data-toggle="tooltip" data-placement="right" name="BusinessName" title="Business Name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="field-validation-error" id="lbl-error-BusinessName" style="display:none;" data-valmsg-for="BusinessName" data-valmsg-replace="true">The Business Name is required.</span>
+                        <span class="field-validation-error" id="lbl-error-BusinessNameExist" style="display:none;" data-valmsg-for="BusinessName" data-valmsg-replace="true">This Business Name is AllReady Exist.</span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-Business">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    DataTableDesignBussiness();
+    function DataTableDesignBussiness() {
+        $('#example tfoot tr').appendTo('#example thead');
+        var table = $("#example").DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+            "scrollX": true
+        });
+        $("#tableDiv").find(".dataTables_filter").hide();
+        $("#tableDiv").find(".dataTables_info").hide();
+        $("#tableDiv thead .SearchName").keyup(function () {
+            table.column(0).search(this.value).draw();
+        });  
+        $("#tableDiv thead .SearchCreatedDate").Zebra_DatePicker({
+            //direction: false,
+            showButtonPanel: false,
+            format: 'd-m-Y',
+            default_position: 'below',
+            onSelect: function () {
+                var date = $("#tableDiv").find('.SearchCreatedDate').val();
+                table.column(1).search(date).draw();
+            }
+        });
+        $(".dp_clear").on('click', function () {
+            var date = $("#tableDiv").find("thead").find('.SearchCreatedDate').val();
+            table.column(1).search(date).draw();
+        });
+    }
+
+</script>

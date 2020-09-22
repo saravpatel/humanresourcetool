@@ -1,0 +1,120 @@
+﻿@model HRTool.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" media="all">
+<link rel="stylesheet" href="~/Content/login_page.min.css" media="all">
+<link rel="stylesheet" href="~/Content/custom.css" media="all">
+<link rel="stylesheet" href="~/Content/Site.css" media="all">
+
+<div class="fotfix">
+    <div data-ui-view="" class="">
+        <div class="container ">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="loginbox">
+                            <p class="login_account text-right"> Having Problems? <a target="_blank" href="http://www.energymanpower.com">Visit Our Support Site</a></p>
+                            <div class="head">
+                                <h1>
+                                    <img src="~/img/logo_main.png" id="" alt="">
+                                </h1>
+                                <p class="logintext">Login</p>
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <div class="formbox">
+                                <p>Please enter your login details below.</p>
+                                <div class="form tool">
+                                    <div class="block">
+                                 
+                                            <label class="block">Email Address</label>
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.UserName)
+                               
+                                    </div>
+                                    <div class="block">
+                                
+                                            <label class="block">Password</label>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Password)
+                                           @Html.ValidationSummary(true)
+                                        </div>
+                                    </div>
+                          <div class="block"> 
+                                <a class="left linkforgot" href="#/forgotPassword">Forgot Your Password?</a>
+                                <button type="submit" class="pull-right md-btn md-btn-primary login-btn" value="Log in">Login</button>                            
+				</div>  
+				                  </div>
+</div>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+<footer>
+    <p class="text-center">&copy; 2017 - inheritx.com</p>
+</footer>
+
+
+
+
+@*<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <hr />
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Register", "Register")
+                </p>
+            }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

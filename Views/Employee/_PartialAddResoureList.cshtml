@@ -1,0 +1,234 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+@using HRTool.CommanMethods;
+
+<input type="hidden" id="hdnSession" data-value="@SessionProxy.IsCustomer" />
+<div id="AddResoure" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" style="padding-right: 40px;">
+        <div class="modal-content" >
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Resource</h4>
+                        </div>
+                        <div class="modal-body" align="right" id="AddResoureceBody">
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="checkWorker" />
+
+<div class="md-card">
+    <div class="" >
+        <div id="tableDivResourercords">
+            <div class="table-responsive">
+                @if (SessionProxy.IsCustomer==true)
+                {
+                    @*<div class="table-btns">
+                        <div class="resource-table-btns">
+                            <a class="btn btn-success btn-circle  btn-add-Resoure" title="Add Project" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddResoure"><i class="fa fa-plus"></i></a>
+                            <a class="btn btn-primary btn-circle  btn-edit-Resoure" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddProjectModel" disabled="disabled"><i class="material-icons">edit</i></a>
+                            <a class="btn btn-danger btn-circle  btn-delete-Resoure" data-toggle="tooltip" data-placement="right" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                            <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Resoure" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+                            <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Resoure" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+                            <button class="btn btn-warning btn-circle  btn-clearFilter-Resoure" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+                            <a class="btn btn-primary btn-circle  btn-export2excel-Resoure" href="@Url.Action("ExportExcelCoustomer", "Employee")" title="export2excel"><i class="fa fa-rocket"></i></a>
+                        </div>
+                        <div class="resource-employee-details">
+                            <div class="ResourcListCount Wrecord">
+                                <span>
+                                    <label>Full Time Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.FullTime"> |
+                                </span>
+                                <span>
+                                    <label>Part Time Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.PartTime"> |
+                                </span>
+                                <span>
+                                    <label>Temporary Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TemporaryTime">
+                                </span>
+                            </div>
+                            <div class="CustomerListCount Wrecord" style="display:none;">
+                                <span>
+                                    <label>Total Companies :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TotalCoumpany"> |
+                                </span>
+                                <span>
+                                    <label>Total Customers :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TotalCustomer">
+                                </span>
+                            </div>
+                        </div>
+                    </div>*@
+                }
+                else
+                {
+                    <div class="table-btns">
+                        
+                            <a class="btn btn-success btn-circle  btn-add-Resoure" title="Add Project" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddResoure" ><i class="fa fa-plus"></i></a>
+                            <a class="btn btn-primary btn-circle  btn-edit-Resoure" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddProjectModel" ><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-danger btn-circle  btn-delete-Resoure" data-toggle="tooltip" data-placement="right" title="Delete" disabled="disabled"><i class="fa fa-trash-o" ></i> </a>
+                            <button title="Refresh" class="btn btn-success btn-circle  btn-Refresh-Resoure" data-toggle="tooltip" data-placement="right"><i class=" fa fa-refresh"  disabled="disabled"></i></button>
+                            <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Resoure" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+                            <button class="btn btn-info btn-circle  btn-clearFilter-Resoure" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+                            <a class="btn btn-danger btn-circle  btn-export2excel-Resoure" href="@Url.Action("ExportExcel", "Employee")" title="export2excel"><i class="fa fa-upload"></i></a>
+                        
+                        <div class="resource-employee-details">
+                            <div class="ResourcListCount Wrecord">
+                                <span>
+                                    <label>Full Time Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.FullTime"> 
+                                </span>
+                                <span>
+                                    <label>Part Time Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.PartTime"> 
+                                </span>
+                                <span>
+                                    <label>Temporary Employee :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TemporaryTime">
+                                </span>
+                            </div>
+                            <div class="CustomerListCount Wrecord" style="display:none;">
+                                <span>
+                                    <label>Total Companies :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TotalCoumpany"> 
+                                </span>
+                                <span>
+                                    <label>Total Customers :</label>
+                                    <input class="form-control" type="text" readonly="readonly" value="@Model.TotalCustomer">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="clearfix"></div>
+            <div class="uk-overflow-container">
+                <div class="table-responsive">
+                    <table id="ResoureListtable" class="table-bordered display table style2 table-striped" cellspacing="0">
+                        <thead>
+                            <tr class="tblHeading">
+                                <th>Name</th>
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>Business</th>
+                                <th>Division</th>
+                                <th>Pool</th>
+                                <th>Function</th>
+                                <th>Type</th>
+                                <th>Overall Score (Average Score)</th>
+                                <th>Core Strengths (Average Score)</th>
+                                <th>Number of Skills</th>
+                                <th>Number of Skills  Endorsed</th>
+                                <th>Endorsement Received</th>                            
+                                <th>Nationality</th>
+                                <th>Country of Residence</th>
+                                <th>Length of service</th>
+                            </tr>
+                        </thead>
+                        <tbody class="employee_list_fix">
+                            @foreach (var item in Model.AllListData)
+                            {
+                                <tr id="@item.Id" class="dataTr">
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.JobTitleName
+                                    </td>
+                                    <td>
+                                        @item.CompanyName
+                                    </td>
+                                    <td>
+                                        @item.BusinessName
+                                    </td>
+                                    <td>
+                                        @item.DivisionName
+                                    </td>
+                                    <td>
+                                        @item.PoolName
+                                    </td>
+                                    <td>
+                                        @item.FunctionName
+                                    </td>
+                                    <td>@item.ResourceTypeName</td>
+                                    <td>NULL</td>
+                                    <td>NULL</td>
+                                    <td>@item.TotalSkill</td>
+                                    <td>@item.NumberofSkillsEndorsed</td>
+                                    <td>@item.NoOfEndorsmntReceive</td>
+                                    <td>@item.NationalityName</td>
+                                    <td>@item.ContryName</td>
+                                    <td>@item.LengthofService</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th >
+                                    <input type="text" class="form-control FirstName" placeholder="First Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control JobTitleName" placeholder="Job Title">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control CompanyName" placeholder="Company Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control BusinessName" placeholder="Business Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control DivisionName" placeholder="Division Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control PoolName" placeholder="Pool Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control FunctionName" placeholder="Function Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control ResourceTypeName"  placeholder="Resource Type">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control OverallScore" placeholder="Overall Score">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control CoreStrengths"  placeholder="Core Strengths">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control TotalSkill" placeholder="Total Skill">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control NumberofSkillsEndorsed" placeholder="Number Of Skills">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control NoOfEndorsmntReceive" placeholder="Endorsement Received">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control NationalityName"  placeholder="Nationality">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control ContryName" placeholder="Country of Residence">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control LengthofService" placeholder="Length of service">
+                                </th>                               
+                            </tr>
+                        </tfoot>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

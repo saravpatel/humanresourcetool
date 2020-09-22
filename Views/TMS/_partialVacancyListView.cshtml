@@ -1,0 +1,109 @@
+﻿@model HRTool.Models.Admin.TMSVacancyDetailsViewModel
+<div id="VacancyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title vacancyTitle"></h4>
+            </div>
+            <div class="modal-body" id="AddVacancyLogBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-AdminCaseLog">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<h4 class="heading_a uk-margin-bottom">
+   
+    <h1 class="page-title">
+        Vacancy List
+        <small>   View company vacancy or upload a new one.</small>
+    </h1>
+    
+    <div class="clearfix"></div>
+</h4>
+
+<div class="md-card">
+    <div >
+        <div class="uk-overflow-container" >
+            <div class="table-btns">
+                <a class="btn btn-success btn-circle  btn-add-Vacancy" title="Add Vacancy" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#VacancyModal"><i class="fa fa-plus"></i></a>
+                <a class="btn btn-primary btn-circle  btn-edit-Vacancy" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#VacancyModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger btn-circle  btn-delete-Vacancy" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Vacancy" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Vacancy" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                <button class="btn btn-info btn-circle  btn-clearFilter-Vacancy" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+            </div>
+            <div class="table-responsive">
+                
+                        <table id="VacancyModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                            <thead>
+                                <tr class="tblHeading">
+                                    <th>Name</th>
+                                    <th>Recruitment Process</th>
+                                    <th>Hiring Lead</th>
+                                    <th>Location</th>
+                                    <th>Business</th>
+                                    <th>Division</th>
+                                    <th>Pool</th>
+                                    <th>Function</th>
+                                    <th>Created</th>
+                                    <th>Status</th>
+                                    <th>New applicants</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="searchTh"><input type="text" class="form-control SearchName" placeholder="Name"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchRecruitment" placeholder="Process"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchHiring" placeholder="Hiring"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchLocation" placeholder="Location"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchBusiness" placeholder="Business"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchDivision" placeholder="Division"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchPool" placeholder="Pool"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchFunction" placeholder="Function"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchCreated" placeholder="Created"></th>
+                                    <th class="searchTh"><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model.VacancyList)
+                            {
+                                    <tr id="@item.Id" class="dataTr">
+                                        <td>@item.Title</td>
+                                        <td>@item.RecruitmentProcess</td>
+                                        <td>@item.HiringLead</td>
+                                        <td>@item.Location</td>
+                                        <td>@item.Business</td>
+                                        <td>@item.Division</td>
+                                        <td>@item.Pool</td>
+                                        <td>@item.Function</td>
+                                        <td>@item.ClosingDate</td>
+                                        <td>@item.Status</td>
+                                        <td>@item.Newapplicants</td>
+                                        <td>
+                                            <a onclick="gotoApplicantOverview(@item.Id)"><i class="fa fa-user"></i></a> &nbsp;&nbsp;
+                                            <a href="@Url.Action("Index", "TMSVacancy", new { VacancyId = item.Id})" target="_blank" class="pull-right"><i class="fa fa-link"></i></a>
+                                        </td>
+                                    </tr>
+                            }
+                            </tbody>
+
+                        </table>
+                   
+            </div>
+        </div>
+    </div>
+</div>
+

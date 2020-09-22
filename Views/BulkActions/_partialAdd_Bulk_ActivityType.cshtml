@@ -1,0 +1,162 @@
+﻿
+@model HRTool.Models.BulkActions.BulkActonActivityType
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Add Employee Information</h4>
+    </div>
+<div id="findBtn">
+   
+    <div class="row marbot10">
+        <div class="col-md-2">
+            <label class="control-label" for="Year">Year*</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.Year != 0)
+        {
+                <input type="number" max="4" class="form-control" id="YearText" value="@Model.Year" min="0" data-toggle="tooltip" data-placement="right" name="Year" title="Year" required>
+
+        }
+        else
+        {
+                <input type="number" max="4" class="form-control" id="YearText" data-toggle="tooltip" min="0" data-placement="right" name="Year" title="Year" required>
+        }
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-Year" style="display:none;" data-valmsg-for="Year" data-valmsg-replace="true">The Year is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-2">
+            <input type="hidden" id="activityType_Id" value="@Model.Id" />
+            <label class="control-label" for="ActivityTypes">Activity Type*</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="ActivityTypeText" value="@Model.Name" data-toggle="tooltip" data-placement="right" name="ActivityTypes" title="Activity Type" required>
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-ActivityTypes" style="display:none;" data-valmsg-for="ActivityTypes" data-valmsg-replace="true">The Activity Type Name is required.</span>
+            <span class="field-validation-error" id="lbl-error-ActivityTypeExist" style="display:none;" data-valmsg-for="ActivityTypes" data-valmsg-replace="true">This Activity Type Name is AllReady Exist.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-2">
+
+            <label class="control-label" for="CurrencyList">Currency*</label>
+        </div>
+        <div class="col-md-6">
+
+            <select id="selCurrency" class="form-control">
+                @*<option class="selCurrency" id="0" value="0">-- Select Currency --</option>*@
+                @foreach (var items in Model.currencyList)
+            {
+                if (Model.CurrencyValue == items.Value)
+                {
+                        <option class="selCurrencys" selected="selected" value="@items.Value">@items.Text</option>
+                }
+                else
+                {
+                        <option class="selCurrencys" value="@items.Value">@items.Text</option>
+                }
+
+            }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-CurrencyList" style="display:none;" data-valmsg-for="CurrencyList" data-valmsg-replace="true">The Currency Name is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-2">
+            <label class="control-label" for="WorkUnitList">Work Unit*</label>
+        </div>
+        <div class="col-md-6">
+            <select id="selWorkUnit" class="form-control">
+                @*<option class="selWorkUnit" id="0" value="0">-- Select Work Unit --</option>*@
+                @foreach (var items in Model.workUnitList)
+            {
+                if (Model.WorkUnitValue == items.Value)
+                {
+                        <option class="selWorkUnits" value="@items.Value">@items.Text</option>
+                }
+                else
+                {
+                        <option class="selWorkUnits" value="@items.Value">@items.Text</option>
+
+                }
+            }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-WorkUnitList" style="display:none;" data-valmsg-for="WorkUnitList" data-valmsg-replace="true">The Work Unit Name is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-2">
+            <label class="control-label" for="WorkerRate">Worker Rate</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.WorkerRate != 0)
+        {
+                <input type="number" max="10" class="form-control" id="WorkerRateText"  min="0" value="@Model.WorkerRate" data-toggle="tooltip" data-placement="right" name="WorkerRate" title="Worker Rate" required>
+        }
+        else
+        {
+                <input type="number" max="10" class="form-control" id="WorkerRateText"  min="0" data-toggle="tooltip" data-placement="right" name="WorkerRate" title="Worker Rate" required>
+        }
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-WorkerRate" style="display:none;" data-valmsg-for="WorkerRate" data-valmsg-replace="true">The Worker Rate is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-2">
+            <label class="control-label" for="CustomerRate">Customer Rate</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.CustomerRate != 0)
+        {
+                <input type="number" max="10" class="form-control" id="CustomerRateText" min="0" value="@Model.CustomerRate" data-toggle="tooltip" data-placement="right" name="CustomerRate" title="Customer Rate" required>
+        }
+        else
+        {
+                <input type="number" max="10" class="form-control" id="CustomerRateText"  min="0" data-toggle="tooltip" data-placement="right" name="CustomerRate" title="Customer Rate" required>
+        }
+        </div>
+        <div class="col-md-4">
+            <span class="field-validation-error" id="lbl-error-CustomerRate" style="display:none;" data-valmsg-for="CustomerRate" data-valmsg-replace="true">The Customer Rate is required.</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" id="btnBulkActivityData">Add</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+<script>
+    $("#YearText").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#CustomerRateText").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#WorkerRateText").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#selCurrency").on('change', function () {
+        $("#lbl-error-CurrencyList").hide();
+    })
+    $("#selWorkUnit").on('change', function () {
+        $("#lbl-error-WorkUnitList").hide();
+    })
+</script>
+<script src="~/JS/BulkAction/BulkActionJs.js"></script>

@@ -1,0 +1,270 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+
+<div class="row marbot10">
+    <label class="col-md-3">Country*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpCountry">
+            @foreach (var Country in Model.CountryDropdown)
+            {
+                <option value="@Country.Value">@Country.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidCountry" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">State*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpState">
+            @foreach (var State in Model.StateDropdown)
+            {
+                <option value="@State.Value">@State.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidState" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Town*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpTown">
+            @foreach (var Town in Model.CityDropdown)
+            {
+                <option value="@Town.Value">@Town.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidTown" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Airport</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpAirport">
+            @foreach (var Airport in Model.AirportList)
+            {
+                <option value="@Airport.Value">@Airport.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidAirport" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">House Number</label>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" name="HouseNumber" class="form-control" id="HouseNumber" value="">
+                <span class="form-control-bar"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Postcode</label>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" name="Postcode" class="form-control" id="Postcode" value="@Model.PostalCode">
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="md-btn md-btn-primary" id="FindAddess">FIND ADDRESS</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Address</label>
+    <div class="col-md-6">
+        <textarea  name="Address" class="form-control textarea-resizeNone" id="Address" >@Model.Address</textarea>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Work Phone</label>
+    <div class="col-md-6">
+        <input type="number" name="WorkPhone" class="form-control" id="WorkPhone" value="" min="0"/>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidWorkPhone" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Work Mobile</label>
+    <div class="col-md-6">
+        <input type="number" name="WorkMobile" class="form-control" id="WorkMobile" value="" min="0" />
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidWorkMobile" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Personal Phone</label>
+    <div class="col-md-6">
+        <input type="number" name="PersonalPhone" class="form-control" id="PersonalPhone" value="" min="0" />
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        @*<span class="field-validation-error" id="ValidPersonalPhone" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>*@
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Personal Mobile</label>
+    <div class="col-md-6">
+        <input type="number" name="PersonalMobile" class="form-control" id="PersonalMobile" value="" min="0"/>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        @*<span class="field-validation-error" id="ValidPersonalMobile" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>*@
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Personal Email</label>
+    <div class="col-md-6">
+        <input type="text" name="PersonalEmail" class="form-control" id="PersonalEmail" value="@Model.PersonalEmail" />
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        @*<span class="field-validation-error" id="ValidPersonalEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>*@
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <h4>Bank Details</h4>
+        <hr>
+        <div class="row marbot10">
+            <label class="col-md-3">Account Number</label>
+            <div class="col-md-6">
+                <input type="number" name="AccountNumber" class="form-control" id="AccountNumber" value="" min="0" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Account Name</label>
+            <div class="col-md-6">
+                <input type="text" name="AccountName" class="form-control" id="AccountName" value="" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Code</label>
+            <div class="col-md-6">
+                <input type="text" name="BankCode" class="form-control" id="BankCode" value="" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Name</label>
+            <div class="col-md-6">
+                <input type="text" name="BankName" class="form-control" id="BankName" value="" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">IBAN Number</label>
+            <div class="col-md-6">
+                <input type="text" name="IBAN_Number" class="form-control" id="IBAN_Number" value="" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidIBAN_Number" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">SWIFT Code</label>
+            <div class="col-md-6">
+                <input type="text" name="SWIFT_Code" class="form-control" id="SWIFT_Code" value="" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidIBAN_Number" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Bank Address</label>
+            <div class="col-md-6">
+                <textarea type="text" name="Address" class="form-control textarea-resizeNone" id="BankAddress" value=""></textarea>
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Other Account Information</label>
+            <div class="col-md-6">
+                <textarea type="text" name="OtherAccountInformation" class="form-control textarea-resizeNone" id="OtherAccountInformation" value=""></textarea>
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $("#WorkPhone").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#WorkMobile").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#PersonalPhone").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#PersonalMobile").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#AccountNumber").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+
+</script>

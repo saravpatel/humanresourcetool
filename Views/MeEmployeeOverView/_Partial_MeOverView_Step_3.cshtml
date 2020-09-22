@@ -1,0 +1,22 @@
+﻿@model List<HRTool.Models.Me.BenefitList>
+<div class="md-card">
+    <div >
+        <div class="uk-overflow-container" style="height:444px;">
+            <div class="table-responsive">
+                <div id="tableDiv">     
+                    <table id="BenefitModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                       <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="@item.id" class="dataTr">                                 
+                                    <td>@item.benifitName</td>
+                                    <td>@item.dateAwarded</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

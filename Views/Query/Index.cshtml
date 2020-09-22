@@ -1,0 +1,169 @@
+﻿@model HRTool.Models.Query.QueryDataSet
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="QueryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title QueryTitle">Create Query</h4>
+            </div>
+            <div class="modal-body" id="AddQueryForm">
+
+            </div>
+            <div class="modal-body" id="QueryResult">
+
+            </div>
+            @*<div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-Add-Edit" id="btn-submit-Document" onclick="SaveQuery()">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+<div id="DocumentSignatureModal" class="modal fade signature-popup-main" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title DocumentSignatureTitle">Employee Signature</h4>
+            </div>
+            <div class="modal-body" id="AddSignatureBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-Signature-Close" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success btn-Signature-Edit" id="btn-submit-Signature">Sign</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ 
+
+<h1 class="page-title">
+    Query List
+    
+</h1>
+
+<div class="md-card">
+    <div >
+        <div class="uk-overflow-container">
+            <input type="hidden" id="Employee_ID" value="" />
+            <div class="table-btns">
+                <a class="btn btn-success btn-circle  btn-add-Document" title="Create Query" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#QueryModal" onclick="AddQuery()"><i class="fa fa-plus"></i></a>
+                @*<a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+            <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+            <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+            <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>*@
+            </div>
+             
+                <div id="tableDivData" class="table-responsive">
+                    
+                    <table id="ResoureListDatatable" class="table-bordered display table style2 table-striped" cellspacing="0">
+                        <thead>
+                            <tr class="tblHeading">
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Reminder</th>
+                                <th>Favourite</th>
+                            </tr>
+                        </thead>
+                        <tbody class="employee_list_fix">
+                            @foreach (var item in Model.AllQueryData)
+                            {
+
+                                <tr id="@item.Id" class="dataTr">
+                                    <td>
+                                        @item.QueryName
+                                    </td>
+                                    <td>
+                                        @item.QueryDescription
+                                    </td>
+                                    <td>
+                                        NULL
+                                    </td>
+                                    <td>
+                                        NULL
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                <tr>
+                    <th>
+                        <input type="text" class="form-control QueryName" placeholder="Name">
+                    </th>
+                    <th>
+                        <input type="text" class="form-control QueryDescription" placeholder="Description">
+                    </th>
+                    <th>
+                        <input type="text" class="form-control QueryReminder" placeholder="Reminder">
+                    </th>
+                    <th>                        
+                    </th>
+                </tr>
+            </tfoot>
+
+                    </table>
+
+                </div>
+                
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    QueryTableData();
+    function QueryTableData() {
+        $('#ResoureListDatatable tfoot tr').appendTo('#ResoureListDatatable thead');
+        var table = $("#tableDivData").find('#ResoureListDatatable').DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+            "scrollX": true           
+        });
+        $('#tableDivData').find('.dataTables_filter').hide();
+        $('#tableDivData').find('.dataTables_info').hide();
+        $("#tableDivData").on('keyup', '.QueryName', function () {
+            table.column(0).search(this.value).draw();
+        });
+        $("#tableDivData").on('keyup', '.QueryDescription', function () {
+            table.column(1).search(this.value).draw();
+        });
+        $("#tableDivData").on('keyup', '.QueryReminder', function () {
+            table.column(2).search(this.value).draw();
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    var ConstantQuery = {
+        QueryIndex: '@Url.Action("Index", "Query")',
+        Create:'@Url.Action("CreateQuery", "Query")',
+        BindColumnList: '@Url.Action("GetColumnList", "Query")',
+        AddFilter : '@Url.Action("AddFilter","Query")',
+        bindDiv: '@Url.Action("bindDivisionList", "Query")',
+        bindpool: '@Url.Action("bindPoolList", "Query")',
+        bindFuncation: '@Url.Action("bindFuncationList", "Query")',
+        SaveAllQuery: '@Url.Action("SaveAllQuery", "Query")',
+        bindBussiness: '@Url.Action("bindBussiness", "Query")',
+        getCustomer: '@Url.Action("getCustomer", "Query")',
+        saveQuery: '@Url.Action("SaveQuery", "Query")',
+        SaveQueryData: '@Url.Action("SaveQueryData", "Query")',
+
+    }
+</script>
+<script src="~/JS/Query/QueryJS.js"></script>

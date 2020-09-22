@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c458d8ab0284280ad73e41733b61599" Name="Diagram1" ZoomLevel="22">
+        <EntityTypeShape EntityType="EvolutionModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.ActivityType" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Admin_Document" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Airport" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="5.875" />
+        <EntityTypeShape EntityType="EvolutionModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="EvolutionModel.Asset" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Benefit" Width="1.5" PointX="5.75" PointY="10.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Benefits_Documents" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EvolutionModel.BradfordFactor_HolidaySettings" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Business" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Case" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Cases_Comments" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Cases_Documents" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EvolutionModel.certificate" Width="1.5" PointX="11.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EvolutionModel.certificate_document" Width="1.5" PointX="13.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EvolutionModel.City" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Cmp_Customer" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Company_Customer" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Company_Settings" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Country" Width="1.5" PointX="4.75" PointY="15.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Currency" Width="1.5" PointX="15.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Division" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Email_Setting" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employe_EmergencyContacts" Width="1.5" PointX="6.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Educations" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Endrosement_Comments" Width="1.5" PointX="13.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Experiences" Width="1.5" PointX="19.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Languages" Width="1.5" PointX="19.75" PointY="10.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_LateLeave" Width="1.5" PointX="10.75" PointY="19.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_MaternityOrPaternityLeaves_Document" Width="1.5" PointX="19.75" PointY="15.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_MeternityOrPaternityLeaves_Comment" Width="1.5" PointX="19.75" PointY="19.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_OtherLeave_Documents" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_TimeSheet" Width="1.5" PointX="4.75" PointY="21.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_TimeSheet_Detail" Width="1.5" PointX="21.75" PointY="11.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_TimeSheet_Documents" Width="1.5" PointX="21.75" PointY="17.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_TravelLeave_Documents" Width="1.5" PointX="21.75" PointY="21.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_Uplift" Width="1.5" PointX="0.75" PointY="22.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_Uplift_Documents" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_PublicHoliday" Width="1.5" PointX="12.75" PointY="22.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Qualifications" Width="1.5" PointX="23.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Resume" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary" Width="1.5" PointX="23.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary_Deduction" Width="1.5" PointX="9.875" PointY="23.5" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary_Deduction_Temp" Width="1.5" PointX="23.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary_Entitlement_Temp" Width="1.5" PointX="17.75" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary_Entitlements" Width="1.5" PointX="23.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Salary_Temp" Width="1.5" PointX="23.75" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_SickLeaves_Comments" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Task_Temp" Width="1.5" PointX="25.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TimeSheet" Width="1.5" PointX="25.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TimeSheet_Documents" Width="1.5" PointX="25.75" PointY="19.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TOIL" Width="1.5" PointX="19.75" PointY="25.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TravelLeave_Documents" Width="1.5" PointX="25.75" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_WorkPattern" Width="1.5" PointX="10.75" PointY="26.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeeRelation" Width="1.5" PointX="12.75" PointY="26.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Function" Width="1.5" PointX="26.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.HolidaysNAbsence_Setting" Width="1.5" PointX="27.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Menu_List" Width="1.5" PointX="4.75" PointY="27.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Mobile_setting" Width="1.5" PointX="27.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EvolutionModel.News" Width="1.5" PointX="27.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EvolutionModel.News_Comments" Width="1.5" PointX="27.75" PointY="18.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PerformanceSetting" Width="1.5" PointX="27.75" PointY="22.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Pool" Width="1.5" PointX="28.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Project" Width="1.5" PointX="6.75" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PublicHolidayCountry" Width="1.5" PointX="16.75" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PublicHoliday" Width="1.5" PointX="21.75" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.QueryColunName" Width="1.5" PointX="23.75" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Role_DefaultMenu" Width="1.5" PointX="0.75" PointY="29.75" />
+        <EntityTypeShape EntityType="EvolutionModel.SkillSet" Width="1.5" PointX="29.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.State" Width="1.5" PointX="29.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EvolutionModel.sysdiagram" Width="1.5" PointX="29.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EvolutionModel.SystemList" Width="1.5" PointX="29.75" PointY="15.75" />
+        <EntityTypeShape EntityType="EvolutionModel.SystemListValue" Width="1.5" PointX="18.75" PointY="29.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Task_Documents" Width="1.5" PointX="29.75" PointY="19.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Task_List" Width="1.5" PointX="29.75" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.TimeSheet_Setting" Width="1.5" PointX="25.75" PointY="29.75" />
+        <EntityTypeShape EntityType="EvolutionModel.TMS_Applicant_Comments" Width="1.5" PointX="29.75" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.TMS_Applicant_Documents" Width="1.5" PointX="30.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.TMS_Setting_RecruitmentProcesses" Width="1.5" PointX="2.75" PointY="31.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Training_Document" Width="1.5" PointX="31.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.UserMenu" Width="1.5" PointX="31.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Visa" Width="1.5" PointX="10.75" PointY="31.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Visa_Document" Width="1.5" PointX="31.75" PointY="12.75" />
+        <EntityTypeShape EntityType="EvolutionModel.WorkPatternDetail" Width="1.5" PointX="31.75" PointY="16.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeeAddressInfo" Width="1.5" PointX="31.75" PointY="27.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeeTask" Width="1.5" PointX="32.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.AspNetRole" Width="1.5" PointX="3.75" PointY="3.125" />
+        <EntityTypeShape EntityType="EvolutionModel.AspNetUserRole" Width="1.5" PointX="6" PointY="7.125" />
+        <AssociationConnector Association="EvolutionModel.FK_AspNetUserRoles_AspNetRoles" />
+        <EntityTypeShape EntityType="EvolutionModel.HolidayYearAndMonthSetting" Width="1.5" PointX="12.75" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_TravelLeave" Width="1.5" PointX="20.75" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeeBankInfo" Width="1.75" PointX="22.75" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.WorkPattern" Width="1.5" PointX="29.75" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_AddEndrosementSkills" Width="1.375" PointX="31.75" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.System_settings" Width="1.5" PointX="33.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_SickLeaves_Documents" Width="1.5" PointX="33.75" PointY="11.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Document_Signature" Width="1.5" PointX="34.375" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_OtherLeave" Width="1.5" PointX="34.375" PointY="33.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_Scheduling" Width="1.75" PointX="0.75" PointY="35.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_ProjectPlanner_Uplift_Detail" Width="1.5" PointX="3.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TimeSheet_Detail" Width="1.5" PointX="36.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_TravelLeave" Width="1.5" PointX="15.375" PointY="33.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_SickLeaves" Width="1.5" PointX="5.375" PointY="34.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_MaternityOrPaternityLeaves" Width="1.5" PointX="18" PointY="33.875" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Skills" Width="1.5" PointX="16.375" PointY="18.75" />
+        <EntityTypeShape EntityType="EvolutionModel.TMS_Applicant" Width="1.5" PointX="25.375" PointY="32.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Vacancy" Width="1.5" PointX="7.375" PointY="34.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_Document" Width="1.5" PointX="34.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EvolutionModel.AspNetUser" Width="1.5" PointX="0.75" PointY="2.25" />
+        <AssociationConnector Association="EvolutionModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
+        <AssociationConnector Association="EvolutionModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="EvolutionModel.FK_AspNetUserRoles_AspNetUsers" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeeTraining" Width="1.5" PointX="36.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EvolutionModel.ApplicantRejectReason" Width="1.5" PointX="36.375" PointY="13.75" />
+        <EntityTypeShape EntityType="EvolutionModel.Employee_AnualLeave" Width="1.5" PointX="34.375" PointY="27.75" />
+        <EntityTypeShape EntityType="EvolutionModel.QueryData" Width="1.5" PointX="36.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceCustomerSegmentJSONDetail" Width="1.5" PointX="9.375" PointY="37.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceGoalComment" Width="3.125" PointX="38.375" PointY="5.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceGoalDocument" Width="2.5" PointX="38.375" PointY="14.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformance" Width="1.5" PointX="36.375" PointY="34.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PerformanceCustomerDetail" Width="1.5" PointX="36.375" PointY="30.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PerformanceCoWorkerDetail" Width="1.5" PointX="36.375" PointY="26.75" />
+        <EntityTypeShape EntityType="EvolutionModel.SendReviewToCoworker" Width="1.5" PointX="38.375" PointY="18.75" />
+        <EntityTypeShape EntityType="EvolutionModel.SendReviewToCustomer" Width="1.5" PointX="38.375" PointY="23.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceGoal" Width="1.5" PointX="38.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceCoreJSONDetail" Width="1.5" PointX="11.375" PointY="37.75" />
+        <EntityTypeShape EntityType="EvolutionModel.EmployeePerformanceJobRoleSegmentJSONDetail" Width="1.5" PointX="38.375" PointY="28.75" />
+        <EntityTypeShape EntityType="EvolutionModel.PerformanceEmployeeDetail" Width="1.5" PointX="38.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

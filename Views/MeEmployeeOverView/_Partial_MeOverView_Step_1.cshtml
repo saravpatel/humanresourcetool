@@ -1,0 +1,71 @@
+﻿@model HRTool.Models.Me.MeEmployeeLeaverWizard
+<div class="row marbot10">
+    <label class="col-md-3">Reason for Leaving*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpReason">
+            @foreach (var item in Model.LeaveReasonList)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>   
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidReasonForLeaving" data-valmsg-for="ReasonForLeaving" data-valmsg-replace="true" style="display:none">Please Select Reason For Leaving.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Additional Comments</label>
+    <div class="col-md-6">
+        <textarea name="additionalComments" class="form-control" id="additionalComments" value=""></textarea>
+        <span class="form-control-bar"></span>
+    </div>   
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Final Employment Date*</label>
+    <div class="col-md-6">
+        <input type="text" name="finalemploymentDate" class="form-control Datepiker" id="finalemploymentDate" value="">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidfinalemploymentDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Final Employment Date.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Final Working Date*</label>
+    <div class="col-md-6">
+        <input type="text" name="finalworkingDate" class="form-control Datepiker" id="finalworkingDate" value="">
+        <span class="form-control-bar"></span>
+    </div>  
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidfinalworkingDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Final Working Date.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Resignation Date*</label>
+    <div class="col-md-6">
+        <input type="text" name="finalresignDate" class="form-control Datepiker" id="finalresignDate" value="">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidfinalResignDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Resignation Date.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Mark as Leaver Immediately?</label>
+    <div class="col-md-6">
+        <input type="checkbox" id="chkMarkAsImmediatley" />
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Remaining Holidays This Year</label>
+    <div class="col-md-6">
+        <input type="number" class="form-control" id="remainingHoliday" min="0"/>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Remaining Holidays(Pro-Ratabased on leaving date) </label>
+    <div class="col-md-6">
+        <input type="number" class="form-control" id="remainingHoliday" min="0" />
+    </div>
+</div>
+<script src="~/JS/Me/Overview/MeEmployeeOverViewJS.js"></script>

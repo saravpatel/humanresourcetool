@@ -1,0 +1,292 @@
+﻿@model HRTool.Models.BulkActions.EmployeeProjectPlanner_Scheduling_DocumnetsViewModel
+<style>
+    .Display {
+        display: none;
+    }
+</style>
+<div id="findBtn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Scheduling</h4>
+    </div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <input type="hidden" value="@Model.Id" id="HiddenId" />
+            <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+            <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+            <input type="hidden" value="@Model.day" id="HiddendayId" />
+            <span class="icheck-inline icheck-inline-custome text-center">
+                <label class="inline-label">
+                    <input type="radio" name="lessThanADay" id="adayormore" onclick="ISLessThenADay()" class="Scheduling_radio" @(Model.IsDayOrMore == true ? "checked" : "")>
+                    A day or more
+                </label>
+            </span>
+            <span class="icheck-inline icheck-inline-custome  text-center">
+                <label class="inline-label">
+                    <input type="radio" name="lessThanADay" id="lessThanADay" onclick="ISDayOrMore()" class="Scheduling_radio" checked="checked" @(Model.IsLessThenADay == true ? "checked" : "")>
+                    Less than a day
+                </label>
+            </span>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+    <div id="div_ADayOrMore" class="@(Model.IsDayOrMore == true ? "" : "Display")">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Start Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">End Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+                <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Duration</label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" value="@Model.Duration" id="txt_Duration" class="form-control" readonly />
+            </div>
+            <div class="col-md-4" style="padding-left:0px;">
+                <label style="margin-top:5px;">Days</label>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="div_LessThenADay" class="@(Model.IsDayOrMore == true ? "Display" : "")">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.StartDate" id="txt_LessThenStartDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-LessThenStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="InTimeSD">Start*</label>
+            </div>
+            <div class="col-md-1">
+                <div class="input-group spinner">
+                    <select id="drp-HourseListSD" class="form-control">
+                        @foreach (var item in Model.HoursList)
+                        {
+                            if (Model.InTimeHr.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group spinner">
+                    <select id="drp-MinutesListSD" class="form-control">
+                        @foreach (var item in Model.MinutesList)
+                        {
+                            if (Model.InTimeMin.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-InTimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">In time is required.</span>
+                <span class="field-validation-error" id="lbl-error-validtimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">Please select valid time.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="InTimeED">End*</label>
+            </div>
+            <div class="col-md-1">
+                <div class="input-group spinner">
+                    <select id="drp-HourseListED" class="form-control">
+                        @foreach (var item in Model.HoursList)
+                        {
+                            if (Model.EndTimeHr.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group spinner">
+                    <select id="drp-MinutesListED" class="form-control">
+                        @foreach (var item in Model.MinutesList)
+                        {
+                            if (Model.EndTimeMin.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-InTimeED" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">Out time is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Duration">Duration</label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" value="@Model.DurationHr" id="txt_DurationHours" class="form-control" readonly="readonly" />
+            </div>
+            <div class="col-md-4" style="padding-left:0px;">
+                <label style="margin-top:5px;">Hours</label>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-DurationHours" style="display:none;" data-valmsg-for="DurationHours" data-valmsg-replace="true">Please select valid time.</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+
+            <label class="control-label" for="StatusList">Customer</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-Customer" class="form-control">
+                @foreach (var item in Model.CustomerList)
+            {
+                if (Model.Customer.ToString() == item.Value)
+                {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                        <option value=@item.Value>@item.Text</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+
+            <label class="control-label" for="StatusList">Project</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-Project" class="form-control">
+                @foreach (var item in Model.ProjectList)
+            {
+                if (Model.Project.ToString() == item.Value)
+                {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                        <option value=@item.Value>@item.Text</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+
+            <label class="control-label" for="StatusList">Asset</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-Asset" class="form-control">
+                @foreach (var item in Model.AssetList)
+            {
+                if (Model.Asset.ToString() == item.Value)
+                {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                        <option value=@item.Value>@item.Text</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Supporting Comments *</label>
+        </div>
+        <div class="col-md-6">
+            <textarea placeholder="Supporting Comments" id="text_Comments" data-toggle="tooltip" data-placement="right" name="Comments" title="Comments" class="form-control textarea-resizeNone">@Model.Comments</textarea>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+
+        <button type="submit" class="btn btn-success" id="btn-submit-AdminCaseLog">Add</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+
+
+    </div>
+</div>
+<script src="~/JS/BulkAction/BulkActionJs.js"></script>
+

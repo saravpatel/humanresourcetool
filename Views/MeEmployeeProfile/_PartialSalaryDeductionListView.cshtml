@@ -1,0 +1,70 @@
+﻿@model IList<HRTool.Models.Resources.AddSalaryDeductionViewModel>
+
+<div class="modal fade" id="addsalaryDeduction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btn-close-SalaryDeduction">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryDeductionDeductionTitle" id="myModalLabel">Add salaryDeduction</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddsalaryDeductionDeductionBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-success" id="btn-submit-salaryDeduction">ADD</button>*@
+                <button type="button" class="btn btn-warning" id="btn-Cancel-SalaryDeduction">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-btns">
+    @*<a class="btn btn-success btn-circle  btn-add-salaryDeduction" id="btn-Show-SalaryDeduction"*@ @*data-toggle="modal" data-target="#addsalaryDeduction">@*<i class="fa fa-plus"></i></a>*@
+    <a class="btn btn-primary btn-circle  btn-edit-salaryDeduction" id="btn-Edit-SalaryDeduction" title="Edit" disabled="disabled"> @*data-toggle="modal" data-target="#addsalaryDeduction">*@<i class="fa fa-pencil"></i></a>
+    @*<a class="btn btn-danger btn-circle  btn-delete-salaryDeduction" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>*@
+</div>
+
+<table id="salaryDeductionTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Deduction</th>
+            <th>Fixed Amount</th>
+            <th>% of Salary</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataDeductionTr">
+                <td>@item.Deduction</td>
+                <td>@item.FixedAmount</td>
+                <td>@item.PercentOfSalary</td>
+                <td>@item.Comments</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+   
+    $("#btn-close-SalaryDeduction").click(function () {
+        $("#addsalaryDeduction").hide();
+    });
+    $("#btn-Cancel-SalaryDeduction").click(function () {
+        $("#addsalaryDeduction").hide();
+    });
+    $("#btn-Show-SalaryDeduction").click(function () {
+        $("#addsalaryDeduction").show();
+    });
+
+</script>

@@ -1,0 +1,103 @@
+﻿@model HRTool.Models.Settings.AddAssetsViewModel
+
+<input type="hidden" id="AssetsTypeId_1" value="@Model.AssetsTypeId_1" />
+<input type="hidden" id="AssetsTypeId_2" value="@Model.AssetsTypeId_2"/>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Name*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Name Of the project">
+            <input type="text" name="name" id="AssetName" value="@Model.Name" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Asset Type - 1*</label>
+        <div class="col-md-6">
+            <select class="form-control" id="Assettype1">
+                <option value="0"> Select AssetType1..</option>
+                @foreach (var itemAssets1 in Model.AssetsType_1_List)
+                {
+                    <option value="@itemAssets1.Value" @(itemAssets1.Selected ? "Selected" : "")>@itemAssets1.Text</option>
+                }
+                <option value="AddOtherSettings" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#otherSettingModal"> + Add New</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageAsset1" data-valmsg-for="Assettype1" data-valmsg-replace="true" style="display:none"></span>
+            <span class="field-validation-error" id="validatiAsset1" data-valmsg-for="Assettype1" data-valmsg-replace="true" style="display:none">Please Select Valid Asset</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group" data-ng-class="{ 'has-error' : assetForm.selectedAssetType2.$invalid &amp;&amp; formSubmitted }">
+
+        <label class="control-label col-md-3">Asset Type - 2*</label>
+        <div class="col-md-6">
+            <select class="form-control" id="Assettype2">
+                <option value="0">  Select AssetType2..</option>
+                @foreach (var itemAssets2 in Model.AssetsType_2_List)
+                {
+                    <option value="@itemAssets2.Value" @(itemAssets2.Selected ? "Selected" : "")>@itemAssets2.Text</option>
+                }
+                <option value="AddOtherSettings2" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#otherSettingModal"> + Add New</option>
+
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageAsset2" data-valmsg-for="Asset2" data-valmsg-replace="true" style="display:none"></span>
+            <span class="field-validation-error" id="validatiAsset2" data-valmsg-for="Assettype1" data-valmsg-replace="true" style="display:none">Please Select Valid Asset</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group" data-ng-class="{ 'has-error' : assetForm.selectedCustomer.$invalid &amp;&amp; formSubmitted }">
+        <label class="control-label col-md-3">Asset Owner*</label>
+        <div class="col-md-6">
+            <select class="form-control" id="Ownar">
+                <option value="0">  Select Asset Owner..</option>
+                @foreach (var Owner in Model.AssetsOwnerList)
+                {
+                    <option value="@Owner.Value" @(Owner.Selected ? "Selected" : "")>@Owner.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageowner" data-valmsg-for="owner" data-valmsg-replace="true" style="display:none"></span>
+
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <label class="control-label" for="systemListName">Upload picture</label>
+    </div>
+    <div class="col-md-6">
+        <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">BROWSE</label>
+        <input type="file" id="fileToUpload" onchange="readURL(this)" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        <!-- <input autocomplete="off" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" class="btn btn-sm btn-purple btn-upload" style="display: block;" name="fileUpload" type="file"> -->
+        @if (!string.IsNullOrEmpty(Model.Picture))
+        {
+
+            <img src="~/Upload/Assets/@Model.Picture" style="height:15px;" />
+        }
+        else
+        {
+            <img src="~/Images/no-image.jpg" class="editpic" />
+        }
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+<script>
+    $("#AssetName").on("change", function () {
+        $("#validationmessageName").hide();
+    })
+</script>

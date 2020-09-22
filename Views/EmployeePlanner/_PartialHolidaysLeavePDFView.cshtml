@@ -1,0 +1,399 @@
+﻿@model IList<HRTool.Models.Resources.EmployeeHolidayLeavesPdfViewModel>
+@{
+    ViewBag.Title = "Export";
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>Holiday Leave Detail</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
+        <meta name="format-detection" content="telephone=no" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,90" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+<style type="text/css">
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-text-size-adjust: 100% !important;
+        -ms-text-size-adjust: 100% !important;
+        -webkit-font-smoothing: antialiased !important;
+    }
+
+    img {
+        border: 0 !important;
+        outline: none !important;
+    }
+
+    p {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+    table {
+        border-collapse: collapse;
+        mso-table-lspace: 0px;
+        mso-table-rspace: 0px;
+    }
+
+    td, a, span {
+        border-collapse: collapse;
+        mso-line-height-rule: exactly;
+    }
+
+    .ExternalClass * {
+        line-height: 100%;
+    }
+
+    .table_border {
+        width: 100%;
+        border: 1px solid;
+    }
+
+        .table_border tr {
+            border-bottom: 1px solid #000;
+        }
+
+            .table_border tr td {
+                font-family: 'Lato', Arial, sans-serif;
+                font-size: 14px;
+                line-height: 30px;
+                font-weight: normal;
+                letter-spacing: 1px;
+                color: #000;
+                vertical-align: middle;
+                word-break: break-all;
+            }
+
+            .table_border tr:first-child td {
+                font-weight: bold;
+            }
+
+    span.fix_wid {
+        float: left;
+        width: 140px;
+    }
+</style>
+</head>
+    <body style="margin:0px; padding:0px;" bgcolor="#fafaf9">
+<!--Full width table start-->
+<table border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#fafaf9">
+    <tr>
+        <td align="center" valign="top">
+            <table align="center" class="inx_main_table" width="1200" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
+                <tr>
+                    <td>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="25" class="inx_aside">&nbsp;</td>
+                                <td>
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" valign="top" class="inx_center" style="font-family:'Lato', Arial, sans-serif; font-size:24px; line-height:30px; font-weight:bold; color:#55a1e2; text-decoration:underline; text-transform:uppercase;">Holiday Leave Detail</td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">Employee Name </span>: Francesca Passo</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top">
+                                                <table width="50%" border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tr>
+                                                        <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">Start Date </span>: 1 December 2015</td>
+                                                    </tr>
+                                                </table>
+
+                                                <table width="50%" border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tr>
+                                                        <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">End Date </span>: 5 June 2017</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">Entitlement </span>: 16.5 (inc. -2 days TOIL)</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top">
+                                                <table width="50%" border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tr>
+                                                        <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">Booked </span>: 0</td>
+                                                    </tr>
+                                                </table>
+
+                                                <table width="50%" border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tr>
+                                                        <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; letter-spacing:1px; color:#000;"><span class="fix_wid">Remaining </span>: 18.5</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellspacing="0" cellpadding="0" align="left" class="table_border">
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="140" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Start Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">End Date</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Duration</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Status</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="100" align="left" valign="top" style="">Type</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="150" align="left" valign="top" style="">Approved By</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="150" align="left" valign="top" style="">Date Requested</td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                        <td width="10">&nbsp;</td>
+                                                        <td width="" align="left" valign="top" style="">Comments</td>
+                                                        <td width="10">&nbsp;</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="25" class="inx_aside">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="inx_aside">&nbsp;</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+    </html>
+
+

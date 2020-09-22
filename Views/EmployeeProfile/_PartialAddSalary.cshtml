@@ -1,0 +1,194 @@
+﻿@model HRTool.Models.Resources.AddSalaryViewModel
+
+<style>
+    .tsalary {
+        min-height: 30px !important;
+        padding: 15px 0 0px 10px;
+    }
+</style>
+
+<div class="row marbot10">
+    <div class="form-group">
+        <input type="hidden" value="@Model.Id" id="hiddenId" />
+        <input type="hidden" value="@Model.EmployeeId" id="EmployeeID" />
+        <input type="hidden" value="@Model.TableId" id="TempSalaryID" />
+        <label class="control-label col-md-3">Effective From*</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control mrg-btm datepicker" id="Effective" data-toggle="tooltip" data-placement="right" name="EffectiveFrom" title="Effective From" placeholder="Effective From" value="@Model.EffectiveFrom">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Salary Type</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist">
+        <select class="form-control" id="drpSalary">
+            @foreach (var Salary in Model.SalaryTypeList)
+            {
+            <option value="@Salary.Value" @(Salary.Selected ? "Selected" : "")>@Salary.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Payment Frequency </label>
+    </div>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpPayment">
+            @foreach (var Payment in Model.PaymentFrequencyList)
+            {
+            <option value="@Payment.Value" @(Payment.Selected ? "Selected" : "")>@Payment.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Amount*</label>
+        <div class="col-md-3">
+            <input type="number" class="form-control mrg-btm" id="Amount" min="0" placeholder="Amount" value="@Model.Amount" data-toggle="tooltip" data-placement="right" name="Amount" title="Amount">
+        </div>
+        <div class="col-md-3 dropdown" data-toggle="tooltip">
+            <select class="form-control" id="drpCurrency">
+                @*@foreach (var Currency in Model.CurrencyList)
+                {
+                    <option value="@Currency.Value" @(Currency.Selected ? "Selected" : "")>@Currency.Text</option>
+                }*@
+                @foreach (var curryency in Model.CurrencyList)
+                {
+                    if (Model.curruencyCode.ToString() == curryency.Value)
+                    {
+                        <option value="@curryency.Value" selected="selected">@curryency.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@curryency.Value">@curryency.Text</option>
+                    }
+                }       
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageAmount" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+@if (!Model.Tempmode)
+{
+    <div class="row marbot10">
+        <label class="col-md-3">Deductions</label>
+        <div class="col-md-6">
+            <div id="tableDivDeductionSalary">
+                @Html.Action("AddSalaryDeductionsList", "EmployeeProfile", new { Id = Model.Id })
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+
+    </div>
+    
+    <div class="row marbot10">
+        <label class="col-md-3">Entitlements</label>
+        <div class="col-md-6">
+            <div id="tableDivEntitlementSalary">
+                @Html.Action("AddSalaryEntitlementsList", "EmployeeProfile", new { Id = Model.Id })
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+}
+else 
+{
+    <div class="row marbot10">
+        <label class="col-md-3">Deductions</label>
+        <div class="col-md-6">
+            <div id="tableDivDeductionTempSalary">
+                @Html.Action("AddSalaryDeductionsListTemp", "EmployeeProfile", new { Id = Model.TableId })
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+
+    </div>
+    
+    <div class="row marbot10">
+        <label class="col-md-3">Entitlements</label>
+        <div class="col-md-6">
+            <div id="tableDivEntitlementTempSalary">
+                @Html.Action("AddSalaryEntitlementsListTemp", "EmployeeProfile", new { Id = Model.TableId})
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    
+}
+
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Total Salary</label>
+        <input type="hidden" id="EmployeeTotalSalaryAmount" value="@Model.TotalSalary"/>
+        <div class="col-md-6">
+            @if (Model.TotalSalary == "0")
+            {
+            <textarea readonly="readonly" class="form-control mrg-btm tsalary textarea-resizeNone" id="TotalSalary" data-toggle="tooltip" data-placement="right" placeholder="TotalSalary" name="TotalSalary" title="Total Salary">Total Annual Salary is $ @Model.TotalSalary</textarea>
+            }
+            else
+            {
+            <textarea readonly="readonly" class="form-control mrg-btm tsalary textarea-resizeNone" id="TotalSalary" data-toggle="tooltip" data-placement="right" placeholder="TotalSalary" name="TotalSalary" title="Total Salary">Total Annual Salary is @Model.TotalSalary</textarea>
+            }
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Reason for Change*</label>
+    </div>
+    <div class="col-md-6 dropdown" data-toggle="tooltip">
+        <select class="form-control" id="drpResonforChange">
+            @foreach (var Reason in Model.ReasonforChangeList)
+            {
+            <option value="@Reason.Value" @(Reason.Selected ? "Selected" : "")>@Reason.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageReason" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Comments</label>
+        <div class="col-md-6">
+            <textarea class="form-control mrg-btm datepicker textarea-resizeNone" id="Comments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments">@Model.Comments</textarea>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@model HRTool.Models.Resources.EmployeeTrainingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+
+
+
+
+<div id="page_content_inner">
+    <input type="hidden" id="CurrentUser" value="@Model.CurrentUserId" />
+    <h1 class="page-title">
+        Training Matrix
+        <small>Check the progress of each Resource in your team's training programs</small>
+    </h1>
+    <div class="md-card">
+        <div id="tableDivTraining">
+
+            <div id="AddTrainingModel" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Employee Training</h4>
+                        </div>
+                        <div class="modal-body" id="addTrainingBody">
+
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @Html.Action("List", "EmployeeTraining", new { id = @Model.CurrentUserId })
+        </div>
+    </div>
+</div>
+
+<script src="~/JS/Resources/Training/EmployeeTrainingJS.js"></script>
+<script>
+    var constantSet = {
+        Savetraining: '@Url.Action("SavData", "EmployeeTraining")',
+        addEdit: '@Url.Action("AddEditTrainingSet", "EmployeeTraining")',
+        DeleteProjectUrl: '@Url.Action("DeleteTrainingRecord", "EmployeeTraining")',
+        FiledTypelistUrl: '@Url.Action("FiledTypeList", "EmployeeTraining")',
+        ImageUrl: '@Url.Action("ImageData", "EmployeeTraining")',
+    };
+</script>

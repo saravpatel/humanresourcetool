@@ -1,0 +1,112 @@
+﻿@model HRTool.Models.Resources.StartNewReviewViewModel
+<div class="row marbot10">
+    <div class="form-group">
+        <input type="hidden" value="@Model.Id" id="hiddenId" />
+        <input type="hidden" value="@Model.EmployeeId" id="Hiddemn_EmployeeId" />
+        <div class="col-md-6">
+            <label class="control-label">Review</label>
+            <select class="form-control" id="drpReviewList" onchange="setTheDate();">
+                @foreach (var Review in Model.ReviewList)
+                {
+                    <option value="@Review.Value">@Review.Text</option>
+                }
+            </select>
+
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <div class="col-md-6">
+            <label class="control-label">Project</label>
+            <select class="form-control" id="drpProjectList">
+                @foreach (var Project in Model.ProjectList)
+                {
+                    <option value="@Project.Value">@Project.Text</option>
+                }
+            </select>
+            @*<select id="drpProjectList" name="userId" class="form-control"></select>*@
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageforProject" data-valmsg-for="forProject" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10" id="HideDiv">
+    <div class="form-group">
+        <label class="control-label col-md-3">Completion Date*</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control mrg-btm datepicker" id="CompletionDate" data-toggle="tooltip" data-placement="right" name="EffectiveFrom" title="Effective From" placeholder="Completion Date">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageCompletionDate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none">Completion Date is Required.</span>
+        </div>
+    </div>
+</div>
+<script>
+   // getProjectType();
+    function getProjectType()
+    {
+        $.ajax({
+            url: '@Url.Action("DDlProject", "EmployeePerformance")',
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+                var ddlValue = new Array();
+                $.each(data, function (index, item) {
+                    ddlValue.push({ text: item.Value, id: item.Key });
+                });
+                $("#drpProjectList").select2({
+                    data: ddlValue,
+                });
+            }
+        });
+    }
+
+
+    $(document).ready(
+    function setTheDate() {
+        var reviewId = $("#drpReviewList").val();
+        $.ajax({
+            url: '@Url.Action("GetReviewDate", "EmployeePerformance")',
+            data: { ReviewId: reviewId },
+            dataType: 'json',
+            success: function (response) {
+                $("#CompletionDate").val(response.data1);
+                if (response.data2 == true) {
+                    $("#CompletionDate").prop("disabled", true);
+                }
+                else {
+                    $("#CompletionDate").prop("disabled", false);
+                }
+            },
+            error: function (response) {
+                //alert("error!");  //
+            }
+        });
+    });
+
+    function setTheDate() {
+        var reviewId = $("#drpReviewList").val();
+        $.ajax({
+            url: '@Url.Action("GetReviewDate", "EmployeePerformance")',
+            data: { ReviewId: reviewId },
+            dataType: 'json',
+            success: function (response) {
+                $("#CompletionDate").val(response.data1);
+                if (response.data2 == true) {
+                    $("#CompletionDate").prop("disabled", true);
+                }
+                else {
+                    $("#CompletionDate").prop("disabled", false);
+                }
+            },
+            error: function (response) {
+                //alert("error!");  //
+            }
+        });
+    };
+</script>

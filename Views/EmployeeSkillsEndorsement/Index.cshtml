@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+<div id="page_content_inner">
+    <input type="hidden" id="UserId" value="@Model.Id" />
+    <input type="hidden" id="EmployeeUserId" value="@Model.EmployeeId" />
+    <h4 class="heading_a uk-margin-bottom">
+        @*<div class="icon"><img src="~/Images/listicons/icn-skillendorsement.png" alt=""></div>*@
+        <div class="titletext">
+            Skills Endorsement
+            <p></p>
+        </div>
+        <div class="clearfix"></div>
+    </h4>
+
+    <div id="tableDivResource">
+        @Html.Action("SkilListRecord", "EmployeeSkillsEndorsement", new { EmployeeId = @Model.EmployeeId })
+    </div>
+    <div class="givethanks">
+        <div class="row">
+            <div class="col-md-4">
+                <a class="md-btn md-btn-primary" id="AskForEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">Ask for Endorsement</a>
+            </div>
+            <div class="col-md-3">
+                <!--<a class="md-btn md-btn-primary" ng-click="editHandler(0)">Endorse Somebody</a>-->
+            </div>
+        </div>
+    </div>
+    <div id="AssignskillsListRecords">
+        @Html.Action("EndorsementList", "EmployeeSkillsEndorsement", new { EmployeeId = @Model.EmployeeId })
+        <input type="hidden" id="EndrosementId" value="@Model.EndrosementId">
+    </div>
+</div>
+
+<div class="modal fade" id="ViewTask_Details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Add Skill Set</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="ViewSkillsDetailsBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="cancelSkillViewDetail">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AskForEndorsementModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Ask For Endorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AskForEndorsementBody">
+
+            </div>
+          
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditAskForEndorsementModelSkill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Ask For Ensorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="EditAskForEndorsementModelSkillBody">
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/JS/Resources/SkillsEndorsemen/EmployeeSkillsEndorsementJS.js"></script>
+<script>
+    var constantSet = {
+        SaveTechnicalUrl: '@Url.Action("SaveTechnicalSkill", "EmployeeSkillsEndorsement")',
+        SaveGeneralUrl: '@Url.Action("SaveGeneralSkill", "EmployeeSkillsEndorsement")',
+        DeleteTechnicalUrl: '@Url.Action("DeleteSalaryRecord", "EmployeeSkillsEndorsement")',
+        DeleteGeneralUrl: '@Url.Action("DeleteSalaryRecord", "EmployeeSkillsEndorsement")',
+        ViewSkillslUrl: '@Url.Action("ViewSkillSTechnicalDetails", "EmployeeSkillsEndorsement")',
+        ViewSkillsGenerallUrl: '@Url.Action("ViewSkillSGeneralDetails", "EmployeeSkillsEndorsement")',
+        AskForEndorsementUrl: '@Url.Action("AskForEndorsement", "EmployeeSkillsEndorsement")',
+        GenerallUrl: '@Url.Action("GeneralSetDetails", "EmployeeSkillsEndorsement")',
+        technicalUrl: '@Url.Action("TechnicalSetDetails", "EmployeeSkillsEndorsement")',
+        AssignskillsUrl: '@Url.Action("AssignEndrosementSkills", "EmployeeSkillsEndorsement")',
+        EditAssignskillsUrl: '@Url.Action("GetEditAssignEndrosementSkills", "EmployeeSkillsEndorsement")',
+        AddCommentsUrl: '@Url.Action("AddComments", "EmployeeSkillsEndorsement")',
+        SaveCommentUrl: '@Url.Action("SaveCommentsRecvords", "EmployeeSkillsEndorsement")',
+        EditCommentUrl: '@Url.Action("EditCommentsRecord", "EmployeeSkillsEndorsement")',
+        DeleteCommentUrl: '@Url.Action("DeleteComment", "EmployeeSkillsEndorsement")',
+        DeleteEndrosment: '@Url.Action("DeleteEndrosment", "EmployeeSkillsEndorsement")',
+        DeleteDataGeneral: '@Url.Action("DeleteGeneralSkills", "EmployeeSkillsEndorsement")',
+        DeleteDataTechnical: '@Url.Action("DeleteTechnicalSkills", "EmployeeSkillsEndorsement")',
+    }
+</script>

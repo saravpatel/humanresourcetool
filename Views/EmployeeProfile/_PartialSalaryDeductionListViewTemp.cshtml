@@ -1,0 +1,57 @@
+﻿@model IList<HRTool.Models.Resources.AddSalaryDeductionViewModel>
+
+<div class="modal fade" id="addsalaryDeductionTemp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btn-close-SalaryDeductionTemp">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryDeductionTempTitle" id="myModalLabel">Add salaryDeduction</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddsalaryDeductionTempBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-salaryDeductionTemp">ADD</button>
+                <button type="button" class="btn btn-warning" id="btn-Cancel-SalaryDeductionTemp">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-salaryDeductionTemp" id="btn-Show-SalaryDeductionTemp" @*data-toggle="modal" data-target="#addsalaryDeductionTemp"*@><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-salaryDeductionTemp" id="btn-Edit-SalaryDeductionTemp" title="Edit" disabled="disabled" @*data-toggle="modal" data-target="#addsalaryDeductionTemp"*@><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-salaryDeductionTemp" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+</div>
+
+<table id="salaryDeductionTempTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Deduction</th>
+            <th>Fixed Amount</th>
+            <th>% of Salary</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataDeductionTempTr">
+                <td>@item.Deduction</td>
+                <td>@item.FixedAmount</td>
+                <td>@item.PercentOfSalary</td>
+                <td>@item.Comments</td>
+            </tr>
+        }
+    </tbody>
+</table>

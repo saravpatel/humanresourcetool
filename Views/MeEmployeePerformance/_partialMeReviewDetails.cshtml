@@ -1,0 +1,272 @@
+﻿@model HRTool.Models.Resources.ReviewDetails
+
+@{
+    var IsCoworker = Model.Coworker == true ? 1 : 0;
+    var IsManager = Model.Manager == true ? 1 : 0;
+}
+<style>
+    .Employee :active {
+        background-color: #666;
+        color: white;
+    }
+
+    .Manager :active {
+        background-color: #666;
+        color: white;
+    }
+
+    .btn:active {
+        background-color: #666;
+        color: white;
+    }
+</style>
+<input type="hidden" id="hdnReview" value="@Model.ReviewId" />
+<input type="hidden" id="hdnEmpPerfReviewId" value="@Model.EmpPerfReviewId" />
+<input type="hidden" id="EmpPerReview" value="@Model.Id" />
+<div>
+    <button class="btn btn-info" id="EmployeeSeg" onclick="getEmployeeDetails(@Model.ReviewId,0,@Model.IsActivePastFlag,1)">Employee</button>
+    <button class="btn btn-info" id="ManagerSeg" onclick="getEmployeeDetails(@Model.ReviewId,1,@Model.IsActivePastFlag,2)">Manager</button>
+    <button class="btn btn-info" id="CustomerSeg" onclick="GetDetailofCustomer(@Model.ReviewId,0,@Model.EmpID,@Model.IsActivePastFlag)">Customer</button>
+    <button class="btn btn-info" id="CoworkerSeg" onclick="GetDetailofCoworker(@Model.ReviewId,0,@Model.EmpID,@Model.IsActivePastFlag)">Co-Worker</button>
+    <button class="btn btn-info" id="ObjectiveSeg" onclick="getGoalsDetails(@Model.Id,@Model.ReviewId,@Model.EmpID,@Model.IsActivePastFlag)">Goals</button>
+    <button class="btn btn-info" id="DeleteReview" onclick="DeletePerformanceReview(@Model.EmpPerfReviewId,@Model.ReviewId,@Model.EmpID)">Delete Review</button>
+    <a href="@Url.Action("PrintEmployeePerformance", "MeEmployeePerformance", new { EmpId=@Model.EmpID, ReviewId = @Model.ReviewId,EmpPerfId=@Model.EmpPerfReviewId})" class="md-btn md-btn-primary md-sm" target="_blank"><i class="material-icons color-wh">print</i> Print</a>
+    @if (Model.IsActivePastFlag == 1)
+    {
+        <button class="btn btn-info" style="display:none" id="ShareReview" onclick="ShareReview(@Model.ReviewId,@Model.EmpID,@Model.ManagerId)">Share</button>
+        <button class="btn btn-info" style="display:none" id="UnShareReview" onclick="UnShareReview(@Model.ReviewId,@Model.EmpID,@Model.ManagerId)">Un-Share</button>
+    }
+    @if (Model.Flag == 1)
+    {
+        <button class="btn btn-info" id="CloseReview" onclick="ClosePerformanceReview(@Model.ReviewId,@Model.EmpID)">Close Review</button>
+    }
+
+</div>
+<div id="CoworkerDetails">
+</div>
+<div id="InviteCoworkerModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Invite Reviewers</h4>
+                <h5>Invite other employees to complete 360 feedback for this employee</h5>
+            </div>
+            <div class="modal-body" id="InviteCoworkerBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btnSendInvite">Send</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="InvitePerCustomerModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Invite Reviewers</h4>
+                <h5>Invite customers to complete 360 feedback for this employee</h5>
+            </div>
+            <div class="modal-body" id="InvitePerCustomerModelBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btnSendInviteToCustomer">Send</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="ShareemployeePerformnceReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Share Review?</h4>
+            </div>
+            <div class="modal-body" id="ShareemployeePerformnceReviewModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="SharePerfReview" onclick="ShareEmployeePerformance();">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="UnShareemployeePerformnceReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Un-Share Review?</h4>
+            </div>
+            <div class="modal-body" id="UnShareemployeePerformnceReviewModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="UnSharePerfReview" onclick="UnShareEmployeePerformance();">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ClosePerformnceReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Mark Performance Review Complete?</h4>
+            </div>
+            <div class="modal-body" id="ClosePerformnceReviewModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="CloseEmployeePerReview" onclick="CloseEmployeePerReview(@Model.ReviewId,@Model.ManagerId,@Model.IsActivePastFlag);">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="GoalPerformnceReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Goal Management</h4>
+            </div>
+            <div class="modal-body" id="GoalPerformnceReviewModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="GoalployeePerReview" onclick="SaveGoalEmployeePerReview(@Model.ReviewId,@Model.ManagerId,@Model.IsActivePastFlag);">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="GoalPerformnceProgressModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Goal Management</h4>
+            </div>
+            <div class="modal-body" id="GoalPerformnceProgressModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="GoalployeePerReview" onclick="SaveGoalEmployeePerProgressDocument(@Model.ReviewId,@Model.ManagerId,@Model.IsActivePastFlag);">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="GoalPerformnceProgressCommnetModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Checkin</h4>
+            </div>
+            <div class="modal-body" id="GoalPerformnceProgressCommnetModelBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="CancleGoalComment()">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="GoalployeePerReview" onclick="SaveGoalComment(@Model.ReviewId,@Model.ManagerId,@Model.IsActivePastFlag);">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ShareReview(ReviewId, EmpId, ManagerId) {
+        $.ajax({
+            url: '@Url.Action("ShareEmployeeReview", "MeEmployeePerformance")',
+            data: { ReviewId: ReviewId, EmpId: $('#Hiddemn_EmployeeId').val(), ManagerId: ManagerId },
+            success: function (data) {
+
+                $("#ShareemployeePerformnceReviewModal").find("#ShareemployeePerformnceReviewModalBody").html('');
+                $("#ShareemployeePerformnceReviewModal").find("#ShareemployeePerformnceReviewModalBody").html(data);
+                $("#ShareemployeePerformnceReviewModal").modal('show');
+            }
+        });
+    }
+    function UnShareReview(ReviewId, EmpId, ManagerId) {
+        $.ajax({
+            url: '@Url.Action("UnShareEmployeeReview", "MeEmployeePerformance")',
+            data: { ReviewId: ReviewId, EmpId: $('#Hiddemn_EmployeeId').val() },
+            success: function (data) {
+
+                $("#UnShareemployeePerformnceReviewModal").find("#UnShareemployeePerformnceReviewModalBody").html('');
+                $("#UnShareemployeePerformnceReviewModal").find("#UnShareemployeePerformnceReviewModalBody").html(data);
+                $("#UnShareemployeePerformnceReviewModal").modal('show');
+            }
+        });
+    }
+    function GetDetailofCoworker(ReviewId, IsManagerEmployee, EmpID, IsActivePastFlag) {
+        
+        $.ajax({
+            url: MeconstantEmpPerformance.GetCoworkerDetailForReview,
+            data: { reviewID: ReviewId, isManagerEmployee: IsManagerEmployee, empID: EmpID, isActivePastFlag: IsActivePastFlag },
+            success: function (data) {
+                $("#CoworkerDetails").html('');
+                $("#CoworkerDetails").html(data);
+            }
+        });
+    };
+
+    function GetDetailofCustomer(ReviewId, IsManagerEmployee, EmpID, IsActivePastFlag) {
+        
+        $.ajax({
+            url: MeconstantEmpPerformance.GetCustomerDetailForReview,
+            data: { reviewID: ReviewId, isManagerEmployee: IsManagerEmployee, empID: EmpID, isActivePastFlag: IsActivePastFlag },
+            success: function (data) {
+                $("#CoworkerDetails").html('');
+                $("#CoworkerDetails").html(data);
+            }
+        });
+    };
+
+    
+    //function getCoworkerDetails(ReviewId, EmpID, IsActivePastFlag) {
+    //    
+    //    $.ajax({
+    //        url: MeconstantEmpPerformance.GetCoworkerDetailForReview,
+    //        data: { ReviewId: ReviewId, IsManagerEmployee: IsManagerEmployee, IsActivePastFlag: IsActivePastFlag },
+    //        success: function (data) {
+    //            $("#TableQueData").find("#QuestionDetails").html('');
+    //            $("#TableQueData").find("#QuestionDetails").html(data);
+    //        }
+    //    });
+    //};
+    function getGoalsDetails(EmpPerReviewId, ReviewId, EmpID, IsActivePastFlag) {
+        $.ajax({
+            url: '@Url.Action("GetEmployeePerformanceGoal", "MeEmployeePerformance")',
+            data: { EmpPerReviewId: EmpPerReviewId, EmpId: EmpID },
+            success: function (data) {
+                $("#CoDetailsView").find("#CoworkerDetails").html('');
+                $("#CoDetailsView").find("#CoworkerDetails").html(data);
+                $("#CoDetailsView").find("#coworkerList").hide();
+                $("#CoDetailsView").find("#CustomerListDiv").show();
+
+
+            }
+        });
+    }
+    function DeletePerformanceReview(EmpPerfReviewID, ReviewId, EmpID) {
+        $.ajax({
+            url: '@Url.Action("DeletePerformanceReview", "MeEmployeePerformance")',
+            data: { EmpPerfReviewID: EmpPerfReviewID, ReviewId: ReviewId, EmpId: $('#Hiddemn_EmployeeId').val() },
+            success: function (data) {
+                location.reload();
+            }
+        });
+    }
+</script>

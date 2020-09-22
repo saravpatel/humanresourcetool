@@ -1,0 +1,293 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_TimeSheet_DetailViewModel
+<div class="col-md-12 border-div-top Timesheet_Detail_Div">
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Time in *</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                @*<input id="txt_InTimeHr" type="text" class="form-control spinnerTextBox" placeholder="Hr" value="@Model.InTimeHr" min="0" max="23" onkeyup="this.value = minmax(this.value, 0, 23)">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-HourseListSDTimesheet" class="form-control" onchange="HoursList()">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.InTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                @*<input id="txt_InTimeMin" type="text" class="form-control spinnerTextBox" placeholder="Min" value="@Model.InTimeMin" min="0" max="60" onkeyup="this.value = minmax(this.value, 0, 60)">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-MinutesListSDTimesheet" class="form-control" onchange="HoursList()">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.InTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTime" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">In time is required.</span>
+            <span class="field-validation-error" id="lbl-error-validtimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">Please select valid time.</span>
+            <span style="float:right;"><i class="fa fa-trash-o timesheet_delete_icon"></i></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Time Out*</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">               
+                <select id="drp-HourseListEDTimesheet" class="form-control" onchange="HoursList()">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.EndTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">           
+                <select id="drp-MinutesListEDTimesheet" class="form-control" onchange="HoursList()">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.EndTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-EndTime" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End time is required.</span>
+            @*<span class="field-validation-error" id="lbl-error-ValidInTime" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please Select Valid In Time.</span>*@
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Project</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-Project" class="form-control">
+                @foreach (var item in Model.ProjectList)
+                {
+                    if (Model.Project.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Cost Code *</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-CostCode" class="form-control">
+                @foreach (var item in Model.CostCodeList)
+                {
+                    if (Model.CostCode.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-CostCode" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Cost Code is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Customer</label>
+        </div>
+        <div class="col-md-6">
+            <input type="hidden" id="selectID" value="@Model.CustomerId"/>
+            <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.Customer" size="70" placeholder="Customer Name" />
+            @*<select id="drp-Customer" class="form-control">
+                @foreach (var item in Model.CustomerList)
+                {
+                    if (Model.Customer == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>*@
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Asset</label>
+        </div>
+        <div class="col-md-6">
+            <select id="drp-Asset" class="form-control">
+                @foreach (var item in Model.AssetList)
+                {
+                    if (Model.Asset.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+<script>
+        var getEmpployee = { getEmpData: '@Url.Action("getEmployee", "MeEmployeePlanner")', }
+</script>
+<script>
+    var listData = [];
+    customerLData();
+    function customerLData() {
+        var id = $("#currentEmployeeId").val();
+        $.ajax({
+            url: getEmpployee.getEmpData,
+            data: { Id: id },
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                debugger;
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+            }
+        });
+    }
+    //$("#page_content").on('change', '#drp-HourseListSDTimesheet', function (e) {
+    //    $("#lbl-error-ValidInTime").hide();
+    //     var St = $(this).val();
+    //    var Sm = $("#drp-MinutesListSDTimesheet").val();
+    //    var Et = $("#drp-HourseListEDTimesheet").val();
+    //    var Em = $("#drp-MinutesListEDTimesheet").val();
+    //    var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+    //    if (isNaN(Diff) || Diff <= 0) {
+    //        $("#lbl-error-ValidInTime").show();
+    //    }
+    //    else {
+    //        $("#lbl-error-ValidInTime").hide();
+    //    }
+
+    //});
+    //$("#page_content").on('change', '#drp-MinutesListSDTimesheet', function (e) {
+    //    $("#lbl-error-ValidInTime").hide();
+    //    var St = $(this).val();
+    //    var Sm = $("#drp-MinutesListSDTimesheet").val();
+    //    var Et = $("#drp-HourseListEDTimesheet").val();
+    //    var Em = $("#drp-MinutesListEDTimesheet").val();
+    //    var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+    //    if (isNaN(Diff) || Diff <= 0) {
+    //        $("#lbl-error-ValidInTime").show();
+    //    }
+    //    else {
+    //        $("#lbl-error-ValidInTime").hide();
+    //    }
+
+    //});
+    //$("#page_content").on('change', '#drp-HourseListEDTimesheet', function () {
+    //    $("#lbl-error-ValidInTime").hide();
+    //    var St = $(this).val();
+    //    var Sm = $("#drp-MinutesListSDTimesheet").val();
+    //    var Et = $("#drp-HourseListEDTimesheet").val();
+    //    var Em = $("#drp-MinutesListEDTimesheet").val();
+    //    var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+    //    if (isNaN(Diff)|| Diff <= 0) {
+    //        $("#lbl-error-ValidInTime").show();
+    //    } else {
+    //        $("#lbl-error-ValidInTime").hide();
+    //    }
+    //});
+    //$("#page_content").on('change', '#drp-MinutesListEDTimesheet', function (e) {
+    //    $("#lbl-error-ValidInTime").hide();
+    //    var St = $(this).val();
+    //    var Sm = $("#drp-MinutesListSDTimesheet").val();
+    //    var Et = $("#drp-HourseListEDTimesheet").val();
+    //    var Em = $("#drp-MinutesListEDTimesheet").val();
+    //    var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+    //    if (isNaN(Diff) || Diff <= 0) {
+    //        $("#lbl-error-ValidInTime").show();
+    //    }
+    //    else {
+    //        $("#lbl-error-ValidInTime").hide();
+    //    }
+
+    //});
+   
+</script>

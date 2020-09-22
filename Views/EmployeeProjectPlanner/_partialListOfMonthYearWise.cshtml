@@ -1,0 +1,173 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlannerYearViewModel
+@using HRTool.CommanMethods;
+
+
+
+<div id="EmployeeProjectPlanner_TimeSheetModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">TimeSheet</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_TimeSheetBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_TravelLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Travel</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_TravelLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_SchedulingModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Scheduling</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_SchedulingBody">
+
+            </div>
+            <div class="modal-footer">
+                @if (SessionProxy.IsCustomer == true)
+                {
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_Scheduling">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+                }
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_UpliftModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Uplift</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_UpliftBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@foreach (var month in Model.MonthList)
+{
+    <div id="accordion_row_@month.monthId" class="accordion_row" data-yearid="@Model.yearId" data-monthid="@month.monthId">
+        <a class="accordion-section-title accordion_head project_planner" onclick="SetContainerHeight()">
+            @month.MonthName
+            <ul>
+                <li>0<span class="spritesheet_img icnscheduling"></span></li>
+                <li>0<span class="spritesheet_img icnleave"></span></li>
+                <li>00:00<span class="spritesheet_img icnholidays"></span></li>
+                <li>00:00<span class="spritesheet_img icnuplift"></span></li>
+                <li><span class="spritesheet_img icnarrow"></span></li>
+            </ul>
+        </a>
+    </div>
+    <div class="accordion_body panel-body" style="display:none;">
+        <div class="tablefull">
+            <div class="fixedtable ">
+                <div class="fixedleftcolumn">
+                    <div class="fixedHead">
+                        <table id="accordion_table_@month.monthId" class="first-table">
+                            <tbody>
+                                <tr class="controlsbutton">
+                                    <td class="move">
+                                        <a class="scrollleft active" data-monthid="@month.monthId">
+                                            <span class="spritesheet icnarrowleft"></span>
+                                        </a>
+                                        <a class="scrollright active" data-monthid="@month.monthId">
+                                            <span class="spritesheet icnarrowright"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdtype">Type</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Scheduling</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Travel</td>
+                                </tr>
+                                @if (SessionProxy.IsCustomer)
+                                {
+                                    <tr>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td height="50px">Timesheet</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td height="50px">Uplift</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="fixedrightcolumn" id="fixedrightcolumn_@month.monthId">
+                    @Html.Partial("_partialListOfDayMonthYearWise", month.DayList)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+
+
+
+
+
+

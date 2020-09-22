@@ -1,0 +1,49 @@
+﻿@model IList<HRTool.Models.Settings.System_SettingViewModel>
+
+<div id="System_SettingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add System Settings</h4>
+            </div>
+            <div class="modal-body" id="System_SettingBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-System_setting">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-otherSetting" title="Add task" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#otherSettingModal"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-otherSetting" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#otherSettingModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+</div>
+<table id="otherSettingTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th>System Setting Name</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th >
+                <input type="text" class="form-control SystemListName">
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @*@foreach (var item in Model.SystemSettingList)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>
+                    @item.Name
+                </td>
+            </tr>
+        }*@
+    </tbody>
+</table>

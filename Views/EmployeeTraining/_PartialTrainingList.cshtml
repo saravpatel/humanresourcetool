@@ -1,0 +1,108 @@
+﻿@model IList<HRTool.Models.Resources.EmployeeTrainingViewModel>
+
+
+<div id="AddNewFieldModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Field</h4>
+            </div>
+            <div class="modal-body" id="AddNewFieldList">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-FiledType">Add</button>
+                <button type="button" class="btn btn-warning btnclose">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+ <div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-Training" title="Add Project" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddTrainingModel"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-Training" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddTrainingModel" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-Training" data-toggle="tooltip" data-placement="right" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Training" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Training" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-info btn-circle  btn-clearFilter-Training" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+</div>
+    <div class="table-responsive">
+      
+
+        <table id="TrainingListtable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+            <thead>
+                <tr class="tblHeading">
+                    <th>Employee</th>
+                    <th>Training</th>
+                    <th>Importance</th>
+                    <th>Status</th>
+                    <th>Progress(%)</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Expiry Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th >
+                        <input type="text" class="form-control EmployeeName">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control TrainingName">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control ImportanceName">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control StatusName">
+                    </th>
+                    <th >
+                        <input type="number" class="form-control Progress">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control mrg-btm datepicker StartDate" id="CreatedStartDate" name="Created">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control mrg-btm datepicker EndDate" id="CreatedEndDate" name="Created">
+                    </th>
+                    <th >
+                        <input type="text" class="form-control mrg-btm datepicker ExpiryDate" id="CreatedExpiryDate" name="Created">
+                    </th>
+
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.Id" class="dataTr">
+                        <td>
+                            @item.EmployeeName
+                        </td>
+                        <td>
+                            @item.TrainingName
+                        </td>
+                        <td>
+                            @item.ImportanceName
+                        </td>
+                        <td>
+                            @item.StatusName
+                        </td>
+                        <td>
+                            @item.Progress
+                        </td>
+                        <td>
+                            @item.StartDate
+                        </td>
+                        <td>
+                            @item.EndDate
+                        </td>
+                        <td>
+                            @item.ExpiryDate
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+ 

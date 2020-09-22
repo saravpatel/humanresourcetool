@@ -1,0 +1,1584 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        padding: 10px;
+    }
+
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    #exTab2 h3 {
+        color: white;
+        background-color: #55a1e2;
+        padding: 5px 15px;
+    }
+ 
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+    .search_list li+li {
+    border-top: 1px solid rgba(0,0,0,.08);
+}
+</style>
+
+<div id="exTab2" class="container">
+    @*<ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#All" data-toggle="tab">All</a>
+        </li>
+        <li>
+            <a href="#1" data-toggle="tab">Timesheet</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Scheduling</a>
+        </li>
+        <li>
+            <a href="#3" data-toggle="tab">Travel</a>
+        </li>
+        <li>
+            <a href="#4" data-toggle="tab">Annual Leave</a>
+        </li>
+        <li>
+            <a href="#8" data-toggle="tab">Sick Leave</a>
+        </li>
+        <li>
+            <a href="#9" data-toggle="tab">Other Leave</a>
+        </li>
+        <li>
+            <a href="#10" data-toggle="tab">Training Requests</a>
+        </li>
+        <li>
+            <a href="#11" data-toggle="tab">New Vacancy</a>
+        </li>
+        <li>
+            <a href="#12" data-toggle="tab">Mat/Pat Leave</a>
+        </li>
+        <li>
+            <a href="#13" data-toggle="tab">Uplift</a>
+        </li>
+    </ul>*@
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="All">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            All
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <ul id="list" class="search_list">
+                            <!-- ngRepeat: page in allPages -->
+                            @*<li ng-repeat="page in allPages" class="ng-scope">
+                                <h4 class="search_list_heading"><a class="ng-binding" href="#1">Timesheet Request</a></h4>
+                                <span class="search_list_link uk-text-truncate ng-binding">restricted.components.accordion</span>
+                            </li> end ngRepeat: page in allPages 
+                            <li ng-repeat="page in allPages" class="ng-scope">
+                                <h4 class="search_list_heading"><a  class="ng-binding" href="#2">Sheduling Request</a></h4>
+                                <span class="search_list_link uk-text-truncate ng-binding">restricted.components.breadcrumbs</span>
+                            </li>*@<!-- end ngRepeat: page in allPages -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="1">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Timesheet Submission
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div  >
+                        <div class="uk-overflow-container" style="height:444px; ">
+                            <div class="table-responsive" style="width:1700px;">
+                                <div id="tableDiv" style="float:left;width:1400px">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#
+                                            "><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+
+                                    <table id="DocumentModalTable" class="table-bordered display table style2 table-striped  dataTable">
+                                        <thead>
+                                            <tr class="tblHeading">
+                                                <th>Day</th>
+                                                <th>Date</th>
+                                                <th>Hours</th>
+                                                <th>Cost Code</th>
+                                                <th>Project</th>
+                                                <th>Customer</th>
+                                                <th>Asset</th>
+                                                <th>Supporting Document</th>
+                                                <th>Status</th>
+                                                <th>Approve</th>
+                                                <th>Reject</th>
+                                            </tr>
+                                            <tr>
+                                                <th ><input type="text" class="form-control SearchDay" placeholder="Day"></th>
+                                                <th ><input type="text" class="form-control SearchDate" placeholder="Date"></th>
+                                                <th ><input type="text" class="form-control SearchHours" placeholder="Hours"></th>
+                                                <th ><input type="text" class="form-control SearchCostCode" placeholder="Cost Code"></th>
+                                                <th ><input type="text" class="form-control SearchProject" placeholder="Project"></th>
+                                                <th ><input type="text" class="form-control SearchCustomer" placeholder="Customer"></th>
+                                                <th ><input type="text" class="form-control SearchAsset" placeholder="Asset"></th>
+                                                <th ></th>
+                                                <th ><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                <th ></th>
+                                                <th ></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr id="@item.Id" class="dataTr">
+                                                    <td>@item.Day</td>
+                                                    <td>@item.Date</td>
+                                                    <td>@item.Hours</td>
+                                                    <td>@item.CostCode</td>
+                                                    <td>@item.Project</td>
+                                                    <td>@item.Customer</td>
+                                                    <td>@item.Asset</td>
+                                                    <td><button name="button" value="Approve" type="button" style="background-color:cornflowerblue; color:white;border-radius: 7px; ">View Document</button></td>
+                                                    <td><button name="button" value="Approve" type="button" style="background-color:cornflowerblue; color:white;border-radius: 7px; width:100px;">Pending</button></td>
+                                                    <td><input type="checkbox" name="Approve"> Check</td>
+                                                    <td><input type="checkbox" name="Reject"> Check</td>
+                                                </tr>
+                                            }
+                                           
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                   <table style="margin-top:60px;margin-left:10px">
+                                       <tr>
+                                           <td>Worker</td>
+                                           <td>
+                                               <input type="text" class="form-control " placeholder="Worker"><br />
+                                           </td>
+                                       </tr>
+                                     
+                                       <tr>
+                                           <td>Total Hours</td>
+                                           <td>
+                                               <input type="text" class="form-control " placeholder="Hours"><br />
+                                           </td>
+                                          
+                                       </tr>
+                                       <tr>
+                                           <td>Total Days</td>
+                                           <td>
+                                               <input type="text" class="form-control " placeholder="Days"><br />
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td colspan="2">
+                                               <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                               <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                           </td>
+                                       </tr>
+                                   </table>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="2">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Schedule Request
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                 
+                        
+                                <div id="tableDiv">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable1" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Day</th>
+                                                    <th>Date</th>
+                                                    <th>Hours</th>
+                                                    <th>Cost Code</th>
+                                                    <th>Project</th>
+                                                    <th>Customer</th>
+                                                    <th>Asset</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" placeholder="Day"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Date"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Hours"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Cost Code"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Project"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Customer"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Asset"></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @*@foreach (var item in Model)
+                    {
+                        <tr id="@item.Id" class="dataTr">
+                            <td>@item.Day</td>
+                            <td>@item.Date</td>
+                            <td>@item.Hours</td>
+                            <td>@item.CostCode</td>
+                            <td>@item.Project</td>
+                            <td>@item.Customer</td>
+                            <td>@item.Asset</td>
+                            <td><button name="button" value="Approve" type="button" style="background-color:cornflowerblue; color:white;border-radius: 7px; ">View Document</button></td>
+                            <td><button name="button" value="Approve" type="button" style="background-color:cornflowerblue; color:white;border-radius: 7px; width:100px;">Pending</button></td>
+                            <td><input type="checkbox" name="Approve"> Check</td>
+                            <td><input type="checkbox" name="Reject"> Check</td>
+                        </tr>
+                    }*@
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:60px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Hours</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Total Days</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            
+
+                  
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="3">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Travel Request
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container">
+                            <div class="table-responsive" >
+                                <div id="tableDiv">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable2" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Type</th>
+                                                    <th>From Country</th>
+                                                    <th>From Town</th>
+                                                    <th>From Place</th>
+                                                    <th>To Country</th>
+                                                    <th>To Town</th>
+                                                    <th>To Place</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Duration</th>
+                                                    <th>Customer</th>
+                                                    <th>Project</th>
+                                                    <th>Cost Code</th>
+                                                    <th>Total Cost In Frinctional Currency</th>
+                                                    <th>Link</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control  " placeholder="Type"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="FromCountry"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="FromTown"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="FromPlace"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="ToCountry"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="ToTown"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="ToPlace"></th>
+                                                    <th><input type="text" class="form-control " placeholder="StartDate"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="EndDate"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="Duration"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="Customer"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="Project"></th>
+                                                    <th><input type="text" class="form-control  " placeholder="CostCode"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control  " placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:60px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total </td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Total Days</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Costs</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Costs"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="4">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Annual Leave Request
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container">
+                            <div class="table-responsive">
+                                <div id="tableDiv">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+
+                                    <table id="DocumentModalTable3" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                        <thead>
+                                            <tr class="tblHeading">
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Days</th>
+                                                <th>Status</th>
+                                                <th>Approve</th>
+                                                <th>Reject</th>
+                                            </tr>
+                                            <tr>
+                                                
+                                                <th ><input type="text" class="form-control SearchStartDate" placeholder="StartDate"></th>
+                                                <th ><input type="text" class="form-control SearchEndDate" placeholder="EndDate"></th>
+                                                <th ><input type="text" class="form-control SearchDays" placeholder="Days"></th>
+                                                <th ><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                <th ></th>
+                                                <th ></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+
+                                    </table>
+                                </div>
+                                <div style="float:right;height:500px;width:350px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Holidays </td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Holidays Taken</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Holidays to be Approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Remaining Holidays</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="8">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Sick Leave Submission
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container" style="height:444px; ">
+                            <div class="table-responsive" style="width:1700px;">
+                                <div id="tableDiv" style="float:left;width:1400px">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable4" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Duration</th>
+                                                    <th>Self Certification Required</th>
+                                                    <th>Interview Required</th>
+                                                    <th>Type</th>
+                                                    <th>Doctor Consulted</th>
+                                                    <th>Issue at Work</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+
+                                                    <th><input type="text" class="form-control" placeholder="StartDate"></th>
+                                                    <th><input type="text" class="form-control" placeholder="EndDate"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Days"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Sick Days in the year </td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Sick Days to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bradford trigger point</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bradford Action</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="9" class="tab-pane">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Other Leave Request
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container" style="height:444px; ">
+                            <div class="table-responsive">
+                                <div id="tableDiv" style="float:left;width:1200px">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                    <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable5" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Duration</th>
+                                                    <th>Reason</th>
+
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+
+                                                    <th><input type="text" class="form-control" placeholder="StartDate"></th>
+                                                    <th><input type="text" class="form-control" placeholder="EndDate"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Days"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Reason"></th>
+
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Other Leave in the year </td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Other Leave to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="10" class="tab-pane">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                           Training Requests
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container" style="height:444px; ">
+                            <div class="table-responsive">
+                                <div id="tableDiv" style="float:left;width:1200px">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                    <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable6" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Training Name</th>
+                                                    <th>Importance</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Days</th>
+                                                    <th>Provider</th>
+                                                    <th>Cost</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" placeholder="Name"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Importance"></th>
+                                                    <th><input type="text" class="form-control" placeholder="StartDate"></th>
+                                                    <th><input type="text" class="form-control" placeholder="EndDate"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Training Days in the year </td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Hours"><br />
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Training to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Training Days to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Training Costs to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Days"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="11" class="tab-pane">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                           New Vacancies
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        <div class="uk-overflow-container" style="height:444px; ">
+                            <div class="table-responsive">
+                                <div id="tableDiv" style="float:left;width:1200px">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                    <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable7" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Vacancy</th>
+                                                    <th>Closing Date</th>
+                                                    <th>Recruitment Process</th>
+                                                    <th>Salary range</th>
+                                                    <th>Location</th>
+                                                    <th>Business</th>
+                                                    <th>Division</th>
+                                                    <th>Pool</th>
+                                                    <th>Function</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" placeholder="Vacancy"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Date"></th>
+                                                    <th><input type="text" class="form-control" placeholder="RecruitmentProcess"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Number Of Open Vacancy</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                      
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="12" class="tab-pane">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Maternity/Paternity Leave Request
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        
+                                <div id="tableDiv">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                    <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable8" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Due Date</th>
+                                                    <th>Link</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Length of Employment</td>
+                                            <td>
+                                                <input type="text" class="form-control"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="13" class="tab-pane">
+            <div id="page_content_inner">
+                <h4 class="heading_a uk-margin-bottom">
+                    <div class="icon"></div>
+                    <div class="titletext">
+                        <div>
+                            Uplift Submission
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </h4>
+                <div class="md-card">
+                    <div >
+                        
+                                <div id="tableDiv">
+                                    <div class="table-btns">
+                                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                                    <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload">import_export</i></button>
+                                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket" data-toggle="tooltip" data-placement="right" data-original-title="" title=""></i></button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table-bordered display table style2 table-striped  dataTable" id="DocumentModalTable9" cellspacing="0">
+
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th>Day</th>
+                                                    <th>Date</th>
+                                                    <th>Uplift Position</th>
+                                                    <th>Hours</th>
+                                                    <th>Project</th>
+                                                    <th>Customer</th>
+                                                    <th>Change In Worker Rate</th>
+                                                    <th>Change In Customer Rate</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th>Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" placeholder="Day"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Date"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Position"></th>
+                                                    <th><input type="text" class="form-control " placeholder="Hours"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Project"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Customer"></th>
+                                                    <th><input type="text" class="form-control" placeholder="Worker Rate"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="float:right;height:500px;width:290px;border:0;border-left:3px;border-style:solid; border-color:#EDEDED">
+                                    <table style="margin-top:20px;margin-left:10px">
+                                        <tr>
+                                            <td>Worker</td>
+                                            <td>
+                                                <input type="text" class="form-control " placeholder="Worker"><br />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total Hours Uplift in the Year</td>
+                                            <td>
+                                                <input type="text" class="form-control"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>No. of Uplift to be approved</td>
+                                            <td>
+                                                <input type="text" class="form-control"><br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button name="button" value="Approve" type="button" style="background-color:green; color:white;border-radius: 12px; width:100px;">Approve</button>
+
+                                                <button name="button" value="Reject" type="button" style="background-color:crimson;color:white;border-radius: 12px; width:100px;">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+       
+                $.getJSON("/ApproveHeader/ApproveRequestList",
+                               function (json) {
+                                  
+                                   for (var i = 0; i < json.length; i++) {
+                                       if (json[i].Header == 'TimeSheet Request') {
+                                           $('#list').append("<li><a href='#1' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her timesheet for approval </p></li>");
+                                       }
+                                       if (json[i].Header == 'Scheduling Request') {
+                                           $('#list').append("<li><a href='#2' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted a new schedule work and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Travel Request') {
+                                           $('#list').append("<li><a href='#3' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted a travel request and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Annual Leave Request') {
+                                           $('#list').append("<li><a href='#4' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her holidays request and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Sick Leave Request') {
+                                           $('#list').append("<li><a href='#8' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Sick Leave and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Other Leave Request') {
+                                           $('#list').append("<li><a href='#9' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Other Leave request and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Training Request') {
+                                           $('#list').append("<li><a href='#10' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Training request and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Mat/Pat Leave Request') {
+                                           $('#list').append("<li><a href='#12' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her : Maternity/Paternity Leave request and your approval is required </p></li>");
+                                       }
+                                       if (json[i].Header == 'Uplift Submission') {
+                                           $('#list').append("<li><a href='#13' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Uplift  for approval </p></li>");
+                                       }
+                                       }
+                               });
+                
+                $(".nav-tabs a").click(function (event) {
+                                     
+                    var Text = $(this).text();
+                    if (Text == 'All') {
+                        $("#list li").empty();
+                      
+                        $.getJSON("/ApproveHeader/ApproveRequestList",
+
+                              function (json) {
+                                 
+                                  for (var i = 0; i < json.length; i++) {
+                                     
+                                      if (json[i].Header == 'TimeSheet Request') {
+                                          $('#list').append("<li><a href='#1' id='Next' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her timesheet for approval </p></li>");
+                                         
+                                      }
+                                      if (json[i].Header == 'Scheduling Request') {
+                                          $('#list').append("<li><a href='#2' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted a new schedule work and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Travel Request') {
+                                          $('#list').append("<li><a href='#3' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted a travel request and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Annual Leave Request') {
+                                          $('#list').append("<li><a href='#4' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her holidays request and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Sick Leave Request') {
+                                          $('#list').append("<li><a href='#8' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Sick Leave and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Other Leave Request') {
+                                          $('#list').append("<li><a href='#9' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Other Leave request and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Training Request') {
+                                          $('#list').append("<li><a href='#10' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Training request and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Mat/Pat Leave Request') {
+                                          $('#list').append("<li><a href='#12' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her : Maternity/Paternity Leave request and your approval is required </p></li>");
+                                      }
+                                      if (json[i].Header == 'Uplift Submission') {
+                                          $('#list').append("<li><a href='#13' data-toggle='tab'> " + json[i].Header + " </a><br/><p>Mr/Mrs " + json[i].Name + " has submitted his/her Uplift  for approval </p></li>");
+                                      }
+                                  }
+                              });
+                    }
+                    event.preventDefault();
+                    // $(this).parent().addClass("Active");
+                    // $(this).parent().removeClass("Active");
+                    var tab = $(this).attr("href");
+                    //$('#All').parent().removeClass("Active");
+                    $(tab).fadeIn();
+                    $("#1").hide();
+                    $("#2").hide();
+                    $("#3").hide();
+                    $("#4").hide();
+                    $("#8").hide();
+                    $("#9").hide();
+                    $("#10").hide(); $("#12").hide();
+                    $("#11").hide(); $("#13").hide();
+
+                });
+                //$(".list a").click(function(event) {
+                   
+                //});
+                $("#DocumentModalTable1 tbody").empty();
+                $.getJSON("/ApproveHeader/ScheduleApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+                                       var tablerows = "";
+                                       tablerows += "<tr><td>" + json[i].Day + "</td>";
+                                       
+                                       var date = json[i].Date;
+                                       if (date.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(date.substring(6, date.length - 2)));
+                                           var dtString = dt.getDate()+ "/" + (dt.getMonth()+1) + "/" + dt.getFullYear(); //Format Date to Regular date Format
+                                       }
+                                       tablerows += ("<td>" + dtString + "</td>");
+                                       tablerows += ("<td>" + json[i].Hours + "</td>");
+                                       tablerows += ("<td>" + json[i].CostCode + "</td>");
+                                       tablerows += ("<td>" + json[i].Project + "</td>");
+                                       tablerows +=("<td>" + json[i].Customer + "</td>");
+                                       tablerows += ("<td>" + json[i].Asset + "</td>");
+                                       tablerows += ("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tablerows += ("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tablerows += ("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tablerows += ("<td><input type=\"checkbox\" name=\"Reject\"> Check</td></tr>");
+                                      
+                                       $('#DocumentModalTable1').append(tablerows);
+                                   }
+                                   
+                               });
+           //}
+            //if (Text == 'Travel') {
+                $("#DocumentModalTable2 tbody").empty();
+                $.getJSON("/ApproveHeader/TravelApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+                                     
+                                       var Startdate = json[i].Startdate;
+                                       var EndDate = json[i].Enddate;
+                                       if (Startdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Startdate.substring(6, Startdate.length - 2)));
+                                           var Startdt =dt.getDate()+ "/" + (dt.getMonth()+1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       if (EndDate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(EndDate.substring(6, EndDate.length - 2)));
+                                           var dtEnddt = dt.getDate() + "/" +(dt.getMonth()+1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       tr.append("<td>" + json[i].Type + "</td>");
+                                       tr.append("<td>" + json[i].FromCountry + "</td>");
+                                       tr.append("<td>" + json[i].FromTown + "</td>");
+                                       tr.append("<td>" + json[i].FromAirport + "</td>");
+                                       tr.append("<td>" + json[i].ToCountry + "</td>");
+                                       tr.append("<td>" + json[i].ToTown + "</td>");
+                                       tr.append("<td>" + json[i].ToAirport + "</td>");
+                                       tr.append("<td>" + Startdt + "</td>");
+                                       tr.append("<td>" + dtEnddt + "</td>");
+                                       tr.append("<td>"+  json[i].Duration+"</td>");
+                                       tr.append("<td>" + json[i].Customer + "</td>");
+                                       tr.append("<td>" + json[i].Project + "</td>");
+                                       tr.append("<td>" + json[i].CostCode + "</td>");
+                                       tr.append("<td></td>");
+                                       tr.append("<td></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable2').append(tr);
+                                   }
+                               });
+            //}
+           //// if (Text == 'Annual Leave') {
+                $("#DocumentModalTable3 tbody").empty();
+                $.getJSON("/ApproveHeader/AnualLeaveApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var Startdate = json[i].StartDate;
+                                       var EndDate = json[i].EndDate;
+                                       if (Startdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Startdate.substring(6, Startdate.length - 2)));
+                                           var Startdt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       if (EndDate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(EndDate.substring(6, EndDate.length - 2)));
+                                           var dtEnddt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                     
+                                       tr.append("<td>" + Startdt + "</td>");
+                                       tr.append("<td>" + dtEnddt + "</td>");
+                                       tr.append("<td>" + json[i].Duration + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable3').append(tr);
+                                   }
+                               });
+           // }
+            //if (Text == 'Sick Leave') {
+                $("#DocumentModalTable4 tbody").empty();
+                $.getJSON("/ApproveHeader/SickLeaveApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var Startdate = json[i].StartDate;
+                                       var EndDate = json[i].EndDate;
+                                       if (Startdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Startdate.substring(6, Startdate.length - 2)));
+                                           var Startdt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       if (EndDate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(EndDate.substring(6, EndDate.length - 2)));
+                                           var Enddt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                     
+                                       tr.append("<td>" + Startdt + "</td>");
+                                       tr.append("<td>" + Enddt + "</td>");
+                                       tr.append("<td>" + json[i].Duration + "</td>");
+                                       tr.append("<td>" + json[i].SelfCertificationRequired + "</td>");
+                                       tr.append("<td>" + json[i].InterviewRequired + "</td>");
+                                       tr.append("<td>" + json[i].Type + "</td>");
+                                       tr.append("<td>" + json[i].DoctorConsulted + "</td>");
+                                       tr.append("<td>" + json[i].IssueAtWork + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable4').append(tr);
+                                   }
+                               });
+            //}
+            //if (Text == 'Other Leave') {
+                $("#DocumentModalTable5 tbody").empty();
+                $.getJSON("/ApproveHeader/OtherLeaveApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var Startdate = json[i].StartDate;
+                                       var EndDate = json[i].EndDate;
+                                       if (Startdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Startdate.substring(6, Startdate.length - 2)));
+                                           var Startdt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       if (EndDate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(EndDate.substring(6, EndDate.length - 2)));
+                                           var Enddt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+
+                                       tr.append("<td>" + Startdt + "</td>");
+                                       tr.append("<td>" + Enddt + "</td>");
+                                       tr.append("<td>" + json[i].Duration + "</td>");
+                                       tr.append("<td>" + json[i].Reason + "</td>");
+                                       
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\" > Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable5').append(tr);
+                                   }
+                               });
+            //}
+            //if (Text == 'Training Requests') {
+                $("#DocumentModalTable6 tbody").empty();
+                $.getJSON("/ApproveHeader/TrainingRequestApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var Startdate = json[i].StartDate;
+                                       var EndDate = json[i].EndDate;
+                                       if (Startdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Startdate.substring(6, Startdate.length - 2)));
+                                           var Startdt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       if (EndDate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(EndDate.substring(6, EndDate.length - 2)));
+                                           var Enddt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       tr.append("<td>" + json[i].TrainingName + "</td>");
+                                       tr.append("<td>" + json[i].Importance + "</td>");
+                                       tr.append("<td>" + Startdt + "</td>");
+                                       tr.append("<td>" + Enddt + "</td>");
+                                       tr.append("<td></td>");
+                                       tr.append("<td>" + json[i].Provider + "</td>");
+                                       tr.append("<td>" + json[i].Cost + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable6').append(tr);
+                                   }
+                               });
+            //}
+            //if (Text == 'New Vacancy') {
+                $("#DocumentModalTable7 tbody").empty();
+                $.getJSON("/ApproveHeader/NewVacancyApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var Closingdate = json[i].ClosingDate;
+                                       
+                                       if (Closingdate.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(Closingdate.substring(6, Closingdate.length - 2)));
+                                           var clodt = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                      
+                                       tr.append("<td>" + json[i].VacancyName + "</td>");
+                                       tr.append("<td>" + clodt + "</td>");
+                                       tr.append("<td>" + json[i].RecruitmentProcess + "</td>");
+                                       tr.append("<td>" + json[i].Salary + "</td>");
+                                       tr.append("<td>" + json[i].Location + "</td>");
+                                       tr.append("<td>" + json[i].Business + "</td>");
+                                       tr.append("<td>" + json[i].Division + "</td>");
+                                       tr.append("<td>" + json[i].Pool + "</td>");
+                                       tr.append("<td>" + json[i].Function + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable7').append(tr);
+                                   }
+                               });
+            //}
+            //if (Text == 'Mat/Pat Leave') {
+            //    debugger;
+                $("#DocumentModalTable8 tbody").empty();
+                $.getJSON("/ApproveHeader/Mat_PatLeaveRequest",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var date = json[i].DueDate;
+
+                                       if (date.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(date.substring(6, date.length - 2)));
+                                           var duedate = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       tr.append("<td>" + duedate + "</td>");
+                                       tr.append("<td>" + json[i].Link + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable8').append(tr);
+                                   }
+                               });
+            //}
+            //if (Text == 'Uplift') {
+            //    debugger;
+                $("#DocumentModalTable9 tbody").empty();
+                $.getJSON("/ApproveHeader/UpliftApprove",
+                               function (json) {
+
+                                   var tr;
+                                   //Append each row to html table  
+                                   for (var i = 0; i < json.length; i++) {
+                                       tr = $('<tr/>');
+
+                                       var date = json[i].Date;
+
+                                       if (date.substring(0, 6) == "/Date(") {
+                                           var dt = new Date(parseInt(date.substring(6, date.length - 2)));
+                                           var duedate = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();//Format Date in regular date format
+                                       }
+                                       tr.append("<td>" + json[i].Day + "</td>");
+                                       tr.append("<td>" + duedate + "</td>");
+                                       tr.append("<td>" + json[i].UpliftPosition + "</td>");
+                                       tr.append("<td>" + json[i].Hours + "</td>");
+                                       tr.append("<td>" + json[i].Project + "</td>");
+                                       tr.append("<td>" + json[i].Customer + "</td>");
+                                       tr.append("<td>" + json[i].ChangeInWorkerRate + "</td>");
+                                       tr.append("<td>" + json[i].ChangeInCustomerRate + "</td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">View Document</button></td>");
+                                       tr.append("<td><button name=\"button\" value=\"Approve\" type=\"button\" style=\"background-color:cornflowerblue; color:white;border-radius: 7px;\">Pending</button></td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Approve\"> Check</td>");
+                                       tr.append("<td><input type=\"checkbox\" name=\"Reject\"> Check</td>");
+                                       $('#DocumentModalTable9').append(tr);
+                                   }
+                               });
+            //}
+            //event.preventDefault();
+            //$(this).parent().addClass("Active");
+            //$(this).parent().siblings().removeClass("Active");
+            //var tab = $(this).attr("href");
+            //$(".tab-pane").not(tab).css("display", "none");
+           // $(tab).fadeIn();
+    });
+    
+       // Datatable();
+    //});
+   
+</script>
+<script src="~/JS/Approve/TimesheetApprove.js"></script>
+

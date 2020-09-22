@@ -1,0 +1,272 @@
+﻿@model HRTool.Models.Admin.AdminTaskViewModel
+@{
+
+}
+<div id="wizard" class="swMain">
+    <input type="hidden" value="@Model.Id" id="HiddenId" />
+
+    <ul class="tablistnew two">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Document
+            </a>
+        </li>
+    </ul>
+    @*<ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#step-1" class="s1">
+                    <span>1</span> Details
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span> Document
+                </a>
+            </li>
+        </ul>*@
+    <div id="step-1">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="">Title *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.Title" id="txt_Title" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Title" style="display:none;" data-valmsg-for="ExpiryDate" data-valmsg-replace="true">Title is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Category *</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-Category" class="form-control">
+                    @foreach (var item in Model.CategoryList)
+                    {
+                        if (Model.CategoryId.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Category" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Category is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Assign To *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="hidden" id="selectID" />
+                <input type="text" class="awesomplete form-control" id="empNameText" size="70" placeholder="Employee Name" />
+                @*<select id="drp-AssignTo" class="form-control">
+                        @foreach (var item in Model.AssignToList)
+                        {
+                            if (Model.AssignToId == Convert.ToInt32(item.Value))
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>*@
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-AssignTo" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Assign To is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">In Relation To *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="hidden" id="selectReportToID" />
+                <input type="text" class="awesomplete form-control" id="empReportTo" size="70" placeholder="Employee Name" />
+
+                @*<select id="drp-InRelationTo" class="form-control">
+                        @foreach (var item in Model.InRelationToList)
+                        {
+                            if (Model.InRelationToId == Convert.ToInt32(item.Value))
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>*@
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-InRelationTo" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">In Relation To is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Due Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.DueDate" id="txt_DueDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-DueDate" style="display:none;" data-valmsg-for="DueDate" data-valmsg-replace="true">Due Date is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Status</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-Status" class="form-control">
+                    @foreach (var item in Model.StatusList)
+                    {
+                        if (Model.StatusId.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Alert Before Days</label>
+            </div>
+            <div class="col-md-6">
+                <input type="number" value="@Model.AlertBeforeDays" id="txt_AlertBeforeDays" min="0" class="form-control" />
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Description</label>
+            </div>
+            <div class="col-md-6">
+                <textarea id="textArea_Description" class="form-control textarea-resizeNone">@Model.Description</textarea>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="step-2">
+        <div class="browse-attach">
+            <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        </div>
+
+        <div id="filesList">
+            @foreach (var item in Model.DocumentList)
+            {
+                <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    var getEmployeeList = {
+        gatEmptask: '@Url.Action("GetEmployeeName_Task", "AdminTask")',
+    }
+</script>
+<script>
+    $("#txt_AlertBeforeDays").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    searchEmployeeName_Task();
+    function searchEmployeeName_Task(){
+
+        var listData = [];
+        var listRepTo = [];
+  
+        $.ajax({
+            url: getEmployeeList.gatEmptask,
+            data: {},
+            success: function (data) {
+                debugger;
+                $.each(data.AssignToList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                $.each(data.InRelationToList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                $('#empNameText').change(function () {
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.AssignToList.length; i++) {
+                        if (value == data.AssignToList[i].Text) {
+                            var eid = data.AssignToList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+                var inpRpTo = document.getElementById("empReportTo");
+                var awsRpTo = new Awesomplete(inpRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsRpTo.list = listRepTo;
+                $('#empReportTo').change(function () {
+                    value = $('#empReportTo').val();
+                    for (var i = 0; i < data.InRelationToList.length; i++) {
+                        if (value == data.InRelationToList[i].Text) {
+                            var eid = data.InRelationToList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectReportToID").val(eid);
+                });
+            }
+        });
+    }
+</script>

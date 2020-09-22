@@ -1,0 +1,506 @@
+﻿@model HRTool.Models.Settings.PerformanceSettingViewModel
+
+<style>
+    .divclass {
+        height: 20%;
+        width: 100%;
+    }
+
+    .inlinedivclass {
+        width: 50%;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="md-card">
+    <input type="hidden" id="PerformaceId" value="@Model.Id">
+    <div class="md-card-content large-padding main-card">
+
+        <div class="row marbot10">
+            <label class="col-md-3">Review</label>
+            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Name Of the Review">
+                <input type="text" name="reviewText" class="form-control" id="Review" value="@Model.ReviewText">
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="validationmessageReview" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Completion Date*</label>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" onclick="ChangeDateBehaviour();" class="form-control-performance" id="AnnualReview" checked="@Model.AnnualReview">
+                            <label>Annual Review</label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" disabled="disabled" class="form-control mrg-btm datepicker" id="CompletionDate" placeholder="Completion Date" name="CompletionDate" title="Completion Date" value="@Model.CompletionDate">
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="CompletionDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="validationmessageCompletionDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Company</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Company" multiple="multiple">
+                    @foreach (var Company in Model.CompanyList)
+                    {
+                        if (Model.selectedCompany.Contains(Company.Value))
+                        {
+                    <option value="@Company.Value" selected="selected">@Company.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Company.Value">@Company.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Location</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Location" multiple="multiple">
+                    @foreach (var Location in Model.LocationList)
+                    {
+                        if (Model.selectedLocation.Contains(Location.Value))
+                        {
+                    <option value="@Location.Value" selected="selected">@Location.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Location.Value">@Location.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Business</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Business" multiple="multiple">
+                    @foreach (var Business in Model.BusinessList)
+                    {
+                        if (Model.selectedBusiness.Contains(Business.Value))
+                        {
+                    <option value="@Business.Value" selected="selected">@Business.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Business.Value">@Business.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Division</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Division" multiple="multiple">
+                    @foreach (var Division in Model.DivisionList)
+                    {
+                        if (Model.selectedDivision.Contains(Division.Value))
+                        {
+                    <option value="@Division.Value" selected="selected">@Division.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Division.Value">@Division.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Pool</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Pool" multiple="multiple">
+                    @foreach (var Pool in Model.PoolList)
+                    {
+                        if (Model.selectedPoolList.Contains(Pool.Value))
+                        {
+                    <option value="@Pool.Value" selected="selected">@Pool.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Pool.Value">@Pool.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Function</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Function" multiple="multiple">
+                    @foreach (var Function in Model.FunctionList)
+                    {
+                        if (Model.selectedFunction.Contains(Function.Value))
+                        {
+                    <option value="@Function.Value" selected="selected">@Function.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Function.Value">@Function.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Job Title</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-JobTitle" multiple="multiple">
+                    @foreach (var JobTitle in Model.JobTitleList)
+                    {
+                        if (Model.selectedJobTitle.Contains(JobTitle.Value))
+                        {
+                    <option value="@JobTitle.Value" selected="selected">@JobTitle.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@JobTitle.Value">@JobTitle.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Employment Type</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <select class="form-control" id="drp-Employment" multiple="multiple">
+                    @foreach (var Employment in Model.EmploymentList)
+                    {
+                        if (Model.selectedEmployment.Contains(Employment.Value))
+                        {
+                    <option value="@Employment.Value" selected="selected">@Employment.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Employment.Value">@Employment.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Copy From</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drp-CopyFrom">
+                    @foreach (var Copy in Model.CopyFromList)
+                    {
+                    <option value="@Copy.Value">@Copy.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-danger" id="CopySegment">Copy</button>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Ratings</label>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Overall</label>
+                        <input type="checkbox" id="Overall" checked="@Model.RatingOverAll" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Core</label>
+                        <input type="checkbox" id="Core" checked="@Model.RatingCore" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Job Role</label>
+                        <input type="checkbox" id="JobRole" checked="@Model.RatingJobRole" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div id="Overallcontainer">
+            @if (Model.OverallScoreJsonList == null || Model.OverallScoreJsonList.Count == 0)
+            {
+            <div class="row marbot10 OverallScore" id="1" data-id="1">
+                <label class="col-md-3">Overall Score</label>
+                <div class="col-md-6">
+                    <div class="marbot10">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" name="overallScore" id="Overall_1" data-id="1" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <span class="field-validation-error" id="validationmessageOverall_1" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row marbot10 OverallScore" id="2" data-id="2">
+                <label class="col-md-3"></label>
+                <div class="col-md-6">
+                    <div class="marbot10">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" name="overallScore" id="Overall_2" data-id="2" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <span class="field-validation-error" id="validationmessageOverall_2" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row marbot10 OverallScore" id="3" data-id="3">
+                <label class="col-md-3"></label>
+                <div class="col-md-6">
+                    <div class="marbot10">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" name="overallScore" id="Overall_3" data-id="3" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <span class="field-validation-error" id="validationmessageOverall_3" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            }
+            else
+            {
+                int i = 1;
+                foreach (var item in Model.OverallScoreJsonDetaillistList)
+                {
+            <div class="row marbot10 OverallScore" id="OverallScore_@i" data-id="@i">
+                <label class="col-md-3"></label>
+                <div class="col-md-6">
+                    <div class="marbot10">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" name="overallScore" id="Overall_@i" data-id="@i" class="form-control" value="@item.Text">
+                            </div>
+                            <div class="col-md-2">
+                                <span id="SpanOverall_@i" data-id="@i">@i</span>
+                                @if (i > 3)
+                                        {
+                                    <a class="RemoveOverall" id="Remove_@i" data-id="@i"><span class="fa fa-close" cursor:pointer"></span></a>
+                                        }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+                    i = i + 1;
+                }
+            }
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">&nbsp;</label>
+            <div class="col-md-6">
+                <div class="">
+                    <button class="btn btn-success" id="add-more" style="margin-left:10px;">Add More</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="SegmentSection">
+            <input type="hidden" id="jsonSegmentSection" value="@Model.CoreSegmentJSON" />
+            @Html.Action("SegmentCoreSectionCreate", "PerformanceSetting", new { coreSegmentJSON = Model.CoreSegmentJSON })
+            @*@Html.Raw(Json.Encode(@Model.CoreSegmentJSON))';*@
+        </div>
+        <div id="JobroleSegmentSection">
+            <input type="hidden" id="jsonJobroleSegmentSection" value="@Model.JobRoleSegmentJSON" />
+            @Html.Action("SegmentJobRolesSectionCreate", "PerformanceSetting", new { jobRoleSegmentJSON = Model.JobRoleSegmentJSON })
+
+        </div>
+        <div id="CustomerSegmentSection">
+            <input type="hidden" id="jsonCustomerSegmentSection" value="@Model.CustomerSegmentJSON" />
+            @Html.Action("SegmentCustomerSectionCreate", "PerformanceSetting", new { customerSegmentJSON = Model.CustomerSegmentJSON })
+        </div>
+        <div id="CoWorkerSegmentSection">
+            <input type="hidden" id="jsonCoWorkerSegmentSection" value="@Model.CoWorkerSegmentJSON" />
+            @Html.Action("SegmentCoWorkerSectionCreate", "PerformanceSetting", new { coWorkerSegmentJSON = Model.CoWorkerSegmentJSON })
+        </div>
+        <div class="col-md-12">
+            <button type="button" class="btn btn-success pull-right" id="SendMailToAll">Send email to all Employees</button>
+            <button type="submit" class="btn btn-success" id="btn_SavePerformance">Save</button>
+            <button type="button" class="btn btn-warning" id="btn_CancelPerformance">Cancel</button>
+        </div>
+        <br /><br />
+    </div>
+</div>
+
+
+@* Core Segment*@
+<div id="CoreSegmentModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="segments-box">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Segment</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="wizard" class="swMain">
+                                <ul class="nav nav-tabs">
+                                    <li>
+                                        <a href="#step-1" class="s1">
+                                            <span>1</span>Segment
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-2" class="s2">
+                                            <span>2</span>Questions
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div id="step-1">
+                                    <div class="row marbot10">
+                                        <div class="form-group">
+                                            <label class="col-md-3">Title*</label>
+                                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Values Of the Cost">
+                                                <input type="text" name="Title" id="Title" value="" class="form-control" ng-required="false">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <span class="field-validation-error" id="validationmessageTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row marbot10">
+                                        <div class="form-group">
+                                            <label class="col-md-3">Description</label>
+                                            <div class="col-md-6">
+                                                <textarea class="form-control" id="Description" value="" placeholder="Description"></textarea>
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="step-2">
+                                    <div class="cf nestable-lists">
+                                        <div class="dd CoreSegmentNestable">
+                                            <ol id="CoreSegmentQuestionList" class="dd-list" data-uk-nestable="{maxDepth:0}"></ol>
+                                        </div>
+                                    </div>
+                                    <div data-toggle="modal" data-target="#CoreSegmentAddQuestionModel">
+                                        <a class="md-btn btn-default" id="CoreSegmentAddQuestion">Add Segments</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CoreSegmentAddQuestionModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="segments-box">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Question</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="froala-editor"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btn-submit-AddCoreSegmentQuestion" data-dismiss="modal">Add</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    @*var constantJson = {
+        coreSegmentJson: '@Model.CoreSegmentJSON',
+        JobrolesSegmentJson: '@Model.JobRoleSegmentJSON',
+        CustomerSegmentJson: '@Model.CustomerSegmentJSON',
+        CoworkerSegmentJson: '@Model.CoWorkerSegmentJSON'
+    }*@
+</script>
+
+<script>
+
+    function ChangeDateBehaviour() {
+        if ($('#AnnualReview').is(":checked") == true) {
+            $("#CompletionDate").prop("disabled", false);
+        }
+        else if ($('#AnnualReview').is(":checked") == false) {
+            $("#CompletionDate").prop("disabled", true);
+            $('#CompletionDate').val('')
+        }
+    }
+    var updateOutput = function (e) {
+        var list = e.length ? e : $(e.target),
+                output = list.data('output');
+        if (window.JSON) {
+            output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+        }
+        else {
+            output.val('JSON browser support required for this demo.');
+        }
+    };
+    $(document).ready(function () {
+        $('.CoreSegmentNestable').nestable({
+            maxDepth: 1,
+        });
+        function changeTable() {
+        }
+        updateOutput($('.CoreSegmentNestable').data('output', $('.CoreSegmentNestable-output')));
+    });
+
+    $("#page_content_inner").find("#Overallcontainer").find(".RemoveOverall").on('click', function () {
+
+        var id = $(this).attr("data-id");
+        $("#OverallScore_" + id).remove();
+    })
+
+</script>
+
+

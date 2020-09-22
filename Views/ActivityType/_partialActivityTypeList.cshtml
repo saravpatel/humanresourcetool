@@ -1,0 +1,110 @@
+﻿@model HRTool.Models.Settings.ActivityTypeViewModel
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-ActivityType" data-toggle="modal" data-target="#addActivityType" title="Add Business"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-ActivityType" data-toggle="modal" data-target="#addActivityType" title="Edit" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-ActivityType" data-toggle="modal" data-target="#deleteActivityType" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-ActivityType" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-ActivityType" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-info btn-circle  btn-clearFilter-ActivityType" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+</div>
+<div class="table-responsive">
+    <table id="example" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr class="tblHeading">
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Currency</th>
+                <th>Work Unit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.activityTypeList)
+            {
+                <tr id="@item.Id" class="dataTr">
+                    <td>@item.Name</td>
+                    <td>@item.Rate</td>
+                    <td>@item.Currency</td>
+                    <td>@item.WorkUnit</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th><input type="text" class="form-control SearchName" placeholder="Name"></th>
+                <th><input type="text" class="form-control SearchRate" placeholder="Rate"></th>
+                <th><input type="text" class="form-control SearchCusrruncy" placeholder="Currency"></th>
+                <th><input type="text" class="form-control SearchWorkUnit" placeholder="Work Unit"></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addActivityType" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title activityTypeTitle" id="myModalLabel">Add Activity Type</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddEditActivityType">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-ActivityType">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="deleteActivityType" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Warning
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="row marbot10">
+                    <div class="col-md-12">
+                        <label class="control-label">
+                            Are you sure, you want to delete a record?
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-delete-ActivityType">Ok</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+

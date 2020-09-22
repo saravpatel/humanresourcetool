@@ -1,0 +1,75 @@
+﻿@model HRTool.Models.Resources.CustomerInviteList
+
+@{
+    ViewBag.Title = "_PartialInviteCustomer";
+}
+
+<div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label>Select Customer</label>
+        </div>
+        <input type="hidden" id="CustomerList" />
+        <input type="text" class="awesomplete form-control" id="empReportTo" size="70" placeholder="Customer Name" />
+        @*<div class="col-md-6">
+            <select id="CustomerList" class="form-control">
+                @foreach (var item in Model.CustomerList)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>*@
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-Cust" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Customer is required.</span>
+        </div>
+    </div>    
+</div>
+<script>
+    var getCustomerList = {
+        GetCustomerSegmentList: '@Url.Action("InviteCustomerList", "EmployeePerformance")',
+    }
+</script>
+<script>
+    CustomerListData();  
+    //function CustomerListData()
+    //{
+    //    $("#CustomerList").select2();
+    //}
+    $("CustomerList").on("change", function () {
+        $("#lbl-error-Cust").hide();
+    })    
+    function CustomerListData() {
+        var listRepTo = [];
+        $.ajax({
+            url: getCustomerList.GetCustomerSegmentList,
+            data: {},
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                //Report To
+                var inpRpTo = document.getElementById("empReportTo");
+                var awsRpTo = new Awesomplete(inpRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsRpTo.list = listRepTo;
+                $('#empReportTo').change(function () {
+                    value = $('#empReportTo').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            var eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#CustomerList").val(eid);
+                });            
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+    <br />
+   
+
+    <h1 class="page-title">
+        Activity Type List   
+    </h1>
+
+
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("activityTypeList", "ActivityType")
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var constantActivityType = {
+        addEdit: '@Url.Action("AddEditActivityType", "ActivityType")',
+        SaveCmp: '@Url.Action("SaveActivityType", "ActivityType")',
+        EditCmp: '@Url.Action("EditActivityType", "ActivityType")',
+        DeleteCmp:'@Url.Action("DeleteActivityType", "ActivityType")'
+    };
+
+</script>
+<script src="~/JS/Settings/ActivityType/ActivityTypeJS.js"></script>
+

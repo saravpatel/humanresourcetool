@@ -1,0 +1,59 @@
+﻿@model HRTool.Models.Me.MeEmployeeLeaverWizard
+<div class="row marbot10">
+    <label class="col-md-3">Re-Assign Direct Report To</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpEmployeeList">
+            @foreach (var item in Model.EmployeeList)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidReasonForLeaving" data-valmsg-for="ReasonForLeaving" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Re-employable</label>
+        <div class="col-md-6">
+            <div class="resource-report-radio-btn">
+                @if (Model.reEmployeeable == 1)
+                {
+                    <label class="radio-btn">
+                        <input type="radio" name="Re-employable" id="Re_employableYesId" value="1" checked>
+                        <span>Yes</span>
+                    </label>
+                                <label class="radio-btn">
+                                    <input type="radio" name="Importance" id="Re_employableNoId" value="0">
+                                    <span>No</span>
+                                </label>
+                }
+                else
+                {
+                    <label class="radio-btn">
+                        <input type="radio" name="Importance" id="Re_employableYesId" value="1">
+                        <span>Yes</span>
+                    </label>
+                                <label class="radio-btn">
+                                    <input type="radio" name="Importance" id="Re_employableNoId" value="0" checked>
+                                    <span>No</span>
+                                </label>
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageImportance" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none">Importance is required.</span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Suporting Comments</label>
+    <div class="col-md-6">
+        <textarea name="supportingComments" class="form-control" id="supportingComments" value=""></textarea>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidReasonForLeaving" data-valmsg-for="ReasonForLeaving" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>

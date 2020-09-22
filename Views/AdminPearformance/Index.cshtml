@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page_content_inner" class="page_content_custom">    
+        <ul id="PerformanceTabPanel" class="nav nav-tabs nav-justified">
+            <li class="PerformanceIndex active">
+                <a class="btn-click-PerformanceIndex">
+                    <i class="material-icons font50">person</i>
+                </a>
+            </li>
+            <li class="OverallScoreSection">
+                <a class="btn-OverallScoreSection">
+                    <i class="material-icons font50">grid_on</i>
+                </a>
+            </li>
+            <li class="CoreStrengthsSection">
+                <a class="btn-CoreStrengthsSection">
+                    <i class="material-icons font50">flag</i>
+                </a>
+            </li>
+            <li class="PerformanceReviewChart">
+                <a class="btn-PerformanceReviewChart">
+                    <i class="material-icons font50">group</i>
+                </a>
+            </li>
+        </ul>
+    <div id="contantBody">
+        @Html.Action("PerformanceIndex", "AdminPearformance")
+    </div>
+</div>
+
+<script src="~/JS/Admin/AdminPearformance/AdminPearformanceJS.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script> 
+<script src="https://highcharts.github.io/export-csv/export-csv.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+<script src="~/JS/canvasjs.min.js"></script>
+<script src="~/JS/html2canvas.js"></script>
+<script src="~/JS/jsapi.js"></script>
+<script src="~/JS/jspdf.min.js"></script>
+<script>
+    var AdminPerformance = {
+        GetDataByReview: '@Url.Action("GetDataByReview", "AdminPearformance")',
+        Index: '@Url.Action("PerformanceIndex", "AdminPearformance")',
+        OverallScore: '@Url.Action("GetOverAllScore", "AdminPearformance")',
+        OverallScoreByFilter: '@Url.Action("GetOverAllScoreListByFilter", "AdminPearformance")',
+        ExportToExcelOverallScore: '@Url.Action("ExportToExcelOverallScore", "AdminPearformance")',
+        CoreScoreList: '@Url.Action("CoreScoreList","AdminPearformance")',
+        CoreScoreByFilter: '@Url.Action("CoreScoreByFilter", "AdminPearformance")',
+        EmployeePerformanceCompare: '@Url.Action("GetEmployeePerformanceCompare", "AdminPearformance")',
+        GetDivisonByBusinessID: '@Url.Action("GetDivisonByBusinessId", "AdminPearformance")',
+        GetPoolByDivisonID: '@Url.Action("GetPoolByDivisonID", "AdminPearformance")',
+        GetFunctionByPoolId: '@Url.Action("GetFunctionByPoolId", "AdminPearformance")',
+        GetPerformanceGraphByFilter: '@Url.Action("GetPerformanceGraphByFilter", "AdminPearformance")',
+        GetTopImproversePerGraphByFilter: '@Url.Action("GetTopImproversePerGraphByFilter", "AdminPearformance")',
+        GetBiggestDropPerGraphByFilter: '@Url.Action("GetBiggestDropPerGraphByFilter","AdminPearformance")',
+        GetMostConsistantEmployeeByFilter: '@Url.Action("GetMostConsistantEmployeeByFilter","AdminPearformance")',
+        GetAllEmployeePerformanceGraph: '@Url.Action("GetEmployeePerformanceGraph", "AdminPearformance")',
+        GetEmployeeAllPerformanceFilter: '@Url.Action("GetEmployeeAllPerformance", "AdminPearformance")',
+        GetEmployeeAllPerformanceFilter: '@Url.Action("GetEmployeeAllPerformance", "AdminPearformance")',
+
+    }
+</script>

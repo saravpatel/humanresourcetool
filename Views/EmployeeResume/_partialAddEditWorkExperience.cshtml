@@ -1,0 +1,119 @@
+﻿@model HRTool.Models.Resources.EmployeeExperienceViewModel
+
+<input type="hidden" id="WorkExperienceId" value="@Model.Id" />
+<input type="hidden" id="Employeeid" value="@Model.EmployeeID" />
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="JobTitle">Job Title*</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="txt_JobTitle" value="@Model.JobTitle" data-toggle="tooltip" name="JobTitle" title="Job Title" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-JobTitle" style="display:none;" data-valmsg-for="Job Title" data-valmsg-replace="true">The Job Title is required.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="CompanyName">Company Name*</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="txt_CompanyName" value="@Model.CompanyName" data-toggle="tooltip" name="CompanyName" title="Company Name" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-CompanyName" style="display:none;" data-valmsg-for="CompanyName" data-valmsg-replace="true">The Company Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="StartDate">Start Date</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control mrg-btm datepicker" id="datep_StartDate" value="@Model.JobStartDate" data-toggle="tooltip" name="StartDate" title="Start Date">
+
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="StartDate" data-valmsg-replace="true">The Start Date is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="EndDate">End Date</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control mrg-btm datepicker" id="datep_EndDate" value="@Model.JobEndDate" data-toggle="tooltip" name="EndDate" title="End Date">
+
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="EndDate" data-valmsg-replace="true">The End Date is required.</span>
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="OtherInformation">Other Information</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt_OtherInformation" data-toggle="tooltip" data-placement="right" name="OtherInformation" title="Other Information">@Model.OtherInformation</textarea>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-OtherInformation" style="display:none;" data-valmsg-for="OtherInformation" data-valmsg-replace="true">The OtherInformation is required.</span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datep_StartDate').Zebra_DatePicker({
+            //direction: false,
+            showButtonPanel: false,
+            format: 'd-m-Y',
+            onSelect: function () {
+                $("#lbl-error-StartDate").hide();
+                $("#lbl-error-EndDate").hide();
+                var fromDate = $('#datep_StartDate').val();
+                var toDate = $('#datep_EndDate').val();
+                if (fromDate != "") {
+                    fromDate = fromDate.replace(/-/g, '/');
+                    toDate = toDate.replace(/-/g, '/');
+                    if (toDate != "") {
+                        if (FromDateValidation(fromDate, toDate)) {
+                            $("#lbl-error-StartDate").html("Start Date date is less than to End date");
+                            $("#lbl-error-StartDate").show();
+                            $("#datep_StartDate").val("");
+                            return false;
+                        }
+                    }
+                }
+            }
+        });
+        $('#datep_EndDate').Zebra_DatePicker({
+            //direction: true,
+            showButtonPanel: false,
+            format: 'd-m-Y',
+            onSelect: function () {
+                $("#lbl-error-EndDate").hide();
+                var fromDate = $('#datep_StartDate').val();
+                var toDate = $('#datep_EndDate').val();
+                if (fromDate == "") {
+                    $("#lbl-error-EndDate").html("Start date is required");
+                    $("#lbl-error-EndDate").show();
+                    $("#datep_EndDate").val("");
+                    return false;
+                }
+                else {
+                    fromDate = fromDate.replace(/-/g, '/');
+                    toDate = toDate.replace(/-/g, '/');
+                    if (ToDateValidation(fromDate, toDate)) {
+                        $("#lbl-error-EndDate").html("EndDate date is greater than Start date");
+                        $("#lbl-error-EndDate").show();
+                        $("#datep_EndDate").val("");
+                        return false;
+                    }
+                }
+            }
+        });
+    });
+</script>

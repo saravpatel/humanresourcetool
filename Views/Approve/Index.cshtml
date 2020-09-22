@@ -1,0 +1,699 @@
+﻿@model List<HRTool.Models.Approval.AllApproveRequestList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    
+
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    #exTab2 h3 {
+        color: white;
+        background-color: #55a1e2;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    .search_list div + div {
+        border-top: 1px solid rgba(0,0,0,.08);
+    }
+
+    .uplft {
+    }
+
+    .buttonApprv {
+        background-color: green !important;
+        color: white !important;
+        border-radius: 12px !important;
+        width: 100px !important;
+        display: none;
+    }
+
+    .buttonRejct {
+        background-color: red !important;
+        color: white !important;
+        border-radius: 12px !important;
+        width: 100px !important;
+        display: none;
+    }
+
+    .downloadbtn {
+        background-color: cornflowerblue;
+        color: white;
+        border-radius: 7px;
+    }
+
+
+
+
+
+
+
+
+</style>
+
+@*notification start*@
+<div class="col-md-12">
+    <h1 class="page-title">
+        Approval       
+         <small></small>
+    </h1>
+
+    <div class="portlet light">
+        <div class="portlet-title tabbable-line approve-tab full-tab-width">
+            <ul class="nav nav-tabs">
+                <li id="AllList" class="active">
+                    <a href="#All" id="AllList" data-toggle="tab">All</a>
+                </li>
+                <li id="TimeSheet">
+                    <a href="#">Timesheet</a>
+                </li>
+                <li id="Scheduling">
+                    <a href="#">Scheduling</a>
+                </li>
+                <li id="Travel">
+                    <a href="#">Travel</a>
+                </li>
+                <li id="Annual">
+                    <a href="#">Annual Leave</a>
+                </li>
+                <li id="Sick">
+                    <a href="#">Sick Leave</a>
+                </li>
+                <li id="Other">
+                    <a href="#">Other Leave</a>
+                </li>
+                <li id="Training">
+                    <a href="#">Training Requests</a>
+                </li>
+                <li id="Vacancy">
+                    <a href="#">New Vacancy</a>
+                </li>
+                <li id="MatPat">
+                    <a href="#">Mat/Pat Leave</a>
+                </li>
+                <li id="Uplift">
+                    <a href="#">Uplift</a>
+                </li>
+            </ul>
+     </div>
+
+    @*<div class="portlet-body">
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="slimScrollDiv">
+                    <div class="scroller"   data-handle-color="#D7DCE2" data-initialized="1">
+                        <ul class="feeds">
+                            <li>
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-success">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                Web server hardware needs to be upgraded.
+                                                <span class="label label-sm label-default "> Approve </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date"> 1 hours </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="slimScrollDiv">
+                        <div class="scroller" data-handle-color="#D7DCE2" data-initialized="1">
+                            <ul class="feeds">
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    Web server hardware needs to be upgraded.
+                                                    <span class="label label-sm label-default "> Approve </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 4 hours </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="slimScrollDiv">
+                        <div class="scroller" data-handle-color="#D7DCE2" data-initialized="1">
+                            <ul class="feeds">
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    Web server hardware needs to be upgraded.
+                                                    <span class="label label-sm label-default "> Approve </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 6 hours </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="slimScrollDiv">
+                        <div class="scroller" data-handle-color="#D7DCE2" data-initialized="1">
+                            <ul class="feeds">
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    Web server hardware needs to be upgraded.
+                                                    <span class="label label-sm label-default "> Approve</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 5 hours </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+    <div id="exTab2">
+  
+
+        <div class="tab-content" id="#mobilesize">
+            <div class="tab-pane active" id="All">
+                <div id="page_content_inner">
+                    @*<h4 class="heading_a uk-margin-bottom">
+                            <div class="icon"></div>
+                            <div class="titletext">
+                                <div>
+                                    All
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </h4>*@
+                    <div id="">
+                        <div ng-controller="mailboxCtrl" class="md-card-list-wrapper" id="mailbox">
+                            <div class="uk-width-large-10-12 uk-container-center">
+                                <div class="md-card-list">
+                                    @{
+                                        int Count = 0;
+                                    }
+                                    @if (Model.Where(x => x.Header == "TimeSheet Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Timesheet Request</h4>
+                                    }
+
+
+
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="TimeSheetId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "TimeSheet Request")
+                                            {
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-clock-o approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="TimesheetRequest"> Timesheet Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="TimesheetRequest"> Timesheet Request </span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+
+
+
+
+
+                                    @*@if (Model.Where(xx => xx.Header == "ProjectPlanner TimeSheet Request").Count() > 0)
+                                        {
+                                            <h4 style="color: #2fa4e7;">ProjectPlanner TimeSheet Request</h4>
+                                        }
+                                        <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="ProjectPlannerTimeSheetId" hierarchical-slide="">
+                                            @foreach (var item in Model)
+                                            {
+                                                Count += 1;
+                                                if (item.Header == "ProjectPlanner TimeSheet Request")
+                                                {
+
+                                                    <li on-last-repeat="" class="ng-scope" >
+                                                        <div class="md-card-list-item-sender">
+                                                            <span class="ng-binding ng-scope">
+                                                                <input type="hidden" value="@item.EmployeeId" />
+                                                                @if (item.Gender = true)
+                                                                {
+                                                                    <a id="header">@item.Title @item.Name has submitted his ProjectPlanner timesheet for approval</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a id="header">@item.Title @item.Name has submitted her ProjectPlanner timesheet for approval</a>
+                                                                }
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>*@
+                                    @if (Model.Where(xx => xx.Header == "Scheduling Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Schedule Request</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="ScheduleId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Scheduling Request")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-pie-chart approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="SchedulingRequest">Scheduling Request</span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="SchedulingRequest">Scheduling Request</span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+                                    @if (Model.Where(xx => xx.Header == "Travel Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Travel Request</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="TravelId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Travel Request")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-plane   approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="TravelLeaveRequest">Travel Leave Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="TravelLeaveRequest">Travel Leave Request </span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                    @if (Model.Where(xx => xx.Header == "Annual Leave Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Annual Leave Request</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="AnnualId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Annual Leave Request")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-calendar approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="AnnualLeaveRequest">Annual Leave Request</span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Gender @item.Name has submitted her <span class="AnnualLeaveRequest">Annual Leave Request</span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                    @if (Model.Where(xx => xx.Header == "Other Leave Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Other Leave Request</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="OtherId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Other Leave Request")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+
+                                                    <i class="fa  fa-calendar-plus-o approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="OtherLeaveRequest">Other Leave Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="OtherLeaveRequest">Other Leave Request </span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                    @if (Model.Where(xx => xx.Header == "Training Request").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Training Request</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="TrainingId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Training Request")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-briefcase approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="TrainingRequest">Training Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="TrainingRequest">Training Request </span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                    @if (Model.Where(xx => xx.Header == "New Vacancy").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">New Vacancy</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="NewVacancyId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "New Vacancy")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-file-text approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            <a id="header">@item.Title @item.Name has submitted <span class="NewVacancy">New Vacancy</span> for approval</a>
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                    @if (Model.Where(xx => xx.Header == "Uplift Submission").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Uplift Submission</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="UpliftId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Uplift Submission")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-line-chart  approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="UpliftSubmissionRequest">Uplift Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="UpliftSubmissionRequest">Uplift Request </span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+                                    @if (Model.Where(xx => xx.Header == "Sick Leave").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Sick Leave Submission</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="SickLeaveId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Sick Leave")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+                                                    <i class="fa fa-thermometer-quarter  approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="SickLeaveSubmissionRequest"> Sick Leave Request</span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="SickLeaveSubmissionRequest"> Sick Leave Request</span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+                                    @if (Model.Where(xx => xx.Header == "Maternity/Paternity Leave").Count() > 0)
+                                    {
+                                        <h4 style="color: #2fa4e7;">Maternity/Paternity Leave Submission</h4>
+                                    }
+                                    <ul class="hierarchical_slide ng-scope hierarchical_slide_inView" id="MatPatId" hierarchical-slide="">
+                                        @foreach (var item in Model)
+                                        {
+                                            Count += 1;
+                                            if (item.Header == "Maternity/Paternity Leave")
+                                            {
+
+                                                <li on-last-repeat="" class="ng-scope" >
+
+                                                    <i class="fa fa-users approv-icon"></i>
+                                                    <div class="md-card-list-item-sender">
+                                                        <span class="ng-binding ng-scope">
+                                                            <input type="hidden" value="@item.EmployeeId" />
+                                                            @if (item.Gender = true)
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted his <span class="MatPatLeaveRequest">Paternity Leave Request </span> for approval</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a id="header">@item.Title @item.Name has submitted her <span class="MatPatLeaveRequest"> Maternity Leave Request</span> for approval</a>
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="timesheetlist"></div>
+            <div id="Schedulelist"></div>
+            <div id="Travellist"></div>
+            <div id="Anualleavelist"></div>
+            <div id="otherLeaveApproval"></div>
+            <div id="trainingReqApproval"></div>
+            <div id="newVacancyApproval"></div>
+            <div id="upliftApproval"></div>
+            <div id="sickApproval"></div>
+            <div id="matpatApproval"></div>
+        </div>
+    </div>
+
+    </div>
+</div>
+@*notification code end*@
+
+
+
+    @*<script>
+            var constantApproval = {
+                TimeSheetApproval: '@Url.Action("TimeSheetApprove", "TimeSheetApproval", new { EmpId = @Model.EmployeeId })'
+            }
+        </script>
+
+        <script src="~/JS/Approve/ApprovalJS.js"></script>*@
+
+    <script>
+
+        var constantApproval = {
+            TimesheetApprove: '@Url.Action("TimeSheetApprove", "Approve")',
+            ScheduleApproval: '@Url.Action("ScheduleApproval", "Approve")',
+            TravelApprove: '@Url.Action("TravelApprove", "Approve")',
+            AnualLeaveApprove: '@Url.Action("AnualLeaveApprove", "Approve")',
+            OtherLeaveApprove: '@Url.Action("OtherLeaveApprove", "Approve")',
+            TrainingRequestApprove: '@Url.Action("TrainingRequestApprove", "Approve")',
+            NewVacancyApprove: '@Url.Action("NewVacancyApprove", "Approve")',
+            UpliftApprove: '@Url.Action("UpliftApprove", "Approve")',
+            sickApprove: '@Url.Action("SickLeaveApprove", "Approve")',
+            MatPatApprove: '@Url.Action("Mat_PatApprove", "Approve")',
+        }
+
+        @*$("#TimeSheetId ul li").on('click', function () {
+        var hidden_fields = $(this).find('input:hidden').val();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Content("~/Approve/TimeSheetApprove")',
+            data: {
+                EmpID: hidden_fields
+            },
+            success: function (result) {
+                $('#timesheetlist').html(result);
+
+                $('#timesheetlist').show();
+                $('#All').hide();
+
+            }
+        });
+    });
+    $("#AllList").click(function () {
+        //location.reload();
+        $(this).parent().addClass("Active");
+        var tab = $(this).attr("href");
+        $(tab).fadeIn();
+    });*@
+    </script>
+    <script src="~/JS/Approve/Approval.js"></script>

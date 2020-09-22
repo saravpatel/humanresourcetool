@@ -1,0 +1,55 @@
+﻿@model HRTool.Models.Resources.EmployeeTOILModelView
+@{
+    
+}
+<input type="hidden" id="TOIL_Id" value="@Model.Id" />
+<input type="hidden" id="TOIL_StartDate" value="@Model.StartDate" />
+ 
+<div class="row marbot10">
+    <label class="col-md-3">Balance</label>
+    <div class="col-md-6">
+        <input type="number" readonly="readonly" data-toggle="tooltip" data-placement="right" name="Balance" title="Holidays Balance" class="form-control" id="Toil_Balance" value="@Model.Balance" placeholder="Balance">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Duration Days</label>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" id="DurationDays_Plus" value="@Model.AddEdit">+</button>
+    </div>
+    <div class="col-md-3">
+        <input type="number" data-toggle="tooltip" data-placement="right" name="DurationDays" title="Duration Days" class="form-control" id="Toil_DurationDays" value="@Model.DurationDays" placeholder="Duration Days">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="dateOfBirth">Expiry Date*</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control mrg-btm datepicker" id="txt_ExpiryDate" value="@Model.ExpiryDate" data-toggle="tooltip" data-placement="right" name="ExpiryDate" title="Expiry Date">
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-ExpiryDate" style="display:none;" data-valmsg-for="ExpiryDate" data-valmsg-replace="true">The Expiry Date is required.</span>
+        <span class="field-validation-error" id="lbl-error-ExpiryDateOver" style="display:none;" data-valmsg-for="ExpiryDate" data-valmsg-replace="true">The Expiry Date is less than to start date.</span>
+    </div>
+</div>
+
+
+
+<div class="row marbot10">
+    <label class="col-md-3">Supporting Comments</label>
+    <div class="col-md-6">
+        <textarea name="SupportingComments" data-toggle="tooltip" data-placement="right" title="Supporting Comments" class="form-control textarea-resizeNone" id="Txt_SupportingComments">@Model.SupportingComments</textarea>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidSupportingComments" data-valmsg-for="SupportingComments" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>

@@ -1,0 +1,170 @@
+﻿@model HRTool.Models.Resources.EmployeeSkillsEndorsementViewModel
+
+
+<div class="modal fade" id="AddTechnicalSkills" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabel">Add Skill Set</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddTechnicalSkillsBody">
+                @*<div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="systemListName">Skill Set</label>
+                    </div>
+                    <div class="col-md-6 dropdown-selectlist">
+                        <select class="form-control" id="drpTechnical">
+                            @foreach (var Techanical in Model.TechnicalList)
+                            {
+                                <option value="@Techanical.Value">@Techanical.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>*@
+                <p>Some text in model</p>
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-AddTechnicalSkills">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AddGeneralSkills" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabel">Add Skill</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddGeneralSkillsBody">
+                @*<div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="systemListName">Skill Set</label>
+                    </div>
+                    <div class="col-md-6 dropdown-selectlist">
+                        <select class="form-control" id="drpGenerl">
+                            @foreach (var General in Model.GeneralList)
+                            {
+                            <option value="@General.Value">@General.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>*@
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-AddGeneralSkills">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="md-card-title">Technical Skill Set</h4>
+        <div class="table-btns">
+            <a class="btn btn-success btn-circle  btn-add-TechnicalSkills" data-toggle="modal" data-target="#AddTechnicalSkills"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-primary btn-circle  btn-edit-TechnicalSkills" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddTechnicalSkills" disabled="disabled"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-danger btn-circle  btn-delete-TechnicalSkills" title="Delete" disabled="disabled">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </div>
+        <div class="md-card">
+            <div class="uk-overflow-container" style="height:200px;">
+                <table id="TechnicalSkillsTables" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="display:none">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TechnicalSkillsList)
+                        {
+                            <tr id="@item.Id" data-id="@Model.EmployeeId" class="dataTrTechnical">
+                                <td style="color: #1e88e5;">@item.TechnicalSkillsName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4 class="md-card-title-general">General Skill Set</h4>
+        <div class="table-btns">
+            <a class="btn btn-success btn-circle  btn-add-GeneralSkills" data-toggle="modal" data-target="#AddGeneralSkills"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-primary btn-circle  btn-edit-GeneralSkills" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddGeneralSkills" disabled="disabled"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-danger btn-circle  btn-delete-GeneralSkills" title="Delete" disabled="disabled">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </div>
+        <div class="md-card">
+            <div class="uk-overflow-container" style="height:200px;">
+                <table id="GeneralSkillsTables" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="display:none">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.GeneralSkillsList)
+                        {
+                            <tr id="@item.Id" class="dataTr" data-id="@Model.EmployeeId">
+                                <td style="color: #1e88e5">@item.GeneralSkillsName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ViewTaskDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Add Skill Set</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="ViewSkillsDetailsBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="cancelSkillViewDetail">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>

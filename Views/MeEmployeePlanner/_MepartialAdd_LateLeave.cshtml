@@ -1,0 +1,84 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_LateLeaveViewModel
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <input type="hidden" value="@Model.Id" id="HiddenId" />
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+        <label class="control-label" for="StatusList">Date *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" readonly="readonly" value="@Model.LateDate" id="txt_LateDate" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-LateDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Late Date is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">How late *</label>
+    </div>
+    <div class="col-md-1">
+        <div class="input-group spinner">
+            @*<input id="txt_LateHr" type="text" class="form-control spinnerTextBox" placeholder="Hr" value="@Model.LateHr" min="0" max="23">
+            <div class="input-group-btn-vertical">
+                <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>*@
+            <select id="drp-HourseListLateLeave" class="form-control" onchange="ChangeHour()">
+                @foreach (var item in Model.HoursList)
+                {
+                    if (Model.InTimeHr.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+
+        </div>        
+    </div>
+    <div class="col-md-5">
+        <div class="input-group spinner">
+            @*<input id="txt_LateMin" type="text" class="form-control spinnerTextBox" placeholder="Min" value="@Model.LateMin" min="0" max="60">
+            <div class="input-group-btn-vertical">
+                <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>*@
+            <select id="drp-MinutesListSDLateLeave" class="form-control" onchange="ChangeHour()">
+                @foreach (var item in Model.MinutesList)
+                {
+                    if (Model.InTimeMin.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-HowLate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Hour is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Supporting Comments *</label>
+    </div>
+    <div class="col-md-6">
+        <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comment</textarea>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+    </div>
+</div>

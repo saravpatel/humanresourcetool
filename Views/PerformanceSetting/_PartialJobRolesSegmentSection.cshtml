@@ -1,0 +1,170 @@
+﻿@model IList<HRTool.Models.Settings.EditSegmentViewModel>
+@{
+    int i = 1;
+}
+<div class="segments-box">
+    <div class="color-st green"></div>
+    <h4 class="heading_a">Job Role Segments</h4>
+    <div class="performance-grid">
+        <div class="cf nestable-lists">
+            <div class="dd JobRolesSegmentNestable" style="width:100%">
+                <ol id="MainPageJobRoleSegmentQuestionList" class="dd-list" data-uk-nestable="{maxDepth:0}">
+                    @foreach (var item in Model)
+                    {
+                        <li class="dd-item liJobSegment_@i" data-id="@i" id="@i">
+                            <div class="dd-handle dd3-handle" data-id="@i" id="@i"><i class="fa fa-bars"></i></div>
+                            <div class="dd3-content row AddEditJobSegmentRow">
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-6 jobSegmentTitle">@item.Title</div><div class="col-lg-6 jobSegmentTotalQuestion">@item.TotalQueastion Questions</div><div class="col-lg-6 jobSegmentDescription">@item.Description</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="icons">
+                                        <a><i class="material-icons uk-text-success EditMainJobSegmet" data-title="@item.Title" data-description="@item.Description" data-questionjsonstring="@item.QueationType" data-id="@i" data-toggle="modal" data-target="#JobRoleSegmentModel">edit</i></a><a class="removeMainLiJobSegment">
+                                            <i class="material-icons uk-text-danger">delete</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                                i = i + 1;
+                            }
+                        </li>
+                                }
+                </ol>
+            </div>
+        </div>
+        <div data-toggle="modal" data-target="#JobRoleSegmentModel">
+            <a class="btn btn-success" style="width:100%;background: #1abc9c;" id="JobRoleSegmentclass">Add Segments</a>
+        </div>
+    </div>
+</div>
+
+@*Job roles*@
+<div id="JobRoleSegmentModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add job roles Segment</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="JobRolesSegmentAddQuestionModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Question</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Question*</label>
+                                    <div class="col-md-6">
+                                        <input type="hidden" id="hidden_JobSegment_Question_id" value="" />
+                                        <input type="text" class="form-control" id="jobQuestion" placeholder="Question" />
+                                        <span class="field-validation-error" id="label_jobsegment_Question" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Question is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Help Text*</label>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control" id="JobRole_HelpText" placeholder="Question" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorHelpText" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Help Text is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Type *</label>
+                                    <div class="col-md-6">
+                                        <select class="col-md-6 form-control" id="JobRole_Question_Type">
+                                            @foreach (var item in ViewBag.JobRoleFiledList)
+                                            {
+                                                <option value=@item.Key>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorFiledType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Type is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Core Value *</label>
+                                    <div class="col-md-6 dropdown">
+                                        <select id="JobRole_Question_CoreValue" class="col-md-6 form-control">
+                                            @foreach (var item in ViewBag.JobRole_ValueList)
+                                            {
+                                                <option value=@item.Key>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorCoreValue" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Core Value is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btn-submit-AddJobRolesSegmentQuestion">Add</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#JobRole_Question_Type").on("change", function () {
+        $("#lblerrorFiledType").hide();
+    })
+    $("#JobRole_Question_CoreValue").on("change", function () {
+        $("#lblerrorCoreValue").hide();
+    })
+    var updateOutput = function (e) {
+        var list = e.length ? e : $(e.target),
+                output = list.data('output');
+
+        if (window.JSON) {
+            output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+        }
+        else {
+            output.val('JSON browser support required for this demo.');
+        }
+    };
+    $(document).ready(function () {
+        $('.JobRolesSegmentNestable').nestable({
+            maxDepth: 1,
+        });
+        function changeTable() {
+        }
+        updateOutput($('.JobRolesSegmentNestable').data('output', $('.JobRolesSegmentNestable-output')));
+    });
+</script>

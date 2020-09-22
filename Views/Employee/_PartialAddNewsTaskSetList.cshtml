@@ -1,0 +1,100 @@
+﻿@model HRTool.Models.Resources.AddNewTaskListViewModel
+
+<div class="col-md-3 NewtaskListrecord" data-id="@Model.Id" id="NewTask_@Model.Id">
+    <div class="New">
+        <input type="hidden" class="NewTitle" value="@Model.Title">
+        <input type="hidden" class="NewDiscrtion" value="@Model.Description">
+        <input type="hidden" class="Assignto" value="@Model.Assign">
+        <input type="hidden" class="DueDateto Datepiker" value="@Model.DueDate">
+        <input type="hidden" class="Statusto" value="@Model.Status">
+        <input type="hidden" class="AlertBefore" value="@Model.AlertBeforeDays">
+        <input type="hidden" id="Tempvalue" value="@Model.IsTemp" />
+    </div><div class="task-card">
+        <div class="onerow">
+            <span><input type="checkbox" id="NewTaskcheckbox_@Model.Id"></span>
+            <a><span data-toggle="modal" data-target="#AddNewTask" data-id="@Model.Id" id="title_@Model.Id" class="EditNewTask" style="cursor:pointer">@Model.Title</span></a>
+            <p>@Model.Description</p>
+            <div class="Deletetask">
+                <a>
+                    <span data-id="@Model.Id" id="title_@Model.Id" class="DeleteTaskrecord" style="cursor:pointer">Delete Task</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#ShowAddNewTask").click(function () {
+        $("#AddNewTask").show();
+    });
+    $("#closeAddNewtask").click(function () {
+        $("#AddNewTask").hide();
+    });
+
+    $("#tableDivResourceList").find(".EditNewTask").click(function () {
+        
+        var id = $(this).attr("data-id");
+        $("#AddNewTask").show();
+        $.ajax({
+            url: '@Url.Action("EditTaskTemp", "Employee")',
+            data: { Id: id },
+            success: function (result) {
+                $("#page_content").find('#tableDivResourceList').find("#AddTaskbody").html('');
+                $("#page_content").find('#tableDivResourceList').find("#AddTaskbody").append(result);
+                $("#page_content").find(".Datepiker").Zebra_DatePicker({
+                    showButtonPanel: false,
+                    format: 'd-m-Y',
+                });
+                $(".hrtoolLoader").hide();
+                $(".modal-backdrop").hide();
+                if (id > 0) {
+                    $(".toast-info").show();
+                    setTimeout(function () { $(".toast-info").hide(); }, 1500);
+                }
+                else {
+                    $(".toast-success").show();
+                    setTimeout(function () { $(".toast-success").hide(); }, 1500);
+                }
+            }
+        });
+    });
+
+    $("#tableDivResourceList").find(".DeleteTaskrecord").click(function () {
+        
+        var id = $(this).attr("data-id");
+        $.Zebra_Dialog(" are you sure want to Delete this Records!?", {
+            'type': false,
+            'title': 'Delete this Record',
+            'width': 350,
+            'buttons': [
+                {
+                    caption: 'Cancel',
+                    callback: function () { }
+                }, {
+                    caption: 'Ok',
+                    callback: function () {
+
+                        $.ajax({
+                            url: '@Url.Action("DeteteTaskTemp", "Employee")',
+                            data: { Id: id },
+                            success: function (result) {
+
+                                $("#tableDivResourceList").find('#AddResoureceBody').find("#step-5").html('');
+                                $("#tableDivResourceList").find('#AddResoureceBody').find("#step-5").html(result);
+                                if (id > 0) {
+                                    $(".toast-info").show();
+                                    setTimeout(function () { $(".toast-info").hide(); }, 1500);
+                                }
+                                else {
+                                    $(".toast-success").show();
+                                    setTimeout(function () { $(".toast-success").hide(); }, 1500);
+                                }
+                            }
+                        });
+                    }
+                }]
+        });
+
+    });
+</script>

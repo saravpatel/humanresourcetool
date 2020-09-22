@@ -1,0 +1,281 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+
+<style>
+    .btn-help-me {
+        background: #2196f3;
+        color: #fff;
+    }
+</style>
+<div class="row marbot10">
+    <label class="col-md-3">Start Date*</label>
+    <div class="col-md-6">
+        <input type="text" name="StartDate" class="form-control Datepiker" id="StartDate" value="@Model.StartDate" placeholder="Start Date">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidStartDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Resource Type*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpResourceType" onchange="checkForData(this);">
+            @foreach (var Resource in Model.ResourceTypeList)
+            {
+                if (Model.LoginUserID != Convert.ToInt32(Resource.Value))
+                {
+                    <option value="@Resource.Value" @(Resource.Selected ? "Selected" : "")>@Resource.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">The Resource Type is required.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Probation End Date*</label>
+    <div class="col-md-6">
+        <input type="text" name="ProbationEndDate" class="form-control Datepiker" id="ProbationEndDate" value="" placeholder="Probation End Date" >
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        <span class="field-validation-error" id="lbl-error-ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Valid Probation End Date.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Next Probation Review Date</label>
+    <div class="col-md-6">
+        <input type="text" name="NextProbationReviewDate" class="form-control Datepiker" id="NextProbationReviewDate" value="" placeholder="Next Probation Review Date">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidNextProbationReviewDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Notice Period*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpNoticePeriod">
+            @foreach (var Notice in Model.NoticePeriodList)
+            {
+                <option value="@Notice.Value">@Notice.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidNoticePeriod" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Fixed Term End Date</label>
+    <div class="col-md-6">
+        <input type="text" name="FixedTermEndDate" class="form-control Datepiker" id="FixedTermEndDate" value="" placeholder="Fixed Term End Date">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-ValidFDEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Valid End Date.</span>
+        <span class="field-validation-error" id="ValidFixedTermEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Method of Recruitment Setup</label>
+    <div class="col-md-6">
+        <textarea name="MethodofRecruitmentSetup" class="form-control" id="MethodofRecruitmentSetup" value="" placeholder="Method of Recruitment Setup"></textarea>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        @*<span class="field-validation-error" id="ValidFixedTermEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>*@
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">Recruitment Cost</label>
+    <div class="col-md-3">
+        <input type="number" name="RecruitmentCost" min="0" oninput="if(value.length>8)value=value.slice(0,8)" class="form-control" id="RecruitmentCost" placeholder="Recruitment Cost">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control" id="drpCurruncy">
+            @foreach (var curryency in Model.CurruencyCodeList)
+            {
+                if (Model.curruencyCode.ToString() == curryency.Value)
+                {
+                    <option value="@curryency.Value" selected="selected">@curryency.Text</option>
+                }
+                else
+                {
+                        <option value="@curryency.Value">@curryency.Text</option>
+                }
+            }           
+        </select>
+    </div>
+</div>
+@*<div class="row marbot10">
+    <label class="col-md-3">Work Pattern</label>
+    <div class="col-md-6 dropdown">
+        @*<input type="hidden" id="selectID" />
+            <input type="text" class="awesomplete form-control" id="empNameText" size="70" placeholder="Employee Name" />*@
+        @*<select class="form-control" id="drpworkPattern">
+            @foreach (var data in Model.WorkPatternList)
+            {
+                <option value="@data.Value">@data.Text</option>
+            }
+        </select>*@
+    @*</div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidworkPattern" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+  
+</div>*@
+<div class="row marbot10">
+    <label class="col-md-3">Holidays</label>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">This year</label>
+                <input type="number" name="Thisyear" min="0" class="form-control" id="Thisyear" value="" placeholder="This year" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label">Next year</label>
+                <input type="number" name="Nextyear" class="form-control" min="0" id="Nextyear" value="" placeholder="Next year" readonly>
+            </div>
+        </div>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3"></label>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-info btn-help-me" data-toggle="modal" data-target="#Helpmecalculate" id="ShowHelpmecalculate">Help me calculate</button>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div id="Helpmecalculate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="closecalculate">&times;</button>
+                            <h4 class="modal-title">Holiday Entitlement Calculator</h4>
+                        </div>
+                        <div class="modal-body" align="right" id="AddHelpmecalculateBody">
+                            <div class="row marbot10">
+                                <label class="col-md-3">Full Time Entitlement*</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="FullTimeEntitlement" class="form-control" id="FullTimeEntitlement" value="">
+                                    <span class="form-control-bar"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="field-validation-error" id="ValidFullTimeEntitlement" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                </div>
+                            </div>
+                            <div class="row marbot10">
+                                <label class="col-md-3">Days Per Week*</label>
+                                <div class="col-md-6">
+                                    <input type="number" name="DaysPerWeek" class="form-control" id="DaysPerWeek" value="5" readonly="readonly">
+                                    <span class="form-control-bar"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                </div>
+                            </div>
+
+                            <div class="row marbot10">
+                                <label class="col-md-3">Entitlement Includes Public Holidays?*</label>
+                                <div class="col-md-6">
+                                    <input type="checkbox" name="EntitlementIncludesPublicHoliday" class="form-control" id="EntitlementIncludesPublicHoliday" checked>
+                                    <span class="form-control-bar"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="field-validation-error" id="EntitlementIncludes" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                </div>
+                            </div>
+                            <div class="row marbot10">
+                                <label class="col-md-3">This Year- 16 Days</label>
+                                <div class="col-md-8">
+                                    <button type="button" name="EntitlementIncludesPublicHoliday" class="md-btn md-btn-primary" id="ThisYear-16Days" value=""><span class="fa fa-question-circle"></span></button>
+                                    <div class="holidayinfobox" id="btnThisYear" style="display:none">
+                                        <h3>How the entitlement is calculated</h3>
+                                        <p>
+                                            Entitlement = 22/5x 5x37.29/52=15.78
+                                        </p>
+                                        <p>
+                                            Where:
+                                            1.122/5 = No of weeks holiday a full time employee gets
+                                            2.25 = No of days this employee works
+                                            3.337.29/52 = No of weeks remaining in the year / 52
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row marbot10">
+                                <label class="col-md-3">Next Year- 22 Days</label>
+                                <div class="col-md-8">
+                                    <button type="button" name="NextYear-22Days" class="md-btn md-btn-primary" id="NextYear-22Days" value=""><span class="fa fa-question-circle"></span></button>
+                                    <div class="holidayinfobox" id="btnNextYear" style="display:none">
+                                        <h3>How the entitlement is calculated</h3>
+                                        <p>
+                                            Entitlement = 22/5x 5=22
+                                        </p>
+                                        <p>
+                                            Where:
+                                            1.122/5 = No of weeks holiday a full time employee gets
+                                            2.25 = No of days this employee works
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btn-submit-Helpmecalculate">Done</button>
+                            <button type="button" class="btn btn-warning" id="closeHelpmecalculate">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+   
+    $("#ThisYear-16Days").click(function () {
+        $("#btnThisYear").toggle();
+    });
+    $("#NextYear-22Days").click(function () {
+        $("#btnNextYear").toggle();
+    });
+
+    $("#closeHelpmecalculate").click(function () {
+        $("#Helpmecalculate").hide();
+    });
+    $("#closecalculate").click(function () {
+        $("#Helpmecalculate").hide();
+    });
+    $("#ShowHelpmecalculate").click(function () {
+        $("#Helpmecalculate").show();
+    });
+    $("#RecruitmentCost").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

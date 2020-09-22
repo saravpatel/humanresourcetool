@@ -1,0 +1,34 @@
+﻿@model HRTool.Models.Settings.WorkPatternViewModel
+<div class="row">
+    <div class="col-md-5">
+        <input type="hidden" id="WorkPattenId" value="@Model.Id" />
+        <input type="text" placeholder="Work patten Name" value="@Model.Name" id="txt_Name" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-WorkpattenName" style="display:none;" data-valmsg-for="WorkpattenName" data-valmsg-replace="true">Work pattern name is required.</span>
+    </div>
+    <div class="col-md-4">
+        @if (Model.IsRotating)
+        {
+            <input type="checkbox" name="AllowRotating" id="AllowRotating" checked="checked">
+        }
+        else
+        {
+            <input type="checkbox" name="AllowRotating" id="AllowRotating">
+        }
+
+        <label for="AllowRotating" class="inline-label"  data-toggle="tooltip" data-placement="right" title="Allow Mobile Use">Allow Rotating</label>
+    </div>
+</div>
+<br />
+
+<div id="workPatternDiv">
+    @if (Model.IsRotating)
+    {
+        @Html.Partial("_partialTrueIsRotating", Model.WorkPatternList);
+    }
+    else
+    {
+        @Html.Partial("_partialFalseIsRotating", Model);
+    }
+</div>

@@ -1,0 +1,95 @@
+﻿@model HRTool.Models.Resources.CoworkerInviteList
+
+@{
+    ViewBag.Title = "_PartialInviteCoworker";
+}
+
+<div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label>Select Employee</label>
+        </div>
+        <div class="col-md-6">
+            <input type="hidden" id="EmployeeList" />
+            <input type="text" class="awesomplete form-control" id="empReportTo" size="70" placeholder="CoWorker Name" />
+            @*<select id="EmployeeList">
+                @foreach(var item in Model.EmployeeList)
+                 {
+                    <option value="@item.Value">@item.Text</option>
+                 }
+            </select>*@
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-Emp" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Employee is required.</span>   
+        </div>
+        </div>
+
+    <div class="row marbot10">        
+        <div class="col-md-3" >
+             <input type="checkbox" id="InvitationMail" onchange="valueChanged()"/> Invitation by Email        
+        </div>
+        <div style="display:none" id="EmailShowHide">
+                <div class="col-md-3">
+                <input type="text" id="EmpNameAndSurname" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                <input type="text" id="EmpEmail" class="form-control" />
+                </div>                
+                <div class="col-md-6">
+                    <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Email is Invalid.</span>
+                </div>
+            </div>
+    </div>    
+</div>
+<script>
+    var getEmployeeList = {
+        GetEmployeeSegmentList: '@Url.Action("InviteEmployeeList", "EmployeePerformance")',
+    }
+</script>
+<script>      
+    EmployeeListData();   
+    function EmployeeListData() {
+        var listRepTo = [];
+        $.ajax({
+            url: getEmployeeList.GetEmployeeSegmentList,
+            data: {},
+            success: function (data) {
+                $.each(data.EmployeeList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                //Report To
+                var inpRpTo = document.getElementById("empReportTo");
+                var awsRpTo = new Awesomplete(inpRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsRpTo.list = listRepTo;
+                $('#empReportTo').change(function () {
+                    $("#lbl-error-Emp").hide();
+                    value = $('#empReportTo').val();
+                    for (var i = 0; i < data.EmployeeList.length; i++) {
+                        if (value == data.EmployeeList[i].Text) {
+                            var eid = data.EmployeeList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#EmployeeList").val(eid);
+                });
+            }
+        });
+    }
+    function valueChanged() {
+        if ($('#InvitationMail').is(":checked")) {
+            $("#EmailShowHide").show();
+        }
+        else {
+            $("#EmailShowHide").hide();
+
+        }
+    }
+
+</script>

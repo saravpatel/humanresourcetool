@@ -1,0 +1,164 @@
+﻿@model HRTool.Models.Admin.ApplicantCompetencyPDfViewModel
+@{
+    ViewBag.Title = "Export";
+    Layout = null;
+}
+
+@*<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>*@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="~/Content/bootstrap.cerulean.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<style>
+    .btn-grey{
+    background-color:#D8D8D8;
+    color:#FFF;
+    }
+.rating-block{
+ background-color:#FAFAFA;
+ border:1px solid #EFEFEF;
+ padding:15px 15px 20px 15px;
+ border-radius:3px;
+}
+</style>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" width="80%" border="0" style="margin:0 auto;width:820px;font-family:'Roboto',sans-serif;">
+                <tr>
+                    <td align="left" style="width:40%; float:left; text-align:left;font-size:20px;font-family:'Roboto',sans-serif; color:#000; font-weight:bold;">Name : @Model.FirstName @Model.LastName</td>
+                    <td style="width:60%; float:right; text-align:right; font-size: 20px; font-family: 'Roboto',sans-serif; color: #000; font-weight: bold;">Job Applied: @Model.VacancyName</td>
+                </tr>
+                <tr>
+                    <td height="20px"></td>
+                </tr>
+                <tr>
+                    <td align="center" style="text-align:center;font-size:30px;font-family:'Roboto',sans-serif; color:#55a1e2; font-weight:bold;width:0 auto;">Competencies</td>
+                </tr>
+                <tr>
+                    <td align="center" style="text-align:center;font-size:22px;font-family:'Roboto',sans-serif;"></td>
+                </tr>
+                <tr><td height="40"></td></tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                            @foreach (var item in Model.CompatencyJSV)
+                            {
+                                <tr>
+                                    <td style="width:28%; margin-bottom:10px; float:left; font-size:14px;font-family:'Roboto',sans-serif; font-size:16px;">
+                                        @item.CompetencyName :
+                                    </td>
+                                    <td style="width:70%; margin-bottom:10px; float:left; font-size:14px;font-family:'Roboto',sans-serif;">
+                                        @if (item.Score == Convert.ToString("0"))
+                                        {
+                                            <input type="text" value="@item.Score" />
+                                            <img src="~/img/slider/slider0.png" valign="top" width="600" style="width:600px;vertical-align:top;">
+                                        }
+                                        @if (item.Score == Convert.ToString("1"))
+                                        {
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                             <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                             </button>
+                                        }
+                                        @if (item.Score == Convert.ToString("2"))
+                                        {
+                                            <input type="hidden" value="@item.Score" id="score2"/>
+                                            <div class="rating-block">
+                                                @*<i class="fa fa-star" aria-hidden="true"></i>*@
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>  
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>                                               
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        @if (item.Score == Convert.ToString("3"))
+                                        {
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>    
+                                        }
+                                        @if (item.Score == Convert.ToString("4"))
+                                        {
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                        }
+                                        @if (item.Score == Convert.ToString("5"))
+                                        {
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Avrage : @Model.totalAvg</td>                    
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

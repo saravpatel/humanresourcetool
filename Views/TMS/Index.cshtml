@@ -1,0 +1,84 @@
+﻿@model HRTool.Models.commonViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page_content_inner" class="page_content_custom tmspages">
+
+    <ul id="TMSTabPanel" class="nav nav-tabs nav-justified">
+        <li class="PerformanceIndex active" >
+            <a class="btn-click-TMSIndex">
+                <span class="icn icn-dash"></span>
+            </a>
+        </li>
+        <li class="OverallScoreSection">
+            <a class="btn-click-Vacancy">
+                <span class="icn icn-vacancy"></span>
+            </a>
+        </li>
+        <li class="CoreStrengthsSection">
+            <a class="btn-click-Applicant">
+                <span class="icn icn-applicant"></span>
+            </a>
+        </li>
+        <li class="GraphSection">
+            <a class="btn-click-Pool">
+                <span class="icn icn-pool"></span>
+            </a>
+        </li>
+    </ul>
+
+    <div id="contantBody">
+        @Html.Action("TMSIndex", "TMS")
+    </div>
+</div>
+<script type="text/javascript">
+    var constantTMS = {
+        Index: '@Url.Action("TMSIndex", "TMS")',
+        Vacancy: '@Url.Action("VacancyList","TMS")',
+        Applicant: '@Url.Action("AppLicantList","TMS")',
+        Pool: '@Url.Action("PoolList","TMS")',
+        AddVacancy: '@Url.Action("AddEditVacancy","TMS")',
+        SaveVacancy: '@Url.Action("SaveVacancy","TMS")',
+        DeleteVacancy:'@Url.Action("DeleteVacancy","TMS")',
+        bindDiv: '@Url.Action("bindDivisionList", "TMS")',
+        bindpool: '@Url.Action("bindPoolList", "TMS")',
+        bindFuncation: '@Url.Action("bindFuncationList", "TMS")',
+        ImageData: '@Url.Action("ImageData", "TMS")',
+        SelectVacancy: '@Url.Action("VacancyDetails","TMS")',
+        AddEditApplicant: '@Url.Action("AddEditApplicant","TMS")',
+        EditApplicant:'@Url.Action("EditApplicant", "TMS")',
+        FileUpload: '@Url.Action("FileUploadData", "TMS")',
+        userId: '@Model.UserId',
+        userFullName: '@Model.Name',
+        SaveApplicant: '@Url.Action("SaveApplicant", "TMS")',
+        EmailCheck: '@Url.Action("Emailcheck", "TMS")',
+        DeleteApplicant: '@Url.Action("DeleteApplicant", "TMS")',
+        StepMove: '@Url.Action("MoveToStep","TMS")',
+        RejectStepMove: '@Url.Action("MoveAllApplicantToReject","TMS")',
+        TalentStepMove: '@Url.Action("MoveAllApplicantToTelent","TMS")',
+        RejectionReasonList: '@Url.Action("getRejectionReasonList", "TMS")',
+        EditResource: '@Url.Action("AddApplicantAsResource", "Employee")',
+        bindDiv: '@Url.Action("bindDivisionList", "Employee")',
+        bindpool: '@Url.Action("bindPoolList", "Employee")',
+        bindFuncation: '@Url.Action("bindFuncationList", "Employee")',
+        BindStateUrl: '@Url.Action("BindStateDropdown", "Employee")',
+        BindCityIDUrl: '@Url.Action("BindCityDropdown", "Employee")',
+        BindAirPortIDUrl: '@Url.Action("BindAirportDropdown", "Employee")',
+        SaveResoure: '@Url.Action("AddResoureRecord", "Employee")',
+        AddApplicantRejectionReason: '@Url.Action("AddAppliacantRejectReason", "TMS")',
+        AddRejectReason: '@Url.Action("AddRejectReason","TMS")',
+        QuickFilterByTalentPool: '@Url.Action("QuickFilterByTalentPool","TMS")',
+        getfunction: '@Url.Action("getFunction", "TMS")',
+        getPool: '@Url.Action("getPool", "TMS")',
+        filDiv: '@Url.Action("getDivision", "TMS")',
+        constantFilterPi: '@Url.Action("GetPiechartJSON", "TMS")',
+        validSSo: '@Url.Action("validateSSo", "Employee")',
+        copyrecordUrl: '@Url.Action("CopyRecord", "Employee")',
+        DeleteAppliRecord: '@Url.Action("DeleteApplicantRecord", "TMS")',
+        HelpCalculate: '@Url.Action("HelpMeCalculate","Employee")',
+
+    };
+</script>
+<script src="~/JS/Admin/AdminTMS/AdminTMSJS.js"></script>

@@ -1,0 +1,123 @@
+﻿@model List<HRTool.Models.Me.TaskList>
+@*<style type="text/css">
+    #NewTaskList {
+        min-height: 250px;
+    }
+</style>*@
+<div id="NewTaskList">
+    @*<input type="hidden" id="taskid" value="@Model.Id" />*@
+    @foreach (var item in Model)
+    {
+            <div class="New">
+                <input type="hidden" class="NewTitle" value="@item.Title">
+                <input type="hidden" class="NewDiscrtion" value="@item.Description">
+                <input type="hidden" class="DueDateto Datepiker" value="@item.DueDate">
+                <input type="hidden" class="Statusto" value="@item.status">                             
+            </div>
+            <div class="task-card">
+                <div class="onerow">
+                    <span><input type="checkbox" id="NewTaskcheckbox_@item.TaskId"></span>
+                    <a><span data-toggle="modal" data-target="#AddNewTask" data-id="@item.TaskId" id="title_@item.TaskId" class="EditNewTask" onclick="editTaskDetail(@item.TaskId)" style="cursor:pointer">@item.Title</span></a>
+                    <p>@item.Description</p>
+                    <div class="Deletetask">
+                        @if (@item.Title == "Visa")
+                        {
+                        }
+                        else if (@item.Title == "Certificate")
+                        {
+                        }
+                        else
+                        {
+                            <a><span id="taskId" class="DeleteTaskrecord" style="cursor:pointer" value="@item.TaskId" onclick="deleteTaskRecord(@item.TaskId)">Delete Task</span></a>
+                        }
+                    </div>
+                </div>
+            </div>       
+    }
+</div>
+
+<div class="addNewTask-btn">
+    <button type="button" class="btn btn-success" id="ShowAddNewTask" data-toggle="modal" data-target="#AddNewTask">Add New Task</button>
+</div>
+<div id="AddNewTask" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Task</h4>
+                        </div>
+                        <div class="modal-body" id="AddTaskbody">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btn-submit-AddNewTask">Add</button>
+                            <button type="button" class="btn btn-warning" id="closeAddNewtask">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function editTaskDetail(count){
+        var id = count;
+        $("#AddNewTask").show();
+        $.ajax({
+            url: '@Url.Action("EditTask", "MeEmployeeOverView")',
+            data: { Id: id },
+            success: function (result) {
+                $("#page_content").find('#MeOverviewLeaverTask').find("#AddTaskbody").html('');
+                $("#page_content").find('#MeOverviewLeaverTask').find("#AddTaskbody").append(result);
+                $("#page_content").find(".Datepiker").Zebra_DatePicker({
+                    showButtonPanel: false,
+                    format: 'd-m-Y',
+                });
+                $(".hrtoolLoader").hide();
+                $(".modal-backdrop").hide();               
+            }
+        });
+    }
+
+function deleteTaskRecord(count) {
+        var id = count;
+        $.Zebra_Dialog(" are you sure want to Delete this Records!?", {
+            'type': false,
+            'title': 'Delete this Record',
+            'width': 350,
+            'buttons': [
+                {
+                    caption: 'Cancel',
+                    callback: function () { }
+                }, {
+                    caption: 'Ok',
+                    callback: function () {
+
+                        $.ajax({
+                            url: '@Url.Action("DeteteTask", "MeEmployeeOverView")',
+                            data: { Id: id },
+                            success: function (result) {
+
+                                $("#page_content").find("#MeOverviewLeaverTask").find("#AddMeOverViewBody").html('');
+                                $("#page_content").find("#MeOverviewLeaverTask").find("#AddMeOverViewBody").html(result);
+
+                                if (id > 0) {
+                                    $(".toast-info").show();
+                                    setTimeout(function () { $(".toast-info").hide(); }, 1500);
+                                }
+                                else {
+                                    $(".toast-success").show();
+                                    setTimeout(function () { $(".toast-success").hide(); }, 1500);
+                                }
+                            }
+                        });
+                    }
+                }]
+        });
+    }
+
+</script>
+
+

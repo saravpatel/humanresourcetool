@@ -1,0 +1,266 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlanner_Uplift_DetailViewModel
+
+<div class="col-md-12 border-div-top Uplift_Detail_Div">
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Time in *</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                @*<input id="txt_InTimeHr" type="text" class="form-control spinnerTextBox" placeholder="Hr" value="@Model.InTimeHr" min="0" max="23">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-HourseListSDTimesheet" class="form-control">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.InTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                @*<input id="txt_InTimeMin" type="text" class="form-control spinnerTextBox" placeholder="Min" value="@Model.InTimeMin" min="0" max="60">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-MinutesListSDTimesheet" class="form-control">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.InTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTime" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">In time is required.</span>
+            <span style="float:right;"><i class="fa fa-trash-o Uplift_delete_icon"></i></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">End Time *</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                @*<input id="txt_EndTimeHr" type="text" class="form-control spinnerTextBox" placeholder="Hr" value="@Model.EndTimeHr" min="0" max="23">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-HourseListEDTimesheet" class="form-control">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.EndTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                @*<input id="txt_EndTimeMin" type="text" class="form-control spinnerTextBox" placeholder="Min" value="@Model.EndTimeMin" min="0" max="60">
+                <div class="input-group-btn-vertical">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-up"></i></button>
+                    <button class="btn btn-primary" type="button"><i class="fa fa-caret-down"></i></button>
+                </div>*@
+                <select id="drp-MinutesListEDTimesheet" class="form-control">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.EndTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-EndTime" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End time is required.</span>
+            <span class="field-validation-error" id="lbl-error-validtimeSD" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please Select Valid Time.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Change in Worker Rate %</label>
+        <div class="col-md-2">
+            <input type="number" min="0" max="100" id="txt_workerRatePer" class="form-control spinnerTextBox" value="@Model.WorkerRatePer" onchange="handleChangeInput(this)"/>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-workerRatePer" data-valmsg-for="workerRatePer" data-valmsg-replace="true" style="display:none"></span>
+            <span class="field-validation-error" id="lbl-error-workerRatePercjk" data-valmsg-for="workerRatePer" data-valmsg-replace="true" style="display:none">Please Enter Valid Worker Rate %.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Change in Worker Rate</label>
+        <div class="col-md-2">
+            <input type="number" min="0" max="100" id="txt_workerRate" class="form-control spinnerTextBox" value="@Model.WorkerRate" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-workerRate" data-valmsg-for="workerRate" data-valmsg-replace="true" style="display:none"></span>            
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Change in Customer Rate %</label>
+        <div class="col-md-2">
+            <input type="number" min="0" max="100" id="txt_CustomerRatePer" class="form-control spinnerTextBox" value="@Model.CustomerRatePer" onchange="handleChangeInputCust(this)"/>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-CustomerRatePer" data-valmsg-for="CustomerRatePer" data-valmsg-replace="true" style="display:none"></span>
+            <span class="field-validation-error" id="lbl-error-CustomerRatePercjk" data-valmsg-for="workerRatePer" data-valmsg-replace="true" style="display:none">Please Enter Valid Worker Rate %.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Change in Customer Rate</label>
+        <div class="col-md-2"> 
+            <input type="number" class="form-control spinnerTextBox" min="0" max="100" id="txt_CustomerRate" value="@Model.CustomerRate" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-CustomerRate" data-valmsg-for="CustomerRate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<script>
+    function handleChangeInput(input) {
+        if (input.value < 0) input.value = 0;
+        if (input.value > 100) input.value = 100;
+        if (input.value > 100)
+        {
+            $("#lbl-error-workerRatePercjk").show();
+        }
+        else {
+            $("#lbl-error-workerRatePercjk").hide();
+        }        
+    }
+    function handleChangeInputCust(input)
+    {
+        if (input.value < 0) input.value = 0;
+        if (input.value > 100) input.value = 100;
+        if (input.value > 100) {
+            $("#lbl-error-CustomerRatePercjk").show();
+        }
+        else {
+            $("#lbl-error-CustomerRatePercjk").hide();
+        }
+    }
+    $("#drp-HourseListSDTimesheet").on("change", function ()
+    {
+        $("#lbl-error-InTime").hide();
+        var St = $(this).val();
+        var Sm = $("#drp-MinutesListSDTimesheet").val();
+        var Et = $("#drp-HourseListEDTimesheet").val();
+        var Em =  $("#drp-MinutesListEDTimesheet").val();
+        var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+        if (Diff <= 0) {
+            $("#drp-HourseListEDTimesheet").val(0);
+            $("#drp-MinutesListEDTimesheet").val(0);
+            $("#lbl-error-validtimeSD").show();
+        }
+        else {
+            $("#lbl-error-validtimeSD").hide();
+        }
+
+    });
+    $("#drp-MinutesListSDTimesheet").on("change", function () {
+        $("#lbl-error-InTime").hide();
+        var St = $("#drp-HourseListSDTimesheet").val();
+        var Sm = $("#drp-MinutesListSDTimesheet").val();
+        var Et = $("#drp-HourseListEDTimesheet").val();
+        var Em = $(this).val();
+        var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+        if (Diff <= 0) {
+            $("#drp-HourseListEDTimesheet").val(0);
+            $("#drp-MinutesListEDTimesheet").val(0);
+            $("#lbl-error-validtimeSD").show();
+        }
+        else {
+            $("#lbl-error-validtimeSD").hide();
+        }
+    });
+
+    $("#drp-HourseListEDTimesheet").on("change", function () {
+        $("#lbl-error-EndTime").hide();
+        var St = $("#drp-HourseListSDTimesheet").val();
+        var Sm = $("#drp-MinutesListSDTimesheet").val();
+        var Et = $(this).val();
+        var Em = $("#drp-MinutesListEDTimesheet").val();
+        var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+        if (Diff <= 0) {
+            $("#drp-HourseListEDTimesheet").val(0);
+            $("#drp-MinutesListEDTimesheet").val(0);
+            $("#lbl-error-validtimeSD").show();
+        }
+        else {
+            $("#lbl-error-validtimeSD").hide();
+        }
+
+    });
+    $("#drp-MinutesListEDTimesheet").on("change", function () {
+        $("#lbl-error-EndTime").hide();
+        var St = $("#drp-HourseListSDTimesheet").val();
+        var Sm = $("#drp-MinutesListSDTimesheet").val();
+        var Et = $("#drp-HourseListEDTimesheet").val();
+        var Em = $(this).val();
+        var Diff = ((new Date("1991-1-1 " + Et + "" + ":" + "" + Em + "") - new Date("1991-1-1 " + St + "" + ":" + "" + Sm + "")) / 1000 / 60 / 60).toFixed(2);
+        if (Diff <= 0) {
+            $("#drp-HourseListEDTimesheet").val(0);
+            $("#drp-MinutesListEDTimesheet").val(0);
+            $("#lbl-error-validtimeSD").show();
+        }
+        else {
+            $("#lbl-error-validtimeSD").hide();
+        }
+    });
+    $("#txt_workerRatePer").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_workerRate").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_CustomerRatePer").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_CustomerRate").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

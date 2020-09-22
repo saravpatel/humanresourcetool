@@ -1,0 +1,75 @@
+﻿@model HRTool.Models.Resources.PreviewEmployeeEndorseData
+<input type="hidden" value="@Model.comment" id="EditEndrosemenComments" />
+<div class="col-md-4">
+    <h3>Employee</h3>
+    <div class="imgprofile" style="border: 5px solid #f3f3f3;outline: 5px solid #cecece;        @*height: 216px;width: 255px;*@">
+        @if (!string.IsNullOrEmpty(Model.EmpImage))
+        {
+            <img src="~/Upload/Resources/@Model.EmpImage" class="img-responsive"    id="imgPicture" class="img-responsive center-block"/>
+        }
+        else
+        {
+            <img id="imgPicture"    class="img-responsive center-block" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+        }
+       
+    </div>
+
+    <h3 id="hName" class="ng-binding">@Model.EmpName</h3>
+</div>
+<div class="col-md-8">
+    <h3>Lebal</h3>
+    <div class="col-md-9">
+        <div id="froala-editor"></div>
+        <input type="hidden" id="EditCommnent" value="@Model.comment @Model.EmpGenrelSkill @Model.EmpTechnicalSkill" />
+    </div>
+    @*<textarea style="height: 221px;" class="form-control">@Model.comment @Model.EmpGenrelSkill @Model.EmpTechnicalSkill
+    </textarea>*@
+</div>
+<div class="col-md-12">
+    <div>
+        <h3>Endorsement Recipients</h3>
+        <div class="uk-overflow-container">
+            <div class="table-responsive ">
+                <table id="ResoureListtable" class="table-bordered display table style2 pull-right" cellspacing="0">
+
+                    <tbody class="employee_list_fix">
+                        @foreach (var item in Model.recepientList)
+                        {
+                            <tr id="@item.RepId" class="dataTr">
+                                <td width="25%">
+                                    @if (!string.IsNullOrEmpty(item.RepImage))
+                                    {
+                                        <img src="~/Upload/Resources/@item.RepImage" width="20px" height="20px" id="imgPicture" class="mCS_img_loaded" />
+                                    }
+                                    else
+                                    {
+                                        <img id="imgPicture" class="mCS_img_loaded" width="20px" height="20px" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+                                    }
+                                    <span class="name-limit">@item.RepName</span>
+                                </td>
+                                <td>
+                                    @item.RepJobTitle
+                                </td>
+                                <td>
+                                    @item.RepBusiness
+                                </td>
+                                <td>
+                                    @item.RepDivision
+                                </td>
+                                <td>
+                                    @item.RepPool
+                                </td>
+                                <td>
+                                    @item.RepFunction
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

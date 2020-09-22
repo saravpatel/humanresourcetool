@@ -1,0 +1,244 @@
+﻿
+@model List<HRTool.Models.Approval.SickLeaveapprove>
+<div id="9" class="tab-pane">
+    <div id="page_content_inner4">
+        <h4 class="heading_a uk-margin-bottom">
+            <div class="icon"></div>
+            <div class="titletext">
+                <div>
+                    Sick Leave Request for @TempData["SickEmpName"]
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </h4>
+       
+                <div class="row">
+                    <div class="table-btns table-btn-right-space">
+                        @*<a class="btn btn-success btn-circle  btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-primary btn-circle  btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-danger btn-circle  btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                        <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                        <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                        <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                   
+                    <ul class="list-groun list-inline">
+                        <li><input type="text" class="form-control " id="sickLeaveWorkerid" style="display:none" value="@TempData["SickEmpId"]"></li>
+                        <li style="width:10%"><input type="text" class="form-control " placeholder="Worker" id="OtherLeaveWorkerName" value="@TempData["SickEmpName"]" readonly></li>
+                        <li style="width:10%"><input type="text" class="form-control" id="totalSickIntheYear" readonly value="@TempData["TotalSick"]" /></li>
+                        <li style="width:10%"><input type="text" class="form-control" id="branforPoint" readonly value="@TempData["Brandforspoint"]" /></li>
+                        <li style="width:10%"><input type="text" class="form-control" id="branforPointAction" readonly /></li>
+                        <li style="width:10%"><input type="text" class="form-control " value="0" placeholder="Days" id="SickLeaveApprove" readonly> </li>
+                        <li style="width:10%"><button name="button" value="Approve" id="SickLeaveApprovebtn" type="button" class=" btn buttonApprv">Approve</button> </li>
+                        <li style="width:10%"><button name="button" value="Reject" id="sickLeaveRejectbtn" type="button" onclick="updateSickLeaveRejrct();" class="btn buttonRejct">Reject</button> </li>
+                        </ul></div>
+                    <div class="uk-overflow-container col-md-12">
+                       
+                        <div class="table-responsive">
+                            <div id="tableDiv">
+
+                                <div class=" table-responsive">
+                                    <table id="DocumentModalTable12" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                                        <thead>
+                                            <tr class="tblHeading">
+                                                <th style="display:none">ID</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Duration</th>
+                                                <th>Self Certification Required</th>
+                                                <th>Interview Required</th>
+                                                <th>Type</th>
+                                                <th>Doctor Consulted</th>
+                                                <th>Issue at Work</th>
+                                                <th>Supporting Document</th>
+                                                <th>Status</th>
+                                                <th>Approve</th>
+                                                <th>Reject</th>
+                                            </tr>
+                                            <tr>
+                                                <th  style="display:none"></th>
+                                                <th ><input type="text" class="form-control SearchStartDate" placeholder="StartDate"></th>
+                                                <th ><input type="text" class="form-control SearchEndDate" placeholder="EndDate"></th>
+                                                <th ><input type="text" class="form-control SearchDuration" placeholder="Duration"></th>
+                                                <th ><input type="text" class="form-control SearchSelfCertiRequired" placeholder="Self Certification Required"></th>
+                                                <th ><input type="text" class="form-control SearchInterviewRequired" placeholder="Interview Required"></th>
+                                                <th ><input type="text" class="form-control SearchType" placeholder="Type"></th>
+                                                <th ><input type="text" class="form-control SearchDoctConsulted" placeholder="Doctor Consulted"></th>
+                                                <th ><input type="text" class="form-control SearchIssueAtWork" placeholder="Issue At Work"></th>
+                                                <th ></th>
+                                                <th ><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                <th ></th>
+                                                <th ></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Count() > 0)
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        @*<td><input type="hidden" value="@item.EmployeeId" /></td>*@
+                                                        <td style="Display:None"> @item.Id </td>
+                                                        <td>@item.StartDate</td>
+                                                        <td>@item.EndDate</td>
+                                                        <td>@item.Duration</td>
+                                                        <td>@item.SelfCertificationRequired</td>
+                                                        <td>@item.InterviewRequired</td>
+                                                        <td>@item.Type</td>
+                                                        <td>@item.DoctorConsulted</td>
+                                                        <td>@item.IssueAtWork</td>
+                                                        @if (String.IsNullOrEmpty(item.FileName))
+                                                        {
+                                                            <td>
+                                                                No Document
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>
+                                                                <input type="hidden" value="@item.FileName" />
+                                                                <button name="button" class="btn downloadbtn btn-xs" value="Approve" type="button">View Document</button>
+                                                            </td>
+                                                        }
+
+                                                        <td> Pending </td>
+                                                        <td><input type="checkbox" name="Approve" Class="othApprovechk" onclick="calSickLeaveToBeApproved();"> Check</td>
+                                                        <td><input type="checkbox" name="Reject" Class="othRejectchk" onclick="calSickLeaveToBeApproved();"> Check</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+      
+</div>
+<script>
+    var constantApproval = {
+        UpdateSickLeaveApproval: '@Url.Action("UpdateSickLeaveApproval", "Approve")',
+        UpdateSickLeaveReject: '@Url.Action("UpdateSickLeaveReject", "Approve")',
+        SickLeaveApprove: '@Url.Action("SickLeaveApprove", "Approve")'
+    }
+    $('#DocumentModalTable12').on('click', '.downloadbtn', function () {//replace table selector with an id selector, if you are targetting a specific table
+
+        var Text = 'SickLeave';
+        var filename = $(this).parent().find("input[type='hidden']").val()
+        //alert($(this).parent().find("input[type='hidden']").val());
+        $.ajax(
+            {
+                url: '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text,
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                data: {
+                    FileName: filename
+                },
+                type: "GET",
+                success: function () {
+                    window.location = '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text;
+                }
+            });
+    });
+    //$('#sickLeaveReject').on("click", function () {
+    //    var ids = $("#DocumentModalTable12 tr:has(input:checked)").map(function () {
+    //        var $tr = $(this);
+    //        var id = $tr.find("td:first").text();
+    //        return id;
+    //    }).toArray();
+    //    var hidden_field = $("#sickLeaveWorkerid").val();
+    //    var Id = ids.join(", ");
+    //    $.post(constantApproval.UpdateOtherLeaveReject, { "ID": Id, "EmpId": hidden_field },
+    //            function (json) {                
+    //                $('#sickLeaveApproval').html(json);
+    //                OtherSearchDataReject();
+    //            })
+    //});
+    function SickSearchDataReject() {
+        var table = $('#DocumentModalTable12').DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+        });
+        $('#tableDiv').find('.dataTables_filter').hide();
+        $('#tableDiv').find('.dataTables_info').hide();
+
+        //$('#DocumentModalTable12 tfoot tr').appendTo('#DocumentModalTable thead');
+
+        $("#DocumentModalTable12 thead .SearchStartDate").keyup(function () {
+            table.column(1).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchEndDate").keyup(function () {
+            table.column(2).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchDuration").keyup(function () {
+            table.column(3).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchSelfCertiRequired").keyup(function () {
+            table.column(4).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchInterviewRequired").keyup(function () {
+            table.column(5).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchType").keyup(function () {
+            table.column(6).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchDoctConsulted").keyup(function () {
+            table.column(7).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchIssueAtWork").keyup(function () {
+            table.column(8).search(this.value).draw();
+        });
+        $("#DocumentModalTable12 thead .SearchStatus").keyup(function () {
+            table.column(10).search(this.value).draw();
+        });
+    }
+    function updateSickLeaveRejrct() {
+        var ids = $("#DocumentModalTable12 tr:has(input:checked)").map(function () {
+            var $tr = $(this);
+            var id = $tr.find("td:first").text();
+            return id;
+        }).toArray();
+        var Id = ids.join(", ");        
+        $.post(constantApproval.UpdateSickLeaveReject, { "ID": Id },
+                function (json) {
+                    var hidden_fields = $("#sickLeaveWorkerid").val();
+                    $.ajax({
+                        type: 'POST',
+                        url: constantApproval.SickLeaveApprove,
+                        data: {
+                            EmpID: hidden_fields
+                        },
+                        success: function (data) {
+                            $('#sickApproval').html(data);
+                            SickSearchDataReject();
+                        },
+                    });
+                })
+    }
+    function calSickLeaveToBeApproved() {
+        var features = [];
+        var total = 0;
+        $('input[type="checkbox"]:checked').each(function () {
+            var getRow = $(this).parents('tr');
+            var Days = (getRow.find('td:eq(3)').html());
+            features.push(Days);
+        });
+        for (var i in features) {
+            debugger;
+            total = parseFloat(total) + parseFloat(features[i]);
+        }
+        $('#SickLeaveApprove').val(total);
+
+    }
+</script>
+
+<script src="~/JS/Approve/UpdateApproveReject.js"></script>

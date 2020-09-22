@@ -1,0 +1,116 @@
+﻿@model HRTool.Models.RolesManagement.AssignRoleViewModel
+@{
+    ViewBag.Title = "AssignRole";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<style>
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        min-height: 34px;
+    }
+</style>
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/select2.min.js"></script>
+<div id="page_content_inner">
+    <br />
+  
+
+    <h1 class="page-title">
+        Assign Role
+         
+    </h1>
+
+
+
+    <div class="md-card">
+        <div >
+            <div id="tableDivProject">
+                @using (Html.BeginForm("AssignRole", "RolesManagement", FormMethod.Post, new { @role = "form", @class = "form-horizontal form-label-left" }))
+                {
+                    <div class="x_content" style="padding:15px;">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Users <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 brd-radius">
+                                <select id="ddluserId" name="userId" class="form-control" onchange="GetRolesByUser()"></select>
+                                @Html.ValidationMessageFor(m => m.userId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Roles <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 brd-radius">
+                                @Html.DropDownListFor(m => m.RoleId, Model.RoleList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.RoleId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3">
+                                <button type="submit" class="btn btn-success" id="btnsubmitAssignRole" style="float:right;"><i class="fa fa-save"></i> Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var userID = '@Model.userId';
+        if (userID == 0) {
+            userID = '-- Select User --';
+        }
+        $.ajax({
+            url: '@Url.Action("DDlUserName", "RolesManagement")',
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+                var ddlValue = new Array();
+
+                $.each(data, function (index, item) {
+                    ddlValue.push({ text: item.Value, id: item.Key });
+                });
+
+                $("#ddluserId").select2({
+                    data: ddlValue,
+                });
+                //$("#ddluserId").val(userID);
+                //$("#select2-ddluserId-container").html(userID);
+                //$("#select2-ddluserId-container").data('title', userID);
+
+
+            }
+        });
+    });
+    function GetRolesByUser() {
+        var UserId = $("#ddluserId").val();
+        $.ajax({
+            url: '@Url.Action("GerRoleByUserID", "RolesManagement")',
+            dataType: 'json',
+            data:{UserID:UserId},
+            success: function (data) {
+                if (data != null) {
+                    $("#RoleId option[value='"+data+"']").attr("selected", true);
+                }
+            }
+        });
+    }
+    $("#tableDivProject").on("click","#btnsubmit").click(function () {
+        $.ajax({
+            url: '@Url.Action("EditAssignRole", "RolesManagement")',
+            dataType: 'json',
+            data: { UserID: $("#ddluserId").val(), roleID :$("#RoleId").val()},
+            success: function (data) {
+                if (data != null) {
+                    toastr.success(data);
+                }
+            }
+        });
+    })
+</script>

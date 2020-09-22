@@ -1,0 +1,70 @@
+﻿@model IList<HRTool.Models.Resources.CaseLogViewModel>
+
+<div id="EmployeeCaseLogModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Case Details</h4>
+            </div>
+            <div class="modal-body" id="EmployeeCaseLogBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeeCaseLog">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-EmployeeCaseLog" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeCaseLogModal"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-EmployeeCaseLog" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeCaseLogModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-EmployeeCaseLog" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-EmployeeCaseLog" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-EmployeeCaseLog" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-warning btn-circle  btn-clearFilter-EmployeeCaseLog" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+</div>
+
+<table id="EmployeeCaseLogModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th>Case #</th>
+            @*<th>Employee-SSO</th>*@
+            <th>Summary</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Created By</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Id</td>
+                @*<td>@item.EmployeeName</td>*@
+                <td>@item.Summary</td>
+                <td>@item.Status</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CreatedName</td>
+                <td>@item.CreatedDate</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th ><input type="text" style="width:75px !important;" class="form-control SearchCaseId" placeholder="Case #"></th>
+            @*<th ><input type="text" style="width: 200px !important;" class="form-control SearchEmployee" placeholder="Employee - SSO"></th>*@
+            <th ><input type="text" style="width: 150px !important;" class="form-control SearchSummary" placeholder="Summary"></th>
+            <th ><input type="text" style="width: 75px !important;" class="form-control SearchStatus" placeholder="Status"></th>
+            <th ><input type="text" style="width: 90px !important;" class="form-control SearchCategory" placeholder="Category"></th>
+            <th ><input type="text" style="width: 100px !important;" class="form-control SearchCreatedBy" placeholder="Created By"></th>
+            <th ><input type="text" style="width: 150px !important;" class="form-control SearchCreated" placeholder="Created"></th>
+        </tr>
+    </tfoot>
+</table>

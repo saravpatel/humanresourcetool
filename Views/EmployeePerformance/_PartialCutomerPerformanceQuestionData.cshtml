@@ -1,0 +1,98 @@
+﻿
+@model HRTool.Models.Settings.SegmentViewModel
+<br />
+<br />
+<div>
+    <input type="hidden" value="@Model.Id" id="PerCusDetailId" />
+    <input type="hidden" value="@Model.JsonQuestionString" id="QuestJSONString" />
+    <input type="hidden" value="@Model.IsJobRoleCustomer" id="IsJobroleCustomer" />
+    <input type="hidden" value="@Model.Id" id="CustomerJsonDetailID" />
+    <input type="hidden" value="@Model.Flag" id="FlagValue" />
+    <input type="hidden" value="@Model.EmpPerDetailId" id="CustomerPerfromceDetail" />
+    @if (Model.Flag == 1)
+    {
+        <div class="QuestionData">
+            <div class="EditSegmetId" data-id="@Model.customerQuesModel.QueId"></div>
+            <div id="QuestionData" class="qustion-title text-center">@Model.customerQuesModel.questionData</div>
+            <div id="QuetionHelpText" class="qustion text-center">@Model.customerQuesModel.FiledText</div>
+            <div>
+               
+                    @if (Model.customerQuesModel.QuFiledValue == "Text Box" || Model.customerQuesModel.QuFiledValue == "Text Field")
+                    {
+                        <input type="text" id="TextFild_@Model.customerQuesModel.QueId" class="form-control QuetionValue" value="@Model.customerQuesModel.Score" />
+                    }
+                    else if (Model.customerQuesModel.QuFiledValue == "Number Field")
+                    {
+                        <input type="number" min="0" id="TextFild_@Model.customerQuesModel.QueId" class="form-control QuetionValue" value="@Model.customerQuesModel.Score" />
+                    }
+                    else if (Model.customerQuesModel.QuFiledValue == "Scrollbar")
+                    {
+                        <input type="hidden" class="form-control Question_ID" id="QuestionProgress_@Model.customerQuesModel.QueId" value="@Model.customerQuesModel.QueId" />
+                            <input type="hidden" class="form-control Question_NAME" id="QuestionName_@Model.customerQuesModel.QueId" value="@Model.customerQuesModel.questionData" />
+                            <input type="text" value="@Model.customerQuesModel.Score" class="form-control Question_Score QuetionValue" id="Competecy_@Model.customerQuesModel.QueId" name="@Model.customerQuesModel.questionData" />
+                    }
+                    else
+                    {
+                        <input type="text" min="0" id="TextFild_@Model.customerQuesModel.QueId" class="form-control QuetionValue" value="@Model.customerQuesModel.Score" />
+                    }
+                <div>
+                    <label class="control-label col-md-3">Comments</label>                    
+                    <textarea class="form-control textarea-resizeNone" id="custQuestionComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments" style="height:250px">@Model.customerQuesModel.Comments</textarea>                 
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.Flag == 0)
+    {
+        <div class="QuestionData">
+            <div style="display:none;" class="EditSegmetId" data-id="@Model.jobroleQueModel.QueId"></div>
+            <div id="QuestionData" class="qustion-title text-center">@Model.jobroleQueModel.questionData</div>
+            <div id="QuetionHelpText" class="qustion text-center">@Model.jobroleQueModel.FiledText</div>
+            <div>               
+                    @if(Model.jobroleQueModel.QuFiledValue == "Text Box" || Model.jobroleQueModel.QuFiledValue == "Text Field")
+                    {
+                        <input type="text" id="TextFild_@Model.jobroleQueModel.QueId" class="form-control QuetionValue" value="@Model.jobroleQueModel.Score" />
+                    }
+                    else if (Model.jobroleQueModel.QuFiledValue == "Number Field")
+                    {
+                        <input type="number" min="0" id="TextFild_@Model.jobroleQueModel.QueId" class="form-control QuetionValue" value="@Model.jobroleQueModel.Score" />
+                    }
+                    else if (Model.jobroleQueModel.QuFiledValue == "Scrollbar")
+                    {
+                        <input type="hidden" class="form-control Question_ID" id="QuestionProgress_@Model.jobroleQueModel.QueId" value="@Model.jobroleQueModel.QueId" />
+                        <input type="hidden" class="form-control Question_NAME" id="QuestionName_@Model.jobroleQueModel.QueId" value="@Model.jobroleQueModel.questionData" />
+                        <input type="text" value="@Model.jobroleQueModel.Score" class="form-control Question_Score QuetionValue" id="Competecy_@Model.jobroleQueModel.QueId" name="@Model.jobroleQueModel.questionData" />
+                    }
+                    else
+                    {
+                        <input type="text" min="0" id="TextFild_@Model.jobroleQueModel.QueId" class="form-control QuetionValue" value="@Model.jobroleQueModel.Score" />
+                    }                               
+                <div>
+                    <label class="control-label col-md-3">Comments</label>                   
+                    <textarea class="form-control textarea-resizeNone" id="jobroleQuestionComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments" style="height:250px">@Model.jobroleQueModel.Comments</textarea>                   
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<div class="col-md-12">  
+        <button id="btn-SaveCustomerReviewDetails" onclick="saveCustomerInviteDetails(@Model.Flag)" class="btn btn-success" value="Submit">Submit</button>  
+</div>
+<script>
+    var saveCusto = {
+        saveCustomerInviteDetails:'@Url.Action("saveCustomerInviteDetails", "EmployeePerformance")',
+    }
+</script>
+<script>
+    displayProgressbar();
+    function displayProgressbar()
+    {
+        $(".Question_Score").ionRangeSlider({
+            type: "single",
+            min: 0,
+            max: 5
+        });
+    }
+
+</script>

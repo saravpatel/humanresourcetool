@@ -1,0 +1,183 @@
+﻿@model HRTool.Models.Settings.CompanyCustomerViewModel
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <input type="hidden" id="customer_Id" value="@Model.Id" />
+        <label class="control-label" for="CustomerPhotoPath">Upload picture</label>
+    </div>
+    <div class="col-md-6">
+        <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">BROWSE</label>
+        <input type="file" id="fileToUpload" onchange="readURL(this)" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        <!-- <input autocomplete="off" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" class="btn btn-sm btn-purple btn-upload" style="display: block;" name="fileUpload" type="file"> -->
+        @if (!string.IsNullOrEmpty(Model.PhotoPath))
+        {
+
+            <img src="~/Upload/CompanyCustomer/@Model.PhotoPath" style="height:15px;" />
+        }
+        else
+        {
+            <img src="~/Images/no-image.jpg" class="editpic" />
+        }
+
+        @*<input type="text" class="form-control" value="@Model.Value" id="txt-SystemListValueName" placeholder="Skill Name" data-toggle="tooltip" name="Value" title="Skill Name">*@
+    </div>
+    <div class="col-md-4">
+        @*<span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>*@
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+
+        <label class="control-label" for="TitleList">Title*</label>
+    </div>
+    <div class="col-md-6">
+
+        <select id="selTitle">
+            <option class="selTitle" id="0" value="0">-- Select Title --</option>
+            @foreach (var items in Model.titleList)
+            {
+                if (Model.TitleValue == @items.Value)
+                {
+                    <option class="selTitles" selected="selected" id="@items.SystemListID" value="@items.Id">@items.Value</option>
+                }
+                else
+                {
+                    <option class="selTitles" id="@items.SystemListID" value="@items.Id">@items.Value</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-TitleList" style="display:none;" data-valmsg-for="TitleList" data-valmsg-replace="true">The Title Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="FirstName">First Name*</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="firstNameText" value="@Model.FirstName" data-toggle="tooltip" name="FirstName" title="First Name" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-FirstName" style="display:none;" data-valmsg-for="FirstName" data-valmsg-replace="true">The Fist Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="LastName">Last Name</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="LastNameText" value="@Model.LastName" data-toggle="tooltip" name="LastName" title="Last Name" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-LastName" style="display:none;" data-valmsg-for="LastName" data-valmsg-replace="true">The Last Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Cmp_Email">Email*</label>
+    </div>
+    <div class="col-md-6">
+        <input type="email" class="form-control" id="Cmp_EmailText" value="@Model.Email" data-toggle="tooltip" name="Cmp_Email" title="Email" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-Cmp_Email" style="display:none;" data-valmsg-for="Cmp_Email" data-valmsg-replace="true">The Valid Email is required.</span>
+        <span class="field-validation-error" id="lbl-error-Cmp_EmailExist" style="display:none;" data-valmsg-for="Cmp_Email" data-valmsg-replace="true">This Email is AllReady Exist.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="GenderList">Gender*</label>
+    </div>
+    <div class="col-md-6">
+        <select id="selGender">
+            <option class="selGender" id="0" value="0">-- Select Gender --</option>
+            @foreach (var items in Model.genderList)
+            {
+                if (Model.GenderValue == items.Value)
+                {
+                    <option class="selGenders" selected="selected" id="@items.SystemListID" value="@items.Id">@items.Value</option>
+                }
+                else
+                {
+                    <option class="selGenders" id="@items.SystemListID" value="@items.Id">@items.Value</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-GenderList" style="display:none;" data-valmsg-for="GenderList" data-valmsg-replace="true">The Gender Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="dateOfBirth">Date Of Birth</label>
+    </div>
+    <div class="col-md-6">
+        @*@if (Model.Dob != "")
+            {*@
+        <input type="text" class="form-control mrg-btm datepicker" id="dateOfBirth" value="@Model.Dob" data-toggle="tooltip" name="dateOfBirth" title="Date Of Birth">
+        @*}
+            else{
+                <input type="text" class="form-control mrg-btm datepicker" id="dateOfBirth"   data-toggle="tooltip" name="dateOfBirth" title="Date Of Birth">
+            }*@
+
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-dateOfBirth" style="display:none;" data-valmsg-for="dateOfBirth" data-valmsg-replace="true">The Date Of Birth is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="PostalCode">Postal Code</label>
+    </div>
+    <div class="col-md-6">
+        <input type="number" max="10" class="form-control" id="PostalCodeText" value="@Model.PostalCode" data-toggle="tooltip" name="PostalCode" title="Postal Code" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-PostalCode" style="display:none;" data-valmsg-for="PostalCode" data-valmsg-replace="true">The Postal Code is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Address">Address</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="AddressText" data-toggle="tooltip" value="@Model.Address" name="Address" title="Address" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-Address" style="display:none;" data-valmsg-for="Address" data-valmsg-replace="true">The Address is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="WorkPhone">Work Phone</label>
+    </div>
+    <div class="col-md-6">
+        <input type="number" max="14" class="form-control" id="WorkPhoneText" value="@Model.WorkPhone" data-toggle="tooltip" name="WorkPhone" title="Work Phone" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-WorkPhone" style="display:none;" data-valmsg-for="WorkPhone" data-valmsg-replace="true">The Work Phone is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Mobile">Mobile</label>
+    </div>
+    <div class="col-md-6">
+        <input type="number" max="14" class="form-control" id="MobileText" value="@Model.Mobile" data-toggle="tooltip" name="Mobile" title="Mobile" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-Mobile" style="display:none;" data-valmsg-for="Mobile" data-valmsg-replace="true">The Mobile is required.</span>
+    </div>
+</div>

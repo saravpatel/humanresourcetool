@@ -1,0 +1,104 @@
+﻿@model HRTool.Models.Resources.AddSalaryDeductionViewModel
+
+<input type="hidden" id="SalaryDeductionID" value="@Model.Id" />
+<input type="hidden"  id="SalaryId" value="@Model.EmployeeSalaryID" />
+<input type="hidden" id="EmployeeTotalSalary" value="@Model.TotalSalary" />
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="DeductionList">Deduction*</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-SalaryDeduction">
+            @foreach (var items in Model.SalaryTypeList)
+            {
+                if (Model.DeductionID.ToString() == items.Value)
+                {
+                    <option class="SelectStepIDs" selected="selected" id="@items.Value" value="@items.Value">@items.Text</option>
+                }
+                @*else
+                {
+                    <option class="SelectStepIDs" disabled="disabled" id="@items.Value" value="@items.Value">@items.Text</option>
+                }*@
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-DeductionList" style="display:none;" data-valmsg-for="DeductionList" data-valmsg-replace="true">The Deduction is required.</span>
+    </div>
+
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="TotalSalaryPercentage">Display as amount or %</label>
+    </div>
+    <div class="col-md-6 dropdown" data-toggle="tooltip">
+        <input type="checkbox" disabled="disabled" readonly="readonly" id="check_IncludeSalaryPercentage" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageTotalSalaryPercentage" data-valmsg-for="TotalSalaryPercentage" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Fixed Amount*</label>
+        <div class="col-md-3">
+            <input type="text" readonly="readonly" class="form-control mrg-btm" id="FixedAmount" placeholder="Fixed Amount" value="@Model.FixedAmount" data-toggle="tooltip" data-placement="right" name="FixedAmount" title="Fixed Amount">
+        </div>
+        <div class="col-md-3 dropdown" data-toggle="tooltip">
+            <label id="CurrencyType">@Model.SalaryType</label>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageFixedAmount" data-valmsg-for="FixedAmount" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">% of Salary*</label>
+        <div class="col-md-3">
+            <input type="number" class="txt_Percent_pad" readonly="readonly" id="txt_PercentOfSalary" value="@Model.PercentOfSalary" data-toggle="tooltip" data-placement="right" placeholder="% Of Salary" name="PercentOfSalary" title="Percent Of Salary" />
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagePercentOfSalary" data-valmsg-for="PercentOfSalary" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+<div class="col-md-3">
+    <label class="control-label" for="TotalSalaryIncude">Include in Total Salary*</label>
+</div>
+<div class="col-md-6 dropdown" data-toggle="tooltip">
+    @if (Model.IncludeInSalary == true)
+    {
+        <input type="checkbox" disabled="disabled" readonly="readonly" id="check_IncludeSalary" checked="checked" value="@Model.IncludeInSalary" />
+    }
+    else
+    {
+        <input type="checkbox" disabled="disabled" readonly="readonly" id="check_IncludeSalary" value="@Model.IncludeInSalary" />
+    }
+    
+</div>
+<div class="col-md-3">
+    <span class="field-validation-error" id="validationmessageTotalSalaryIncude" data-valmsg-for="TotalSalaryIncude" data-valmsg-replace="true" style="display:none"></span>
+</div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Comments</label>
+        <div class="col-md-6">
+            <textarea readonly="readonly" class="form-control mrg-btm datepicker textarea-resizeNone" id="Comments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments">@Model.Comments</textarea>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>

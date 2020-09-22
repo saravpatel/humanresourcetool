@@ -1,0 +1,2959 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EvolutionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CurrencyID" Type="int" />
+    <Property Name="WorkUnitID" Type="int" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="WorkerRate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CustomerRate" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Admin_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocumentPath" Type="nvarchar(max)" />
+    <Property Name="DocumentOriginalPath" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="LinkDisplayText" Type="nvarchar" MaxLength="100" />
+    <Property Name="LinkURL" Type="nvarchar(max)" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" />
+    <Property Name="PoolID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+    <Property Name="Category" Type="int" />
+    <Property Name="EmployeeAccess" Type="bit" Nullable="false" />
+    <Property Name="ManagerAccess" Type="bit" Nullable="false" />
+    <Property Name="CustomerAccess" Type="bit" Nullable="false" />
+    <Property Name="SpecificWorker" Type="bit" Nullable="false" />
+    <Property Name="WorkerID" Type="int" />
+    <Property Name="SpecificManager" Type="bit" Nullable="false" />
+    <Property Name="ManagerID" Type="int" />
+    <Property Name="SpecificCustomer" Type="bit" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="SignatureRequire" Type="bit" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Airports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountrID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="Longitude" Type="decimal" Precision="12" Scale="9" Nullable="false" />
+    <Property Name="Lattitude" Type="decimal" Precision="12" Scale="9" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Evolution.dbo.ApplicantRejectReason' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ApplicantRejectReason">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="100" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="UserIdCreatedNy" Type="int" />
+    <Property Name="UserIdLastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RoleId" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" />
+    <Property Name="NameTitle" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="OtherNames" Type="nvarchar" MaxLength="100" />
+    <Property Name="KnownAs" Type="nvarchar" MaxLength="100" />
+    <Property Name="SSOID" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Nationality" Type="int" />
+    <Property Name="NINumberSSN" Type="nvarchar" MaxLength="100" />
+    <Property Name="image" Type="nvarchar" MaxLength="500" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="ContinuousServiceDate" Type="datetime" />
+    <Property Name="ResourceType" Type="int" />
+    <Property Name="AdditionalReportsto" Type="int" />
+    <Property Name="HRResponsible" Type="int" />
+    <Property Name="JobTitle" Type="int" />
+    <Property Name="JobContryID" Type="int" />
+    <Property Name="Company" Type="int" />
+    <Property Name="Location" Type="int" />
+    <Property Name="ProbationEndDate" Type="datetime" />
+    <Property Name="NextProbationReviewDate" Type="datetime" />
+    <Property Name="NoticePeriod" Type="int" />
+    <Property Name="FixedTermEndDate" Type="datetime" />
+    <Property Name="MethodofRecruitmentSetup" Type="nvarchar(max)" />
+    <Property Name="RecruitmentCost" Type="nvarchar" MaxLength="100" />
+    <Property Name="Thisyear" Type="int" />
+    <Property Name="Nextyear" Type="int" />
+    <Property Name="WorkPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkMobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="CustomeNewTask" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="HasLeft" Type="int" />
+    <Property Name="EducationID" Type="int" />
+    <Property Name="LanguageID" Type="int" />
+    <Property Name="QualificationID" Type="int" />
+    <Property Name="WorkExperienceID" Type="int" />
+    <Property Name="ResumeText" Type="nvarchar" MaxLength="4000" />
+    <Property Name="HolidayYear" Type="int" />
+    <Property Name="MeasuredIn" Type="int" />
+    <Property Name="InculudedCarriedOver" Type="int" />
+    <Property Name="TOIL" Type="int" />
+    <Property Name="AuthorisorEmployeeID" Type="nvarchar" MaxLength="200" />
+    <Property Name="EntitlementIncludesPublicHoliday" Type="bit" />
+    <Property Name="AutoApproveHolidays" Type="bit" />
+    <Property Name="ExceedAllowance" Type="bit" />
+    <Property Name="UseVirtualClock" Type="bit" />
+    <Property Name="SelectCustomerCompanyId" Type="nvarchar" MaxLength="120" />
+    <Property Name="CustomerCareID" Type="nchar" MaxLength="120" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="workPatternId" Type="int" />
+    <Property Name="CurrenciesId" Type="int" />
+    <Property Name="IncludePublicHoliday" Type="bit" />
+    <Property Name="HolidayEntitlement" Type="int" />
+    <Property Name="IsReadAddReport" Type="bit" />
+    <Property Name="IsReadHRRespo" Type="bit" />
+    <Property Name="IsReadArchived" Type="bit" />
+    <Property Name="ActivityType" Type="int" />
+    <Property Name="RecovryRate" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="IsReadNewResource" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastModifyBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CmpCustomerID" Type="int" />
+    <Property Name="PhotoPath" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="AssetType" Type="int" />
+    <Property Name="AssetType2" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Benefit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="BenefitID" Type="int" Nullable="false" />
+    <Property Name="DateAwarded" Type="datetime" />
+    <Property Name="ExpiryDate" Type="datetime" />
+    <Property Name="FixedAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Currency" Type="int" />
+    <Property Name="RecoverOnTermination" Type="bit" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Benefits_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BenefitsID" Type="int" Nullable="false" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BradfordFactor_HolidaySettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LowerValue1" Type="int" />
+    <Property Name="UpperValue1" Type="int" />
+    <Property Name="Alert1" Type="nvarchar(max)" />
+    <Property Name="LowerValue2" Type="int" />
+    <Property Name="UpperValue2" Type="int" />
+    <Property Name="Alert2" Type="nvarchar(max)" />
+    <Property Name="LowerValue3" Type="int" />
+    <Property Name="UpperValue3" Type="int" />
+    <Property Name="Alert3" Type="nvarchar(max)" />
+    <Property Name="LowerValue4" Type="int" />
+    <Property Name="UpperValue4" Type="int" />
+    <Property Name="Alert4" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Business">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="500" />
+    <Property Name="Category" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cases_Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CaseID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDateTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cases_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CaseID" Type="int" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="certificate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Body" Type="nvarchar" MaxLength="128" />
+    <Property Name="Number" Type="nvarchar" MaxLength="128" />
+    <Property Name="AssignTo" Type="int" />
+    <Property Name="InRelationTo" Type="int" />
+    <Property Name="ValidFrom" Type="datetime" />
+    <Property Name="ExpiringDate" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="AlertBeforeDays" Type="int" />
+    <Property Name="Mandatory" Type="bit" />
+    <Property Name="Validate" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="Archived" Type="bit" />
+  </EntityType>
+  <EntityType Name="certificate_document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CertificateId" Type="int" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="80" />
+    <Property Name="StateId" Type="int" />
+    <Property Name="status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Cmp_Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoPath" Type="nvarchar" MaxLength="200" />
+    <Property Name="Title" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="128" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="WorkPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company_Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OriginalCompanyLogo" Type="nvarchar(max)" />
+    <Property Name="CompanyLogo" Type="nvarchar(max)" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ParentCompany" Type="nvarchar" MaxLength="100" />
+    <Property Name="Website" Type="nvarchar" MaxLength="200" />
+    <Property Name="Currency" Type="int" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="SecondaryPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="MailingAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="GeneralNotes" Type="nvarchar" MaxLength="200" />
+    <Property Name="VAT_GST_Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreditLimit" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentTerms" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreditStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesRegions" Type="nvarchar" MaxLength="50" />
+    <Property Name="TaxGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankSortCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="IBAN" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company_Settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="500" />
+    <Property Name="Statement" Type="nvarchar" MaxLength="100" />
+    <Property Name="IndustryID" Type="int" />
+    <Property Name="DateFormat" Type="int" />
+    <Property Name="TimeFormat" Type="int" />
+    <Property Name="BaseCurrency" Type="int" />
+    <Property Name="DailyAdminEmail" Type="bit" Nullable="false" />
+    <Property Name="WeeklyManagerEmail" Type="bit" Nullable="false" />
+    <Property Name="WeeklyEmployeeEmail" Type="bit" Nullable="false" />
+    <Property Name="ManagerSeeEmployeeSalary" Type="bit" Nullable="false" />
+    <Property Name="EmployeeSeeSalary" Type="bit" Nullable="false" />
+    <Property Name="OrganisationChart" Type="bit" Nullable="false" />
+    <Property Name="OrganisationChartExternalLink" Type="nvarchar" MaxLength="50" />
+    <Property Name="AllowEmployeeUploadPhoto" Type="bit" Nullable="false" />
+    <Property Name="ManagerSeeEmployeeContactDetail" Type="bit" Nullable="false" />
+    <Property Name="ManagerUploadDocument" Type="bit" Nullable="false" />
+    <Property Name="CompanyReport" Type="bit" Nullable="false" />
+    <Property Name="ProbationPeriod" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmployeeAccess" Type="int" Nullable="false" />
+    <Property Name="ManagerAccess" Type="int" Nullable="false" />
+    <Property Name="OtherLeaveReasons" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="80" />
+    <Property Name="status" Type="tinyint" />
+    <Property Name="PhoneCode" Type="int" />
+    <Property Name="SortName" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Currencies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FreezingDate" Type="datetime" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="3" />
+    <Property Name="FixedRate" Type="decimal" Precision="20" Scale="10" />
+    <Property Name="LiveRate" Type="decimal" Precision="20" Scale="10" />
+    <Property Name="IsFixed" Type="bit" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Divisions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Email_Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="From_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="From_Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email_Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Server" Type="nvarchar" MaxLength="50" />
+    <Property Name="Port" Type="int" />
+    <Property Name="Enable_SSL" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employe_EmergencyContacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Relationship" Type="int" Nullable="false" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee_AddEndrosementSkills">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="AssignSkillId" Type="nvarchar" MaxLength="120" />
+    <Property Name="SkilsId" Type="int" />
+    <Property Name="SkillsName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="SkillType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee_AnualLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="IsLessThenADay" Type="bit" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Duration" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="TOIL" Type="bit" />
+    <Property Name="PartOfTheDay" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="DocumentPath" Type="nvarchar(max)" />
+    <Property Name="DocumentOriginalPath" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="LinkDisplayText" Type="nvarchar" MaxLength="100" />
+    <Property Name="LinkURL" Type="nvarchar(max)" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" />
+    <Property Name="PoolID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+    <Property Name="Category" Type="int" />
+    <Property Name="EmployeeAccess" Type="bit" Nullable="false" />
+    <Property Name="ManagerAccess" Type="bit" Nullable="false" />
+    <Property Name="CustomerAccess" Type="bit" Nullable="false" />
+    <Property Name="SpecificWorker" Type="bit" Nullable="false" />
+    <Property Name="WorkerID" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecificManager" Type="bit" Nullable="false" />
+    <Property Name="ManagerID" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecificCustomer" Type="bit" Nullable="false" />
+    <Property Name="CustomerID" Type="nvarchar" MaxLength="100" />
+    <Property Name="SignatureRequire" Type="bit" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="IsRead" Type="bit" />
+    <Property Name="IsReadSignature" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_Document_Signature">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="DocumentID" Type="int" Nullable="false" />
+    <Property Name="SignatureText" Type="nvarchar" MaxLength="50" />
+    <Property Name="IpAddress" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Educations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="150" />
+    <Property Name="InstitutionName" Type="nvarchar" MaxLength="150" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="OtherInformation" Type="nvarchar" MaxLength="500" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Endrosement_Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EndrosementId" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Experiences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobTitle" Type="nvarchar" MaxLength="150" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="150" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="JobStartDate" Type="datetime" />
+    <Property Name="JobEndDate" Type="datetime" Nullable="false" />
+    <Property Name="OtherInformation" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Languages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageID" Type="int" />
+    <Property Name="SpeakingID" Type="int" />
+    <Property Name="ListeningID" Type="int" />
+    <Property Name="WritingID" Type="int" />
+    <Property Name="ReadingID" Type="int" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_LateLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="LateDate" Type="datetime" />
+    <Property Name="LateHr" Type="int" />
+    <Property Name="LateMin" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="lastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_MaternityOrPaternityLeaves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="DueDate" Type="datetime" Nullable="false" />
+    <Property Name="ExptectedBirthWeekStartDate" Type="datetime" />
+    <Property Name="ExptectedBirthWeekEndDate" Type="datetime" />
+    <Property Name="OrdinaryMaternityLeaveStartDate" Type="datetime" />
+    <Property Name="OrdinaryMaternityLeaveEndDate" Type="datetime" />
+    <Property Name="AdditionalMaternityLeaveStartDate" Type="datetime" />
+    <Property Name="AdditionalMaternityLeaveEndDate" Type="datetime" />
+    <Property Name="EarliestBirthWeekStartDate" Type="datetime" />
+    <Property Name="ActualStartDate" Type="datetime" />
+    <Property Name="ActualEndDate" Type="datetime" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="Link" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsRead" Type="bit" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="20" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRes" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_MaternityOrPaternityLeaves_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaternityOrPaternityID" Type="int" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_MeternityOrPaternityLeaves_Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaternityOrPaternityID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDateTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_OtherLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="ReasonForLeaveId" Type="int" />
+    <Property Name="IsLessThenADay" Type="bit" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Duration" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Hour" Type="int" />
+    <Property Name="Min" Type="int" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="PartOfTheDay" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_OtherLeave_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OtherLeaveId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_Scheduling">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="IsDayOrMore" Type="bit" Nullable="false" />
+    <Property Name="IsLessThenADay" Type="bit" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="DurationDays" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="InTimeHr" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="InTimeMin" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="EndTimeHr" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="EndTimeMin" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DurationHr" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="CustomerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="AssetId" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRes" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_TimeSheet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_TimeSheet_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetId" Type="int" />
+    <Property Name="InTimeHr" Type="int" />
+    <Property Name="InTimeMin" Type="int" />
+    <Property Name="EndTimeHr" Type="int" />
+    <Property Name="EndTimeMin" Type="int" />
+    <Property Name="Project" Type="int" />
+    <Property Name="CostCode" Type="int" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="128" />
+    <Property Name="Asset" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_TimeSheet_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_TravelLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="FromCountryId" Type="int" />
+    <Property Name="FromStateId" Type="int" />
+    <Property Name="FromTownId" Type="int" />
+    <Property Name="FromAirportId" Type="int" />
+    <Property Name="ToCountryId" Type="int" />
+    <Property Name="ToStateId" Type="int" />
+    <Property Name="ToTownId" Type="int" />
+    <Property Name="ToAirportId" Type="int" />
+    <Property Name="ReasonForTravelId" Type="int" />
+    <Property Name="IsLessThenADay" Type="bit" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Duration" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="StartTimeHour" Type="int" />
+    <Property Name="StartTimeMin" Type="int" />
+    <Property Name="EndTimeHour" Type="int" />
+    <Property Name="EndTimeMin" Type="int" />
+    <Property Name="DurationHr" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="128" />
+    <Property Name="Project" Type="int" />
+    <Property Name="CostCode" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_TravelLeave_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TravelLeaveId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_Uplift">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="UpliftPostionId" Type="int" />
+    <Property Name="WorkerRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="WorkerRatePer" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CustomerRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CustomerRatePer" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CustomerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_Uplift_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UpliftId" Type="int" />
+    <Property Name="InTimeHr" Type="int" />
+    <Property Name="InTimeMin" Type="int" />
+    <Property Name="OutTimeHr" Type="int" />
+    <Property Name="OutTimeMin" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="WorkerRate" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="WorkerRatePer" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="CustomerRate" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="CustomerRatePer" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_ProjectPlanner_Uplift_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TravelLeaveId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="UpliftId" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_PublicHoliday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="PublicHolidayCountryId" Type="int" />
+    <Property Name="EffecitveFrom" Type="datetime" />
+    <Property Name="EffectiveTo" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_Qualifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Resume">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="ResumeText" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Employee_Salary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="EffectiveFrom" Type="datetime" />
+    <Property Name="SalaryType" Type="int" />
+    <Property Name="PaymentFrequency" Type="int" />
+    <Property Name="Amount" Type="nvarchar" MaxLength="100" />
+    <Property Name="Currency" Type="int" />
+    <Property Name="TotalSalary" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReasonforChange" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="LastModificationDate" Type="datetime" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="Archived" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_Salary_Deduction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeSalaryID" Type="int" Nullable="false" />
+    <Property Name="Deduction" Type="int" />
+    <Property Name="FixedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PercentOfSalary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IncludeInSalary" Type="bit" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Salary_Deduction_Temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeSalaryID" Type="int" Nullable="false" />
+    <Property Name="Deduction" Type="int" />
+    <Property Name="FixedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PercentOfSalary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IncludeInSalary" Type="bit" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Salary_Entitlement_Temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeSalaryID" Type="int" Nullable="false" />
+    <Property Name="Entitlement" Type="int" />
+    <Property Name="FixedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PercentOfSalary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IncludeInSalary" Type="bit" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Salary_Entitlements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeSalaryID" Type="int" Nullable="false" />
+    <Property Name="Entitlement" Type="int" />
+    <Property Name="FixedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PercentOfSalary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IncludeInSalary" Type="bit" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Salary_Temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="EffectiveFrom" Type="datetime" />
+    <Property Name="SalaryType" Type="int" />
+    <Property Name="PaymentFrequency" Type="int" />
+    <Property Name="Amount" Type="nvarchar" MaxLength="100" />
+    <Property Name="Currency" Type="int" />
+    <Property Name="TotalSalary" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReasonforChange" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="LastModificationDate" Type="datetime" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="Archived" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_SickLeaves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsADayOrMore" Type="bit" Nullable="false" />
+    <Property Name="IsHalfDay" Type="bit" Nullable="false" />
+    <Property Name="IsHours" Type="bit" Nullable="false" />
+    <Property Name="Reason" Type="int" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="DurationDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PartOfDay" Type="nvarchar" MaxLength="50" />
+    <Property Name="DurationHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EmergencyLeave" Type="bit" Nullable="false" />
+    <Property Name="ConfirmedbyHR" Type="bit" Nullable="false" />
+    <Property Name="SelfCertificationFormRequired" Type="bit" Nullable="false" />
+    <Property Name="SelfCertificateReceivedDate" Type="datetime" />
+    <Property Name="BackToWorkInterviewRequired" Type="bit" Nullable="false" />
+    <Property Name="InterviewDate" Type="datetime" />
+    <Property Name="InterviewConductedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="IsPaidatotherrate" Type="bit" Nullable="false" />
+    <Property Name="IsUnpaid" Type="bit" Nullable="false" />
+    <Property Name="DoctorConsulted" Type="bit" Nullable="false" />
+    <Property Name="DoctorName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DateOfVisit" Type="datetime" />
+    <Property Name="TimeOfVisit" Type="nvarchar" MaxLength="50" />
+    <Property Name="MedicalCertificateIssuedDate" Type="datetime" />
+    <Property Name="DoctorAdvice" Type="nvarchar" MaxLength="500" />
+    <Property Name="MedicationPrescribed" Type="nvarchar" MaxLength="500" />
+    <Property Name="WhyDoctorNotConsulted" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsDuaToAccident" Type="bit" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="IssueAtWork" Type="nvarchar" MaxLength="250" />
+    <Property Name="Type" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsRead" Type="bit" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="varchar" MaxLength="20" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_SickLeaves_Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SickLeaveID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDateTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_SickLeaves_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SickLeaveID" Type="int" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_Skills">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="TechnicalSkillsName" Type="nvarchar" MaxLength="500" />
+    <Property Name="GeneralSkillsName" Type="nvarchar" MaxLength="500" />
+    <Property Name="TechnicalSkillsArchived" Type="bit" />
+    <Property Name="GeneralSkillsArchived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="SkillType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsRead" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_Task_Temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" />
+    <Property Name="Category" Type="int" />
+    <Property Name="AssignTo" Type="int" />
+    <Property Name="InRelationTo" Type="int" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="AlterBeforeDays" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_TimeSheet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_TimeSheet_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetId" Type="int" />
+    <Property Name="InTimeHr" Type="int" />
+    <Property Name="InTimeMin" Type="int" />
+    <Property Name="EndTimeHr" Type="int" />
+    <Property Name="EndTimeMin" Type="int" />
+    <Property Name="Project" Type="int" />
+    <Property Name="CostCode" Type="int" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="128" />
+    <Property Name="Asset" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_TimeSheet_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_TOIL">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="DurationDays" Type="int" />
+    <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+    <Property Name="SupportingComments" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_TravelLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="FromCountryId" Type="int" />
+    <Property Name="FromStateId" Type="int" />
+    <Property Name="FromTownId" Type="int" />
+    <Property Name="FromAirportId" Type="int" />
+    <Property Name="ToCountryId" Type="int" />
+    <Property Name="ToStateId" Type="int" />
+    <Property Name="ToTownId" Type="int" />
+    <Property Name="ToAirportId" Type="int" />
+    <Property Name="ReasonForTravelId" Type="int" />
+    <Property Name="IsLessThenADay" Type="bit" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Duration" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="StartTimeHour" Type="int" />
+    <Property Name="StartTimeMin" Type="int" />
+    <Property Name="EndTimeHour" Type="int" />
+    <Property Name="EndTimeMin" Type="int" />
+    <Property Name="DurationHr" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="128" />
+    <Property Name="Project" Type="int" />
+    <Property Name="CostCode" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="Status" Type="nchar" MaxLength="50" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddReport" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee_TravelLeave_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TravelLeaveId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee_WorkPattern">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="WorkPatternID" Type="int" Nullable="false" />
+    <Property Name="EffectiveFrom" Type="datetime" Nullable="false" />
+    <Property Name="EffectiveTo" Type="datetime" />
+    <Property Name="NewWorkPatternID" Type="int" />
+    <Property Name="CurrentWeekWorkPatternDetailID" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeAddressInfo">
+    <Key>
+      <PropertyRef Name="ContactInfoId" />
+    </Key>
+    <Property Name="ContactInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="StateId" Type="int" />
+    <Property Name="TownId" Type="int" />
+    <Property Name="AirportId" Type="int" />
+    <Property Name="HousNumber" Type="nvarchar" MaxLength="250" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="150" />
+    <Property Name="ContactAddress" Type="nvarchar(max)" />
+    <Property Name="PersonalPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="PersonalMobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="PersonalEmail" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EmployeeBankInfo">
+    <Key>
+      <PropertyRef Name="BankInfoId" />
+    </Key>
+    <Property Name="BankInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="500" />
+    <Property Name="BankCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="OtherAccountInformation" Type="nvarchar(max)" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="250" />
+    <Property Name="BankAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="IBAN_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="SWIFT_Code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeePerformance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="ReviewId" Type="int" Nullable="false" />
+    <Property Name="RevviewByEmpID" Type="int" />
+    <Property Name="PerformanceStatus" Type="nchar" MaxLength="10" />
+    <Property Name="OverallScore" Type="nchar" MaxLength="10" />
+    <Property Name="JobRoleScore" Type="nchar" MaxLength="10" />
+    <Property Name="OverallComments" Type="nvarchar(max)" />
+    <Property Name="ReviewDate" Type="datetime" />
+    <Property Name="ReviewStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceCoreJSONDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerEmployeedetailId" Type="int" />
+    <Property Name="PerManagerDetailId" Type="int" />
+    <Property Name="CoreId" Type="int" />
+    <Property Name="QueId" Type="int" />
+    <Property Name="Score" Type="nvarchar(max)" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsManager_Id" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIdCreatedBy" Type="int" />
+    <Property Name="UserIdLastModifiedBy" Type="int" />
+    <Property Name="UserIdCreatedDate" Type="datetime" />
+    <Property Name="UserIdLastModifiedDate" Type="datetime" />
+    <Property Name="ReviewID" Type="int" />
+    <Property Name="IsFormCompleted" Type="bit" />
+    <Property Name="EmployeeID" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceCustomerSegmentJSONDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerCustomerdetailId" Type="int" />
+    <Property Name="CustomerSegId" Type="int" />
+    <Property Name="QueId" Type="int" />
+    <Property Name="Score" Type="nvarchar(max)" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIdCreatedBy" Type="int" />
+    <Property Name="UserIdCreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceGoal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeePerformanceId" Type="int" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="GoalName" Type="nvarchar" MaxLength="500" />
+    <Property Name="GoalDescription" Type="nvarchar(max)" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="GoalStatus" Type="nvarchar" MaxLength="20" />
+    <Property Name="GoalValueX" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="GoalValueY" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceGoalComments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerformanceGoalId" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDateTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceGoalDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerformanceGoalId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeePerformanceJobRoleSegmentJSONDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerCustomerdetailId" Type="int" />
+    <Property Name="PerEmployeedetailId" Type="int" />
+    <Property Name="IsManager_Id" Type="int" />
+    <Property Name="PerManagerdetailId" Type="int" />
+    <Property Name="JobRoleSegId" Type="int" />
+    <Property Name="QueId" Type="int" />
+    <Property Name="Score" Type="nvarchar(max)" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIdCreatedBy" Type="int" />
+    <Property Name="UserIdCreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="ReviewID" Type="int" />
+    <Property Name="IsFormCompleted" Type="bit" />
+    <Property Name="EmployeeID" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeRelation">
+    <Key>
+      <PropertyRef Name="EmployeeRelationID" />
+    </Key>
+    <Property Name="EmployeeRelationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Reportsto" Type="int" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" />
+    <Property Name="PoolID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeTask">
+    <Key>
+      <PropertyRef Name="EmployeeTaskID" />
+    </Key>
+    <Property Name="EmployeeTaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="TaskId" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeTraining">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="TrainingNameId" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Importance" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Progress" Type="int" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="ExpiryDate" Type="datetime" />
+    <Property Name="Provider" Type="nvarchar" MaxLength="150" />
+    <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="CustomFieldsJSON" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsReadWorker" Type="bit" />
+    <Property Name="IsReadHR" Type="bit" />
+    <Property Name="IsReadAddRep" Type="bit" />
+  </EntityType>
+  <EntityType Name="Functions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="HolidaysNAbsence_Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkingHours" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkPattern" Type="nvarchar" MaxLength="50" />
+    <Property Name="AnnualLeave" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarryOverDays" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarryOverHours" Type="nvarchar" MaxLength="50" />
+    <Property Name="HolidayYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="PublicHolidayTemplate" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalHolidayEntitlement" Type="bit" Nullable="false" />
+    <Property Name="HolidayEntitlement" Type="nvarchar" MaxLength="50" />
+    <Property Name="HolidayReturn" Type="bit" Nullable="false" />
+    <Property Name="AuthoriseHolidays" Type="bit" Nullable="false" />
+    <Property Name="TOILPeriod" Type="nvarchar" MaxLength="50" />
+    <Property Name="BradfordFactorAlerts" Type="bit" Nullable="false" />
+    <Property Name="CalculationPeriod" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HolidayYearAndMonthSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolidaysNAbsenceID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" />
+    <Property Name="StartYear" Type="int" />
+    <Property Name="EndYear" Type="int" />
+    <Property Name="StartMonth" Type="int" />
+    <Property Name="EndMonth" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="PublicHoliday" Type="int" />
+  </EntityType>
+  <EntityType Name="Menu_List">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ActionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ControllerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DisplayOrder" Type="int" />
+    <Property Name="SubmenuID" Type="int" />
+    <Property Name="Createdate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsDefaultAllocation" Type="bit" />
+    <Property Name="MenuKey" Type="int" />
+  </EntityType>
+  <EntityType Name="Mobile_setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AllowMobileUse" Type="bit" />
+    <Property Name="ShowPhoneNumber" Type="bit" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="EmployeeAccess" Type="bit" />
+    <Property Name="ManagerAccess" Type="bit" />
+    <Property Name="CustomerAccess" Type="bit" />
+    <Property Name="NotifyEmployeeViaEmail" Type="bit" />
+    <Property Name="AllowCustomer" Type="bit" />
+    <Property Name="SpecificWorker" Type="bit" />
+    <Property Name="WorkerID" Type="int" />
+    <Property Name="SpecificManager" Type="bit" />
+    <Property Name="ManagerID" Type="int" />
+    <Property Name="SpecificCustomer" Type="bit" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="News_Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsId" Type="int" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PerformanceCoWorkerDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerformanceId" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoreScore" Type="nvarchar(max)" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="InviteEmployeeId" Type="int" />
+    <Property Name="InviteStatus" Type="bit" />
+    <Property Name="CoWorkerScoreJSC" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PerformanceCustomerDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Performance_Id" Type="int" />
+    <Property Name="InviteCustomer_Id" Type="int" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="CustomerScore" Type="nvarchar" MaxLength="10" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="CusomerSegmentsJSON" Type="nvarchar(max)" />
+    <Property Name="InviteStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsArchived" Type="bit" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PerformanceEmployeeDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Performance_Id" Type="int" />
+    <Property Name="CoreScore" Type="nvarchar" MaxLength="10" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="IsManager_Id" Type="int" />
+    <Property Name="Performance_ManagerId" Type="int" />
+    <Property Name="OverAllScoreJSON" Type="nvarchar(max)" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsArchived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="UserIDCreatedDate" Type="datetime" />
+    <Property Name="UserIDLastModifiedDate" Type="datetime" />
+    <Property Name="ReviewID" Type="int" />
+    <Property Name="IsFormCompleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="PerformanceSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewText" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CompletionDate" Type="datetime" />
+    <Property Name="AnnualReview" Type="bit" />
+    <Property Name="CompanyCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="LocationCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="DivisionCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="JobRoleCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="EmploymentTypeCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="BusinessCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="PoolCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="FunctionCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="OverallScoreJson" Type="nvarchar" MaxLength="2000" />
+    <Property Name="CoreSegmentJSON" Type="nvarchar(max)" />
+    <Property Name="JobRoleSegmentJSON" Type="nvarchar(max)" />
+    <Property Name="CoWorkerSegmentJSON" Type="nvarchar(max)" />
+    <Property Name="CustomerSegmentJSON" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="RatingOverAll" Type="bit" />
+    <Property Name="RatingCore" Type="bit" />
+    <Property Name="RatingJobRole" Type="bit" />
+    <Property Name="CSUserLastModifiedBy_Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="GuID" Type="nchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Pools">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Country" Type="int" />
+    <Property Name="Location" Type="int" />
+    <Property Name="Block" Type="int" />
+    <Property Name="TaxZone" Type="int" />
+    <Property Name="AssetType" Type="int" />
+    <Property Name="OperatorEmployeeID" Type="int" Nullable="false" />
+    <Property Name="ProjectOwner" Type="nvarchar" MaxLength="200" />
+    <Property Name="CustomersCSV" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="GeneralSkillsCSV" Type="nvarchar" MaxLength="200" />
+    <Property Name="TechnicalSkillsCSV" Type="nvarchar" MaxLength="200" />
+    <Property Name="OperatorCompany" Type="nvarchar" MaxLength="200" />
+    <Property Name="AssetTypesCSV" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="PublicHolidayCountry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PublicHolidays">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="PublicHolidayCountryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QueryColunName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableId" Type="int" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="QueryData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="QueryText" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Role_DefaultMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="MenuKey" Type="int" />
+  </EntityType>
+  <EntityType Name="SendReviewToCoworker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewID" Type="int" />
+    <Property Name="PerformanceID" Type="int" />
+    <Property Name="InviteeEmployee" Type="int" />
+    <Property Name="EmployeeOfReview" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoreScore" Type="nvarchar(max)" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="MailStatus" Type="varchar" MaxLength="15" />
+    <Property Name="CoWorkerScoreJSC" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="EmailSentDate" Type="datetime" />
+    <Property Name="EmailSentBy" Type="int" />
+  </EntityType>
+  <EntityType Name="SendReviewToCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewID" Type="int" />
+    <Property Name="PerformanceID" Type="int" />
+    <Property Name="InviteeEmployee" Type="int" />
+    <Property Name="EmployeeOfReview" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoreScore" Type="nvarchar(max)" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="MailStatus" Type="varchar" MaxLength="50" />
+    <Property Name="CoWorkerScoreJSC" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="EmailSentDate" Type="datetime" />
+    <Property Name="EmailSentBy" Type="int" />
+  </EntityType>
+  <EntityType Name="SkillSets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="TechnicalSkillsCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="GeneralSkillsCSV" Type="nvarchar" MaxLength="500" />
+    <Property Name="SkillType" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="80" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="System_settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="100" />
+    <Property Name="Value" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SystemLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemListName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SystemListValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemListID" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="500" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Task_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Task_List">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Category" Type="int" />
+    <Property Name="AssignTo" Type="int" />
+    <Property Name="InRelationTo" Type="int" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="AlterBeforeDays" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="Difualt" Type="bit" />
+  </EntityType>
+  <EntityType Name="TimeSheet_Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="Frequency" Type="int" />
+    <Property Name="Detail" Type="int" />
+  </EntityType>
+  <EntityType Name="TMS_Applicant">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VacancyID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="128" />
+    <Property Name="GenderID" Type="int" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="OtherContactDetails" Type="nvarchar" MaxLength="200" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+    <Property Name="CoverLetterPathOriginal" Type="nvarchar(max)" />
+    <Property Name="CoverLetterPath" Type="nvarchar(max)" />
+    <Property Name="DownloadApplicationFormLink" Type="nvarchar(max)" />
+    <Property Name="UploadApplicationFormPathOriginal" Type="nvarchar(max)" />
+    <Property Name="UploadApplicationFormPath" Type="nvarchar(max)" />
+    <Property Name="ResumePathOriginal" Type="nvarchar(max)" />
+    <Property Name="ResumePath" Type="nvarchar(max)" />
+    <Property Name="Question1Answer" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question2Answer" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question3Answer" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question4Answer" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question5Answer" Type="nvarchar" MaxLength="200" />
+    <Property Name="SourceID" Type="int" />
+    <Property Name="CompatencyJSV" Type="nvarchar(max)" />
+    <Property Name="CommentJSV" Type="nvarchar(max)" />
+    <Property Name="DocumentJSV" Type="nvarchar(max)" />
+    <Property Name="GeneralSkillsJSV" Type="nvarchar(max)" />
+    <Property Name="TechnicalSkillsJSV" Type="nvarchar(max)" />
+    <Property Name="Cost" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="RejectReasonId" Type="int" />
+    <Property Name="RejectReasonComment" Type="nvarchar(max)" />
+    <Property Name="IsReadHiringLead" Type="bit" />
+  </EntityType>
+  <EntityType Name="TMS_Applicant_Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDateTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TMS_Applicant_Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantID" Type="int" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TMS_Setting_RecruitmentProcesses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="StepCSV" Type="nvarchar(max)" />
+    <Property Name="CompetencyCSV" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Training_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrainingId" Type="int" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserMenu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="MenuID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="MenuKey" Type="int" />
+  </EntityType>
+  <EntityType Name="Vacancy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="500" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+    <Property Name="ClosingDate" Type="datetime" />
+    <Property Name="RecruitmentProcessID" Type="int" Nullable="false" />
+    <Property Name="Salary" Type="nvarchar" MaxLength="100" />
+    <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="BusinessID" Type="int" />
+    <Property Name="DivisionID" Type="int" />
+    <Property Name="PoolID" Type="int" />
+    <Property Name="FunctionID" Type="int" />
+    <Property Name="JobDescription" Type="nvarchar(max)" />
+    <Property Name="HiringLeadID" Type="int" Nullable="false" />
+    <Property Name="MustUploadCoverLetter" Type="bit" Nullable="false" />
+    <Property Name="MustUploadResumeCV" Type="bit" Nullable="false" />
+    <Property Name="ApplicationFormPathOriginal" Type="nvarchar(max)" />
+    <Property Name="ApplicationFormPath" Type="nvarchar(max)" />
+    <Property Name="Question1On" Type="bit" Nullable="false" />
+    <Property Name="Question1Text" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question2On" Type="bit" Nullable="false" />
+    <Property Name="Question2Text" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question3On" Type="bit" Nullable="false" />
+    <Property Name="Question3Text" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question4On" Type="bit" Nullable="false" />
+    <Property Name="Question4Text" Type="nvarchar" MaxLength="200" />
+    <Property Name="Question5On" Type="bit" Nullable="false" />
+    <Property Name="Question5Text" Type="nvarchar" MaxLength="200" />
+    <Property Name="SourceID" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="ApprovalStatus" Type="nchar" MaxLength="10" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsReadVacancy" Type="bit" />
+  </EntityType>
+  <EntityType Name="Visa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssignedToEmployeeId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="RelationToCSEmployeeID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Country" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="VisaType" Type="int" />
+    <Property Name="ServiceAgency" Type="int" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlertBeforeDays" Type="int" />
+    <Property Name="DueDateChangedOn" Type="datetime" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="CSUserIDCreatedBy" Type="int" />
+    <Property Name="CSUserIDLastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Visa_Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisaId" Type="int" />
+    <Property Name="NewName" Type="nvarchar(max)" />
+    <Property Name="OriginalName" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkPatternDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkPatternID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="MondayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayStart" Type="datetime" />
+    <Property Name="MondayEnd" Type="datetime" />
+    <Property Name="MondayBreakMins" Type="int" />
+    <Property Name="TuesdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayStart" Type="datetime" />
+    <Property Name="TuesdayEnd" Type="datetime" />
+    <Property Name="TuesdayBreakMins" Type="int" />
+    <Property Name="WednessdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayStart" Type="datetime" />
+    <Property Name="WednessdayEnd" Type="datetime" />
+    <Property Name="WednessdayBreakMins" Type="int" />
+    <Property Name="ThursdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayStart" Type="datetime" />
+    <Property Name="ThursdayEnd" Type="datetime" />
+    <Property Name="ThursdayBreakMins" Type="int" />
+    <Property Name="FridayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayStart" Type="datetime" />
+    <Property Name="FridayEnd" Type="datetime" />
+    <Property Name="FridayBreakMins" Type="int" />
+    <Property Name="SaturdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayStart" Type="datetime" />
+    <Property Name="SaturdayEnd" Type="datetime" />
+    <Property Name="SaturdayBreakMins" Type="int" />
+    <Property Name="SundayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayStart" Type="datetime" />
+    <Property Name="SundayEnd" Type="datetime" />
+    <Property Name="SundayBreakMins" Type="int" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="UserIDCreatedBy" Type="int" />
+    <Property Name="UserIDLastModifiedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkPatterns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="MondayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MondayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TuesdayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThursdayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SaturdayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SundayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Archived" Type="bit" Nullable="false" />
+    <Property Name="CSUserIDCreatedBy" Type="int" />
+    <Property Name="CSUserIDLastModifiedBy" Type="int" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="MondayBreakMins" Type="int" />
+    <Property Name="TuesdayBreakMins" Type="int" />
+    <Property Name="WednessdayBreakMins" Type="int" />
+    <Property Name="ThursdayBreakMins" Type="int" />
+    <Property Name="FridayBreakMins" Type="int" />
+    <Property Name="SaturdayBreakMins" Type="int" />
+    <Property Name="SundayBreakMins" Type="int" />
+    <Property Name="WednessdayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WednessdayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayDays" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayStart" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayEnd" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FridayBreak" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsRotating" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AssignUserRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ChangeDateFormat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="DateFormat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+    <Parameter Name="date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetAllAllPublicHolidayByEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllApproveRequestList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllCoreScorePerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeeCaseDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeeCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeeJobTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeePearformanceDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeeSearchData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllEmployeeSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllNotificationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllOverAllScorePerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllPublicHolidayByEmployee_JobCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAnnualLeaveNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAnnualLeaveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetBusinessOrgChart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BusinessId" Type="int" Mode="In" />
+    <Parameter Name="divisionId" Type="int" Mode="In" />
+    <Parameter Name="poolId" Type="int" Mode="In" />
+    <Parameter Name="functionId" Type="int" Mode="In" />
+    <Parameter Name="emptypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCertificateDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetCurrenciesFixedRateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCurrenciesIsFixData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetDefaultCurrenciesCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetEmployeeAnualLeaveBenefitList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeProfileData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeSearchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BussinessID" Type="int" Mode="In" />
+    <Parameter Name="DivisionId" Type="int" Mode="In" />
+    <Parameter Name="PoolId" Type="int" Mode="In" />
+    <Parameter Name="FunctionId" Type="int" Mode="In" />
+    <Parameter Name="JobTitleId" Type="int" Mode="In" />
+    <Parameter Name="countryId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeTaskList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getEmpNameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEndorseRecipientemployeeDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetHolidayAndAbsenecByEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetLengthOfEmployment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetLoginUserRoleType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetMatPatLeave_Approval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetNewVacancyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetNewVacancyNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+    <Parameter Name="Header" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetOrganizationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetOtherLeaveApprovelList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetOtherLeaveNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetProjectPlannerTimeSheet_Approve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetPublicHoliday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPublicHolidayByCountryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CountryID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetReportToResource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetResourceDatabyFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetResourceDatabyFilterTimesheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetResourceDatabyFilterTravel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetResourceDatabyFilterUplift" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetResourceEmployeeData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetResourcePlannerDatabyFilterTimesheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetResourcePlannerDatabyFilterTravel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetResourcePool" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetScheduleApprovalList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetScheduleNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetSick_Approval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetSkillEndFilterByAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTimeSheet_Approve" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTimeSheetNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTMSRecruitmentProcessChart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RecId" Type="int" Mode="In" />
+    <Parameter Name="BussinessID" Type="int" Mode="In" />
+    <Parameter Name="DivisionId" Type="int" Mode="In" />
+    <Parameter Name="PoolId" Type="int" Mode="In" />
+    <Parameter Name="FunctionId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTotalHolidayEntiAndPublicHoliday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getTotalProjectPlannerTimesheetDuration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getTotalProjectPlannerUpliftDuration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getTotalTimesheetDuration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTrainingNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTrainingRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTravelApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTravelNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUpliftApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetUpliftNotificationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="DetailsId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserRoleList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetVisaDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetWorkPatternDataById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetYearInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="year" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SaveAllActivityTypeData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Year" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="currencyId" Type="int" Mode="In" />
+    <Parameter Name="workUnitId" Type="int" Mode="In" />
+    <Parameter Name="WorkerRate" Type="decimal" Mode="In" />
+    <Parameter Name="customerRate" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="SaveAllBenifitsData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="BenifitId" Type="int" Mode="In" />
+    <Parameter Name="DateAward" Type="datetime" Mode="In" />
+    <Parameter Name="ExpDate" Type="datetime" Mode="In" />
+    <Parameter Name="Value" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Attachment" Type="varchar" Mode="In" />
+    <Parameter Name="RecoveryOnTermination" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SaveAllSalaryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="EffectiveFrom" Type="datetime" Mode="In" />
+    <Parameter Name="SalaryType" Type="int" Mode="In" />
+    <Parameter Name="PaymentFrequancy" Type="int" Mode="In" />
+    <Parameter Name="Amount" Type="varchar" Mode="In" />
+    <Parameter Name="Curruncy" Type="int" Mode="In" />
+    <Parameter Name="TotalSalary" Type="varchar" Mode="In" />
+    <Parameter Name="ReasonForChange" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SaveAllSchadulingData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="IsLessThenADay" Type="bit" Mode="In" />
+    <Parameter Name="IsDayorMore" Type="bit" Mode="In" />
+    <Parameter Name="startDate" Type="datetime" Mode="In" />
+    <Parameter Name="endDate" Type="datetime" Mode="In" />
+    <Parameter Name="duration" Type="decimal" Mode="In" />
+    <Parameter Name="customer" Type="int" Mode="In" />
+    <Parameter Name="project" Type="int" Mode="In" />
+    <Parameter Name="asset" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar(max)" Mode="In" />
+    <Parameter Name="HrSD" Type="decimal" Mode="In" />
+    <Parameter Name="MinSD" Type="decimal" Mode="In" />
+    <Parameter Name="CDate" Type="datetime" Mode="In" />
+    <Parameter Name="HrED" Type="decimal" Mode="In" />
+    <Parameter Name="MinED" Type="decimal" Mode="In" />
+    <Parameter Name="durationHr" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="SaveAllTimeSheetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+    <Parameter Name="InTimeHr" Type="int" Mode="In" />
+    <Parameter Name="InTimeMin" Type="int" Mode="In" />
+    <Parameter Name="OutTimeHr" Type="int" Mode="In" />
+    <Parameter Name="OutTimeMin" Type="int" Mode="In" />
+    <Parameter Name="Project" Type="int" Mode="In" />
+    <Parameter Name="CostCode" Type="int" Mode="In" />
+    <Parameter Name="Customer" Type="int" Mode="In" />
+    <Parameter Name="AssetId" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Attachment" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SaveAllTraningData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="TrainingNameId" Type="int" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="Importance" Type="int" Mode="In" />
+    <Parameter Name="status" Type="int" Mode="In" />
+    <Parameter Name="startDate" Type="datetime" Mode="In" />
+    <Parameter Name="emdDate" Type="datetime" Mode="In" />
+    <Parameter Name="expDate" Type="datetime" Mode="In" />
+    <Parameter Name="provider" Type="varchar" Mode="In" />
+    <Parameter Name="cost" Type="decimal" Mode="In" />
+    <Parameter Name="note" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomFieldsJSON" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="attachment" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SaveAllTravelLeaveDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="FromCountryID" Type="int" Mode="In" />
+    <Parameter Name="FromStateId" Type="int" Mode="In" />
+    <Parameter Name="FromTownId" Type="int" Mode="In" />
+    <Parameter Name="FromAirportId" Type="int" Mode="In" />
+    <Parameter Name="ToCountryID" Type="int" Mode="In" />
+    <Parameter Name="ToStateId" Type="int" Mode="In" />
+    <Parameter Name="ToTownId" Type="int" Mode="In" />
+    <Parameter Name="ToAirportId" Type="int" Mode="In" />
+    <Parameter Name="ReasonTravelId" Type="int" Mode="In" />
+    <Parameter Name="IsLessDay" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="endDate" Type="datetime" Mode="In" />
+    <Parameter Name="duration" Type="varchar" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
+    <Parameter Name="Type" Type="int" Mode="In" />
+    <Parameter Name="customer" Type="int" Mode="In" />
+    <Parameter Name="project" Type="int" Mode="In" />
+    <Parameter Name="costcode" Type="int" Mode="In" />
+    <Parameter Name="Attachment" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="String" Type="ntext" Mode="In" />
+    <Parameter Name="Delimiter" Type="char" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Items" Type="nvarchar" MaxLength="4000" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="UpdateAnnualLeaveApproveStatues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateAnnualLeaveRejectStatues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateMat_PatApproveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateMat_PatRejectStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateNewVacancyApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateNewVacancyReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateOtherLeaveApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateOtherLeaveReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateProjectTimesheetApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateProjectTimesheetReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateScheduleStatusApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateScheduleStatusReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateSickLeaveApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateSickRejectStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTimesheetApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTimesheetStatus_Reject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTrainingApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTrainingReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTravelApproveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateTravelRejectStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateUpliftApproveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateUpliftRejectStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UpdateUserRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpHolidayEntitlNextYearData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="nextYear" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpHolidayEntitlThisYearData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="thisYear" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="EvolutionModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityTypes" EntityType="Self.ActivityTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin_Document" EntityType="Self.Admin_Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Benefit" EntityType="Self.Benefit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Benefits_Documents" EntityType="Self.Benefits_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BradfordFactor_HolidaySettings" EntityType="Self.BradfordFactor_HolidaySettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Business" EntityType="Self.Business" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cases" EntityType="Self.Cases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cases_Comments" EntityType="Self.Cases_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cases_Documents" EntityType="Self.Cases_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="certificate" EntityType="Self.certificate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="certificate_document" EntityType="Self.certificate_document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cmp_Customer" EntityType="Self.Cmp_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company_Customer" EntityType="Self.Company_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company_Settings" EntityType="Self.Company_Settings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Email_Setting" EntityType="Self.Email_Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employe_EmergencyContacts" EntityType="Self.Employe_EmergencyContacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_AddEndrosementSkills" EntityType="Self.Employee_AddEndrosementSkills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_AnualLeave" EntityType="Self.Employee_AnualLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Document" EntityType="Self.Employee_Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Document_Signature" EntityType="Self.Employee_Document_Signature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Educations" EntityType="Self.Employee_Educations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Endrosement_Comments" EntityType="Self.Employee_Endrosement_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Experiences" EntityType="Self.Employee_Experiences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Languages" EntityType="Self.Employee_Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_LateLeave" EntityType="Self.Employee_LateLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_MaternityOrPaternityLeaves" EntityType="Self.Employee_MaternityOrPaternityLeaves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_MaternityOrPaternityLeaves_Document" EntityType="Self.Employee_MaternityOrPaternityLeaves_Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_MeternityOrPaternityLeaves_Comment" EntityType="Self.Employee_MeternityOrPaternityLeaves_Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_OtherLeave" EntityType="Self.Employee_OtherLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_OtherLeave_Documents" EntityType="Self.Employee_OtherLeave_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_Scheduling" EntityType="Self.Employee_ProjectPlanner_Scheduling" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_TimeSheet" EntityType="Self.Employee_ProjectPlanner_TimeSheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_TimeSheet_Detail" EntityType="Self.Employee_ProjectPlanner_TimeSheet_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_TimeSheet_Documents" EntityType="Self.Employee_ProjectPlanner_TimeSheet_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_TravelLeave" EntityType="Self.Employee_ProjectPlanner_TravelLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_TravelLeave_Documents" EntityType="Self.Employee_ProjectPlanner_TravelLeave_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_Uplift" EntityType="Self.Employee_ProjectPlanner_Uplift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_Uplift_Detail" EntityType="Self.Employee_ProjectPlanner_Uplift_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_ProjectPlanner_Uplift_Documents" EntityType="Self.Employee_ProjectPlanner_Uplift_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_PublicHoliday" EntityType="Self.Employee_PublicHoliday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Qualifications" EntityType="Self.Employee_Qualifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Resume" EntityType="Self.Employee_Resume" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary" EntityType="Self.Employee_Salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary_Deduction" EntityType="Self.Employee_Salary_Deduction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary_Deduction_Temp" EntityType="Self.Employee_Salary_Deduction_Temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary_Entitlement_Temp" EntityType="Self.Employee_Salary_Entitlement_Temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary_Entitlements" EntityType="Self.Employee_Salary_Entitlements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Salary_Temp" EntityType="Self.Employee_Salary_Temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_SickLeaves" EntityType="Self.Employee_SickLeaves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_SickLeaves_Comments" EntityType="Self.Employee_SickLeaves_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_SickLeaves_Documents" EntityType="Self.Employee_SickLeaves_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Skills" EntityType="Self.Employee_Skills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Task_Temp" EntityType="Self.Employee_Task_Temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TimeSheet" EntityType="Self.Employee_TimeSheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TimeSheet_Detail" EntityType="Self.Employee_TimeSheet_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TimeSheet_Documents" EntityType="Self.Employee_TimeSheet_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TOIL" EntityType="Self.Employee_TOIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TravelLeave" EntityType="Self.Employee_TravelLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_TravelLeave_Documents" EntityType="Self.Employee_TravelLeave_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_WorkPattern" EntityType="Self.Employee_WorkPattern" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeAddressInfo" EntityType="Self.EmployeeAddressInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeBankInfo" EntityType="Self.EmployeeBankInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformance" EntityType="Self.EmployeePerformance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceCoreJSONDetails" EntityType="Self.EmployeePerformanceCoreJSONDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceCustomerSegmentJSONDetail" EntityType="Self.EmployeePerformanceCustomerSegmentJSONDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceGoal" EntityType="Self.EmployeePerformanceGoal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceGoalComments" EntityType="Self.EmployeePerformanceGoalComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceGoalDocument" EntityType="Self.EmployeePerformanceGoalDocument" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePerformanceJobRoleSegmentJSONDetails" EntityType="Self.EmployeePerformanceJobRoleSegmentJSONDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeRelation" EntityType="Self.EmployeeRelation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeTask" EntityType="Self.EmployeeTask" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeTraining" EntityType="Self.EmployeeTraining" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HolidaysNAbsence_Setting" EntityType="Self.HolidaysNAbsence_Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HolidayYearAndMonthSetting" EntityType="Self.HolidayYearAndMonthSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mobile_setting" EntityType="Self.Mobile_setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News_Comments" EntityType="Self.News_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PerformanceCoWorkerDetails" EntityType="Self.PerformanceCoWorkerDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PerformanceCustomerDetails" EntityType="Self.PerformanceCustomerDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PerformanceEmployeeDetails" EntityType="Self.PerformanceEmployeeDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PerformanceSetting" EntityType="Self.PerformanceSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pools" EntityType="Self.Pools" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PublicHolidayCountry" EntityType="Self.PublicHolidayCountry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PublicHolidays" EntityType="Self.PublicHolidays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QueryColunName" EntityType="Self.QueryColunName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QueryData" EntityType="Self.QueryData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role_DefaultMenu" EntityType="Self.Role_DefaultMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendReviewToCoworker" EntityType="Self.SendReviewToCoworker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendReviewToCustomer" EntityType="Self.SendReviewToCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SkillSets" EntityType="Self.SkillSets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="System_settings" EntityType="Self.System_settings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemLists" EntityType="Self.SystemLists" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemListValue" EntityType="Self.SystemListValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task_Documents" EntityType="Self.Task_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task_List" EntityType="Self.Task_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimeSheet_Setting" EntityType="Self.TimeSheet_Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMS_Applicant" EntityType="Self.TMS_Applicant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMS_Applicant_Comments" EntityType="Self.TMS_Applicant_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMS_Applicant_Documents" EntityType="Self.TMS_Applicant_Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMS_Setting_RecruitmentProcesses" EntityType="Self.TMS_Setting_RecruitmentProcesses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Training_Document" EntityType="Self.Training_Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMenu" EntityType="Self.UserMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vacancy" EntityType="Self.Vacancy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visa" EntityType="Self.Visa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visa_Document" EntityType="Self.Visa_Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkPatternDetails" EntityType="Self.WorkPatternDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkPatterns" EntityType="Self.WorkPatterns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ApplicantRejectReason" EntityType="Self.ApplicantRejectReason" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ApplicantRejectReason].[Id] AS [Id], 
+    [ApplicantRejectReason].[Name] AS [Name], 
+    [ApplicantRejectReason].[Archived] AS [Archived], 
+    [ApplicantRejectReason].[CreatedDate] AS [CreatedDate], 
+    [ApplicantRejectReason].[LastModified] AS [LastModified], 
+    [ApplicantRejectReason].[UserIdCreatedNy] AS [UserIdCreatedNy], 
+    [ApplicantRejectReason].[UserIdLastModifiedBy] AS [UserIdLastModifiedBy]
+    FROM [dbo].[ApplicantRejectReason] AS [ApplicantRejectReason]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

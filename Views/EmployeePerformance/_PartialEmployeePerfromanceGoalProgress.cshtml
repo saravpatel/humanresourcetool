@@ -1,0 +1,140 @@
+﻿@model HRTool.Models.Settings.ObjectiveOfEmployeePerformance
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h4> Goal Management</h4>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" id="CkeckIn" data-toggle="modal" data-target="#GoalPerformnceProgressCommnetModel" onclick="getGoalComment(0,@Model.Id,@Model.EmpPerformanceId,@Model.EmployeeId)">Checkin</button>
+    </div>
+    <div class="col-md-1">
+        <label>Status</label>
+    </div>
+    <div class="col-md-2">
+
+
+        <select class="form-control" id="drpProgressStatus">
+            @foreach (var item in Model.Status)
+            {
+                <option value="@item.Text">@item.Text</option>
+            }
+        </select>
+
+    </div>
+
+</div>
+
+
+
+<div class="row">
+    <div class="main-section" style="background-color: #f3f3f3;padding: 21px;margin-top: 20px;margin: 10px;">
+        <ul class="list-group list-inline">
+            <li> <h4>  @Model.GoalName</h4></li>
+            <li><span>  Due  @Model.DueDate</span> </li>
+            <li> <h4> @Model.GoalDescription</h4></li>
+            <li> <input type="text" value="@Model.UnitPercent" id="UnitPercent" readonly />/100</li>
+
+        </ul>
+        <h6>complate the review</h6>
+        <div id="filesList">
+            @foreach (var item in Model.DocumentList)
+            {
+                <div class="row ListData">
+                    <div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div>
+
+                    <div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br></div>
+                    <div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div>
+                </div>
+                <a id="downloadCoverLetter" href="~/Upload/Resources/GoalDocument/@item.newName" target="_blank" download>Download</a>
+            }
+        </div>
+        <div class="browse-attach" align="right">
+            <label class="btn btn-success" type="file" for="GoalFileToUpload">
+                BROWSE
+            </label>
+            <input type="file" id="GoalFileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<input type="hidden" value="@Model.Id" id="PerGoalId" />
+<input type="hidden" value="@Model.EmpPerformanceId" id="EmpPerGoalId" />
+<input type="hidden" value="@Model.EmployeeId" id="EmployeeId"/>
+
+
+
+
+
+<div class="row">
+   
+    <div class="comment-header">
+    @foreach (var item in Model.CommentList)
+    {
+        <div class="col-md-10">   
+            <h5>sanket brahmbhatt</h5>
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-trash-o dlt-btn"></i>
+        </div>
+
+        <div class="col-md-1">            
+            <i class="fa fa-pencil edit-btn" data-toggle="modal" data-target="#GoalPerformnceProgressCommnetModel" onclick="getCommentData(@item.Id,@Model.Id,@Model.EmpPerformanceId,@Model.EmployeeId);"></i>
+        </div>
+        <div class="col-md-12 comment-text">
+            <div class="">
+              @item.comment
+            </div>            
+     </div>
+    }
+</div>
+</div>
+    
+
+
+
+<script>
+    $("#page_content").on('change', '#GoalFileToUpload', function (e) {
+        $(".hrtoolLoader").show();
+        var files = e.target.files;
+        var imageData = "";
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                imageData = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    imageData.append("file" + x, files[x]);
+                }
+                setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: constantEmpPerformance.GoalImageData,
+                        contentType: false,
+                        processData: false,
+                        data: imageData,
+                        success: function (result) {
+                            var string = '<div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newFileName="' + result.NewFileName + '">' + result.originalFileName + '</label><br /></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>';
+                            var isEmpty = $("#CoDetailsView").find("#GoalPerformnceProgressModal").find("#GoalPerformnceProgressModalBody").find("#filesList").html();
+                            if (isEmpty = "") {
+                                $("#CoDetailsView").find("#GoalPerformnceProgressModal").find("#GoalPerformnceProgressModalBody").find("#filesList").html(string);
+                            }
+                            else {
+                                $("#CoDetailsView").find("#GoalPerformnceProgressModal").find("#GoalPerformnceProgressModalBody").find("#filesList").append(string);
+                            }
+                            $(".hrtoolLoader").hide();
+                            $(".modal-backdrop").hide();
+                        }
+                    });
+                }, 500);
+            }
+        }
+    });
+    $("#page_content").on('click', '.file-deleteicon', function () {
+        $(this).parent().remove();
+    });
+
+</script>

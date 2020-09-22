@@ -1,0 +1,250 @@
+﻿@model HRTool.Models.Settings.ProjectViewModel
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Name*</label>
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Name Of the project">
+            <input type="text" name="name" id="AssetName" value="@Model.Name" class="ImageDescription form-control">
+        </div>  
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-projectname" style="display:none;" data-valmsg-for="Description" data-valmsg-replace="true">The project name is required.</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Country*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Country">
+            <select class="form-control" id="CountryId">
+                <option value="0"> Select Country..</option>
+                @foreach (var Country in Model.CountryList)
+                {
+                    <option value="@Country.Value" @(Country.Selected ? "Selected" : "")>@Country.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageCountry" data-valmsg-for="Conntry" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Location*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Location">
+            <select class="form-control" id="LocationId">
+                <option value="0"> Select Location..</option>
+                @foreach (var Location in Model.LocationList)
+                {
+                    <option value="@Location.Value" @(Location.Selected ? "Selected" : "")>@Location.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageLocation" data-valmsg-for="Loction" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+
+        <label class="control-label col-md-3">Block*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Block">
+            <select class="form-control" id="BlockId">
+                <option value="0">  Select Block..</option>
+                @foreach (var Block in Model.BlockList)
+                {
+                    <option value="@Block.Value" @(Block.Selected ? "Selected" : "")>@Block.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageBlock" data-valmsg-for="Block" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Tax Zone</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Tax Zone">
+            <select class="form-control" id="TaxZoneId">
+                <option value="0">  Select Tax Zone..</option>
+                @foreach (var Tax in Model.TaxZoneList)
+                {
+                    <option value="@Tax.Value" @(Tax.Selected ? "Selected" : "")>@Tax.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">Asset Type</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Asset Type">
+            <select class="form-control" id="AssetTypeId">
+                <option value="0">  Select Asset Type..</option>
+                @foreach (var Asset in Model.AssetsTypeList)
+                {
+                    <option value="@Asset.Value" @(Asset.Selected ? "Selected" : "")>@Asset.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">From Date*</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control mrg-btm datepicker" id="FromDate" placeholder="From Date" value="@Model.FromDate" name="FromDate" title="From Date">
+        </div>
+
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagefromdate" data-valmsg-for="fromdate" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="control-label col-md-3">To Date*</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control mrg-btm datepicker" id="Todate" value="@Model.ToDate" placeholder="To Date" name="Todate" title="To Date">
+        </div>
+
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessagetodate" data-valmsg-for="todate" data-valmsg-replace="true" style="display:none"></span>
+            <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">General Skills*</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist" data-toggle="tooltip" data-placement="right" title=" Select General Skills this Project represents">
+        <select class="form-control" id="drp-GeneralSkills" multiple="multiple" title="-- Select --">
+            @foreach (var item in Model.GeneralSkillsList)
+            {
+                if (Model.Id > 0)
+                {
+                    if (Model.selectedValuesGeneral.Contains(item.Value))
+                    {
+                        <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="validationmessaggeneralskill" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Technical Skills*</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist" data-toggle="tooltip" data-placement="right" title=" Select Technical Skills this Project represents">
+        <select class="form-control" id="drp-TechnicalSkills" multiple="multiple" title="-- Select --">
+            @foreach (var item in Model.TechnicalSkillsList)
+            {
+                if (Model.Id > 0)
+                {
+                    if (Model.selectedValuesTechnical.Contains(item.Value))
+                    {
+                        <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="validationmessatechnicalskill" data-valmsg-for="todate" data-valmsg-replace="true" style="display:none"></span>
+
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Operator</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Operator Company">
+            <input type="text" name="name" id="CompanyOparater" value="@Model.OperatorCompany" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Project Owner</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Owner Of the project">
+            <input type="text" name="name" id="ProjectOwner" value="@Model.ProjectOwner" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Customers</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist">
+        <select class="form-control" id="drp-Customers" multiple="multiple" title="-- Select --">
+            @foreach (var item in Model.CustomersList)
+            {
+                if (Model.Id > 0)
+                {
+                    if (Model.selectedValuesCoustmer.Contains(item.Value))
+                    {
+                        <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Note</label>
+        <div class="col-md-6">
+            <textarea class="form-control" id="txt-SystemListDescription" placeholder="Description" data-toggle="tooltip" name="Description" data-placement="right" title="" data-original-title="Skill Description">@Model.Description</textarea>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>

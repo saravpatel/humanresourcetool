@@ -1,0 +1,300 @@
+﻿@model HRTool.Models.Resources.EmployeeResumePDFViewModel
+
+@{
+
+    Layout = null;
+}
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+<div style="font-family: Roboto, sans-serif;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:750px; max-width:100%;">
+        <tbody>
+            <tr>
+                <td valign="top">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="background: #c6c6c8; padding:15px; margin:0px;">
+                                    <table width="50%" border="0" cellspacing="0" cellpadding="0" style="float:left;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="border-bottom: 1px solid #78b0bf;">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td valign="top" style="background:#a0a8aa; width:120px;">
+                                                                    @if (string.IsNullOrEmpty(Model.PhotoPath))
+                                                                    {
+                                                                        <img src="~/img/resume/profile.png" alt="" style="width:100%; float:left;">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="~/@Model.PhotoPath" alt="" style="width:100%; float:left;">
+                                                                    }
+
+                                                                </td>
+                                                                <td align="right" valign="bottom" style="font-size:26px; color:#78b0bf;">@Model.FirstName @Model.LastName</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size:20px; color: #fff;">@Model.JobTitle</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table width="50%" border="0" cellspacing="0" cellpadding="0" style="text-align:right; border-right: dotted #78b0bf;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-size:15px; padding-bottom:10px; padding-right:5px;">
+                                                    <img src="~/img/resume/icon-top1.png" alt="" style="width:20px; height:20px; border-radius:50%; background:#8c8c8c; color:#fff; padding:6px; margin-left:5px; margin-top:-5px; float:right;">@Model.Address
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size:15px; padding-bottom:10px; padding-right:5px;">
+                                                    <img src="~/img/resume/icon-top2.png" alt="" style="width:20px; height:20px; border-radius:50%; background:#8c8c8c; color:#fff; padding:6px; margin-left:5px; margin-top:-5px; float:right;">
+                                                    <p style="width:90%; float:left; margin:0px; padding:0px;">@Model.PersonalPhone</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size:15px; padding-bottom:10px; padding-right:5px;">
+                                                    <img src="~/img/resume/icon-top3.png" alt="" style="width:20px; height:20px; border-radius:50%; background:#8c8c8c; color:#fff; padding:6px; margin-left:5px; margin-top:-5px; float:right;">
+                                                    <a style="width:90%; float:left; color:#000; text-decoration:none;">@Model.Email</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size:15px; padding-bottom:10px; padding-right:5px;">
+                                                    <img src="~/img/resume/icon-top4.png" alt="" style="width:20px; height:20px; border-radius:50%; background:#8c8c8c; color:#fff; padding:6px; margin-left:5px; margin-top:-5px; float:right;">
+                                                    <a style="width:90%; float:left; color:#000; text-decoration:none;" href="#">@Model.PersonalEmail</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#4a4a4a" style="padding:15px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                    <img src="~/img/resume/content-icon1.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px; background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">BIOGHAPHY
+                                                </td>
+                                                <td width="50%"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">@Model.ResumeText</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                    <img src="~/img/resume/content-icon2.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px; background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">EDUCATION
+                                                </td>
+                                                <td width="50%"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">
+                                                    <table cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+                                                            @foreach (var item in Model.AllDetails.EductionList)
+                                                            {
+                                                                <tr>
+                                                                    <td width="30%" valign="top" style="color:#fff;"><span style="padding-right:3px;">•</span>@item.InstitutionName</td>
+                                                                    <td width="70%" valign="top" style="color:#fff;">
+                                                                        <span style="color:#50a1b5;">@item.CourseName</span>(@item.StartDate To @item.EndDate)<br />
+                                                                        @item.OtherInformation
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                    <img src="~/img/resume/content-icon3.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px;background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">WORK EXPERIENCE
+                                                </td>
+                                                <td width="50%"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">
+                                                    <table cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+
+                                                            @foreach (var items in Model.AllDetails.WorkExperienceList)
+                                                            {
+
+                                                                <tr>
+                                                                    <td width="30%" valign="top" style="color:#fff;"><span style="color:#50a1b5; padding-right:3px;">•</span>@items.CompanyName</td>
+                                                                    <td width="70%" valign="top" style="color:#fff;">
+                                                                        <span style="color:#50a1b5;">@items.JobTitle</span>(@items.JobStartDate To @items.JobEndDate)<br />
+                                                                        @items.OtherInformation
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                    <img src="~/img/resume/content-icon3.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px;background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">QUALIFICATIONS
+                                                </td>
+                                                <td width="50%"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">
+                                                    <table cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+
+                                                            @foreach (var item1 in Model.AllDetails.QualificationList)
+                                                            {
+
+                                                                <tr>
+                                                                    <td width="30%" valign="top" style="color:#fff;"><span style="color:#50a1b5; padding-right:3px;">•</span>@item1.Detail</td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                    <img src="~/img/resume/content-icon4.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px;background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">SKILLS
+                                                </td>
+                                                <td width="50%"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">
+                                                    <table cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="color:#50a1b5; padding-top:5px; padding-bottom:5px; font-size:16px; float:left;">
+                                                                    General Skiils
+                                                                </td>
+                                                            </tr>
+                                                            @*@if (Model.generalSkills != null)
+                                                                {
+                                                                    if (Model.generalSkills.Count > 0)
+                                                                    {
+                                                                        foreach (var item2 in Model.generalSkills)
+                                                                        {*@
+                                                            <tr>
+                                                                <td valign="top" style="color:#fff;"><span style="color:#50a1b5; padding-right:3px;">•</span>@*@item2.Name*@</td>
+                                                            </tr>
+                                                            @*}
+                                                                    }
+                                                                }*@
+                                                            <tr>
+                                                                <td style="color:#50a1b5; padding-top:5px; padding-bottom:5px; font-size:16px; float:left;">
+                                                                    Technical Skiils
+                                                                </td>
+                                                            </tr>
+                                                            @*@if (Model.technicalSkills != null)
+                                                                {
+                                                                    if (Model.technicalSkills.Count > 0)
+                                                                    {
+                                                                        foreach (var item3 in Model.technicalSkills)
+                                                                        {*@
+
+
+                                                            <tr>
+                                                                <td valign="top" style="color:#fff;"><span style="color:#50a1b5; padding-right:3px;">•</span>@*@item3.Name*@</td>
+                                                            </tr>
+                                                            @*}
+                                                                    }
+                                                                }*@
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @*<table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="bottom" align="right" style="width:50%; float:left; border-bottom: 1px solid #969392; color:#50a1b5; font-size:16px; position: relative; top:20px;">
+                                                        <img src="~/Content/img/resume/content-icon5.png" alt="" style="width:22px; height:22px; padding:6px; margin-bottom:10px; background:#fff; border-radius:50%; float:left; position: absolute; left: 0px; bottom: 0px;">
+                                                        SOCIAL
+                                                    </td>
+                                                    <td width="50%"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6" style="padding-top: 25px; margin:10px 0 20px 0; float:left; color:#fff; font-size:15px;">
+                                                        <table cellspacing="0" cellpadding="0" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="30%" valign="bottom" style="color:#797979">
+                                                                        <img src="~/Content/img/resume/social-icon1.png" alt="" style="width:22px; height:22px; padding:6px; background:#50a1b5; border-radius:50%; margin-right:5px;">
+                                                                        <a style="color:#797979; text-decoration:none;" href="#">FB.COM/YOURID123</a>
+                                                                    </td>
+                                                                    <td width="70%" valign="top" style="color:#797979">
+                                                                        <img src="~/Content/img/resume/social-icon2.png" alt="" style="width:22px; height:22px; padding:6px; background:#50a1b5; border-radius:50%; margin-right:5px;">
+                                                                        <a style="color:#797979; text-decoration:none;" href="#">BEHANCE.NET/YOURID123</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>*@
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

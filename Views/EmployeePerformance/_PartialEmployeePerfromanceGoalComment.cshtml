@@ -1,0 +1,29 @@
+﻿@model HRTool.Models.Settings.ObjectiveOfEmployeePerformance
+
+
+<input type="hidden" value="@Model.Id" id="GoalId" />
+<input type="hidden" value="@Model.EmpPerformanceId" id="EmpPerGoalId" />
+<input type="hidden" value="@Model.EmployeeId" id="EmployeeId" />
+<input type="hidden" value="@Model.CommnetId" id="CommntId" />
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label>Progress</label>
+    </div>            
+    <div class="col-md-3">
+        <input type="number" id="NewUnitPercent" class="form-control" min="0"/>
+    </div>        
+</div>
+<div class="row marbot10">
+    <div class="col-md-12">
+        <div id="froala-editor-comment">@Model.Description</div>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Comment" style="display:none;" data-valmsg-for="Comment" data-valmsg-replace="true">Comment is required.</span>
+    </div>
+</div>
+<script>
+    $("#page_content").on('click', '.file-deleteicon', function () {
+        $(this).parent().remove();
+    });
+
+</script>

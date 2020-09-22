@@ -1,0 +1,116 @@
+﻿@model IList<HRTool.Models.Resources.ViewSkillsViewModel>
+@using HRTool.CommanMethods;
+@using Microsoft.AspNet.Identity;
+@{
+    var userId = SessionProxy.UserId;
+}
+
+<div class="table-btns">
+    <a class="btn btn-primary btn-circle  btn-edit-Endrosement" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EditAskForEndorsementModelSkill" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-Endrosement" data-toggle="tooltip" data-placement="right" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Endrosement" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+</div>
+
+<table id="EndrosementTableList" class="table-bordered display table style2   dataTable" style="width:100%;" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th style="display:none">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.EndrosementId" class="dataTr">
+                <td colspan="3" class="newspage" data-title-text=" ">
+                    <div class="blog_list_teaser">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small uk-text-muted ng-binding">
+                                        <strong>@item.EmpolyeeName</strong>   has been endorsed by <span class="md-list-heading ">@item.AssignEmployeeName</span> on - @item.CreateDate <!-- <a href="#" class="">1 Comments</a> -->
+                                        <a class="toggles" data-id="@item.EndrosementId"><label style="color: #2fa4e7;cursor:pointer">Comments (@item.CommentCount)</label></a><span></span>
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="badbox">
+                                    <div class="img">
+                                        <img id="imgBadgeIcon" src="~/Upload/SkillSets/@item.Picture" class="listpic" /><span></span>
+                                    </div>
+                                    <div class="ddata">
+                                        <h5 class="postp">
+                                            @item.Name
+                                        </h5>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="blog_list_footer" style="display:none" id="Comment_@item.EndrosementId">
+                        <ul class="md-list md-list-addon md-list-sub">
+                            @foreach (var itemListRecord in item.commentList)
+                            {
+                                <li ng-repeat="comment in news.comments" class="ng-scope">
+                                    @if (userId == itemListRecord.UserCreate)
+                                    {
+                                        <div class="icons" style="margin-right:25px">
+                                            <a style="cursor:pointer"><i class="fa fa-pencil uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddEndrosmentComments"></i></a>
+                                            <a style="cursor:pointer"><i class="fa fa-trash-o uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id"></i></a>
+                                        </div>
+                                    }
+
+                                    <div class="md-list-addon-element">
+                                        @if (string.IsNullOrEmpty(itemListRecord.ProfileImagePath)) {
+                                            <img class="md-user-image md-list-addon-avatar" src="~/Images/defaultPicture.png" alt=""/>
+                                        }
+                                        else
+                                        {
+                                            <img class="md-user-image md-list-addon-avatar" src="/Upload/Resources/@itemListRecord.ProfileImagePath" alt="" />
+                                        }
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading" style="color:black">@item.EmpolyeeName</span>
+                                        <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified ">few minutes ago</span></span>
+                                    </div>
+                                    <div class="fr-view" style="color:black">
+                                        @Html.Raw(HttpUtility.HtmlDecode((itemListRecord.Comments)).ToString())
+                                    </div>
+                                    <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                        <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                    </div>
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-success pull-right AddComments" data-id="@item.EndrosementId" data-toggle="modal" data-target="#AddEndrosmentComments"><i class="fa fa-plus"></i> Add Comments</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div class="modal fade" id="AddEndrosmentComments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabel">Add Comments </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddEndrosmentCommentsBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-AddComments">ADD Comments</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>

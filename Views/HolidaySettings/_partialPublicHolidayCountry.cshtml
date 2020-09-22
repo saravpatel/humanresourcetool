@@ -1,0 +1,41 @@
+﻿@model HRTool.Models.Settings.publicHolidayCounty
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="hidden" id="countryId" value="@Model.Id" />
+        <input type="text" placeholder="Enter Country Name" value="@Model.Name" id="txt_PublicHoidayCountryName" class="form-control" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table id="publiHolidayList" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+            <thead>
+                <tr class="tblHeading">
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.holidayList)
+                {
+                    <tr class="dataTr" id="@item.Id">
+                        <td style="width:35%;"><input type="text" class="form-control HolidayName" placeholder="Holiday Name" id="HolidayName_@item.Id" value="@item.Name" /></td>
+                        <td style="width:35%;"><input type="text" class="form-control HolidayDate" placeholder="Holiday Date" id="HolidayDate_@item.Id" value="@item.Date" /></td>
+                        <td style="width:30%;">
+                            <button id="@item.Id" data-countryid="@Model.Id" class="btn btn-success btn-update-holiday">Update</button>
+                            <button id="@item.Id" data-countryid="@Model.Id" class="btn btn-danger deleteTr">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="md-btn md-btn-success btn-Add-newHoliday">Add Holiday</button>
+    </div>
+</div>
+<br />

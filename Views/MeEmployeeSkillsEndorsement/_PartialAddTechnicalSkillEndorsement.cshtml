@@ -1,0 +1,35 @@
+﻿@model HRTool.Models.Resources.EmployeeSkillsEndorsementViewModel
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Skill Set</label>
+        <input type="hidden" value="@Model.Id" id="hdnTechID"/>
+    </div>
+    <div class="col-md-6 dropdown-selectlist">
+        <select class="form-control" id="drpTechnical">
+           
+            @foreach (var Techanical in Model.TechnicalList)
+            {
+                if (Model.Id > 0)
+                {
+                    if (Model.TechnicalSkillsList.FirstOrDefault().TechnicalSkillsName.Contains(Techanical.Text))
+                    {
+                        <option value="@Techanical.Value" selected="selected">@Techanical.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Techanical.Value">@Techanical.Text</option>
+                    }
+                }
+                else
+                {
+                    <option value="@Techanical.Value">@Techanical.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+

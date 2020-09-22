@@ -1,0 +1,1449 @@
+﻿@model Tuple<HRTool.Models.Admin.NewsRole, List<HRTool.Models.Admin.AdminNewsViewModel>>
+@{
+
+}
+<input type="hidden" id="LoginUserId" value="@Model.Item1.UserId" />
+
+<div id="AdminNewsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title adminNewsTitle">Add News</h4>
+            </div>
+            <div class="modal-body" id="AdminNewsBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-AdminNews">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="table-btns">
+
+
+    @if (@Model.Item1.AddEdit)
+    {
+        <a class="btn btn-success btn-circle btn-add-AdminNews" title="Add News" data-backdrop="static" data-keyboard="false" @*data-toggle="modal" data-target="#AdminNewsModal"*@><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary btn-circle btn-edit-AdminNews" title="Edit News" data-backdrop="static" data-keyboard="false" @*data-toggle="modal" data-target="#AdminNewsModal"*@ disabled="disabled"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-circle btn-delete-AdminNews" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+    }
+    <a title="Refresh" class="btn btn-primary btn-circle btn-Refresh-AdminNews" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-refresh"></i></a>
+    @*<button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminNews" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>*@
+    <a class="btn btn-warning btn-circle btn-clearFilter-AdminNews" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></a>
+
+    <div  class="col-md-3">
+         
+        <input placeholder="From Date :" type="text" name="fromDate" class="form-control Datepiker" id="fromDate">
+    </div>
+    <div class="col-md-3">
+        
+        <input  placeholder="To Date :" type="text" name="ToDate" class="form-control Datepiker" id="ToDate">
+    </div>
+
+</div>
+
+<div class="row" id="AdminSearchNewsTable" class="table-bordered display table style2 table-striped  dataTable">
+    @*<div class="col-md-12 tblHeading" style="padding-bottom:12px;">
+            <div class="col-md-3 pd-right-left">
+                <b> Description</b>
+                <input type="text" class="form-control SearchDescription" placeholder="Description">
+            </div>
+            <div class="col-md-3 pd-right-left">
+                <b>Subject</b>
+                <input type="text" class="form-control SearchSubject" placeholder="Subject">
+            </div>
+            <div class="col-md-3 pd-right-left">
+                <b>Publisher</b>
+                <input type="text" class="form-control SearchPublisher" placeholder="Publisher">
+            </div>
+            <div class="col-md-3 pd-right-left">
+                <b>Date</b>
+                <input type="text" class="form-control SearchDate" placeholder="Date">
+            </div>
+        </div>*@
+
+</div>
+@*new news design*@
+
+<style>
+    .pl-heroleft .pl, .pl-natv .pl, .pl-queue .pl {
+        display: block;
+        border-bottom: 1px solid #f5f5f5;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .pl {
+        margin-bottom: 1rem;
+    }
+
+    .pl, .pl .hero {
+        position: relative;
+    }
+    .pl-heroleft .hero, .pl-natv .hero, .pl-queue .hero {
+        width: 33.33333%;
+        float: left;
+        margin-right: 1rem;
+    }
+
+    .pl .hero {
+        display: block;
+    }
+
+    .pl, .pl .hero {
+        position: relative;
+    }
+
+    .nticker, .pl .hero, .pl-heroabove.feature .block, .pl.card .block, .pl.card .top, .searchbox {
+        overflow: hidden;
+    }
+    .pl-heroleft .block, .pl-natv .block, .pl-queue .block {
+        overflow: hidden;
+    }
+    
+    .pl .kicker {
+        font-weight: 400;
+        font-size: 1.5rem;
+        display: inherit;
+        margin: 0 0 -1.3rem;
+    }
+    #navsec > a, .nlinks, .pl .kicker, .side-nav li .main {
+        text-transform: uppercase;
+    }
+    a {
+        background-color: transparent;
+        color: #23B5BA;
+    }
+    .pl .kicker {
+        color: #23B5BA !important;
+        text-decoration:none;
+    }
+    .pl h3 a, .pl h4 a {
+        color: #151515;
+        transition: all .1s ease;
+    }
+    .pl-heroleft .deck, .pl-natv .deck, .pl-queue .deck {
+        white-space: normal;
+    }
+
+    .pl .deck {
+        color: #616161;
+        font-family: Roboto;
+        margin-bottom: 1rem;
+        line-height: 119%;
+        font-size: 1.5rem;
+        margin-top:-8px;
+        text-align:justify;
+    }
+    .pl-heroleft .byline, .pl-natv .byline, .pl-queue .byline {
+        margin-bottom: .5rem;
+    }
+
+    .pl .byline {
+        font-size: .8125rem;
+        margin: 0;
+        line-height: normal;
+        font-weight: 400;
+        font-family: Roboto,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    .pl .byline, .pl h3:hover a, .pl h4:hover a {
+        color: #424242;
+    }
+
+    .pl .byline, .pl-jumbotron, .pl.card .bottom {
+        position: relative;
+    }
+    .pl .authorbyline {
+        display: block;
+        margin-right: 1rem;
+        margin-bottom: .33333rem;
+        color: #424242;
+        font-size:1.5rem;
+    }
+    .queueshare {
+        float: right;
+        margin: -16px 29px 0px 0px;
+        color:#ffffff;
+    }
+       .share-add {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #757575;
+            padding-left:10px;
+        }
+    .sharebar.share-text {
+        right: 120px;
+    }
+    .pl .readtime {
+        color: #9e9e9e;
+        font-size: 1.2rem;
+    }
+    .ga-click{
+        text-decoration:none!important;
+    }
+    .pro-pic{
+
+        float:left;
+        margin-right:10px;
+    }
+    a:focus, a:hover {
+        color: #23527c;
+        text-decoration: none !important;
+    }
+    h4 {
+        margin-top: -17px;
+    }
+    
+</style>
+<br/>
+@*<div class="row">
+    <div class="col-md-10">
+
+        <div class="pl">
+            <div class=" col-md-3">
+                <a class="ga-click" href="#" data-ga-category="topic-web-design-playlist" data-ga-label="playlist.6" data-ga-action="image">
+                    <img class="img-responsive thumbnail" src="https://static.pexels.com/photos/6335/man-coffee-cup-pen.jpg" alt="6 Skills You Can Learn Online for a Lucrative and Productive 2017">
+                </a>
+            </div>
+            <div class=" col-md-7 block">
+                <ul class="list-group list-inline">
+                    <li><a class="kicker ga-click " href="/topic/online-learning" data-ga-category="topic-web-design-playlist" data-ga-label="playlist.6" data-ga-action="kicker">online learning</a></li>
+                    <li class="tetx-right uk-text-bold">update on-06-Nov-2017.</li>
+
+                </ul>
+
+
+                <h4><a href="/article/286410" class="ga-click" data-ga-category="topic-web-design-playlist" data-ga-label="playlist.6" data-ga-action="headline">6 Skills You Can Learn Online 2018</a></h4>
+                <div class="deck">Expand your skill sets to be desirable in the job marketExpand your skill sets to be desirable in the job marketExpand your skill sets to be desirable in the job market.Expand your skill sets to be desirable in the job marketExpand your skill sets to be desirabl </div>
+                <div class="byline">
+                    <div class="pro-pic">
+                        <img src="/Upload/Resources/Tulips_06092017062605.jpg" class="md-user-image md-list-addon-avatar">
+                    </div>
+                    <a class="authorbyline ga-click" href="">
+
+                        <span class="name">Richard Agu</span>
+
+                    </a>
+
+                    <div class="queueshare">
+                        <div class="sharebar share-text btn btn-primary btn-sm">
+                        <i class="fa fa-plus" style="color:#ffffff;">Add Comments</i>
+                               
+                        </div>
+                    </div>
+                    <span class="readtime">5 min read</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>*@
+<hr style="margin-top:0px;">
+
+@*new news design*@
+
+
+
+
+
+<table id="AdminNewsTable" class="table-bordered display table style2    dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th style="padding:0px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model.Item2)
+        {
+            if (item.Super)
+            {
+                <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                    <td colspan="4" class="newspage">
+                        <div class="blog_list_teaser">
+                            <ul class="md-list md-list-addon">
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                        {
+                                            <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                        }
+                                        else
+                                        {
+                                            <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                        }
+
+                                       </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                        <span class="uk-text-small uk-text-muted ng-binding">
+                                            has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                            @if (item.AllowCustomer == true)
+                                            {
+                                                <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                            }
+                                        </span>
+                                    </div>
+                                    <h3 class="postp ng-binding">@item.Subject </h3>
+                                    <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                            <ul class="md-list md-list-addon md-list-sub">
+                                @foreach (var itemListRecord in item.NewCommantsList)
+                                {
+                                    <li ng-repeat="comment in news.comments" class="ng-scope">
+                                        @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                        {
+                                            <div class="icons" style="margin-right:25px">
+                                                <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                            </div>
+                                        }
+
+                                        <div class="md-list-addon-element">
+                                            @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                            {
+                                                <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                            }
+                                            else
+                                            {
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            }
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                            <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                        </div>
+                                        <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                        <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                            <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                        </div>
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        @if (item.AllowCustomer == true)
+                        {
+                            <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                if (item.EmployeeAccess == true && item.ManagerAccess == true && item.CustomerAccess == true)
+                {
+                    <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                        <td colspan="4" class="newspage">
+                            <div class="blog_list_teaser">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                            <span class="uk-text-small uk-text-muted ng-binding">
+                                                has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                @if (item.AllowCustomer == true)
+                                                {
+                                                    <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                }
+                                            </span>
+                                        </div>
+                                        <h3 class="postp ng-binding">@item.Subject </h3>
+                                        <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                <ul class="md-list md-list-addon md-list-sub">
+                                    @foreach (var itemListRecord in item.NewCommantsList)
+                                    {
+                                        <li ng-repeat="comment in news.comments" class="ng-scope">
+                                            @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                            {
+                                                <div class="icons" style="margin-right:25px">
+                                                    <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                    <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                </div>
+                                            }
+
+                                            <div class="md-list-addon-element">
+                                                @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                {
+                                                    <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                }
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                            </div>
+                                            <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                            <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                            </div>
+
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            @if (item.AllowCustomer == true)
+                            {
+                                <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                            }
+                        </td>
+                    </tr>
+                }
+                if (item.EmployeeAccess == true && item.ManagerAccess == false && item.CustomerAccess == false)
+                {
+                    if (item.Emp)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList.OrderByDescending(x=>x.CreatedDate))
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                if (item.EmployeeAccess == false && item.ManagerAccess == true && item.CustomerAccess == false)
+                {
+                    if (item.Man)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.EmployeeAccess == false && item.ManagerAccess == false && item.CustomerAccess == true)
+                {
+                    if (item.Cus)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.EmployeeAccess == true && item.ManagerAccess == false && item.CustomerAccess == true)
+                {
+                    if (item.Cus || item.Emp)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right AddComments" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.EmployeeAccess == false && item.ManagerAccess == true && item.CustomerAccess == true)
+                {
+                    if (item.Cus || item.Man)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.EmployeeAccess == true && item.ManagerAccess == true && item.CustomerAccess == false)
+                {
+                    if (item.Emp || item.Man)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+                if (item.SpecificWorker == true && item.SpecificCustomer == true && item.SpecificManager == true)
+                {
+                    if (Model.Item1.UserId == item.WorkerID || Model.Item1.UserId == item.CustomerID || Model.Item1.UserId == item.ManagerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == true && item.SpecificCustomer == false && item.SpecificManager == false)
+                {
+                    if (Model.Item1.UserId == item.WorkerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == true && item.SpecificCustomer == true && item.SpecificManager == false)
+                {
+                    if (Model.Item1.UserId == item.WorkerID || Model.Item1.UserId == item.CustomerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == true && item.SpecificCustomer == false && item.SpecificManager == true)
+                {
+                    if (Model.Item1.UserId == item.WorkerID || Model.Item1.UserId == item.ManagerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == false && item.SpecificCustomer == true && item.SpecificManager == false)
+                {
+                    if (Model.Item1.UserId == item.CustomerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == false && item.SpecificCustomer == true && item.SpecificManager == true)
+                {
+                    if (Model.Item1.UserId == item.CustomerID || Model.Item1.UserId == item.ManagerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                if (item.SpecificWorker == false && item.SpecificCustomer == false && item.SpecificManager == true)
+                {
+                    if (Model.Item1.UserId == item.ManagerID)
+                    {
+                        <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                            <td colspan="4" class="newspage">
+                                <div class="blog_list_teaser">
+                                    <ul class="md-list md-list-addon">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted ng-binding">
+                                                    has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                    @if (item.AllowCustomer == true)
+                                                    {
+                                                        <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <h3 class="postp ng-binding">@item.Subject </h3>
+                                            <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                    <ul class="md-list md-list-addon md-list-sub">
+                                        @foreach (var itemListRecord in item.NewCommantsList)
+                                        {
+                                            <li ng-repeat="comment in news.comments" class="ng-scope">
+                                                @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                                {
+                                                    <div class="icons" style="margin-right:25px">
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                        <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                    </div>
+                                                }
+
+                                                <div class="md-list-addon-element">
+                                                    @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                    {
+                                                        <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                    }
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                    <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                                </div>
+                                                <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                                <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                    <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                @if (item.AllowCustomer == true)
+                                {
+                                    <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+                if (Model.Item1.UserId == item.CreateUserId)
+                {
+                    <tr id="@item.Id" class="noselect1 ng-scope dataTr">
+                        <td colspan="4" class="newspage">
+                            <div class="blog_list_teaser">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                            <span class="uk-text-small uk-text-muted ng-binding">
+                                                has posted a new <strong>update </strong>on - @item.CreatedDate. <!-- <a href="#" class="">1 Comments</a> -->
+                                                @if (item.AllowCustomer == true)
+                                                {
+                                                    <a class="toggles" data-id="@item.Id"><label style="color: #2fa4e7;cursor:pointer  ">Comments (@item.CommentCount)</label></a><span></span>
+                                                }
+                                            </span>
+                                        </div>
+                                        <h3 class="postp ng-binding">@item.Subject </h3>
+                                        <div class="fr-view" style="color:black">@Html.Raw(HttpUtility.HtmlDecode((item.Description)).ToString())</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="blog_list_footer ng-hide" style="display:none" id="Comment_@item.Id">
+                                <ul class="md-list md-list-addon md-list-sub">
+                                    @foreach (var itemListRecord in item.NewCommantsList)
+                                    {
+                                        <li ng-repeat="comment in news.comments" class="ng-scope">
+                                            @if (Model.Item1.UserId == itemListRecord.UserCreate || Model.Item1.UserId == itemListRecord.SuperAdmin)
+                                            {
+                                                <div class="icons" style="margin-right:25px">
+                                                    <a style="cursor:pointer"><i class="material-icons uk-text-success EditCommentRecords" data-id="@itemListRecord.Id" data-toggle="modal" data-target="#AddNewsCommentsModel">edit</i></a>
+                                                    <a style="cursor:pointer"><i class="material-icons uk-text-danger DeleteCommentRecords" data-id="@itemListRecord.Id">delete</i></a>
+                                                </div>
+                                            }
+
+                                            <div class="md-list-addon-element">
+                                                @if (!string.IsNullOrEmpty(item.CurrentImage))
+                                                {
+                                                    <img src="~/Upload/Resources/@item.CurrentImage" class="md-user-image md-list-addon-avatar" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="md-user-image md-list-addon-avatar" src="~/img/avatars/avatar_02_tn.png" alt="">
+                                                }
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading" style="color:black">@item.CreatedBy</span>
+                                                <span class="uk-text-small uk-text-muted">added a comment <span am-time-ago="comment.lastModified">@itemListRecord.Time</span></span>
+                                            </div>
+                                            <div class="postp" style="color:black"><p style="color:black">@Html.Raw(@itemListRecord.Comments)</p></div>
+                                            <div id="comment_comments_@itemListRecord.Id" style="display:none">
+                                                <p>@Html.Raw(@itemListRecord.Comments)</p>
+                                            </div>
+
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            @if (item.AllowCustomer == true)
+                            {
+                                <a href="#" class="btn btn-success pull-right" data-id="@item.Id" data-toggle="modal" data-target="#AddNewsCommentsModel"><i class="fa fa-plus"></i> Add Comments</a>
+                            }
+                        </td>
+                    </tr>
+
+                }
+
+            }
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="AddNewsCommentsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title commentTitle" id="myModalLabel">Add Comments </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddNewsCommentsRecord">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-AddComments">ADD Comments</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,521 @@
+﻿@model HRTool.Models.Admin.TMSVacancyDetailsViewModel
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<style>
+    .dd-empty {
+        background: transparent;
+        border: transparent;
+        min-height: 30px !important;
+    }
+    .dd-handle:hover, .dd-handle:focus {
+        color: #000 !important;
+    }
+        .startrating button{
+        background:#dddddd;
+            padding: 1px 3px;
+    display: inline-block;
+    min-width: 15px !important;
+    min-height: 15px !important;
+    white-space: normal;
+    font-size: 9px;
+    line-height: 13px;
+    
+    }
+.displayinline{
+    display:inline-block;
+}
+.star1 button:nth-child(1),
+       .star2 button:nth-child(1),
+       .star2 button:nth-child(2),
+       .star3 button:nth-child(1),
+       .star3 button:nth-child(2),
+       .star3 button:nth-child(3),
+       .star4 button:nth-child(1),
+       .star4 button:nth-child(2),
+       .star4 button:nth-child(3),
+       .star4 button:nth-child(4),
+       .star5 button:nth-child(1),
+       .star5 button:nth-child(2),
+       .star5 button:nth-child(3),
+       .star5 button:nth-child(4),
+       .star5 button:nth-child(5){
+           color: #fff;
+           background: #f0ad4e;
+           border: #eea236;
+           
+   }
+     .star1haf button:nth-child(2),        
+     .star2haf button:nth-child(3),       
+.star3haf button:nth-child(4),
+.star4haf button:nth-child(5){
+background: #f0ad4e;
+background: -moz-linear-gradient(left, #f0ad4e 50%, #dddddd 50%);
+background: -webkit-linear-gradient(left, #f0ad4e 50%,#dddddd 50%);
+background: linear-gradient(to right, #f0ad4e 50%,#dddddd 50%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ad4e', endColorstr='#dddddd',GradientType=1 );
+    border: 0px;
+}
+
+</style>
+
+
+<div id="AddResoure" data-backdrop="static" data-keyboard="false" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" >
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" onclick="btnClose()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Resource</h4>
+                        </div>
+                        <div class="modal-body" id="AddResoureceBody">
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ApplicantModel" data-backdrop="static" data-keyboard="false" class="modal fade lg-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title applicantTitle">Add Applicant</h4>
+                    </div>
+                    <div class="modal-body" id="AddApplicantBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-success" id="btn-submit-Steps">ADD</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ApplicantRejectReasonModel" data-backdrop="static" data-keyboard="false" class="modal fade lg-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title applicantTitle">Add Applicant Reject Reason</h4>
+                    </div>
+                    <div class="modal-body" id="ApplicantRejectReasonModelBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btn-submit-RejectReason">ADD</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<h4 class="heading_a uk-margin-bottom">
+    <div class="icon">
+        <img src="~/img/listicons/icn-tms.png" alt="" />
+    </div>
+    <div class="titletext w90per">
+        Applicant Overview
+        <p>Here you can select a vacancy and then manage the relevant applicants. You can accept, reject or move applicants through your recruitment pipeline categories. You can define your pipeline categories in Settings. Accepting an applicant will take you to the New Employee Wizard and help you create a new Employee Record.</p>
+    </div>
+    <div class="clearfix"></div>
+</h4>*@
+<h1 class="page-title">
+    Applicant Overview
+    <small>
+        Here you can select a vacancy and then manage the relevant applicants. You can accept, reject or move applicants through your recruitment pipeline categories. You can define your pipeline categories in Settings. Accepting an applicant will take you to the New Employee Wizard and help you create a new Employee Record.
+    </small>
+</h1>
+
+<div class="md-card">
+    <div >
+        <div class="row marbot10 ">
+            <div class="form-group col-md-12">
+                <label class="control-label col-md-1">Vacancy*</label>
+                <div class="col-md-4">
+                    <select id="drp-SelectVacancyId" class="form-control" >
+                        <option id="0" value="0">-- Select Vacancy --</option>
+                        @foreach (var item in Model.VacancyList)
+                        {
+                            if (Model.Id == item.Id)
+                            {
+                                <option id="vacacyId_@item.Id" selected="selected" value="@item.Id">@item.Title</option>
+
+                            }
+                            else
+                            {
+                                <option id="vacacyId_@item.Id" value="@item.Id">@item.Title</option>
+
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-7">
+                    <label class="control-label vacancyProcess"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="gray-box">
+            <div class="row">
+                <div class="col-md-2 uk-text-bold text-right">Status:</div>
+                <div class="col-md-2"><span class="uk-badge uk-badge-success vacancyStatus">@Model.Status</span></div>
+                <div class="col-md-2 uk-text-bold text-right">Close Date:</div>
+                <div class="col-md-2"><span class="uk-badge uk-badge-danger vacancyCloseDate">@Model.ClosingDate</span></div>
+                <div class="col-md-2 uk-text-bold text-right">Description:</div>
+                <div class="col-md-2"><span class="uk-badge uk-badge-danger vacancyCloseDate">@Model.Summary</span></div>
+
+            </div>
+            @*<div class="row uk-margin-top">
+                <div class="col-sm-12 uk-text-bold"></div>
+                <div class="col-sm-12">
+                    <p class="uk-text-small uk-margin-remove"></p>
+                    <p class="fr-view vacancyDescription"></p>
+                </div>
+            </div>*@
+        </div>
+
+        <div id="VacancyDetailsShow" class="hide">
+            @if (Model.StepList != null)
+            {
+                foreach (var item in Model.StepList.OrderByDescending(x => x.Id).ToList())
+                {
+                    <div class="md-card uk-margin-top" style="border-left: 4px solid @item.ColorCode">
+                        <div class="md-card-content appoverv-dbox">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @item.StepName                                    
+                                    @if (@Model.Status == "Active")
+                                    {
+                                        if (item.StepName == "New Applicants")
+                                        {
+                                            <a class="btn btn-primary md-btn-small btn-add-Applicant" data-toggle="modal" data-target="#ApplicantModel"><i class="fa fa-plus"></i> Add New</a>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    @if (item.ApplicantList.Count > 0)
+                                    {
+                                        if (item.StepName == "Rejected")
+                                        {
+                                            <a class="btn btn-primary md-btn-small btn-move-AllTalent" id="@item.Id">Move All to Talent Pool</a>
+                                        }
+                                        else if (item.StepName == "Talent Pool")
+                                        {
+                                            <a class="btn btn-danger md-btn-small btn-move-AllReject" id="@item.Id">Move All to Rejected</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-danger md-btn-small btn-move-AllReject" id="@item.Id">Move All to Rejected</a>
+                                            <a class="btn btn-primary md-btn-small btn-move-AllTalent" id="@item.Id">Move All to Talent Pool</a>
+                                        }
+                            <!-- <a class="btn btn-primary md-btn-small">Delete All</a> -->
+                                    }
+                                    <span>@item.ApplicantList.Count</span>
+                                    <span><i class="fa fa-user"></i></span>
+                                    <a class="OpenToggle hide"><i class="fa fa-arrow-down"></i></a>
+                                    <a class="CloseToggle"><i class="fa fa-arrow-up"></i></a>
+                                </div>
+
+                                <div class="col-sm-12">
+
+                                    <div class="performance-grid">
+                                        <div class="cf nestable-lists">
+                                            <div class="dd ApplicantNestable" data-stepid="@item.Id" data-stepname="@item.StepName" style="width:100%">
+                                                @if (item.ApplicantList.Count > 0)
+                                                {
+                                                    <ol id="ApplicantNestableList" class="dd-list" data-uk-nestable="{handleClass:'uk-nestable-handle'}">
+
+                                                        @foreach (var ss in item.ApplicantList.OrderByDescending(x => x.CreateDate).ToList())
+                                                        {
+                                                            <li class="dd-item maindivList" data-applicantid="@ss.Id" id="@ss.Id">
+                                                                <div class="dd-handle dd3-handle" data-id="@ss.Id" id="@ss.Id">
+                                                                    <i class="fa fa-bars"></i>
+                                                                </div>
+                                                                <div class="dd3-content">
+                                                                    <a onclick="EditApplicants(@ss.Id)" data-toggle="modal" data-target="#ApplicantModel" class="name ng-binding">@ss.FirstName&nbsp;@ss.LastName</a>                                                                    
+                                                                       
+
+                                                                            @*<div class="starrr star2"></div>*@
+                                                                            @if (ss.comScore == 1)
+                                                                            {
+                                                                                <div class="startrating displayinline star1 star1">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore > 1 && ss.comScore <2)
+                                                                            {
+                                                                                <div class="startrating displayinline star1 star1haf">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore == 2)
+                                                                            {
+                                                                                <div class="startrating displayinline star2 star2">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore > 2 && ss.comScore <3)
+                                                                            {
+                                                                                <div class="startrating displayinline star2 star2haf">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore == 3)
+                                                                            {
+                                                                                <div class="startrating displayinline star3 star3">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore > 3 && ss.comScore <4)
+                                                                            {
+                                                                                <div class="startrating displayinline star3 star3haf">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore == 4)
+                                                                            {
+                                                                                <div class="startrating displayinline star4 star4">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore > 4 && ss.comScore <5)
+                                                                            {
+                                                                                <div class="startrating displayinline star4 star4haf">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else if (ss.comScore >= 5)
+                                                                            {
+                                                                                <div class="startrating displayinline star5 star5">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <div class="startrating displayinline">
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            }                                                                        
+                                                                        @*<span @*ng-style=" {'width': applicant.starStr}"  style="width: 50%;">@ss.Star</span>*@
+                                                                    
+                                                                    <span>@ss.CreateDate<span></span></span>
+                                                                    <a onclick="deleteApplicantHandler(@ss.Id)"><i class="fa fa-close"></i></a>
+                                                                </div>
+                                                            </li>
+
+                                                        }
+
+                                                    </ol>
+                                                }
+                                                else
+                                                {
+                                                    <div class="dd-empty"></div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div style="display: block" class="apps-container">
+                                            <div class="app">
+                                                <div class="performance-grid">
+                                                    <div class="cf nestable-lists">
+                                                <div class="dd ApplicantNestable " style="width:100%">
+                                                    @if (item.ApplicantList.Count > 0)
+                                                    {
+                                                        <ol id="ApplicantNestableList" class="dd-list">
+                                                            @foreach (var ss in item.ApplicantList.OrderByDescending(x => x.CreateDate).ToList())
+                                                            {
+                                                                <li class="dd-item maindivList" data-idlist="@ss.Id" id="@ss.Id">
+
+                                                                    <div class="dd-handle" style="height: 40%;" data-id="@ss.Id" id="@ss.Id">
+                                                                        <i class="material-icons">menu</i>
+                                                                        <a onclick="EditApplicants(@ss.Id)" data-toggle="modal" data-target="#ApplicantModel" class="name ng-binding">@ss.FirstName&nbsp;@ss.LastName</a>
+                                                                        <span class="over-rating" title="0.00">
+                                                                            <span @*ng-style=" {'width': applicant.starStr}" * style="width: 50%;">@ss.Star</span>
+                                                                        </span>
+                                                                        <span>@ss.CreateDate<span>a year ago</span></span>
+                                                                        <a onclick="deleteApplicantHandler(@ss.Id)"><i class="fa fa-close"></i></a>
+
+                                                                    </div>
+
+                                                                </li>
+                                                            }
+                                                        </ol>
+                                                    }
+                                                </div>
+                                                </div>
+                                                    </div>
+                                            </div>
+                                        </div>*@
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            }
+
+
+        </div>
+    </div>
+</div>

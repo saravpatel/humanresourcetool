@@ -1,0 +1,67 @@
+﻿@model HRTool.Models.Admin.ApplicantCommentPDfViewModel
+@{
+    ViewBag.Title = "Export";
+    Layout = null;
+}
+
+@*<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>*@
+<!-- Latest compiled and minified CSS -->
+
+<style>
+    .btn-grey {
+        background-color: #D8D8D8;
+        color: #FFF;
+    }
+
+    .rating-block {
+        background-color: #FAFAFA;
+        border: 1px solid #EFEFEF;
+        padding: 15px 15px 20px 15px;
+        border-radius: 3px;
+    }
+</style>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" width="80%" border="0" style="margin:0 auto;width:820px;font-family:'Roboto',sans-serif;">
+                <tr>
+                    <td align="center" style="text-align:center;font-size:30px;font-family:'Roboto',sans-serif; color:#55a1e2; font-weight:bold;width:0 auto;">Comments</td>
+                </tr>
+                <tr>
+                    <td align="left" style="width:60%; float:right; font-size: 15px;font-weight: bold;">Name : @Model.FirstName @Model.LastName</td>
+                          
+                </tr>
+                <tr>
+                    <td align="left" style="float:right; font-size: 15px;font-weight: bold;">Job Applied: @Model.VacancyName</td>             
+                </tr>
+                <tr>
+                    <td align="left" style="float:right; font-size: 15px;font-weight: bold;">Date Of Birth: @Model.DateOfBirth</td>
+                </tr>               
+                <tr>
+                    <td align="center" style="text-align:center;font-size:22px;font-family:'Roboto',sans-serif;"></td>
+                </tr>
+                <tr><td height="40"></td></tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                            @foreach (var item in Model.CommentJSV)
+                            {
+                                <tr>
+                                    <td style="width:28%; margin-bottom:10px; float:left; font-size:14px;font-family:'Roboto',sans-serif; font-size:16px;">
+                                        @item.CreatedName 
+                                    </td>                                                          
+                                    <td style="width:28%; margin-bottom:10px; float:left; font-size:14px;font-family:'Roboto',sans-serif; font-size:16px;">
+                                        @Html.Raw(item.Description)
+                                    </td>                                                                        
+                                    <td>@item.CreatedDateTime</td>
+                                </tr>
+
+                            }
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </td>
+    </tr>
+</table>

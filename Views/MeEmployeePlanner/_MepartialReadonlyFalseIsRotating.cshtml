@@ -1,0 +1,153 @@
+﻿@model HRTool.Models.Settings.WorkPatternViewModel
+@{
+    int aaa = 1;
+}
+
+<div class="row" id="FalseIsRotatingDiv">
+    <div class="col-md-11">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hours</td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.MondayHours" id="MondayHours" name="MondayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.TuesdayHours" id="TuesdayHours" name="TuesdayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.WednessdayHours" id="WednessdayHours" name="WednessdayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.ThursdayHours" id="ThursdayHours" name="ThursdayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.FridayHours" id="FridayHours" name="FridayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.SaturdayHours" id="SaturdayHours" name="SaturdayHours">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Hours" value="@Model.SundayHours" id="SundayHours" name="SundayHours">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Days</td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.MondayDays" id="MondayDays" name="MondayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.TuesdayDays" id="TuesdayDays" name="TuesdayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.WednessdayDays" id="WednessdayDays" name="WednessdayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.ThursdayDays" id="ThursdayDays" name="ThursdayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.FridayDays" id="FridayDays" name="FridayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.SaturdayDays" id="SaturdayDays" name="SaturdayDays">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Days" value="@Model.SundayDays" id="SundayDays" name="SundayDays">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Start</td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.MondayStart" id="MondayStart" name="MondayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.TuesdayStart" id="TuesdayStart" name="TuesdayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.WednessdayStart" id="WednessdayStart" name="WednessdayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.ThursdayStart" id="ThursdayStart" name="ThursdayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.FridayStart" id="FridayStart" name="FridayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.SaturdayStart" id="SaturdayStart" name="SaturdayStart">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.SundayStart" id="SundayStart" name="SundayStart">
+                    </td>
+                </tr>
+                <tr>
+                    <td>End</td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.MondayEnd" id="MondayEnd" name="MondayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.TuesdayEnd" id="TuesdayEnd" name="TuesdayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.WednessdayEnd" id="WednessdayEnd" name="WednessdayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.ThursdayEnd" id="ThursdayEnd" name="ThursdayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.FridayEnd" id="FridayEnd" name="FridayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.SaturdayEnd" id="SaturdayEnd" name="SaturdayEnd">
+                    </td>
+                    <td>
+                        <input type="text" readonly="readonly" min="0" max="24" step="0.5" class="form-control timeMask" placeholder="--:--" value="@Model.SundayEnd" id="SundayEnd" name="SundayEnd">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Break</td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.MondayBreakMins" id="MondayBreakMins" name="MondayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.TuesdayBreakMins" id="TuesdayBreakMins" name="TuesdayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.WednessdayBreakMins" id="WednessdayBreakMins" name="WednessdayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.ThursdayBreakMins" id="ThursdayBreakMins" name="ThursdayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.FridayBreakMins" id="FridayBreakMins" name="FridayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.SaturdayBreakMins" id="SaturdayBreakMins" name="SaturdayBreakMins">
+                    </td>
+                    <td>
+                        <input type="number" readonly="readonly" min="0" max="24" step="0.5" class="form-control" placeholder="Break" value="@Model.SundayBreakMins" id="SundayBreakMins" name="SundayBreakMins">
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1">
+        @Model.TotalHours Hrs
+    </div>
+</div>

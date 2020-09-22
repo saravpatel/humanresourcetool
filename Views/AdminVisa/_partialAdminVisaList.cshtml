@@ -1,0 +1,107 @@
+﻿@model IList<HRTool.Models.Admin.AdminVisaViewModel>
+@using HRTool.CommanMethods;
+
+<div id="AdminVisaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title adminvisaTitle">Add Visa</h4>
+            </div>
+            <div class="modal-body" id="AdminVisaBody">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@if (SessionProxy.IsCustomer == true)
+{
+    <div class="table-btns">       
+        <a class="btn btn-primary btn-circle  btn-edit-AdminVisa" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminVisaModal" disabled="disabled"><i class="fa fa-pencil"></i></a>        
+        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminVisa" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminVisa" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+        <button class="btn btn-danger btn-circle  btn-clearFilter-AdminVisa" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+    </div>
+}
+else
+{
+    <div class="table-btns">
+        <a class="btn btn-success btn-circle  btn-add-AdminVisa" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminVisaModal"><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary btn-circle  btn-edit-AdminVisa" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminVisaModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-circle  btn-delete-AdminVisa" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminVisa" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminVisa" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+        <button class="btn btn-danger btn-circle  btn-clearFilter-AdminVisa" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+    </div>
+}
+
+<div class="table-responsive profile-table">
+<table id="AdminVisaTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0"   style="margin-bottom:0px;">
+    <thead>
+        <tr class="tblHeading">
+            <th>Assigned</th>
+            <th>Job Title</th>
+            <th>Pool</th>
+            <th>Function</th>
+            <th>Country</th>
+            <th>Type</th>
+            <th>Due Date</th>
+            <th>Expire in Days</th>
+            <th>Number</th>
+            <th>Agency</th>
+            <th>Relation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>
+                    @if (item.Status == "Complete")
+                    {
+                        <input type="checkbox" checked="checked" disabled="disabled" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" disabled="disabled" />
+                    }
+                    @item.AssignTo
+                </td>
+                <td>@item.JobTitle</td>
+                <td>@item.Pool</td>
+                <td>@item.Function</td>
+                <td>@item.CountryName</td>
+                <td>@item.VisaType</td>
+                <td>@item.ExpiryDate</td>
+                <td>@item.AlertBeforeDays</td>
+                <td>@item.VisaNumber</td>
+                <td>@item.ServiceAgency</td>
+                <td>@item.InRelationTo</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th ><input type="text" class="form-control SearchAssigned" placeholder="Assigned"></th>
+            <th ><input type="text" class="form-control SearchJobTitle" placeholder="Job Title"></th>
+            <th ><input type="text" class="form-control SearchPool" placeholder="Pool"></th>
+            <th ><input type="text" class="form-control SearchFunction" placeholder="Function"></th>
+            <th ><input type="text" class="form-control SearchCountry" placeholder="Country"></th>
+            <th ><input type="text" class="form-control SearchType" placeholder="Type"></th>
+            <th ><input type="text" class="form-control SearchDueDate" placeholder="Due Date"></th>
+            <th ><input type="text" class="form-control SearchExpireinDays" placeholder="Expire in Days"></th>
+            <th ><input type="text" class="form-control SearchNumber" placeholder="Number"></th>
+            <th ><input type="text" class="form-control SearchAgency" placeholder="Agency"></th>
+            <th ><input type="text" class="form-control SearchRelation" placeholder="Relation"></th>
+        </tr>
+    </tfoot>
+</table>
+    </div>

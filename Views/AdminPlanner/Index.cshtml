@@ -1,0 +1,304 @@
+﻿@model HRTool.Models.Admin.AdminPlannerViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="page-title">
+    Planner
+    </h1>
+<div  id="projectPlanner_main">
+     
+     
+        <div class="showingselect">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="col-md-4 ">
+                        <label for="normal_working">Business</label>
+                        @if (Model.Flag == 1)
+                    {
+                    <select class="form-control" id="drpBusiness" disabled>
+                        @foreach (var item in Model.listOfBusiness)
+                            {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                    </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpBusiness" onchange="GetDivisonByBusinessId(this)">
+                        <option value="0">-- Select Business --</option>
+                        @foreach (var item in Model.listOfBusiness)
+                        {
+                        <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                    }
+                    </div>
+                    <div class="col-md-4 ">
+                        <label for="normal_working">Division</label>
+                        @if (Model.Flag == 1)
+                {
+                    <select class="form-control" id="drpDivision" disabled>
+                        @foreach (var item in Model.listOfDivision)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                    </select>
+                 }
+                else
+                {
+                    <select class="form-control" id="drpDivision" onchange="GetPoolByDivisonID(this)"></select>
+                }
+                    </div>
+                    <div class="col-md-4">
+                        <label for="normal_working">Pool</label>
+                        @if (Model.Flag == 1)
+                    {
+                    <select class="form-control" id="drpPool" disabled>
+                        @foreach (var item in Model.listOfPool)
+                            {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                    </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpPool" onchange="GetFunctionByPoolId(this)"></select>
+                    }
+                    </div>
+                    <div class="col-md-4">
+                        <label class="" for="normal_working">Function</label>
+                        @if (Model.Flag == 1)
+                    {
+                    <select class="form-control" id="drpFunction" disabled>
+                        @foreach (var item in Model.listOfFunction)
+                            {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                    </select>
+                    }
+                    else {
+                    <select class="form-control" id="drpFunction" onchange="GetResourceByFunctionAnyPool(this)"></select>
+                    }
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="">Resource</label>
+                        @if (Model.Flag == 1)
+                    {
+                    <select class="form-control" id="drpResource">
+                        <option value="0">-- Select Resource --</option>
+                        @foreach (var item in Model.listOfEmployee)
+                            {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                    </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpResource"></select>
+                    }
+                    </div>
+                    <div class="col-sm-4 ">
+                        <label for="normal_working" >Year</label>
+                        <select class="form-control" id="drpYear">
+                            @foreach (var item in Model.ListOfYear)
+                        {
+                        <option value="@item.Key">@item.Value</option>
+                        }
+                        </select>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <label for="normal_working" >Project</label>
+                        <select class="form-control" id="drpProject">
+                            <option value="0">-- Select Project --</option>
+                            @foreach (var item in Model.listOfProject)
+                        {
+                        <option value="@item.Key">@item.Value</option>
+                        }
+                        </select>
+                    </div>
+
+                    @*<div class="col-sm-3 ">
+                            <label for="normal_working" >Month</label>
+                            <select class="form-control" id="drpMonth" onchange="applyFilterMonth();">
+                                @foreach (var item in Model.ListOfSelectedYear_Month)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>*@
+
+                    <div class="col-sm-2" style="padding-top:35px;">
+                        <button onclick="resetAll();" class="btn btn-success"> Reset</button>
+                      </div>
+                           <div class="col-md-2" style="padding-top:35px;">
+
+                               <button onclick="ApplyFilter(@Model.AdminPlannerYearModel.YearId)" class="btn btn-info">Apply filter</button>
+                           </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="line-chartMain">
+                        <span class="chart-lebal" >Sick Days Heat Map</span>
+                        <div id="containerHeatMap">
+
+
+                        </div>
+                        <div class="inner_header_right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     
+
+    <div id="ResourceList">
+        <div id="EmployeeSchedulDrillDownModel">
+            <div id="EmployeeSchedulDrillDownModelBody">
+            </div>
+        </div>
+        <div id="EmployeeProjectPlanner_TravelLeaveModel" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Travel</h4>
+                    </div>
+                    <div class="modal-body" id="EmployeeProjectPlanner_TravelLeaveBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                            <button type="button" class="btn btn-warning closeModel" data-dismiss="modal" disabled>Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="EmployeeProjectPlanner_TimeSheetModel" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">TimeSheet</h4>
+                    </div>
+                    <div class="modal-body" id="EmployeeProjectPlanner_TimeSheetBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                            <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div id="projectCalendar">
+        @Html.Partial("_ProjectCalenderPartial", Model.AdminPlannerYearModel)
+    </div>
+<div id="EmployeeFilterDataModal">
+    <div id="EmployeeFilterDataModalBody">
+    </div>
+</div>        
+</div>
+
+<div id="EmployeePlanner_PublicholidayModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Public Holiday</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_PublicHolidayBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/JS/Admin/AdminPlanner/AdminPlanner.js"></script>
+<script>
+    var AdminPlanner = {
+        GetDivisonByBusinessID: '@Url.Action("GetDivisonByBusinessId", "AdminPlanner")',
+        GetPoolByDivisonID: '@Url.Action("GetPoolByDivisonID", "AdminPlanner")',
+        GetFunctionByPoolId: '@Url.Action("GetFunctionByPoolId", "AdminPlanner")',
+        GetResourceByFunctionAndPoolID: '@Url.Action("GetResourceByFunctionAndPoolID", "AdminPlanner")',
+        GetResultByFilter: '@Url.Action("GetResultByFilter", "AdminPlanner")',
+        getAdminTimesheet: '@Url.Action("getAdminTimesheet", "AdminPlanner")',
+        addEdit_TimeSheet_Detail: '@Url.Action("AddEdit_TimeSheet_Detail", "AdminPlanner")',
+        SaveData_TimeSheet: '@Url.Action("SaveData_TimeSheet", "AdminPlanner")',
+        TimeSheetImageData: '@Url.Action("TimeSheetImageData", "AdminPlanner")',
+        workPattenData: '@Url.Action("GetWorkPatternData", "AdminPlanner")',
+        timesheetDrillDown: '@Url.Action("getProjectPlannerTimesheetDrillDownData", "AdminPlanner")',
+        editResourceTimesheet: '@Url.Action("editResourceTimesheet", "AdminPlanner")',
+        getAdmin_ProjectPlannerTravel: '@Url.Action("getAdminProjectPlannerTravel", "AdminPlanner")',
+        BindState: '@Url.Action("BindStateDropdown", "AdminPlanner")',
+        BindCity: '@Url.Action("BindCityDropdown", "AdminPlanner")',
+        BindAirport: '@Url.Action("BindAirportDropdown", "AdminPlanner")',
+        ImageData_TravelLeave: '@Url.Action("TravelLeaveImageData", "AdminPlanner")',
+        SaveData_TravelLeaveData: '@Url.Action("SaveData_TravelLeave", "AdminPlanner")',
+        getAdminProjectPlannerDrillDown: '@Url.Action("getProjectPlannerTravelDrillDownData", "AdminPlanner")',
+        editResourceTravel: '@Url.Action("EditResourceTravel", "AdminPlanner")',
+        GetResultByFilterMonth: '@Url.Action("GetResultByFilter_Month", "AdminPlanner")',
+        addEdit_PublicHoliday: '@Url.Action("GetHolidayDetail", "AdminPlanner")',
+    }
+</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<script type="text/javascript">
+
+
+    //Sick leave hit map
+    Highcharts.chart('containerHeatMap', {
+        chart: {
+            height: 170
+          
+        },
+        title: {
+            text: ''
+        },
+
+        subtitle: {
+            text: ''
+        },
+        exporting: {
+            enabled: false
+        },
+        xAxis: {
+            categories: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+        },
+        //yAxis: {
+        //    allowDecimals: false,
+        //    title: {
+        //        text: ''
+        //    },
+        //    visible: false
+        //},
+        series: [{
+            type: 'column',
+            colorByPoint: false,
+            //data: [1.25, 1.50, 1.75, 0, 0, 0, 1],
+            data: [@Model.SundayDays, @Model.MondayDays, @Model.TuesdayDays, @Model.WednessdayDays, @Model.ThursdayDays, @Model.FridayDays, @Model.SaturdayDays],
+            showInLegend: false
+        }]
+
+    });
+</script>
+

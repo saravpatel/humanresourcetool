@@ -1,0 +1,77 @@
+﻿@model IList<HRTool.Models.Admin.AdminTaskViewModel>
+
+<div id="AdminTaskModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Task</h4>
+            </div>
+            <div class="modal-body" id="AdminTaskBody">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-AdminTask" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminTaskModal"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-AdminTask" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminTaskModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-AdminTask" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>  
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminTask" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminTask" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-danger btn-circle  btn-clearFilter-AdminTask" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+</div>
+
+<div class="table-responsive profile-table">  
+<table id="AdminTaskTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0" style="margin-bottom:0px;">
+    <thead>
+        <tr class="tblHeading">
+            <th>Title</th>
+            <th>Assigned</th>
+            <th>Relation</th>
+            <th>Category</th>
+            <th>Exp. In Days</th>
+            <th>Due Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>
+                    @if (item.Status == "Complete")
+                    {
+                        <input type="checkbox" checked="checked" disabled="disabled" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" disabled="disabled" />
+                    }
+                    @item.Title
+                </td>                
+                <td>@item.AssignTo</td>
+                <td>@item.InRelationTo</td>
+                <td>@item.CategoryName</td>
+                <td>@item.AlertBeforeDays</td>
+                <td>@item.DueDate</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th ><input " type="text" class="form-control SearchTitle" placeholder="Title"></th>
+            <th ><input " type="text" class="form-control SearchAssigned" placeholder="Assigned"></th>
+            <th ><input " type="text" class="form-control SearchRelation" placeholder="Relation"></th>
+            <th ><input " type="text" class="form-control SearchCategory" placeholder="Category"></th>
+            <th ><input " type="text" class="form-control SearchExpireinDays" placeholder="Expire in Days"></th>
+            <th ><input " type="text" class="form-control SearchDueDate" placeholder="Due Date"></th>
+        </tr>
+    </tfoot>
+</table>
+    </div>

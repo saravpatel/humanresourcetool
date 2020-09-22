@@ -1,0 +1,647 @@
+﻿@using Microsoft.AspNet.Identity;
+@using HRTool.CommanMethods;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap -->
+    <link href="~/Templect/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Templect/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Templect/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Templect/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="~/Templect/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/Templect/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-wysiwyg -->
+    @* <link href="~/Templect/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">*@
+
+    <!-- Custom Theme Style -->
+    <link href="~/Templect/build/css/custom.min.css" rel="stylesheet">
+    <!-- Zebra dailog box -->
+    <link href="~/Zebra_Dialog-master/css/flat/zebra_dialog.css" rel="stylesheet" />
+    <!-- jQuery -->
+    @*<script src="~/Templect/vendors/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Templect/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <!-- Zebra dailog box -->
+    <script src="~/Zebra_Dialog-master/javascript/zebra_dialog.js"></script>
+    <script src="~/Zebra_Dialog-master/javascript/zebra_dialog.src.js"></script>
+
+    <!-- Zebra Datepicker -->
+    <link href="~/Content/tablerow.css" rel="stylesheet" />
+    <script src="~/Zebra_Datepicker-master/public/javascript/zebra_datepicker.js"></script>
+    <link href="~/Zebra_Datepicker-master/public/css/default.css" rel="stylesheet" />
+    <!-- Top to down And Down To top -->
+    <link href="~/Smoothscorll/css/totop.css" rel="stylesheet" />
+    <script src="~/Smoothscorll/js/jquery.totop.js"></script>
+
+    <script src="~/Templect/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="~/Templect/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <link href="~/Content/designer.css" type="text/css" rel="stylesheet" />
+
+    <style>
+        .float-right {
+            float: right;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .field-validation-error {
+            color: red;
+        }
+
+        #successMessage {
+            background-color: #1ABB9C;
+            padding: 5px;
+            margin: 5px 0px;
+            color: white;
+        }
+
+            #successMessage > i {
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+        .dataTables_filter {
+            width: 100% !important;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px !important;
+        }
+
+        /*.opacityDiv {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 99999;
+            /*background: url(Images/opacity-7.png) repeat;
+            background-color: #000;
+            opacity: 0.8;
+            display: none;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: #666 !important;
+            background: url('../../Images/loader3.gif') no-repeat center center;
+            z-index: 10000000;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+            display: none;
+        }*/
+
+        .upbtn {
+            position: relative;
+        }
+
+        .btn-upload {
+            position: relative;
+        }
+
+        .upbtn input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            z-index: 999;
+            height: 35px;
+            width: 82%;
+        }
+
+        .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+            vertical-align: middle;
+        }
+
+        .pagination {
+            margin: 0 !important;
+        }
+
+        table.display thead th {
+            border-bottom: none;
+        }
+
+        #ErrorMessage {
+            background-color: red;
+            padding: 5px;
+            margin: 5px 0px;
+            color: white;
+        }
+
+            #ErrorMessage > i {
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+        .not-active {
+            pointer-events: none;
+            cursor: default;
+            disabled: true;
+        }
+
+        dp_clear {
+            display: none;
+        }
+
+        .marqueeText {
+            color: blue;
+            width: 80%;
+            margin-top: 5px;
+        }
+    </style>
+    @{
+        var userId = SessionProxy.UserId;
+        string Name = string.Empty;
+        string userRole = string.Empty;
+        string userImage = string.Empty;
+        PMS.DataModel.PMSEntities _db = new PMS.DataModel.PMSEntities();
+        if (userId > 0)
+        {
+
+            var user = _db.AspNetUsers.Where(x => x.Id == userId).FirstOrDefault();
+            Name = string.Format("{0} {1}", user.FirstName, user.LastName);
+            var account = new PMS.Controllers.AccountController();
+            userRole = account.UserManager.GetRoles(userId).FirstOrDefault();
+            if (user.Image != null)
+            {
+                byte[] imageByteData = (byte[])(user.Image).ToArray(); ;
+                string imageBase64Data = Convert.ToBase64String(imageByteData);
+                userImage = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            }
+        }
+        var actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+        var marqueeList = _db.tbl_marquee.ToList().OrderByDescending(x => x.Id).FirstOrDefault();
+    }
+
+
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+            //window.location.reload();
+        }
+    </script>
+
+</head>
+<body class="nav-md" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <div class=" container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        @Html.Partial("_ProjectName", userRole)
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile">
+
+                        <div class="profile_pic">
+                            <img src="@userImage" alt="~." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome</span>
+                            <h2>@Name</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    @Html.Action("isPMTEntry", "Home")
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="margin-top:120px">
+                        <div class="menu_section">
+                            @Html.Action("Menulist", "Home")
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right" style="width:96%;">
+                            @if (marqueeList != null)
+                            {
+                                <marquee class="marqueeText">
+                                    <h3>@marqueeList.Value</h3>
+                                </marquee>
+                            }
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="@userImage" alt="">@Name
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="@Url.Action("UpdateProfile", "Account")">Edit Profile</a></li>
+                                    <li><a href="@Url.Action("Manage", "Account")">Change Password</a></li>
+                                    @if (User.Identity.Name.ToLower() == "hitesh@inheritx.com" || User.Identity.Name.ToLower() == "hr@inheritx.com" || User.Identity.Name.ToLower() == "dhara.m@inheritx.com")
+                                    {
+                                        <li><a data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#myModalMarquee" style="cursor:pointer;" id="Amarquee">Daily News</a></li>
+                                    }
+                                    @if (User.Identity.Name.ToLower() == "hitesh@inheritx.com")
+                                    {
+                                        <li><a href="@Url.Action("Decrypt", "Setting")">Decrypt Functionality</a></li>
+                                    }
+                                    <li style=" padding: 10px 0px;">
+                                        @Html.Partial("_LoginPartial")
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="modal fade" id="myModalMarquee" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Daily News</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="text-align:center;">
+                                    <p id="lblmarqueesuccess" style="color: green;display:none;"><span style="background: green; color: #fff; display: inline-block; width: 20px; height: 17px; vertical-align: middle; margin-top: -2px; margin-right: 6px; text-align: center; line-height: 15px;"> !</span> Daily News change successfully.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Daily News :</label>
+                                    <input type="text" class="form-control" id="txtmarquee" />
+                                    <label class="errormessage" id="marqueeErrormessage" style="display:none;">This field is required!</label>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btnDailyNewsSave">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+                @*<div id="totopscroller"></div>*@
+            </div>
+
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    CopyRights ©@DateTime.Now.Year InheritX Solution All Rights Reserved.
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <script src="~/Templect/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Templect/vendors/nprogress/nprogress.js"></script>
+    <!-- gauge.js -->
+    <script src="~/templect/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Templect/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Templect/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="~/Templect/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="~/Templect/vendors/Flot/jquery.flot.js"></script>
+    <script src="~/Templect/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="~/Templect/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="~/Templect/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="~/Templect/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="~/Templect/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/Templect/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/Templect/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/Templect/vendors/DateJS/build/date.js"></script>
+
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Templect/production/js/moment/moment.min.js"></script>
+    <script src="~/Templect/production/js/datepicker/daterangepicker.js"></script>
+
+    <!-- Datatables -->
+    <script src="~/Templect/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Templect/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/Templect/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="~/Templect/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="~/Templect/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/Templect/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/Templect/build/js/custom.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cName = '@controllerName';
+            var aName = '@actionName';
+            if (cName != 'Task') {
+                sessionStorage.setItem("TaskIndexPage", "True");
+            }
+            else {
+                if (aName != 'Index') {
+                    sessionStorage.setItem("TaskIndexPage", "True");
+                }
+            }
+        })
+
+    </script>
+    <script>
+
+        $("#btnDailyNewsSave").click(function () {
+            var value = $("#txtmarquee").val();
+            var iserromar = false;
+            if (value.trim() == "") {
+                iserromar = true;
+            }
+            if (iserromar) {
+                $("#marqueeErrormessage").show();
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("SaveMarquee", "Device")',
+                    data: { Value: value },
+                    success: function (data) {
+                        if (data == "success") {
+                            $("#lblmarqueesuccess").show();
+                            setTimeout(function () {
+                                $('#lblmarqueesuccess').fadeOut();
+                                window.location.reload();
+                            }, 2000);
+                        }
+                        else {
+                            @*var url = '@currentURL';
+                            wi*@ndow.location.href = url + "AllocatedDevice";
+                        }
+                    }
+                });
+            }
+        });
+        $(function () {
+            $('#totopscroller').totopscroller();
+        });
+        $(document).ready(function () {
+            $("#sidebar-menu").find(".side-menu").find(".active").find("a").find("span").addClass("fa-chevron-up");
+            $("#sidebar-menu").find(".side-menu").find(".active").find("a").find("span").removeClass("fa-chevron-down");
+
+            var data1 = [
+              [gd(2012, 1, 1), 17],
+              [gd(2012, 1, 2), 74],
+              [gd(2012, 1, 3), 6],
+              [gd(2012, 1, 4), 39],
+              [gd(2012, 1, 5), 20],
+              [gd(2012, 1, 6), 85],
+              [gd(2012, 1, 7), 7]
+            ];
+
+            var data2 = [
+              [gd(2012, 1, 1), 82],
+              [gd(2012, 1, 2), 23],
+              [gd(2012, 1, 3), 66],
+              [gd(2012, 1, 4), 9],
+              [gd(2012, 1, 5), 119],
+              [gd(2012, 1, 6), 6],
+              [gd(2012, 1, 7), 9]
+            ];
+            $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+              data1, data2
+            ], {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
+                },
+                grid: {
+                    verticalLines: true,
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#d5d5d5",
+                    borderWidth: 1,
+                    color: '#fff'
+                },
+                colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+                xaxis: {
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                    mode: "time",
+                    tickSize: [1, "day"],
+                    //tickLength: 10,
+                    axisLabel: "Date",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10
+                },
+                yaxis: {
+                    ticks: 8,
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                },
+                tooltip: false
+            });
+
+            function gd(year, month, day) {
+                return new Date(year, month - 1, day).getTime();
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var icons = new Skycons({
+                "color": "#73879C"
+            }),
+              list = [
+                "clear-day", "clear-night", "partly-cloudy-day",
+                "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                "fog"
+              ],
+              i;
+
+            for (i = list.length; i--;)
+                icons.set(list[i], list[i]);
+
+            icons.play();
+        });
+    </script>
+    <!-- /Skycons -->
+    <!-- Doughnut Chart -->
+    <script>
+        $(document).ready(function () {
+            var options = {
+                legend: false,
+                responsive: false
+            };
+
+        });
+    </script>
+    <!-- /Doughnut Chart -->
+    <!-- bootstrap-daterangepicker -->
+    <script>
+        $(document).ready(function () {
+            var table = $('#datatable').DataTable();
+            //$('#datatable tbody').on('click', 'tr', function () {
+
+            //    if ($(this).hasClass('selected')) {
+            //        $(this).removeClass('selected');
+            //    }
+            //    else {
+            //        table.$('tr.selected').removeClass('selected');
+            //        $(this).addClass('selected');
+            //    }
+            //});
+            $('#button').click(function () {
+                table.row('.selected').remove().draw(false);
+            });
+
+            var cb = function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            };
+
+            var optionSet1 = {
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: {
+                    days: 60
+                },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'left',
+                buttonClasses: ['btn btn-default'],
+                applyClass: 'btn-small btn-primary',
+                cancelClass: 'btn-small',
+                format: 'MM/DD/YYYY',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Clear',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            };
+            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+            $('#reportrange').daterangepicker(optionSet1, cb);
+            $('#reportrange').on('show.daterangepicker', function () {
+                console.log("show event fired");
+            });
+            $('#reportrange').on('hide.daterangepicker', function () {
+                console.log("hide event fired");
+            });
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+            });
+            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                console.log("cancel event fired");
+            });
+            $('#options1').click(function () {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+            });
+            $('#options2').click(function () {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+            });
+            $('#destroy').click(function () {
+                $('#reportrange').data('daterangepicker').remove();
+            });
+        });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+
+    <script>
+        $(".form-control").keypress(function () {
+            $(this).parent().find('.field-validation-error').html('');
+        });
+
+        $(".form-control").change(function () {
+            $(this).parent().find('.field-validation-error').html('');
+        });
+
+        $(".closeSuccessMessage").click(function () {
+            $(this).parent().hide();
+        });
+
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#successMessage').fadeOut();
+            }, 2000);
+        });
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#ErrorMessage').fadeOut();
+            }, 2000);
+        });
+
+
+    </script>
+
+    <!-- /gauge.js -->
+</body>
+
+</html>

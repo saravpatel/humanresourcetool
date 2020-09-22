@@ -1,0 +1,70 @@
+﻿@model HRTool.Models.Settings.EditSegmentViewModel
+@{
+    int i = 0;
+    ViewBag.Title = "CustomerPerformanceReview";
+}
+<style>
+    .square {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #000;
+        display: inline-block;
+        background-color: #3d4957;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+</style>
+
+@*<div class="planner_calendar_header">
+        <div class="changemonth">
+            <a href="#" class="changemonth_previous">
+                <span class="fa fa-chevron-left"></span>
+            </a>
+            <span></span>
+            <a href="#" class="changemonth_next">
+                <span class="fa fa-chevron-right"></span>
+            </a>
+        </div>
+    </div>*@
+<div class="col-md-12">
+    <div class="portlet light">
+        <div class="portlet-title tabbable-line full-tab-width tab-full">
+            @*<input type="text" style="display:none;" id="ReviewId" value="@TempData["ReviewId"]" />
+            <input type="text" style="display:none;" id="PerReviewId" value="@TempData["PerReviewId"]" />
+            <input type="text" style="display:none;" id="CustomerID" value="@TempData["CustomerId"]" />
+            <input type="text" style="display:none;" id="EmpId" value="@TempData["EmpId"]" />*@
+            <ul class="nav nav-tabs ">
+                <li class="active segmentList">
+                    <a class="segmentListLink" id="overview_Segment" onclick="GetCustomerSegmentsDetails(0,0,2,2)">Overview</a>
+                </li>
+                @foreach (var item in Model.CoreSeg)
+                {
+                    <li class="segmentList">
+                        <a id="SegmentList_@item.CoreId" class="segmentListData" data-content="@item.CoreId" onclick="GetCustomerSegmentsDetails(@item.CoreId,@item.QueationType,1,1)">@item.Title</a>
+                    </li>
+                }
+                @foreach (var item in Model.JobRoleSeg)
+                {
+                    <li class="JobRolesegmentList">
+                        <a id="JobRoleSegmentList_@item.JobRoleIds" class="JobRolesegmentListData" data-content="@item.JobRoleIds" onclick="GetCustomerSegmentsDetails(@item.JobRoleIds,@item.QueationType,0,0)">@item.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div id="TableQueData" class="tablescompany">
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+<script src="~/JS/Resources/Performance/EmployeePerformanceSegments.js"></script>
+
+<script>
+    var getCustomerSegments={
+        GetCustomerSegmentsDetailsById:'@Url.Action("GetCustomerSegmentsDetailsById", "EmployeePerformance")',
+        }
+</script>

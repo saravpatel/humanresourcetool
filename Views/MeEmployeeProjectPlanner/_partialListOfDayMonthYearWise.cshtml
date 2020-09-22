@@ -1,0 +1,166 @@
+﻿@model IList<HRTool.Models.Resources.EmployeeProjectPlannerDayViewModel>
+<div class="fixedTable_inner">
+    <table class="FixedTables">
+        <tbody>
+            <tr class="days">
+                @foreach (var day in Model)
+                {
+                    <td>@day.day</td>
+                }
+            </tr>
+            <tr class="head">
+                @foreach (var day in Model)
+                {
+                    <td>@day.DayName[0].ToString()</td>
+                }
+            </tr>
+            <tr class="scheduling">
+                @foreach (var day in Model)
+                {
+                    <td id="travel_leave_@day.day">
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+
+                                    if (day.isSchedulingLeaveTaken)
+                                    {
+
+                                        <span class="icnfilled btn_AddEdit_Scheduling"  data-id="@day.ScheduleId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_SchedulingModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick="getEmployeeWorkPatternExist()"></span>
+                                }
+                            }
+                            else
+                            {
+                            }
+                        }
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+
+                                    if (day.isSchedulingLeaveTaken)
+                                    {
+
+                                        <span class="icnfilled btn_AddEdit_Scheduling"  data-id="@day.ScheduleId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_SchedulingModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn btn_AddEdit_Scheduling"  data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_SchedulingModel"></span>
+                                }
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    </td>
+
+                }
+
+            </tr>
+            <tr class="sblue">
+                @foreach (var day in Model)
+                {
+                    <td id="travel_leave_@day.day">                       
+                            @if (day.isTravelLeaveTaken)
+                            {
+                                <span class="icnfilled btn_AddEdit_TravelLeave" data-id="@day.TravelLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_TravelLeaveModel"></span>
+                            }
+                            else
+                            {
+                                <span id="travel_leave_2" class="icn btn_AddEdit_TravelLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_TravelLeaveModel"></span>
+                            }                        
+                    </td>
+                }
+            </tr>
+            <tr class="sgreen">
+                @foreach (var day in Model)
+                {                    
+                    <td id="timeSheet_@day.day">
+                        @if (day.Flag == 1)
+                        {
+                            if (day.isTimeSheetTaken)
+                            {
+                                <span class="icnfilled btn_AddEdit_TimeSheet" data-id="@day.TimeSheetId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_TimeSheetModel"></span>
+                            }
+                            else
+                            {
+                                <span class="icn " data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick="getEmployeeWorkPatternExist()"></span>
+                            }
+                        }
+                        else
+                        {
+                            if (day.isTimeSheetTaken)
+                            {
+                                <span class="icnfilled btn_AddEdit_TimeSheet" data-id="@day.TimeSheetId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_TimeSheetModel"></span>
+                            }
+                            else
+                            {
+                                <span class="icn btn_AddEdit_TimeSheet" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_TimeSheetModel"></span>
+                            }
+                        }
+                    </td>
+                }
+
+            </tr>
+            <tr class="uplift">
+                @foreach (var day in Model)
+                {
+                    <td id="uplift_@day.day">
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isUpliftTaken)
+                                    {
+                                <span class="icnfilled btn_AddEdit_Uplift" data-id="@day.UpliftId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_UpliftModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                   <span class="icn btn_AddEdit_Uplift" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick = "getEmployeeWorkPatternExist()"></span>
+                                }
+
+                            }
+                            else { }
+                        }
+
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isUpliftTaken)
+                                    {
+                                <span class="icnfilled btn_AddEdit_Uplift" data-id="@day.UpliftId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_UpliftModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                <span class="icn btn_AddEdit_Uplift" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_UpliftModel"></span>
+                                }
+
+                            }
+                            else { }
+                        }
+                    </td>
+                }
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,156 @@
+﻿@model List<HRTool.Models.Approval.NewVacancy>
+<div id="11" class="tab-pane">
+    <div id="page_content_inner6">
+        <h4 class="heading_a uk-margin-bottom">
+            <div class="icon"></div> 
+            <div class="titletext">
+                <div>
+                    New Vacancies
+                </div>
+            </div>
+           
+
+        </h4>
+        <div class="row">
+                    <div class="table-btns table-btn-right-space">
+                                <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                                <button title="Clear Sorting" class="btn btn-danger btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                                <button class="btn btn-warning btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                                <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                    <ul class="list-group list-inline">
+                        <li><input type="text" class="form-control " id="UserId" style="display:none;" value="@TempData["VacnyWId"]"></li>
+                        <li>@if (Model != null && Model.Count > 0)
+                        {
+                            <input type="text" class="form-control " value="@Model.FirstOrDefault().totalVacancy" id="NewVacancyWorkerName">
+                         
+                        }</li>
+                        <li><button name="button" value="Approve" id="NewVacancyApprove" type="button" class="btn buttonApprv">Approve</button></li>
+                        <li><button name="button" value="Reject" id="NewVacancyReject" type="button" class="btn buttonRejct">Reject</button></li>
+                        </ul>       
+                    </div>
+                    <div class="">
+                        <div class="uk-overflow-container col-md-12">
+                            <div class="table-responsive">
+                                <div id="tableDiv" style="min-height:344px;">
+
+                                    <div class="table-responsive">
+                                        <table id="DocumentModalTable14" class=" display table style2 table-striped  dataTable" cellspacing="0">
+                                            <thead>
+                                                <tr class="tblHeading">
+                                                    <th style="display:none">Id</th>
+                                                    <th>Vacancy</th>
+                                                    <th>Closing Date</th>
+                                                    <th>Recruitment Process</th>
+                                                    <th>Salary range</th>
+                                                    <th>Location</th>
+                                                    <th>Business</th>
+                                                    <th>Division</th>
+                                                    <th>Pool</th>
+                                                    <th>Function</th>
+                                                    <th>Supporting Document</th>
+                                                    <th>Status</th>
+                                                    <th>Approve</th>
+                                                    <th width="110px !important">Reject</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="display:none"></th>
+                                                    <th><input type="text" class="form-control SearchVacancy" placeholder="Vacancy"></th>
+                                                    <th><input type="text" class="form-control SearchClosingDate" placeholder="Date"></th>
+                                                    <th><input type="text" class="form-control SearchRecruitmentProcess" placeholder="RecruitmentProcess"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null && Model.Count > 0)
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                        <tr>
+                                                            <td style="display:none" class="dataTr">@item.Id</td>
+                                                            <td>@item.Title</td>
+                                                            <td>@item.ClosingDate</td>
+                                                            <td>@item.RecruitmentProcess</td>
+                                                            <td>@item.Salary</td>
+                                                            <td>@item.Location </td>
+                                                            <td>@item.Business</td>
+                                                            <td>@item.Division</td>
+                                                            <td>@item.Pool</td>
+                                                            <td>@item.Function</td>
+                                                            @*<td>@item.FileName</td>*@
+                                                            @if (string.IsNullOrEmpty(@item.FileName))
+                                                        {
+                                                                <td>
+                                                                    No Document
+                                                                </td>
+                                                        }
+                                                        else
+                                                        {
+                                                                <td>
+                                                                    <input type="hidden" value="@item.FileName" />
+                                                                    <button name="button" class="btn downloadbtn btn-xs" value="Approve" type="button">View Document</button>
+                                                                </td>
+                                                        }
+                                                            @*<td><button name="button" value="Approve" type="button" style="background-color:cornflowerblue; color:white;border-radius: 7px;">View Document</button></td>*@
+                                                            <td> Pending </td>
+                                                            <td><input type="checkbox" name="Approve" class="VacnyApprvchk"> Check</td>
+                                                            <td><input type="checkbox" name="Reject" class="vacnyRejctchk"> Check</td>
+                                                        </tr>
+                                                }
+                                            }
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                   
+                    
+                  
+
+                </div>
+               
+
+            </div>
+
+        
+    
+</div>
+<script>
+    var constantApproval = {
+         UpdateNewVacancyApprova: '@Url.Action("UpdateNewVacancyApprova", "Approve")',
+        UpdateNewVacancyReject: '@Url.Action("UpdateNewVacancyReject", "Approve")',
+        NewVacancyApprove: '@Url.Action("NewVacancyApprove", "Approve")'
+    }
+
+    $('#DocumentModalTable14').on('click', '.downloadbtn', function () {//replace table selector with an id selector, if you are targetting a specific table
+        var Text = 'NewVacancy';
+        var filename = $(this).parent().find("input[type='hidden']").val()
+        $.ajax(
+            {
+                url: '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text,
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                data: {
+                    FileName: filename
+                },
+                type: "GET",
+                success: function () {
+
+                    window.location = '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text;
+                }
+            });
+    });
+</script>
+<script src="~/JS/Approve/UpdateApproveReject.js"></script>

@@ -1,0 +1,3067 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2CD4780F-90FF-431E-85B7-071449ED0D75}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HRTool</RootNamespace>
+    <AssemblyName>HRTool</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.86.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.86.0\lib\net40\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.0.3.502\lib\net40-client\Magick.NET-Q16-AnyCPU.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="CommanMethods\Admin\AdminCaseLogMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminCertificateMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminDocumentMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminNewsMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminPearformanceMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminProjectPlanner.cs" />
+    <Compile Include="CommanMethods\Admin\AdminTaskMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminTMSMethod.cs" />
+    <Compile Include="CommanMethods\Admin\AdminVisaMethod.cs" />
+    <Compile Include="CommanMethods\Approval\TimeSheetApprovalMethod.cs" />
+    <Compile Include="CommanMethods\BulkActions\BulkActionsMethod.cs" />
+    <Compile Include="CommanMethods\Common.cs" />
+    <Compile Include="CommanMethods\CustomAuthorizeAttribute.cs" />
+    <Compile Include="CommanMethods\DateTimeSpan.cs" />
+    <Compile Include="CommanMethods\Email\Mail.cs" />
+    <Compile Include="CommanMethods\Enums.cs" />
+    <Compile Include="CommanMethods\KeyValue.cs" />
+    <Compile Include="CommanMethods\Me\MeEmployeeInformation.cs" />
+    <Compile Include="CommanMethods\Me\MeEmployeeProfileMethod.cs" />
+    <Compile Include="CommanMethods\Notification\NotificationMethod.cs" />
+    <Compile Include="CommanMethods\OrganizationChart\OrganizationChartMethod.cs" />
+    <Compile Include="CommanMethods\Query\QueryFilter.cs" />
+    <Compile Include="CommanMethods\Query\QueryMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeBenefitsMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeCasesMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeContactMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeDocumentMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeEmploymentMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeOverViewMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeePerformanceMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeePlannerMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeProfileMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeProjectPlannerMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeSkillsEndorsementMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmployeeTrainingMethod.cs" />
+    <Compile Include="CommanMethods\Resources\EmpolyeeCasesMethod.cs" />
+    <Compile Include="CommanMethods\RolesManagement\AssignRoleMethod.cs" />
+    <Compile Include="CommanMethods\RolesManagement\MenuKeyEnum.cs" />
+    <Compile Include="CommanMethods\RolesManagement\RolesManagementMethod.cs" />
+    <Compile Include="CommanMethods\SessionProxy.cs" />
+    <Compile Include="CommanMethods\Settings\ActivityTypeMethod.cs" />
+    <Compile Include="CommanMethods\Settings\AddAssetsMethod.cs" />
+    <Compile Include="CommanMethods\Settings\CompanyCustomerMethods.cs" />
+    <Compile Include="CommanMethods\Settings\CompanyMethod.cs" />
+    <Compile Include="CommanMethods\Settings\GeneralSkillsSetMethod.cs" />
+    <Compile Include="CommanMethods\Settings\HolidayNAbsenceMethod.cs" />
+    <Compile Include="CommanMethods\Settings\MobileSettingMethod.cs" />
+    <Compile Include="CommanMethods\Settings\PerformanceSettingMethod.cs" />
+    <Compile Include="CommanMethods\Settings\ProjectMethod.cs" />
+    <Compile Include="CommanMethods\Settings\ProjectSettindsMethod.cs" />
+    <Compile Include="CommanMethods\Settings\Sysetm_Setting_Method.cs" />
+    <Compile Include="CommanMethods\Settings\TechnicalSkillsSetMethod.cs" />
+    <Compile Include="CommanMethods\Settings\AddSkillsMethod.cs" />
+    <Compile Include="CommanMethods\Settings\CompanyStructureMethod.cs" />
+    <Compile Include="CommanMethods\Settings\CurrencyConverterMethod.cs" />
+    <Compile Include="CommanMethods\Settings\EmailSettingMethod.cs" />
+    <Compile Include="CommanMethods\Settings\OtherSettingMethod.cs" />
+    <Compile Include="CommanMethods\Settings\TimeSheetSettingsMethod.cs" />
+    <Compile Include="CommanMethods\Settings\TMSSettingsMethod.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivityTypeController.cs" />
+    <Compile Include="Controllers\AddAssetsController.cs" />
+    <Compile Include="Controllers\AddSkillsController.cs" />
+    <Compile Include="Controllers\AdminCaseLogController.cs" />
+    <Compile Include="Controllers\AdminCertificateController.cs" />
+    <Compile Include="Controllers\AdminDocumentController.cs" />
+    <Compile Include="Controllers\AdminNewsController.cs" />
+    <Compile Include="Controllers\AdminPearformanceController.cs" />
+    <Compile Include="Controllers\AdminPlannerController.cs" />
+    <Compile Include="Controllers\AdminProjectPlannerController.cs" />
+    <Compile Include="Controllers\AdminSkillEndrosmentController.cs" />
+    <Compile Include="Controllers\AdminTaskController.cs" />
+    <Compile Include="Controllers\AdminTrainingController.cs" />
+    <Compile Include="Controllers\AdminVisaController.cs" />
+    <Compile Include="Controllers\ApprovalController.cs" />
+    <Compile Include="Controllers\ApproveController.cs" />
+    <Compile Include="Controllers\ApproveHeaderController.cs" />
+    <Compile Include="Controllers\BulkActionsController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CompanyCustomerController.cs" />
+    <Compile Include="Controllers\CompanyStructureController.cs" />
+    <Compile Include="Controllers\CurrencyConverterController.cs" />
+    <Compile Include="Controllers\EmailSettingsController.cs" />
+    <Compile Include="Controllers\EmployeeBenefitsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MeEmployeeCasesController.cs" />
+    <Compile Include="Controllers\EmployeeCasesController.cs" />
+    <Compile Include="Controllers\EmployeeContactsController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\MeEmployeeContactsController.cs" />
+    <Compile Include="Controllers\MeEmployeeDocumentController.cs" />
+    <Compile Include="Controllers\EmployeeDocumentController.cs" />
+    <Compile Include="Controllers\MeEmployeeEmploymentController.cs" />
+    <Compile Include="Controllers\EmployeeEmploymentController.cs" />
+    <Compile Include="Controllers\MeEmployeeOverViewController.cs" />
+    <Compile Include="Controllers\EmployeeOverViewController.cs" />
+    <Compile Include="Controllers\MeEmployeePerformanceController.cs" />
+    <Compile Include="Controllers\EmployeePerformanceController.cs" />
+    <Compile Include="Controllers\MeEmployeePlannerController.cs" />
+    <Compile Include="Controllers\EmployeePlannerController.cs" />
+    <Compile Include="Controllers\MeEmployeeProfileController.cs" />
+    <Compile Include="Controllers\EmployeeProfileController.cs" />
+    <Compile Include="Controllers\MeEmployeeProjectPlannerController.cs" />
+    <Compile Include="Controllers\EmployeeProjectPlannerController.cs" />
+    <Compile Include="Controllers\MeEmployeeResumeController.cs" />
+    <Compile Include="Controllers\EmployeeResumeController.cs" />
+    <Compile Include="Controllers\MeEmployeeSkillsEndorsementController.cs" />
+    <Compile Include="Controllers\EmployeeSkillsEndorsementController.cs" />
+    <Compile Include="Controllers\MeEmployeeTrainingController.cs" />
+    <Compile Include="Controllers\EmployeeTrainingController.cs" />
+    <Compile Include="Controllers\EmpolyeeCasesController.cs" />
+    <Compile Include="Controllers\GeneralSkillsSetController.cs" />
+    <Compile Include="Controllers\HolidaySettingsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\MobileSettingController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OrganizationChartController.cs" />
+    <Compile Include="Controllers\OtherSettingController.cs" />
+    <Compile Include="Controllers\PerformanceSettingController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
+    <Compile Include="Controllers\RolesManagementController.cs" />
+    <Compile Include="Controllers\SysetmSettingController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TechnicalSkillsSetController.cs" />
+    <Compile Include="Controllers\TimeSheetSettingsController.cs" />
+    <Compile Include="Controllers\TMSController.cs" />
+    <Compile Include="Controllers\TMSSettingsController.cs" />
+    <Compile Include="Controllers\TMSVacancyCompetencyController.cs" />
+    <Compile Include="Controllers\TMSVacancyController.cs" />
+    <Compile Include="DataModel\ActivityType.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Admin_Document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Airport.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\ApplicantRejectReason.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AspNetRole.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AspNetUser.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AspNetUserClaim.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AspNetUserLogin.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AspNetUserRole.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Asset.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Benefit.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Benefits_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BradfordFactor_HolidaySettings.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Business.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Case.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Cases_Comments.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Cases_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\certificate.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\certificate_document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\City.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Cmp_Customer.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Company_Customer.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Company_Settings.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Country.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Currency.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\C__MigrationHistory.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Division.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Email_Setting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeAddressInfo.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeBankInfo.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformance.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceCoreJSONDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceCustomerSegmentJSONDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceGoal.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceGoalComment.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceGoalDocument.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeePerformanceJobRoleSegmentJSONDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeRelation.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeTask.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EmployeeTraining.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_AddEndrosementSkills.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_AnualLeave.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Document_Signature.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Educations.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Endrosement_Comments.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Experiences.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Languages.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_LateLeave.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_MaternityOrPaternityLeaves.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_MaternityOrPaternityLeaves_Document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_MeternityOrPaternityLeaves_Comment.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_OtherLeave.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_OtherLeave_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_Scheduling.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_TimeSheet.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_TimeSheet_Detail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_TimeSheet_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_TravelLeave.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_TravelLeave_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_Uplift.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_Uplift_Detail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_ProjectPlanner_Uplift_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_PublicHoliday.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Qualifications.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Resume.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary_Deduction.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary_Deduction_Temp.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary_Entitlements.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary_Entitlement_Temp.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Salary_Temp.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_SickLeaves.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_SickLeaves_Comments.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_SickLeaves_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Skills.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_Task_Temp.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TimeSheet.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TimeSheet_Detail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TimeSheet_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TOIL.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TravelLeave.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_TravelLeave_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee_WorkPattern.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employe_EmergencyContacts.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Function.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllApproveRequestList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllCoreScorePerformance_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllEmployeeCaseDetail_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllEmployeeCountry_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllEmployeeJobTitle_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllEmployeePearformanceDetail_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllEmployeeSearchData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllNotificationList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllOverAllScorePerformance_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllPublicHolidayByEmployee_JobCountry_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAnnualLeaveNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAnnualLeaveRequest_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAnualLeaveEmployeeBenefit_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetBusinessOrgChart_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetCertificateDetail_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetCurrenciesFixedRateData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetCurrenciesIsFixData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetDefaultCurrenciesCode_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetEmployeeAnualLeaveBenefitList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetEmployeeProfileData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetEmployeeSearchList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetEmployeeTaskList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\getEmpNameById_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetEndorseRecipientemployeeDetail_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetHolidayAndAbsenecByEmployee_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetLoginUserRoleType_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetMatPatLeave_Approval_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetNewVacancyList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetNewVacancyNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetOrganizationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetOtherLeaveApprovelList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetOtherLeaveNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetProjectPlannerTimeSheet_Approve_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetPublicHolidayByCountryID_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetPublicHoliday_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetReportToResource_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourceDatabyFilterTimesheet_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourceDatabyFilterTravel_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourceDatabyFilterUplift_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourceDatabyFilter_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourceEmployeeData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourcePlannerDatabyFilterTimesheet_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourcePlannerDatabyFilterTravel_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetResourcePool_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetScheduleApprovalList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetScheduleNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSickLeaveApprovelList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSick_Approval_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetSkillEndFilterByAllEmployee_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTimeSheetNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTimeSheet_Approve_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTMSRecruitmentProcessChart_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTotalHolidayEntiAndPublicHoliday_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\getTotalProjectPlannerTimesheetDuration_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\getTotalProjectPlannerUpliftDuration_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\getTotalTimesheetDuration_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTrainingNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTrainingRequest_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTravelApproval_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetTravelNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetUpliftApprove_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetUpliftNotificationDetails_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetUserRoleList_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetVisaDetail_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetWorkPatternDataById_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetYearInformation_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HolidaysNAbsence_Setting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HolidayYearAndMonthSetting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HRTool.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRTool.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HRTool.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HRTool.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRTool.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Menu_List.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Mobile_setting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\News.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\News_Comments.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PerformanceCoWorkerDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PerformanceCustomerDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PerformanceEmployeeDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PerformanceSetting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Pool.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Project.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PublicHoliday.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PublicHolidayCountry.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\QueryColunName.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\QueryData.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Role_DefaultMenu.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SaveAllBenifitsData_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SendReviewToCoworker.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SendReviewToCustomer.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SkillSet.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\sp_helpdiagrams_Result.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\State.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\sysdiagram.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SystemList.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SystemListValue.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\System_settings.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Task_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Task_List.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TimeSheet_Setting.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TMS_Applicant.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TMS_Applicant_Comments.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TMS_Applicant_Documents.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TMS_Setting_RecruitmentProcesses.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Training_Document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserMenu.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Vacancy.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Visa.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Visa_Document.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\WorkPattern.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\WorkPatternDetail.cs">
+      <DependentUpon>HRTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\AdminCaseLogViewModel.cs" />
+    <Compile Include="Models\Admin\AdminCertificateIdViewModel.cs" />
+    <Compile Include="Models\Admin\AdminDocumentViewModel.cs" />
+    <Compile Include="Models\Admin\AdminNewsViewModel.cs" />
+    <Compile Include="Models\Admin\AdminPearformanceViewModel.cs" />
+    <Compile Include="Models\Admin\AdminPlannerViewModel.cs" />
+    <Compile Include="Models\Admin\AdminProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Admin\AdminTaskViewModel.cs" />
+    <Compile Include="Models\Admin\AdminVisaViewModel.cs" />
+    <Compile Include="Models\Admin\AnnualLeavePlannerViewModel.cs" />
+    <Compile Include="Models\Admin\LateLeavePlannerViewModel.cs" />
+    <Compile Include="Models\Admin\MaternityLeaveViewModel.cs" />
+    <Compile Include="Models\Admin\OtherLeavePlannerViewModel.cs" />
+    <Compile Include="Models\Admin\PublicHolidayViewModel.cs" />
+    <Compile Include="Models\Admin\SchedulingProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Admin\SickLeavePlanner.cs" />
+    <Compile Include="Models\Admin\TimeSheetProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Admin\TMSApplicantViewModel.cs" />
+    <Compile Include="Models\Admin\TMSVacancyViewModel.cs" />
+    <Compile Include="Models\Admin\TravelProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Admin\UpliftProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Approval\TimeSheetApprovalViewModel.cs" />
+    <Compile Include="Models\BulkActions\BulkActions.cs" />
+    <Compile Include="Models\BulkActions\BulkActionTraining.cs" />
+    <Compile Include="Models\BulkActions\BulkActonActivityType.cs" />
+    <Compile Include="Models\DynamicMenuViewModel.cs" />
+    <Compile Include="Models\Employee\EmployeeMenuModel.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MailModel.cs" />
+    <Compile Include="Models\Me\MeEmployeeDetail_Overview.cs" />
+    <Compile Include="Models\Me\MeMenuModel.cs" />
+    <Compile Include="Models\Notification\NotificationDetail.cs" />
+    <Compile Include="Models\Notification\NotificationViewModel.cs" />
+    <Compile Include="Models\OrganizationChart\OrganizationChartViewModel.cs" />
+    <Compile Include="Models\Query\QueryViewModel.cs" />
+    <Compile Include="Models\Resources\AddSalaryDeductionViewModel.cs" />
+    <Compile Include="Models\Resources\AddSalaryEntitlementViewModel.cs" />
+    <Compile Include="Models\Resources\BenefitsViewModel.cs" />
+    <Compile Include="Models\Resources\CaseLogViewModel.cs" />
+    <Compile Include="Models\Resources\DocumentViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeCalculationModel.cs" />
+    <Compile Include="Models\Resources\EmployeeContactViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeDocumentViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeEmploymentViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeePerformanceViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeePlannerViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeProfileViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeProjectPlannerViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeResumeViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeSignatureViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeSkillsEndorsementViewModel.cs" />
+    <Compile Include="Models\Resources\MainResoureViewModel.cs" />
+    <Compile Include="Models\Resources\OverViewViewModel.cs" />
+    <Compile Include="Models\Resources\PerformanceViewModel.cs" />
+    <Compile Include="Models\Resources\EmployeeTrainingViewModel.cs" />
+    <Compile Include="Models\RolesManagement\AssignRoleViewModel.cs" />
+    <Compile Include="Models\RolesManagement\CreateRoleViewModel.cs" />
+    <Compile Include="Models\RolesManagement\MenuRoleViewModel.cs" />
+    <Compile Include="Models\RolesManagement\RoleListViewModel.cs" />
+    <Compile Include="Models\RolesManagement\RolesManagementMenuViewModel.cs" />
+    <Compile Include="Models\Settings\ActivityTypeViewModel.cs" />
+    <Compile Include="Models\Settings\AddAssetsViewModel.cs" />
+    <Compile Include="Models\Settings\AddSkillsViewModel.cs" />
+    <Compile Include="Models\Settings\CompanyCustomerViewModel.cs" />
+    <Compile Include="Models\Settings\CompanyStructureViewModel.cs" />
+    <Compile Include="Models\Settings\CompanyViewModel.cs" />
+    <Compile Include="Models\Settings\CurrencyConverterModel.cs" />
+    <Compile Include="Models\Settings\EmailSettingViewModel.cs" />
+    <Compile Include="Models\Settings\GeneralSkillsSetViewModel.cs" />
+    <Compile Include="Models\Settings\HolidayNAbsenceViewModel.cs" />
+    <Compile Include="Models\Settings\MobileSettingViewModel.cs" />
+    <Compile Include="Models\Settings\OtherSettingViewModel.cs" />
+    <Compile Include="Models\Settings\PerformanceSettingViewModel.cs" />
+    <Compile Include="Models\Settings\ProjectViewModel.cs" />
+    <Compile Include="Models\Settings\SettingMenuViewModel.cs" />
+    <Compile Include="Models\Settings\System_SettingViewModel.cs" />
+    <Compile Include="Models\Settings\TechnicalSkillsSetViewModel.cs" />
+    <Compile Include="Models\Settings\TimeSheetViewModel.cs" />
+    <Compile Include="Models\Settings\TMSSettingsViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.factory.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\app.service.js" />
+    <Content Include="app\shared\style_switcher\style_switcher.js" />
+    <Content Include="App_Data\Template\MailFromTemplate.html" />
+    <Content Include="App_Data\Template\MailToAllEmployeePerformanceSetting.html" />
+    <Content Include="App_Data\Template\MailToTemplate.html" />
+    <Content Include="App_Data\Template\ResourceSkillEndorcementMail.html" />
+    <Content Include="App_Data\Template\SendMailFromCustomerShare.html" />
+    <Content Include="App_Data\Template\SendMailFromManagerShare.html" />
+    <Content Include="App_Data\Template\SendMailFromCustomerToManagerPerformanceShare.html" />
+    <Content Include="App_Data\Template\SendMailFromManagerUnShare.html" />
+    <Content Include="App_Data\Template\SendMailFromManagerToCustomerPerformanceShare.html" />
+    <Content Include="App_Data\Template\SendMailFromCustomerToManagerUnShare.html" />
+    <Content Include="App_Data\Template\SendMailFromMangerTocustomerCloseReview.html" />
+    <Content Include="App_Data\Template\SendMailFromMangerCloseReview.html" />
+    <Content Include="App_Data\Template\SendMailToManagerPerformanceUnShare.html" />
+    <Content Include="App_Data\Template\SendMailToManagerPerformanceShare.html" />
+    <Content Include="App_Data\Template\SendMailCustomer.html" />
+    <Content Include="App_Data\Template\SendMailCoworkerDecline.html" />
+    <Content Include="App_Data\Template\SendMailCoworker.html" />
+    <Content Include="assets\css\main.min.css" />
+    <Content Include="assets\css\progress-wizard.min.css" />
+    <Content Include="assets\css\style_switcher.min.css" />
+    <Content Include="assets\css\themes\_theme_a.min.css" />
+    <Content Include="assets\css\themes\_theme_b.min.css" />
+    <Content Include="assets\css\themes\_theme_c.min.css" />
+    <Content Include="assets\css\themes\_theme_d.min.css" />
+    <Content Include="assets\css\themes\_theme_dark.min.css" />
+    <Content Include="assets\css\themes\_theme_e.min.css" />
+    <Content Include="assets\css\themes\_theme_f.min.css" />
+    <Content Include="assets\css\themes\_theme_g.min.css" />
+    <Content Include="assets\css\themes\_theme_h.min.css" />
+    <Content Include="assets\css\themes\_theme_i.min.css" />
+    <Content Include="assets\icons\flags\flags%402x.png" />
+    <Content Include="assets\icons\flags\flags.min.css" />
+    <Content Include="assets\icons\flags\flags.png" />
+    <Content Include="assets\img\avatars\avatar_01_tn.png" />
+    <Content Include="assets\img\avatars\avatar_02_tn.png" />
+    <Content Include="assets\img\avatars\avatar_03_tn.png" />
+    <Content Include="assets\img\avatars\avatar_05_tn.png" />
+    <Content Include="assets\img\avatars\avatar_06_tn.png" />
+    <Content Include="assets\img\avatars\avatar_07_tn.png" />
+    <Content Include="assets\img\avatars\avatar_08_tn.png" />
+    <Content Include="assets\img\avatars\avatar_09_tn.png" />
+    <Content Include="assets\img\avatars\avatar_10_tn.png" />
+    <Content Include="assets\img\avatars\avatar_11_tn.png" />
+    <Content Include="assets\img\avatars\avatar_12_tn.png" />
+    <Content Include="assets\img\avatars\user%402x.png" />
+    <Content Include="assets\img\avatars\user.png" />
+    <Content Include="assets\img\chart-image.jpg" />
+    <Content Include="assets\img\chat.png" />
+    <Content Include="assets\img\Customer-Outstanding.png" />
+    <Content Include="assets\img\favicon-16x16.png" />
+    <Content Include="assets\img\favicon-32x32.png" />
+    <Content Include="assets\img\Manager-Outstanding.png" />
+    <Content Include="assets\img\OutstandingReviews.png" />
+    <Content Include="assets\img\review.png" />
+    <Content Include="assets\img\Reviews-complated.png" />
+    <Content Include="assets\img\Workers-Outstanding.png" />
+    <Content Include="assets\js\angular_common.min.js" />
+    <Content Include="assets\js\common.min.js" />
+    <Content Include="assets\js\custom\uikit_beforeready.min.js" />
+    <Content Include="bower_components\uikit\css\components\accordian.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\notify.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\progress.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slider.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\upload.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\uikit.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\js\components\accordion.min.js" />
+    <Content Include="bower_components\uikit\js\components\autocomplete.min.js" />
+    <Content Include="bower_components\uikit\js\components\form-password.min.js" />
+    <Content Include="bower_components\uikit\js\components\form-select.min.js" />
+    <Content Include="bower_components\uikit\js\components\grid.min.js" />
+    <Content Include="bower_components\uikit\js\components\lightbox.min.js" />
+    <Content Include="bower_components\uikit\js\components\nestable.min.js" />
+    <Content Include="bower_components\uikit\js\components\notify.min.js" />
+    <Content Include="bower_components\uikit\js\components\slider.min.js" />
+    <Content Include="bower_components\uikit\js\components\slideshow.min.js" />
+    <Content Include="bower_components\uikit\js\components\sortable.min.js" />
+    <Content Include="bower_components\uikit\js\components\sticky.min.js" />
+    <Content Include="bower_components\uikit\js\components\tooltip.min.js" />
+    <Content Include="bower_components\uikit\js\components\upload.min.js" />
+    <Content Include="bower_components\uikit\js\uikit.min.js" />
+    <Content Include="Content\awesomplete.css" />
+    <Content Include="Content\bootstrap.cerulean.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\darkblue.min.css" />
+    <Content Include="Content\demo_style.css" />
+    <Content Include="Content\Developer.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\jquery.rateyo.min.css" />
+    <Content Include="Content\layout.min.css" />
+    <Content Include="Content\loginNew.css" />
+    <Content Include="Content\main.min.css" />
+    <Content Include="Content\rating.css" />
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\smart_wizard.css" />
+    <Content Include="Content\smart_wizard_vertical.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\uikit.almost-flat.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="FileUpload\css\demo-ie8.css" />
+    <Content Include="FileUpload\css\demo.css" />
+    <Content Include="FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="FileUpload\css\jquery.fileupload.css" />
+    <Content Include="FileUpload\css\style.css" />
+    <Content Include="FileUpload\img\loading.gif" />
+    <Content Include="FileUpload\img\progressbar.gif" />
+    <Content Include="FileUpload\js\app.js" />
+    <Content Include="FileUpload\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="FileUpload\js\cors\jquery.xdr-transport.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-angular.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-audio.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-image.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-process.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-ui.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-validate.js" />
+    <Content Include="FileUpload\js\jquery.fileupload-video.js" />
+    <Content Include="FileUpload\js\jquery.fileupload.js" />
+    <Content Include="FileUpload\js\jquery.iframe-transport.js" />
+    <Content Include="FileUpload\js\main.js" />
+    <Content Include="FileUpload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="froala_editor\css\froala_editor.css" />
+    <Content Include="froala_editor\css\froala_editor.min.css" />
+    <Content Include="froala_editor\css\froala_editor.pkgd.css" />
+    <Content Include="froala_editor\css\froala_editor.pkgd.min.css" />
+    <Content Include="froala_editor\css\froala_style.css" />
+    <Content Include="froala_editor\css\froala_style.min.css" />
+    <Content Include="froala_editor\css\plugins\char_counter.css" />
+    <Content Include="froala_editor\css\plugins\char_counter.min.css" />
+    <Content Include="froala_editor\css\plugins\code_view.css" />
+    <Content Include="froala_editor\css\plugins\code_view.min.css" />
+    <Content Include="froala_editor\css\plugins\colors.css" />
+    <Content Include="froala_editor\css\plugins\colors.min.css" />
+    <Content Include="froala_editor\css\plugins\draggable.css" />
+    <Content Include="froala_editor\css\plugins\draggable.min.css" />
+    <Content Include="froala_editor\css\plugins\emoticons.css" />
+    <Content Include="froala_editor\css\plugins\emoticons.min.css" />
+    <Content Include="froala_editor\css\plugins\file.css" />
+    <Content Include="froala_editor\css\plugins\file.min.css" />
+    <Content Include="froala_editor\css\plugins\fullscreen.css" />
+    <Content Include="froala_editor\css\plugins\fullscreen.min.css" />
+    <Content Include="froala_editor\css\plugins\help.css" />
+    <Content Include="froala_editor\css\plugins\help.min.css" />
+    <Content Include="froala_editor\css\plugins\image.css" />
+    <Content Include="froala_editor\css\plugins\image.min.css" />
+    <Content Include="froala_editor\css\plugins\image_manager.css" />
+    <Content Include="froala_editor\css\plugins\image_manager.min.css" />
+    <Content Include="froala_editor\css\plugins\line_breaker.css" />
+    <Content Include="froala_editor\css\plugins\line_breaker.min.css" />
+    <Content Include="froala_editor\css\plugins\quick_insert.css" />
+    <Content Include="froala_editor\css\plugins\quick_insert.min.css" />
+    <Content Include="froala_editor\css\plugins\special_characters.css" />
+    <Content Include="froala_editor\css\plugins\special_characters.min.css" />
+    <Content Include="froala_editor\css\plugins\table.css" />
+    <Content Include="froala_editor\css\plugins\table.min.css" />
+    <Content Include="froala_editor\css\plugins\video.css" />
+    <Content Include="froala_editor\css\plugins\video.min.css" />
+    <Content Include="froala_editor\css\themes\dark.css" />
+    <Content Include="froala_editor\css\themes\dark.min.css" />
+    <Content Include="froala_editor\css\themes\gray.css" />
+    <Content Include="froala_editor\css\themes\gray.min.css" />
+    <Content Include="froala_editor\css\themes\red.css" />
+    <Content Include="froala_editor\css\themes\red.min.css" />
+    <Content Include="froala_editor\css\themes\royal.css" />
+    <Content Include="froala_editor\css\themes\royal.min.css" />
+    <Content Include="froala_editor\html\3rd-party\at.js.html" />
+    <Content Include="froala_editor\html\3rd-party\bootstrap\grid.html" />
+    <Content Include="froala_editor\html\3rd-party\bootstrap\lists.html" />
+    <Content Include="froala_editor\html\3rd-party\bootstrap\modal.html" />
+    <Content Include="froala_editor\html\3rd-party\code-mirror.html" />
+    <Content Include="froala_editor\html\3rd-party\jquery\mobile.html" />
+    <Content Include="froala_editor\html\3rd-party\jquery\ui_modal.html" />
+    <Content Include="froala_editor\html\3rd-party\require_js\index.html" />
+    <Content Include="froala_editor\html\3rd-party\require_js\js\app.js" />
+    <Content Include="froala_editor\html\3rd-party\require_js\js\lib\require.js" />
+    <Content Include="froala_editor\html\api\get_html.html" />
+    <Content Include="froala_editor\html\api\init_destroy.html" />
+    <Content Include="froala_editor\html\api\insert_html.html" />
+    <Content Include="froala_editor\html\api\live_code_preview.html" />
+    <Content Include="froala_editor\html\api\live_content_preview.html" />
+    <Content Include="froala_editor\html\api\selection.html" />
+    <Content Include="froala_editor\html\buttons\custom_buttons.html" />
+    <Content Include="froala_editor\html\buttons\custom_dropdown.html" />
+    <Content Include="froala_editor\html\buttons\external_button.html" />
+    <Content Include="froala_editor\html\buttons\subscript_superscript.html" />
+    <Content Include="froala_editor\html\events\blur_focus.html" />
+    <Content Include="froala_editor\html\events\content_changed.html" />
+    <Content Include="froala_editor\html\events\drop.html" />
+    <Content Include="froala_editor\html\events\image_removed.html" />
+    <Content Include="froala_editor\html\events\initialized_destroy.html" />
+    <Content Include="froala_editor\html\image\custom_button.html" />
+    <Content Include="froala_editor\html\image\default_width.html" />
+    <Content Include="froala_editor\html\image\image_styles.html" />
+    <Content Include="froala_editor\html\image\insert_base64.html" />
+    <Content Include="froala_editor\html\initialization\edit_in_popup.html" />
+    <Content Include="froala_editor\html\initialization\initialized_event.html" />
+    <Content Include="froala_editor\html\initialization\init_on_button.html" />
+    <Content Include="froala_editor\html\initialization\init_on_click.html" />
+    <Content Include="froala_editor\html\initialization\init_on_h1.html" />
+    <Content Include="froala_editor\html\initialization\init_on_image.html" />
+    <Content Include="froala_editor\html\initialization\init_on_link.html" />
+    <Content Include="froala_editor\html\init_inside_iframe\basic.html" />
+    <Content Include="froala_editor\html\init_inside_iframe\content.html" />
+    <Content Include="froala_editor\html\init_inside_iframe\inline.html" />
+    <Content Include="froala_editor\html\init_on_click\basic.html" />
+    <Content Include="froala_editor\html\init_on_click\inline.html" />
+    <Content Include="froala_editor\html\init_on_click\two_editors.html" />
+    <Content Include="froala_editor\html\international\direction_rtl.html" />
+    <Content Include="froala_editor\html\international\language.html" />
+    <Content Include="froala_editor\html\international\rtl_ltr_buttons.html" />
+    <Content Include="froala_editor\html\link\custom_validation.html" />
+    <Content Include="froala_editor\html\link\link_styles.html" />
+    <Content Include="froala_editor\html\link\predefined_links.html" />
+    <Content Include="froala_editor\html\misc\scrollable_container.html" />
+    <Content Include="froala_editor\html\misc\scrollable_container_inline.html" />
+    <Content Include="froala_editor\html\paragraph_modes\enter_br.html" />
+    <Content Include="froala_editor\html\paragraph_modes\enter_div.html" />
+    <Content Include="froala_editor\html\paragraph_modes\enter_p.html" />
+    <Content Include="froala_editor\html\paste\attrs.html" />
+    <Content Include="froala_editor\html\paste\plain.html" />
+    <Content Include="froala_editor\html\paste\tags.html" />
+    <Content Include="froala_editor\html\plugins\char_counter.html" />
+    <Content Include="froala_editor\html\plugins\full_screen.html" />
+    <Content Include="froala_editor\html\plugins\line_breaker.html" />
+    <Content Include="froala_editor\html\plugins\quick_insert.html" />
+    <Content Include="froala_editor\html\popular\disable_edit.html" />
+    <Content Include="froala_editor\html\popular\disable_paragraphs.html" />
+    <Content Include="froala_editor\html\popular\full.html" />
+    <Content Include="froala_editor\html\popular\full_page.html" />
+    <Content Include="froala_editor\html\popular\iframe.html" />
+    <Content Include="froala_editor\html\popular\init_on_click.html" />
+    <Content Include="froala_editor\html\popular\textarea.html" />
+    <Content Include="froala_editor\html\popular\toolbar_buttons.html" />
+    <Content Include="froala_editor\html\popular\toolbar_inline.html" />
+    <Content Include="froala_editor\html\popular\two_instances.html" />
+    <Content Include="froala_editor\html\popular\z_index.html" />
+    <Content Include="froala_editor\html\popups\colors.html" />
+    <Content Include="froala_editor\html\popups\custom.html" />
+    <Content Include="froala_editor\html\popups\emoticons.html" />
+    <Content Include="froala_editor\html\styling\adjustable_height.html" />
+    <Content Include="froala_editor\html\styling\font_family.html" />
+    <Content Include="froala_editor\html\styling\height.html" />
+    <Content Include="froala_editor\html\styling\inline.html" />
+    <Content Include="froala_editor\html\styling\paragraph.html" />
+    <Content Include="froala_editor\html\styling\placeholder.html" />
+    <Content Include="froala_editor\html\styling\width.html" />
+    <Content Include="froala_editor\html\table\cell_style.html" />
+    <Content Include="froala_editor\html\table\insert_helper.html" />
+    <Content Include="froala_editor\html\table\nested.html" />
+    <Content Include="froala_editor\html\table\resize.html" />
+    <Content Include="froala_editor\html\table\style.html" />
+    <Content Include="froala_editor\html\tests\bottom_offset_scrollable_container.html" />
+    <Content Include="froala_editor\html\tests\bottom_scrollable_container.html" />
+    <Content Include="froala_editor\html\tests\core.html" />
+    <Content Include="froala_editor\html\tests\full_br.html" />
+    <Content Include="froala_editor\html\tests\full_page_bottom.html" />
+    <Content Include="froala_editor\html\tests\image_manager.html" />
+    <Content Include="froala_editor\html\tests\init_on_click\full_page.html" />
+    <Content Include="froala_editor\html\tests\max_height.html" />
+    <Content Include="froala_editor\html\tests\toolbar_inline_two.html" />
+    <Content Include="froala_editor\html\tests\top_offset_scrollable_container.html" />
+    <Content Include="froala_editor\html\tests\top_scrollable_container.html" />
+    <Content Include="froala_editor\html\themes\dark.html" />
+    <Content Include="froala_editor\html\themes\gray.html" />
+    <Content Include="froala_editor\html\themes\red.html" />
+    <Content Include="froala_editor\html\themes\royal.html" />
+    <Content Include="froala_editor\html\toolbar\bottom.html" />
+    <Content Include="froala_editor\html\toolbar\bottom_offset.html" />
+    <Content Include="froala_editor\html\toolbar\buttons.html" />
+    <Content Include="froala_editor\html\toolbar\external.html" />
+    <Content Include="froala_editor\html\toolbar\external_inline.html" />
+    <Content Include="froala_editor\html\toolbar\inline.html" />
+    <Content Include="froala_editor\html\toolbar\inline_selection.html" />
+    <Content Include="froala_editor\html\toolbar\offset.html" />
+    <Content Include="froala_editor\html\toolbar\show_selection.html" />
+    <Content Include="froala_editor\html\toolbar\sticky.html" />
+    <Content Include="froala_editor\html\typing\keep_format.html" />
+    <Content Include="froala_editor\html\typing\shortcuts.html" />
+    <Content Include="froala_editor\html\typing\tab.html" />
+    <Content Include="froala_editor\img\photo1.jpg" />
+    <Content Include="froala_editor\index.html" />
+    <Content Include="froala_editor\js\froala_editor.min.js" />
+    <Content Include="froala_editor\js\froala_editor.pkgd.min.js" />
+    <Content Include="froala_editor\js\languages\ar.js" />
+    <Content Include="froala_editor\js\languages\bs.js" />
+    <Content Include="froala_editor\js\languages\cs.js" />
+    <Content Include="froala_editor\js\languages\da.js" />
+    <Content Include="froala_editor\js\languages\de.js" />
+    <Content Include="froala_editor\js\languages\en_ca.js" />
+    <Content Include="froala_editor\js\languages\en_gb.js" />
+    <Content Include="froala_editor\js\languages\es.js" />
+    <Content Include="froala_editor\js\languages\et.js" />
+    <Content Include="froala_editor\js\languages\fa.js" />
+    <Content Include="froala_editor\js\languages\fi.js" />
+    <Content Include="froala_editor\js\languages\fr.js" />
+    <Content Include="froala_editor\js\languages\he.js" />
+    <Content Include="froala_editor\js\languages\hr.js" />
+    <Content Include="froala_editor\js\languages\hu.js" />
+    <Content Include="froala_editor\js\languages\id.js" />
+    <Content Include="froala_editor\js\languages\it.js" />
+    <Content Include="froala_editor\js\languages\ja.js" />
+    <Content Include="froala_editor\js\languages\ko.js" />
+    <Content Include="froala_editor\js\languages\me.js" />
+    <Content Include="froala_editor\js\languages\nb.js" />
+    <Content Include="froala_editor\js\languages\nl.js" />
+    <Content Include="froala_editor\js\languages\pl.js" />
+    <Content Include="froala_editor\js\languages\pt_br.js" />
+    <Content Include="froala_editor\js\languages\pt_pt.js" />
+    <Content Include="froala_editor\js\languages\ro.js" />
+    <Content Include="froala_editor\js\languages\ru.js" />
+    <Content Include="froala_editor\js\languages\sk.js" />
+    <Content Include="froala_editor\js\languages\sr.js" />
+    <Content Include="froala_editor\js\languages\sv.js" />
+    <Content Include="froala_editor\js\languages\th.js" />
+    <Content Include="froala_editor\js\languages\tr.js" />
+    <Content Include="froala_editor\js\languages\ua.js" />
+    <Content Include="froala_editor\js\languages\vi.js" />
+    <Content Include="froala_editor\js\languages\zh_cn.js" />
+    <Content Include="froala_editor\js\languages\zh_tw.js" />
+    <Content Include="froala_editor\js\plugins\align.min.js" />
+    <Content Include="froala_editor\js\plugins\char_counter.min.js" />
+    <Content Include="froala_editor\js\plugins\code_beautifier.min.js" />
+    <Content Include="froala_editor\js\plugins\code_view.min.js" />
+    <Content Include="froala_editor\js\plugins\colors.min.js" />
+    <Content Include="froala_editor\js\plugins\draggable.min.js" />
+    <Content Include="froala_editor\js\plugins\emoticons.min.js" />
+    <Content Include="froala_editor\js\plugins\entities.min.js" />
+    <Content Include="froala_editor\js\plugins\file.min.js" />
+    <Content Include="froala_editor\js\plugins\font_family.min.js" />
+    <Content Include="froala_editor\js\plugins\font_size.min.js" />
+    <Content Include="froala_editor\js\plugins\forms.min.js" />
+    <Content Include="froala_editor\js\plugins\fullscreen.min.js" />
+    <Content Include="froala_editor\js\plugins\help.min.js" />
+    <Content Include="froala_editor\js\plugins\image.min.js" />
+    <Content Include="froala_editor\js\plugins\image_manager.min.js" />
+    <Content Include="froala_editor\js\plugins\inline_style.min.js" />
+    <Content Include="froala_editor\js\plugins\line_breaker.min.js" />
+    <Content Include="froala_editor\js\plugins\link.min.js" />
+    <Content Include="froala_editor\js\plugins\lists.min.js" />
+    <Content Include="froala_editor\js\plugins\paragraph_format.min.js" />
+    <Content Include="froala_editor\js\plugins\paragraph_style.min.js" />
+    <Content Include="froala_editor\js\plugins\print.min.js" />
+    <Content Include="froala_editor\js\plugins\quick_insert.min.js" />
+    <Content Include="froala_editor\js\plugins\quote.min.js" />
+    <Content Include="froala_editor\js\plugins\save.min.js" />
+    <Content Include="froala_editor\js\plugins\special_characters.min.js" />
+    <Content Include="froala_editor\js\plugins\table.min.js" />
+    <Content Include="froala_editor\js\plugins\url.min.js" />
+    <Content Include="froala_editor\js\plugins\video.min.js" />
+    <Content Include="froala_editor\js\plugins\word_paste.min.js" />
+    <Content Include="froala_editor\License.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="icons\flags\flags%402x.png" />
+    <Content Include="icons\flags\flags.css" />
+    <Content Include="icons\flags\flags.min.css" />
+    <Content Include="icons\flags\flags.png" />
+    <Content Include="icons\flags\Hello.txt" />
+    <Content Include="icons\flags\LICENSE.txt" />
+    <Content Include="icons\material-design-icons\iconjar-map.js" />
+    <Content Include="Images\932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+    <Content Include="Images\defaultPicture.png" />
+    <Content Include="Images\listicons\icn-activity.png" />
+    <Content Include="Images\listicons\icn-addcustomers.png" />
+    <Content Include="Images\listicons\icn-administrators.png" />
+    <Content Include="Images\listicons\icn-alllists.png" />
+    <Content Include="Images\listicons\icn-api.png" />
+    <Content Include="Images\listicons\icn-approve.png" />
+    <Content Include="Images\listicons\icn-assettypes.png" />
+    <Content Include="Images\listicons\icn-bulkactions.png" />
+    <Content Include="Images\listicons\icn-case.png" />
+    <Content Include="Images\listicons\icn-certification.png" />
+    <Content Include="Images\listicons\icn-company-sructure.png" />
+    <Content Include="Images\listicons\icn-company.png" />
+    <Content Include="Images\listicons\icn-currency.png" />
+    <Content Include="Images\listicons\icn-dashboard.png" />
+    <Content Include="Images\listicons\icn-documents.png" />
+    <Content Include="Images\listicons\icn-emailsettings.png" />
+    <Content Include="Images\listicons\icn-holidaysNabsence.png" />
+    <Content Include="Images\listicons\icn-license.png" />
+    <Content Include="Images\listicons\icn-me.png" />
+    <Content Include="Images\listicons\icn-mobile.png" />
+    <Content Include="Images\listicons\icn-news.png" />
+    <Content Include="Images\listicons\icn-notifications.png" />
+    <Content Include="Images\listicons\icn-organizationchart.png" />
+    <Content Include="Images\listicons\icn-performance.png" />
+    <Content Include="Images\listicons\icn-planner-annual_leave.png" />
+    <Content Include="Images\listicons\icn-planner-late.png" />
+    <Content Include="Images\listicons\icn-planner-maternity.png" />
+    <Content Include="Images\listicons\icn-planner-other_leave.png" />
+    <Content Include="Images\listicons\icn-planner-public_holidays.png" />
+    <Content Include="Images\listicons\icn-planner-scheduling.png" />
+    <Content Include="Images\listicons\icn-planner-sick_leave.png" />
+    <Content Include="Images\listicons\icn-planner-timesheet.png" />
+    <Content Include="Images\listicons\icn-planner-travel.png" />
+    <Content Include="Images\listicons\icn-planner-uplift.png" />
+    <Content Include="Images\listicons\icn-planner.png" />
+    <Content Include="Images\listicons\icn-projectplanner.png" />
+    <Content Include="Images\listicons\icn-projects.png" />
+    <Content Include="Images\listicons\icn-queries.png" />
+    <Content Include="Images\listicons\icn-reports.png" />
+    <Content Include="Images\listicons\icn-resources.png" />
+    <Content Include="Images\listicons\icn-settings.png" />
+    <Content Include="Images\listicons\icn-skillendorsement.png" />
+    <Content Include="Images\listicons\icn-task.png" />
+    <Content Include="Images\listicons\icn-timesheet.png" />
+    <Content Include="Images\listicons\icn-tms.png" />
+    <Content Include="Images\listicons\icn-training.png" />
+    <Content Include="Images\listicons\icn-visa.png" />
+    <Content Include="Images\no-image.jpg" />
+    <Content Include="img\add.png" />
+    <Content Include="img\avatar3_small.jpg" />
+    <Content Include="img\avatars\avatar_01%402x.png" />
+    <Content Include="img\avatars\avatar_01.png" />
+    <Content Include="img\avatars\avatar_01_tn%402x.png" />
+    <Content Include="img\avatars\avatar_01_tn.png" />
+    <Content Include="img\avatars\avatar_02%402x.png" />
+    <Content Include="img\avatars\avatar_02.png" />
+    <Content Include="img\avatars\avatar_02_tn%402x.png" />
+    <Content Include="img\avatars\avatar_02_tn.png" />
+    <Content Include="img\avatars\avatar_03%402x.png" />
+    <Content Include="img\avatars\avatar_03.png" />
+    <Content Include="img\avatars\avatar_03_tn%402x.png" />
+    <Content Include="img\avatars\avatar_03_tn.png" />
+    <Content Include="img\avatars\avatar_04%402x.png" />
+    <Content Include="img\avatars\avatar_04.png" />
+    <Content Include="img\avatars\avatar_04_tn%402x.png" />
+    <Content Include="img\avatars\avatar_04_tn.png" />
+    <Content Include="img\avatars\avatar_05%402x.png" />
+    <Content Include="img\avatars\avatar_05.png" />
+    <Content Include="img\avatars\avatar_05_tn%402x.png" />
+    <Content Include="img\avatars\avatar_05_tn.png" />
+    <Content Include="img\avatars\avatar_06%402x.png" />
+    <Content Include="img\avatars\avatar_06.png" />
+    <Content Include="img\avatars\avatar_06_tn%402x.png" />
+    <Content Include="img\avatars\avatar_06_tn.png" />
+    <Content Include="img\avatars\avatar_07%402x.png" />
+    <Content Include="img\avatars\avatar_07.png" />
+    <Content Include="img\avatars\avatar_07_tn%402x.png" />
+    <Content Include="img\avatars\avatar_07_tn.png" />
+    <Content Include="img\avatars\avatar_08%402x.png" />
+    <Content Include="img\avatars\avatar_08.png" />
+    <Content Include="img\avatars\avatar_08_tn%402x.png" />
+    <Content Include="img\avatars\avatar_08_tn.png" />
+    <Content Include="img\avatars\avatar_09%402x.png" />
+    <Content Include="img\avatars\avatar_09.png" />
+    <Content Include="img\avatars\avatar_09_tn%402x.png" />
+    <Content Include="img\avatars\avatar_09_tn.png" />
+    <Content Include="img\avatars\avatar_10%402x.png" />
+    <Content Include="img\avatars\avatar_10.png" />
+    <Content Include="img\avatars\avatar_10_tn%402x.png" />
+    <Content Include="img\avatars\avatar_10_tn.png" />
+    <Content Include="img\avatars\avatar_11%402x.png" />
+    <Content Include="img\avatars\avatar_11.png" />
+    <Content Include="img\avatars\avatar_11_tn%402x.png" />
+    <Content Include="img\avatars\avatar_11_tn.png" />
+    <Content Include="img\avatars\avatar_12%402x.png" />
+    <Content Include="img\avatars\avatar_12.png" />
+    <Content Include="img\avatars\avatar_12_tn%402x.png" />
+    <Content Include="img\avatars\avatar_12_tn.png" />
+    <Content Include="img\avatars\user%402x.png" />
+    <Content Include="img\avatars\user-alt%402x.png" />
+    <Content Include="img\avatars\user-alt.png" />
+    <Content Include="img\avatars\user.png" />
+    <Content Include="img\bg.png" />
+    <Content Include="img\bg1.jpg" />
+    <Content Include="img\bg2.jpg" />
+    <Content Include="img\bg3.jpg" />
+    <Content Include="img\bgarrowleft.png" />
+    <Content Include="img\bgoverviewrecruitment.png" />
+    <Content Include="img\blank.png" />
+    <Content Include="img\business-growth-graph-hires.png" />
+    <Content Include="img\circle_blue.png" />
+    <Content Include="img\circle_gray.png" />
+    <Content Include="img\circle_red.png" />
+    <Content Include="img\ecommerce\s6_edge%402x.jpg" />
+    <Content Include="img\ecommerce\s6_edge.jpg" />
+    <Content Include="img\ecommerce\s6_edge_1%402x.jpg" />
+    <Content Include="img\ecommerce\s6_edge_1.jpg" />
+    <Content Include="img\ecommerce\s6_edge_2%402x.jpg" />
+    <Content Include="img\ecommerce\s6_edge_2.jpg" />
+    <Content Include="img\ecommerce\s6_edge_3%402x.jpg" />
+    <Content Include="img\ecommerce\s6_edge_3.jpg" />
+    <Content Include="img\gallery\Image01%402x.jpg" />
+    <Content Include="img\gallery\Image01.jpg" />
+    <Content Include="img\gallery\Image02%402x.jpg" />
+    <Content Include="img\gallery\Image02.jpg" />
+    <Content Include="img\gallery\Image03%402x.jpg" />
+    <Content Include="img\gallery\Image03.jpg" />
+    <Content Include="img\gallery\Image04%402x.jpg" />
+    <Content Include="img\gallery\Image04.jpg" />
+    <Content Include="img\gallery\Image05%402x.jpg" />
+    <Content Include="img\gallery\Image05.jpg" />
+    <Content Include="img\gallery\Image06%402x.jpg" />
+    <Content Include="img\gallery\Image06.jpg" />
+    <Content Include="img\gallery\Image07%402x.jpg" />
+    <Content Include="img\gallery\Image07.jpg" />
+    <Content Include="img\gallery\Image08%402x.jpg" />
+    <Content Include="img\gallery\Image08.jpg" />
+    <Content Include="img\gallery\Image09%402x.jpg" />
+    <Content Include="img\gallery\Image09.jpg" />
+    <Content Include="img\gallery\Image10%402x.jpg" />
+    <Content Include="img\gallery\Image10.jpg" />
+    <Content Include="img\gallery\Image11%402x.jpg" />
+    <Content Include="img\gallery\Image11.jpg" />
+    <Content Include="img\gallery\Image12%402x.jpg" />
+    <Content Include="img\gallery\Image12.jpg" />
+    <Content Include="img\gallery\Image13%402x.jpg" />
+    <Content Include="img\gallery\Image13.jpg" />
+    <Content Include="img\gallery\Image14%402x.jpg" />
+    <Content Include="img\gallery\Image14.jpg" />
+    <Content Include="img\gallery\Image15%402x.jpg" />
+    <Content Include="img\gallery\Image15.jpg" />
+    <Content Include="img\gallery\Image16%402x.jpg" />
+    <Content Include="img\gallery\Image16.jpg" />
+    <Content Include="img\gallery\Image17%402x.jpg" />
+    <Content Include="img\gallery\Image17.jpg" />
+    <Content Include="img\gallery\Image18%402x.jpg" />
+    <Content Include="img\gallery\Image18.jpg" />
+    <Content Include="img\gallery\Image19%402x.jpg" />
+    <Content Include="img\gallery\Image19.jpg" />
+    <Content Include="img\gallery\Image20%402x.jpg" />
+    <Content Include="img\gallery\Image20.jpg" />
+    <Content Include="img\gallery\Image21%402x.jpg" />
+    <Content Include="img\gallery\Image21.jpg" />
+    <Content Include="img\gallery\Image22%402x.jpg" />
+    <Content Include="img\gallery\Image22.jpg" />
+    <Content Include="img\gallery\Image23%402x.jpg" />
+    <Content Include="img\gallery\Image23.jpg" />
+    <Content Include="img\gallery\Image24%402x.jpg" />
+    <Content Include="img\gallery\Image24.jpg" />
+    <Content Include="img\guide_triangle1.png" />
+    <Content Include="img\guide_triangle2.png" />
+    <Content Include="img\icn-activereviews.png" />
+    <Content Include="img\icn-newreview.png" />
+    <Content Include="img\icn-pastreviews.png" />
+    <Content Include="img\icnaccepted.png" />
+    <Content Include="img\icnannualleave.png" />
+    <Content Include="img\icnholidays.png" />
+    <Content Include="img\icnlate.png" />
+    <Content Include="img\icnmat_pat.png" />
+    <Content Include="img\icnotherleave.png" />
+    <Content Include="img\icnpublicholidays.png" />
+    <Content Include="img\icnrec1.png" />
+    <Content Include="img\icnrec1w.png" />
+    <Content Include="img\icnrec2.png" />
+    <Content Include="img\icnrec2w.png" />
+    <Content Include="img\icnrec3.png" />
+    <Content Include="img\icnrec3w.png" />
+    <Content Include="img\icnrec4.png" />
+    <Content Include="img\icnrec4w.png" />
+    <Content Include="img\icnrejected.png" />
+    <Content Include="img\icnscheduling.png" />
+    <Content Include="img\icnscheduling1.png" />
+    <Content Include="img\icnsick.png" />
+    <Content Include="img\icntalent.png" />
+    <Content Include="img\icntimesheets.png" />
+    <Content Include="img\icntravel.png" />
+    <Content Include="img\icnuplift.png" />
+    <Content Include="img\icnuplift1.png" />
+    <Content Include="img\imgapplicants.png" />
+    <Content Include="img\lineapplicants.png" />
+    <Content Include="img\lineapplicants2.png" />
+    <Content Include="img\listicons\icn-activity.png" />
+    <Content Include="img\listicons\icn-addcustomers.png" />
+    <Content Include="img\listicons\icn-administrators.png" />
+    <Content Include="img\listicons\icn-alllists.png" />
+    <Content Include="img\listicons\icn-api.png" />
+    <Content Include="img\listicons\icn-approve.png" />
+    <Content Include="img\listicons\icn-assettypes.png" />
+    <Content Include="img\listicons\icn-benefits.png" />
+    <Content Include="img\listicons\icn-bulkactions.png" />
+    <Content Include="img\listicons\icn-case.png" />
+    <Content Include="img\listicons\icn-certification.png" />
+    <Content Include="img\listicons\icn-company-sructure.png" />
+    <Content Include="img\listicons\icn-company.png" />
+    <Content Include="img\listicons\icn-currency.png" />
+    <Content Include="img\listicons\icn-dashboard.png" />
+    <Content Include="img\listicons\icn-documents.png" />
+    <Content Include="img\listicons\icn-emailsettings.png" />
+    <Content Include="img\listicons\icn-holidaysNabsence.png" />
+    <Content Include="img\listicons\icn-license.png" />
+    <Content Include="img\listicons\icn-me.png" />
+    <Content Include="img\listicons\icn-mobile.png" />
+    <Content Include="img\listicons\icn-news.png" />
+    <Content Include="img\listicons\icn-notifications.png" />
+    <Content Include="img\listicons\icn-organizationchart.png" />
+    <Content Include="img\listicons\icn-performance.png" />
+    <Content Include="img\listicons\icn-planner-annual_leave.png" />
+    <Content Include="img\listicons\icn-planner-late.png" />
+    <Content Include="img\listicons\icn-planner-maternity.png" />
+    <Content Include="img\listicons\icn-planner-other_leave.png" />
+    <Content Include="img\listicons\icn-planner-public_holidays.png" />
+    <Content Include="img\listicons\icn-planner-scheduling.png" />
+    <Content Include="img\listicons\icn-planner-sick_leave.png" />
+    <Content Include="img\listicons\icn-planner-timesheet.png" />
+    <Content Include="img\listicons\icn-planner-travel.png" />
+    <Content Include="img\listicons\icn-planner-uplift.png" />
+    <Content Include="img\listicons\icn-planner.png" />
+    <Content Include="img\listicons\icn-projectplanner.png" />
+    <Content Include="img\listicons\icn-projects.png" />
+    <Content Include="img\listicons\icn-queries.png" />
+    <Content Include="img\listicons\icn-reports.png" />
+    <Content Include="img\listicons\icn-resources.png" />
+    <Content Include="img\listicons\icn-settings.png" />
+    <Content Include="img\listicons\icn-skillendorsement.png" />
+    <Content Include="img\listicons\icn-task.png" />
+    <Content Include="img\listicons\icn-timesheet.png" />
+    <Content Include="img\listicons\icn-tms.png" />
+    <Content Include="img\listicons\icn-training.png" />
+    <Content Include="img\listicons\icn-visa.png" />
+    <Content Include="img\loader-bg.png" />
+    <Content Include="img\logo_main%402x.png" />
+    <Content Include="img\logo_main.png" />
+    <Content Include="img\logo_main_white%402x.png" />
+    <Content Include="img\logo_main_white.png" />
+    <Content Include="img\md-images\ic_beenhere_black_24dp.png" />
+    <Content Include="img\md-images\ic_beenhere_black_48dp.png" />
+    <Content Include="img\md-images\ic_local_dining_black_24dp.png" />
+    <Content Include="img\md-images\ic_local_dining_black_48dp.png" />
+    <Content Include="img\md-images\ic_location_history_black_24dp.png" />
+    <Content Include="img\md-images\ic_location_history_black_48dp.png" />
+    <Content Include="img\md-images\ic_place_black_24dp.png" />
+    <Content Include="img\md-images\ic_place_black_48dp.png" />
+    <Content Include="img\menuicons\all-icons.png" />
+    <Content Include="img\menuicons\icn-activity.png" />
+    <Content Include="img\menuicons\icn-addcustomers.png" />
+    <Content Include="img\menuicons\icn-administrators.png" />
+    <Content Include="img\menuicons\icn-alllists.png" />
+    <Content Include="img\menuicons\icn-approve.png" />
+    <Content Include="img\menuicons\icn-assettypes.png" />
+    <Content Include="img\menuicons\icn-benefits.png" />
+    <Content Include="img\menuicons\icn-bulkactions.png" />
+    <Content Include="img\menuicons\icn-case.png" />
+    <Content Include="img\menuicons\icn-certification.png" />
+    <Content Include="img\menuicons\icn-company-sructure.png" />
+    <Content Include="img\menuicons\icn-company.png" />
+    <Content Include="img\menuicons\icn-currency.png" />
+    <Content Include="img\menuicons\icn-dashboard.png" />
+    <Content Include="img\menuicons\icn-documents.png" />
+    <Content Include="img\menuicons\icn-emailsettings.png" />
+    <Content Include="img\menuicons\icn-holidaysNabsence.png" />
+    <Content Include="img\menuicons\icn-license.png" />
+    <Content Include="img\menuicons\icn-me.png" />
+    <Content Include="img\menuicons\icn-mobile.png" />
+    <Content Include="img\menuicons\icn-news.png" />
+    <Content Include="img\menuicons\icn-notifications.png" />
+    <Content Include="img\menuicons\icn-organizationchart.png" />
+    <Content Include="img\menuicons\icn-performance.png" />
+    <Content Include="img\menuicons\icn-planner.png" />
+    <Content Include="img\menuicons\icn-projectplanner.png" />
+    <Content Include="img\menuicons\icn-projects.png" />
+    <Content Include="img\menuicons\icn-queries.png" />
+    <Content Include="img\menuicons\icn-reports.png" />
+    <Content Include="img\menuicons\icn-resources.png" />
+    <Content Include="img\menuicons\icn-settings.png" />
+    <Content Include="img\menuicons\icn-skillendorsement.png" />
+    <Content Include="img\menuicons\icn-task.png" />
+    <Content Include="img\menuicons\icn-timesheet.png" />
+    <Content Include="img\menuicons\icn-tms.png" />
+    <Content Include="img\menuicons\icn-training.png" />
+    <Content Include="img\menuicons\icn-visa.png" />
+    <Content Include="img\planner\add.png" />
+    <Content Include="img\planner\icnannualleave.png" />
+    <Content Include="img\planner\icnholidays.png" />
+    <Content Include="img\planner\icnlate.png" />
+    <Content Include="img\planner\icnmat_pat.png" />
+    <Content Include="img\planner\icnotherleave.png" />
+    <Content Include="img\planner\icnpublicholidays.png" />
+    <Content Include="img\planner\icnscheduling.png" />
+    <Content Include="img\planner\icnscheduling1.png" />
+    <Content Include="img\planner\icnsick.png" />
+    <Content Include="img\planner\icntimesheets.png" />
+    <Content Include="img\planner\icntravel.png" />
+    <Content Include="img\planner\icnuplift.png" />
+    <Content Include="img\planner\icnuplift1.png" />
+    <Content Include="img\planner\spritesheet-project-planner.png" />
+    <Content Include="img\planner\spritesheet.png" />
+    <Content Include="img\planner\_spritesheet.png" />
+    <Content Include="img\resume\content-icon1.png" />
+    <Content Include="img\resume\content-icon2.png" />
+    <Content Include="img\resume\content-icon3.png" />
+    <Content Include="img\resume\content-icon4.png" />
+    <Content Include="img\resume\content-icon5.png" />
+    <Content Include="img\resume\icon-top1.png" />
+    <Content Include="img\resume\icon-top2.png" />
+    <Content Include="img\resume\icon-top3.png" />
+    <Content Include="img\resume\icon-top4.png" />
+    <Content Include="img\resume\profile.png" />
+    <Content Include="img\resume\social-icon1.png" />
+    <Content Include="img\resume\social-icon2.png" />
+    <Content Include="img\ribbonperformance.png" />
+    <Content Include="img\sidebar_head_bg%402x.png" />
+    <Content Include="img\sidebar_head_bg.png" />
+    <Content Include="img\slider\slider0.png" />
+    <Content Include="img\slider\slider1.png" />
+    <Content Include="img\slider\slider2.png" />
+    <Content Include="img\slider\slider3.png" />
+    <Content Include="img\slider\slider4.png" />
+    <Content Include="img\slider\slider5.png" />
+    <Content Include="img\spinners\spinner%402x.gif" />
+    <Content Include="img\spinners\spinner.gif" />
+    <Content Include="img\spinners\spinner_danger%402x.gif" />
+    <Content Include="img\spinners\spinner_danger.gif" />
+    <Content Include="img\spinners\spinner_large%402x.gif" />
+    <Content Include="img\spinners\spinner_large.gif" />
+    <Content Include="img\spinners\spinner_medium%402x.gif" />
+    <Content Include="img\spinners\spinner_medium.gif" />
+    <Content Include="img\spinners\spinner_small%402x.gif" />
+    <Content Include="img\spinners\spinner_small.gif" />
+    <Content Include="img\spinners\spinner_success%402x.gif" />
+    <Content Include="img\spinners\spinner_success.gif" />
+    <Content Include="img\spinners\spinner_warning%402x.gif" />
+    <Content Include="img\spinners\spinner_warning.gif" />
+    <Content Include="img\spritesheet.png" />
+    <Content Include="img\stars1.png" />
+    <Content Include="img\toast-icon\error.png" />
+    <Content Include="img\toast-icon\info.png" />
+    <Content Include="img\toast-icon\success.png" />
+    <Content Include="img\toast-icon\warning.png" />
+    <Content Include="img\_spritesheet.png" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.skinModern.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.skinNice.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\ion.rangeSlider.skinSimple.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\css\normalize.css" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\img\sprite-skin-flat.png" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\img\sprite-skin-modern.png" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\img\sprite-skin-nice.png" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\img\sprite-skin-simple.png" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\js\ion-rangeSlider\ion.rangeSlider.js" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\js\ion-rangeSlider\ion.rangeSlider.min.js" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\js\vendor\jquery-1.12.3.min.js" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.skinFlat.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.skinHTML5.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.skinModern.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.skinNice.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._ion.rangeSlider.skinSimple.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\css\._normalize.css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\img\._sprite-skin-flat.png" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\img\._sprite-skin-modern.png" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\img\._sprite-skin-nice.png" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\img\._sprite-skin-simple.png" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\ion-rangeSlider\._ion.rangeSlider.js" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\ion-rangeSlider\._ion.rangeSlider.min.js" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\vendor\._jquery-1.12.3.min.js" />
+    <Content Include="jquery_selectlist\css\cross-circle.png" />
+    <Content Include="jquery_selectlist\css\remove.png" />
+    <Content Include="jquery_selectlist\css\selectlist-bootstrap.css" />
+    <Content Include="jquery_selectlist\css\selectlist.css" />
+    <Content Include="jquery_selectlist\scripts\jquery.min.js" />
+    <Content Include="jquery_selectlist\scripts\jquery.selectlist.dev.js" />
+    <Content Include="jquery_selectlist\scripts\jquery.selectlist.js" />
+    <Content Include="jquery_selectlist\scripts\jquery.selectlist.min.js" />
+    <Content Include="JS\2.1.1-jquery.min.js" />
+    <Content Include="JS\Admin\AdminCaseLog\AdminCaseLogJS.js" />
+    <Content Include="JS\Admin\AdminCertificate\AdminCertificateJS.js" />
+    <Content Include="JS\Admin\AdminDocument\AdminDocumentJS.js" />
+    <Content Include="JS\Admin\AdminNews\AdminNewsJS.js" />
+    <Content Include="JS\Admin\AdminPearformance\AdminPearformanceJS.js" />
+    <Content Include="JS\Admin\AdminPlanner\AdminPlanner.js" />
+    <Content Include="JS\Admin\AdminTask\AdminTaskJS.js" />
+    <Content Include="JS\Admin\AdminTMS\AdminTMSJS.js" />
+    <Content Include="JS\Admin\AdminTraining\AdminTrainingJS.js" />
+    <Content Include="JS\Admin\AdminVisa\AdminVisaJS.js" />
+    <Content Include="JS\Admin\ProjectPlanner\AdminProjectPlanner.js" />
+    <Content Include="JS\Admin\SkilEndrosement\SkilEndrosementJS.js" />
+    <Content Include="JS\Approve\Approval.js" />
+    <Content Include="JS\Approve\ApprovalJS.js" />
+    <Content Include="JS\Approve\TimesheetApprove.js" />
+    <Content Include="JS\Approve\UpdateApproveReject.js" />
+    <Content Include="JS\awesomplete.min.js" />
+    <Content Include="JS\bootbox.min.js" />
+    <Content Include="JS\BulkAction\BulkActionJs.js" />
+    <Content Include="JS\canvasjs.min.js" />
+    <Content Include="JS\farbtastic.js" />
+    <Content Include="JS\farbtastic12\farbtastic\CHANGELOG.html" />
+    <Content Include="JS\farbtastic12\farbtastic\demo1.html" />
+    <Content Include="JS\farbtastic12\farbtastic\demo2.html" />
+    <Content Include="JS\farbtastic12\farbtastic\farbtastic.css" />
+    <Content Include="JS\farbtastic12\farbtastic\farbtastic.js" />
+    <Content Include="JS\farbtastic12\farbtastic\LICENSE.txt" />
+    <Content Include="JS\farbtastic12\farbtastic\marker.png" />
+    <Content Include="JS\farbtastic12\farbtastic\mask.png" />
+    <Content Include="JS\farbtastic12\farbtastic\README.html" />
+    <Content Include="JS\farbtastic12\farbtastic\wheel.png" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._CHANGELOG.html" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._demo1.html" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._demo2.html" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._farbtastic.css" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._farbtastic.js" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._LICENSE.txt" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._marker.png" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._mask.png" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._README.html" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._wheel.png" />
+    <Content Include="JS\html2canvas.js" />
+    <Content Include="JS\Job\VacancyApplyJS.js" />
+    <Content Include="JS\jquery-3.3.1.min.js" />
+    <Content Include="JS\jquery-ui.js" />
+    <Content Include="JS\jquery.rateyo.min.js" />
+    <Content Include="JS\jsapi.js" />
+    <Content Include="JS\jscolor.js" />
+    <Content Include="JS\jspdf.min.js" />
+    <Content Include="JS\Layout.js" />
+    <Content Include="JS\Login\jquery.backstretch.min.js" />
+    <Content Include="JS\Login\jquery.min.js" />
+    <Content Include="JS\Login\jquery.validate.min.js" />
+    <Content Include="JS\Login\login-5.min.js" />
+    <Content Include="JS\Me\Contacts\MeEmployeeContactsJS.js" />
+    <Content Include="JS\Me\Document\MeEmployeeDocument.js" />
+    <Content Include="JS\Me\Overview\MeEmployeeOverViewJS.js" />
+    <Content Include="JS\Me\Performances\MeEmployeePerformance.js" />
+    <Content Include="JS\Me\Planner\MeEmployeePlannerJS.js" />
+    <Content Include="JS\Me\Profile\MeEmployeeProfileJS.js" />
+    <Content Include="JS\Me\ProjectPlanner\MeEmployeeProjectPlaneerJS.js" />
+    <Content Include="JS\Me\SkillsEndorsemen\MeEmployeeSkillsEndorsementJS.js" />
+    <Content Include="JS\MultipleFileUpload.js" />
+    <Content Include="JS\OrganizationChart\OrganizationChartJS.js" />
+    <Content Include="JS\pick-a-color-1.1.6.min.js" />
+    <Content Include="JS\Query\QueryJS.js" />
+    <Content Include="JS\rating.js" />
+    <Content Include="JS\Resources\Benefit\EmployeeBenefitJS.js" />
+    <Content Include="JS\Resources\CaseLog\EmployeeCaseLogJS.js" />
+    <Content Include="JS\Resources\Contacts\EmployeeContactsJS.js" />
+    <Content Include="JS\Resources\Document\EmployeeDocumentJS.js" />
+    <Content Include="JS\Resources\Employment\EmployeeEmploymentJS.js" />
+    <Content Include="JS\Resources\MainResoureJs.js" />
+    <Content Include="JS\Resources\Overview\EmployeeOverViewJS.js" />
+    <Content Include="JS\Resources\Performance\EmployeePerformanceJS.js" />
+    <Content Include="JS\Resources\Performance\EmployeePerformanceSegments.js" />
+    <Content Include="JS\Resources\Planner\EmployeePlannerJS.js" />
+    <Content Include="JS\Resources\Profile\EmployeeProfileJS.js" />
+    <Content Include="JS\Resources\ProjectPlanner\EmployeeProjectPlaneerJS.js" />
+    <Content Include="JS\Resources\Resume\EmployeeResumeJS.js" />
+    <Content Include="JS\Resources\SkillsEndorsemen\EmployeeSkillsEndorsementJS.js" />
+    <Content Include="JS\Resources\Training\EmployeeTrainingJS.js" />
+    <Content Include="JS\RolesManagement\CreateRoleJS.js" />
+    <Content Include="JS\RolesManagement\MenuManagmentJS.js" />
+    <Content Include="JS\RolesManagement\RolesManagementJS.js" />
+    <Content Include="JS\select2.js" />
+    <Content Include="JS\Settings\ActivityType\ActivityTypeJS.js" />
+    <Content Include="JS\Settings\AddAssets\AddAssetsJS.js" />
+    <Content Include="JS\Settings\AddSkills\AddSkillsJS.js" />
+    <Content Include="JS\Settings\CompanyCustomer\CompanyCustomerJS.js" />
+    <Content Include="JS\Settings\CompanyStructure\CompanyStuctureJS.js" />
+    <Content Include="JS\Settings\Company\CompanyJS.js" />
+    <Content Include="JS\Settings\CurrencyConverter\CurrencyConverterJS.js" />
+    <Content Include="JS\Settings\EmailSetting\EmailSettingJS.js" />
+    <Content Include="JS\Settings\HolidayNAbsenceSetting\HolidayNAbsenceJS.js" />
+    <Content Include="JS\Settings\HolidayNAbsenceSetting\HolidaysNAbsenceSeveJS.js" />
+    <Content Include="JS\Settings\MobileSetting\MobileSettingJS.js" />
+    <Content Include="JS\Settings\OtherSetting\OtherSettingJS.js" />
+    <Content Include="JS\Settings\PerformanceSetting\PerformanceSettingJS.js" />
+    <Content Include="JS\Settings\Project\ProjectJS.js" />
+    <Content Include="JS\Settings\SkillsSet\GeneralSkillsSetJS.js" />
+    <Content Include="JS\Settings\SkillsSet\TechnicalSkillsSetJS.js" />
+    <Content Include="JS\Settings\TimeSheetSettingsJS.js" />
+    <Content Include="JS\Settings\TMSSettings\TMSSettingsJS.js" />
+    <Content Include="JS\SmartWizard\jquery.smartWizard.js" />
+    <Content Include="JS\SmartWizard\jquery.smartWizard.min.js" />
+    <Content Include="JS\starrating.js" />
+    <Content Include="JS\Task\TaskJS.js" />
+    <Content Include="JS\toastr.js" />
+    <Content Include="Scripts\Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\Ajjquery.smartWizard.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datatables.net-bs\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\datatables.net-bs\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\datatables.net-bs\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\datatables.net-bs\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\datatables.net-bs\License.txt" />
+    <Content Include="Scripts\datatables.net-buttons-bs\css\buttons.bootstrap.css" />
+    <Content Include="Scripts\datatables.net-buttons-bs\css\buttons.bootstrap.min.css" />
+    <Content Include="Scripts\datatables.net-buttons-bs\js\buttons.bootstrap.js" />
+    <Content Include="Scripts\datatables.net-buttons-bs\js\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\datatables.net-buttons-bs\License.txt" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.colVis.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.flash.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.flash.min.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.html5.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.html5.min.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.print.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\buttons.print.min.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\dataTables.buttons.js" />
+    <Content Include="Scripts\datatables.net-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Scripts\datatables.net-buttons\License.txt" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\css\fixedHeader.bootstrap.css" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\License.txt" />
+    <Content Include="Scripts\datatables.net-fixedheader\js\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\datatables.net-fixedheader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\datatables.net-fixedheader\License.txt" />
+    <Content Include="Scripts\datatables.net-keytable\js\dataTables.keyTable.js" />
+    <Content Include="Scripts\datatables.net-keytable\js\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\datatables.net-keytable\License.txt" />
+    <Content Include="Scripts\datatables.net-responsive-bs\css\responsive.bootstrap.css" />
+    <Content Include="Scripts\datatables.net-responsive-bs\css\responsive.bootstrap.min.css" />
+    <Content Include="Scripts\datatables.net-responsive-bs\js\responsive.bootstrap.js" />
+    <Content Include="Scripts\datatables.net-responsive-bs\License.txt" />
+    <Content Include="Scripts\datatables.net-responsive\js\dataTables.responsive.js" />
+    <Content Include="Scripts\datatables.net-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Scripts\datatables.net-responsive\License.txt" />
+    <Content Include="Scripts\datatables.net-scroller-bs\css\scroller.bootstrap.css" />
+    <Content Include="Scripts\datatables.net-scroller-bs\css\scroller.bootstrap.min.css" />
+    <Content Include="Scripts\datatables.net-scroller-bs\License.txt" />
+    <Content Include="Scripts\datatables.net-scroller\js\dataTables.scroller.js" />
+    <Content Include="Scripts\datatables.net-scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Scripts\datatables.net-scroller\License.txt" />
+    <Content Include="Scripts\datatables.net\js\jquery.dataTables.js" />
+    <Content Include="Scripts\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables.net\License.txt" />
+    <Content Include="Scripts\HighChart\exporting.js" />
+    <Content Include="Scripts\HighChart\highcharts-3d.js" />
+    <Content Include="Scripts\HighChart\highcharts-more.js" />
+    <Content Include="Scripts\HighChart\highcharts-new.js" />
+    <Content Include="Scripts\HighChart\highcharts.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jquery.maskedinput-1.3.min.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Scripts\jquery.smartWizard.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\js\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\js\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\assets\main.css" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\helpers\code\index.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\serve.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\src\js\colorpicker-color.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\src\js\colorpicker-component.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\src\js\colorpicker-defaults.js" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\src\js\colorpicker-plugin-wrapper.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="uikit\jquery.nestable.css" />
+    <Content Include="uikit\jquery.nestable.js" />
+    <Content Include="Upload\AdminDocument\download %281%29_22042017033325.jpg" />
+    <Content Include="Upload\AdminDocument\download_22042017033100.jpg" />
+    <Content Include="Upload\AdminDocument\download_22042017033934.jpg" />
+    <Content Include="Upload\AdminDocument\download_22042017035315.jpg" />
+    <Content Include="Upload\AdminDocument\download_22042017040220.jpg" />
+    <Content Include="Upload\AdminDocument\images_22042017032907.jpg" />
+    <Content Include="Upload\AdminDocument\images_22042017032939.jpg" />
+    <Content Include="Upload\AdminDocument\images_22042017045958.jpg" />
+    <Content Include="Upload\AdminDocument\tumblr_static_i_m_a_developer_wallpaper_22042017032703.png" />
+    <Content Include="Upload\AdminDocument\VisualStudio-WallPaper-03_22042017033501.jpg" />
+    <Content Include="Upload\Koala_04072017123734.jpg" />
+    <Content Include="Upload\No-image-found.jpg" />
+    <Content Include="Upload\Resources\applicantTMS_09042018045300.jpg" />
+    <Content Include="Upload\Resources\applicantTMS_09042018115549.jpg" />
+    <Content Include="Upload\Resources\applicantTMS_10042018021141.jpg" />
+    <Content Include="Upload\Resources\Benifits\Desert_21112017044155.jpg" />
+    <Content Include="Upload\Resources\Benifits\Hydrangeas_21112017042340.jpg" />
+    <Content Include="Upload\Resources\Benifits\Hydrangeas_21112017042341.jpg" />
+    <Content Include="Upload\Resources\Benifits\Hydrangeas_21112017042342.jpg" />
+    <Content Include="Upload\Resources\Benifits\Jellyfish_21112017043840.jpg" />
+    <Content Include="Upload\Resources\Benifits\Jellyfish_21112017043934.jpg" />
+    <Content Include="Upload\Resources\Benifits\Penguins_21112017043751.jpg" />
+    <Content Include="Upload\Resources\Benifits\Penguins_21112017044039.jpg" />
+    <Content Include="Upload\Resources\careerTMs_09042018030714.png" />
+    <Content Include="Upload\Resources\careerTMs_09042018040103.png" />
+    <Content Include="Upload\Resources\careerTMs_09042018042130.png" />
+    <Content Include="Upload\Resources\careerTMs_09042018115545.png" />
+    <Content Include="Upload\Resources\careerTMs_09042018125332.png" />
+    <Content Include="Upload\Resources\Chrysanthemum_09042018105811.jpg" />
+    <Content Include="Upload\Resources\Desert_05122017035807.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\download_24042017095344.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\download_24042017100550.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\Hydrangeas_28122017060934.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\images_24042017095655.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\Jellyfish_22112017055008.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\Penguins_27032018055044.jpg" />
+    <Content Include="Upload\Resources\EmployeeDocument\Tulips_25122017034405.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Chrysanthemum_14022018123214.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Chrysanthemum_15022018070321.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Lighthouse_14022018011801.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Lighthouse_14022018011802.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018014328.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018030554.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018030854.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018030855.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018032046.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018035024.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018035513.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_09022018040133.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_14022018121405.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_14022018122556.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Penguins_14022018123211.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Tulips_09022018013903.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Tulips_09022018014230.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Tulips_09022018030640.jpg" />
+    <Content Include="Upload\Resources\GoalDocument\Tulips_09022018030929.jpg" />
+    <Content Include="Upload\Resources\Hydrangeas_09042018110509.jpg" />
+    <Content Include="Upload\Resources\Hydrangeas_17042018112408.jpg" />
+    <Content Include="Upload\Resources\Hydrangeas_29122017042218.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_04012018025451.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_09042018110050.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_11122017124904.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_21122017065910.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_27032018010206.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_27032018024851.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_27032018073930.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_29032018113538.jpg" />
+    <Content Include="Upload\Resources\Lighthouse_29032018114518.jpg" />
+    <Content Include="Upload\Resources\No-image-found.jpg" />
+    <Content Include="Upload\Resources\Penguins_04012018025215.jpg" />
+    <Content Include="Upload\Resources\Penguins_09042018110048.jpg" />
+    <Content Include="Upload\Resources\Penguins_09042018110858.jpg" />
+    <Content Include="Upload\Resources\Penguins_10012018115304.jpg" />
+    <Content Include="Upload\Resources\Penguins_10012018115744.jpg" />
+    <Content Include="Upload\Resources\Penguins_10012018120440.jpg" />
+    <Content Include="Upload\Resources\Penguins_25122017062344.jpg" />
+    <Content Include="Upload\Resources\Planner\MaternityOrPaternityLeave\Penguins_26122017123847.jpg" />
+    <Content Include="Upload\Resources\Planner\SickLeave\Penguins_26122017123526.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Desert_27122017112632.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Hydrangeas_13122017125140.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Hydrangeas_21112017040928.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Lighthouse_27032018030337.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Lighthouse_27032018030431.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Lighthouse_27032018053010.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Lighthouse_28032018030748.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Penguins_21112017040837.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Penguins_22122017051726.jpg" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\Tulips_21112017040550.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Desert_17012018112250.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Hydrangeas_17012018113021.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Hydrangeas_17012018113528.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Hydrangeas_27122017112726.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Lighthouse_17012018113734.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Penguins_04012018044541.jpg" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Tulips_25122017062257.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\203_21042017040113.png" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Hydrangeas_15122017115058.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_06092017120908.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_06102017061634.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_07102017112646.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_10102017065331.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_26092017111131.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Jellyfish_29082017110438.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Lighthouse_15122017113827.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Lighthouse_15122017115233.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Penguins_06102017063518.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_04102017080744.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_04102017080935.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_04102017081112.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_04102017081545.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_06102017061017.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_06102017061534.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_06102017061938.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_06102017062134.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_06102017062520.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_10102017064535.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_10102017065131.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_10102017065635.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_10102017070027.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_11102017111135.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_11102017111549.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_12102017040745.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_23082017052259.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_23092017110756.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_25092017071942.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_25092017072304.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_25092017072636.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_25092017072835.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_26092017111345.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\Tulips_30082017051329.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TimeSheet\_Layout_21042017123554.cshtml" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\160_21042017041456.png" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Chrysanthemum_14092017010809.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Desert_11082017124718.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Desert_21112017035329.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Desert_21112017035330.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Hydrangeas_12082017023011.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Hydrangeas_16012018072643.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Hydrangeas_17012018114236.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_02092017110355.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_04092017074645.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_06102017052210.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_06102017052529.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_07102017112608.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017062713.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017063003.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017063252.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017071242.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017111439.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_11082017111541.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_12082017022957.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_14092017121310.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_16092017013944.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_24082017011748.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_25092017074810.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Jellyfish_26092017112146.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Lighthouse_11082017121501.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Lighthouse_11082017121802.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Lighthouse_15122017111048.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Penguins_11082017120902.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Penguins_11082017121037.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Penguins_11082017123027.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Penguins_15122017111413.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Penguins_17012018114408.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_04102017075054.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017053408.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017065048.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017065253.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017065432.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017065557.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_05102017065731.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_06102017052351.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_06102017052704.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_06102017054758.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_06102017054836.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_11082017111413.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_11082017120727.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_11082017121702.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_11082017124618.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_12082017022953.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_12082017030936.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_12102017013216.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_12102017035452.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_12102017035540.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017011310.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017011422.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017011704.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017011910.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017012008.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_14092017061119.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_15122017111325.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_23082017042332.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_23082017050109.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_25092017053225.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_25092017053341.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_25092017053549.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_25092017073755.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_26092017111010.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Tulips_28092017110213.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Jellyfish_25092017034146.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Penguins_12082017031055.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Penguins_12082017031129.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Penguins_23082017054341.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Penguins_30082017043228.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_04102017083757.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_05102017105316.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_05102017105620.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_05102017105750.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06092017123521.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06102017064600.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06102017064631.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06102017064742.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06102017064853.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_06102017065349.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_07102017112708.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_10102017011714.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017065626.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017065738.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017070036.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017070231.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017070426.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017071116.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017071834.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017072436.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017072624.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017072731.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017073025.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017073416.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017073602.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017073726.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_11102017073945.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_12102017010148.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_12102017041105.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_12102017125933.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_23092017020503.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_23092017020822.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_25092017034003.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_25092017034333.jpg" />
+    <Content Include="Upload\Resources\ProjectPlanner\Uplift\Tulips_25092017034854.jpg" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018030256.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018041019.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018042640.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018051849.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018052533.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018053139.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018053325.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018063441.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018063825.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018113049.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_09042018115540.png" />
+    <Content Include="Upload\Resources\RecrutmentTMS_10042018020016.png" />
+    <Content Include="Upload\Resources\Tulips_06092017062605.jpg" />
+    <Content Include="Upload\Resources\Tulips_09042018110044.jpg" />
+    <Content Include="Upload\Resources\Tulips_09042018111151.jpg" />
+    <Content Include="Upload\Resources\Tulips_10012018041730.jpg" />
+    <Content Include="Upload\Resources\Tulips_10012018122033.jpg" />
+    <Content Include="Upload\Resources\Tulips_10012018122254.jpg" />
+    <Content Include="Upload\Resources\Tulips_10012018122602.jpg" />
+    <Content Include="Upload\Resources\Tulips_22122017014135.jpg" />
+    <Content Include="Upload\Resources\Tulips_29122017043143.jpg" />
+    <Content Include="Upload\Resources\warningTMS_09042018010744.jpg" />
+    <Content Include="Upload\Resources\warningTMS_09042018030252.jpg" />
+    <Content Include="Upload\Resources\warningTMS_09042018120323.jpg" />
+    <Content Include="Upload\TMSApplicant\download_19042017015955.jpg" />
+    <Content Include="Upload\TMSApplicant\images_19042017015951.jpg" />
+    <Content Include="Views\EmployeeProjectPlanner\_PartialAddEditTOILView.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Notification\index.html" />
+    <Content Include="Zebra_Datepicker-master\changelog.txt" />
+    <Content Include="Zebra_Datepicker-master\documentation.txt" />
+    <Content Include="Zebra_Datepicker-master\examples\bootstrap.html" />
+    <Content Include="Zebra_Datepicker-master\examples\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\css\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\css\shCoreDefault.css" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\shBrushJScript.js" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\shBrushXml.js" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\shCore.js" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\shLegacy.js" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\public\javascript\XRegExp.js" />
+    <Content Include="Zebra_Datepicker-master\examples\metallic.html" />
+    <Content Include="Zebra_Datepicker-master\examples\public\css\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\public\css\reset.css" />
+    <Content Include="Zebra_Datepicker-master\examples\public\css\style.css" />
+    <Content Include="Zebra_Datepicker-master\examples\public\images\close.png" />
+    <Content Include="Zebra_Datepicker-master\examples\public\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\public\javascript\core.js" />
+    <Content Include="Zebra_Datepicker-master\examples\public\javascript\index.html" />
+    <Content Include="Zebra_Datepicker-master\examples\public\javascript\jquery-1.12.0.js" />
+    <Content Include="Zebra_Datepicker-master\Gruntfile.js" />
+    <Content Include="Zebra_Datepicker-master\license.txt" />
+    <Content Include="Zebra_Datepicker-master\public\css\bootstrap.css" />
+    <Content Include="Zebra_Datepicker-master\public\css\default.css" />
+    <Content Include="Zebra_Datepicker-master\public\css\metallic.css" />
+    <Content Include="Zebra_Datepicker-master\public\images\calendar-disabled.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\calendar.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\metallic\default-date.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\metallic\disabled-date.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\metallic\header.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\metallic\selected-date.png" />
+    <Content Include="Zebra_Datepicker-master\public\images\themes.png" />
+    <Content Include="Zebra_Datepicker-master\public\javascript\zebra_datepicker.js" />
+    <Content Include="Zebra_Datepicker-master\public\javascript\zebra_datepicker.src.js" />
+    <Content Include="Zebra_Datepicker-master\readme.txt" />
+    <Content Include="Zebra_Dialog-master\css\default\confirmation.png" />
+    <Content Include="Zebra_Dialog-master\css\default\error.png" />
+    <Content Include="Zebra_Dialog-master\css\default\index.html" />
+    <Content Include="Zebra_Dialog-master\css\default\information.png" />
+    <Content Include="Zebra_Dialog-master\css\default\preloader.gif" />
+    <Content Include="Zebra_Dialog-master\css\default\question.png" />
+    <Content Include="Zebra_Dialog-master\css\default\warning.png" />
+    <Content Include="Zebra_Dialog-master\css\default\zebra_dialog.css" />
+    <Content Include="Zebra_Dialog-master\css\flat\confirmation.png" />
+    <Content Include="Zebra_Dialog-master\css\flat\error.png" />
+    <Content Include="Zebra_Dialog-master\css\flat\icons.txt" />
+    <Content Include="Zebra_Dialog-master\css\flat\index.html" />
+    <Content Include="Zebra_Dialog-master\css\flat\information.png" />
+    <Content Include="Zebra_Dialog-master\css\flat\preloader.gif" />
+    <Content Include="Zebra_Dialog-master\css\flat\question.png" />
+    <Content Include="Zebra_Dialog-master\css\flat\warning.png" />
+    <Content Include="Zebra_Dialog-master\css\flat\zebra_dialog.css" />
+    <Content Include="Zebra_Dialog-master\css\index.html" />
+    <Content Include="Zebra_Dialog-master\javascript\index.html" />
+    <Content Include="Zebra_Dialog-master\javascript\zebra_dialog.js" />
+    <Content Include="Zebra_Dialog-master\javascript\zebra_dialog.src.js" />
+    <Content Include="icons\material-design-icons\MaterialIcons-Regular.eot" />
+    <Content Include="icons\material-design-icons\MaterialIcons-Regular.ijmap" />
+    <Content Include="icons\material-design-icons\MaterialIcons-Regular.ttf" />
+    <Content Include="icons\material-design-icons\MaterialIcons-Regular.woff" />
+    <Content Include="icons\material-design-icons\MaterialIcons-Regular.woff2" />
+    <Content Include="icons\material-design-icons\README.md" />
+    <Content Include="Scripts\datatables.net-bs\.bower.json" />
+    <Content Include="Scripts\datatables.net-bs\bower.json" />
+    <Content Include="Scripts\datatables.net-bs\Readme.md" />
+    <Content Include="Scripts\datatables.net-buttons-bs\.bower.json" />
+    <Content Include="Scripts\datatables.net-buttons-bs\bower.json" />
+    <Content Include="Scripts\datatables.net-buttons-bs\Readme.md" />
+    <Content Include="Scripts\datatables.net-buttons\.bower.json" />
+    <Content Include="Scripts\datatables.net-buttons\bower.json" />
+    <Content Include="Scripts\datatables.net-buttons\Readme.md" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\.bower.json" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\bower.json" />
+    <Content Include="Scripts\datatables.net-fixedheader-bs\Readme.md" />
+    <Content Include="Scripts\datatables.net-fixedheader\.bower.json" />
+    <Content Include="Scripts\datatables.net-fixedheader\bower.json" />
+    <Content Include="Scripts\datatables.net-fixedheader\Readme.md" />
+    <Content Include="Scripts\datatables.net-keytable\.bower.json" />
+    <Content Include="Scripts\datatables.net-keytable\bower.json" />
+    <Content Include="Scripts\datatables.net-keytable\Readme.md" />
+    <Content Include="Scripts\datatables.net-responsive-bs\.bower.json" />
+    <Content Include="Scripts\datatables.net-responsive-bs\bower.json" />
+    <Content Include="Scripts\datatables.net-responsive-bs\Readme.md" />
+    <Content Include="Scripts\datatables.net-responsive\.bower.json" />
+    <Content Include="Scripts\datatables.net-responsive\bower.json" />
+    <Content Include="Scripts\datatables.net-responsive\Readme.md" />
+    <Content Include="Scripts\datatables.net-scroller-bs\.bower.json" />
+    <Content Include="Scripts\datatables.net-scroller-bs\bower.json" />
+    <Content Include="Scripts\datatables.net-scroller-bs\Readme.md" />
+    <Content Include="Scripts\datatables.net-scroller\.bower.json" />
+    <Content Include="Scripts\datatables.net-scroller\bower.json" />
+    <Content Include="Scripts\datatables.net-scroller\Readme.md" />
+    <Content Include="Scripts\datatables.net\.bower.json" />
+    <Content Include="Scripts\datatables.net\bower.json" />
+    <Content Include="Scripts\datatables.net\Readme.md" />
+    <Content Include="froala_editor\bower.json" />
+    <Content Include="froala_editor\composer.json" />
+    <Content Include="froala_editor\html\file_s3_upload.php" />
+    <Content Include="froala_editor\html\image_s3_upload.php" />
+    <Content Include="froala_editor\package.json" />
+    <Content Include="ion.rangeSlider-2.1.7\ion.rangeSlider-2.1.7\PSD\sprite-skin.psd" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\._ion.rangeSlider-2.1.7" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\._.DS_Store" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\._css" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\._img" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\._js" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\._PSD" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\._.DS_Store" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\._ion-rangeSlider" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\js\._vendor" />
+    <Content Include="ion.rangeSlider-2.1.7\__MACOSX\ion.rangeSlider-2.1.7\PSD\._sprite-skin.psd" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="fonts\SignatureRegular.eot" />
+    <Content Include="fonts\SignatureRegular.ttf" />
+    <Content Include="fonts\SignatureRegular.woff" />
+    <EntityDeploy Include="DataModel\HRTool.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HRTool.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataModel\HRTool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRTool.edmx</DependentUpon>
+      <LastGenOutput>HRTool.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\HRTool.edmx.diagram">
+      <DependentUpon>HRTool.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataModel\HRTool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HRTool.edmx</DependentUpon>
+      <LastGenOutput>HRTool.cs</LastGenOutput>
+    </Content>
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.woff2" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="JS\farbtastic12\farbtastic\.DS_Store" />
+    <Content Include="JS\farbtastic12\__MACOSX\._farbtastic" />
+    <Content Include="JS\farbtastic12\__MACOSX\farbtastic\._.DS_Store" />
+    <None Include="Properties\PublishProfiles\HrTool.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Zebra_Datepicker-master\.gitignore" />
+    <Content Include="Zebra_Datepicker-master\.npmignore" />
+    <Content Include="Zebra_Datepicker-master\bower.json" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\GPL-LICENSE" />
+    <Content Include="Zebra_Datepicker-master\examples\libraries\syntaxhighlighter\MIT-LICENSE" />
+    <Content Include="Zebra_Datepicker-master\package.json" />
+    <Content Include="Zebra_Datepicker-master\README.md" />
+    <Content Include="Views\Task\_partialTaskIndex.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Shared\_SettingLayout.cshtml" />
+    <Content Include="Views\OtherSetting\Index.cshtml" />
+    <Content Include="Views\EmailSettings\Index.cshtml" />
+    <Content Include="Views\CompanyStructure\Index.cshtml" />
+    <Content Include="Views\OtherSetting\_PartialOtherSettingList.cshtml" />
+    <Content Include="Views\Task\_partialAddSettings.cshtml" />
+    <Content Include="Views\CompanyStructure\_partialBusinessList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\CompanyStructure\_partialDivisionList.cshtml" />
+    <Content Include="Views\CompanyStructure\_partialFunctionList.cshtml" />
+    <Content Include="Views\CompanyStructure\_partialPoolList.cshtml" />
+    <Content Include="Views\OtherSetting\_partialAddOtherSetting.cshtml" />
+    <Content Include="Views\AddSkills\Index.cshtml" />
+    <Content Include="Views\AddSkills\_partialAddSkillsList.cshtml" />
+    <Content Include="Views\AddSkills\_partialAddAddSkills.cshtml" />
+    <Content Include="Views\TechnicalSkillsSet\Index.cshtml" />
+    <Content Include="Views\TechnicalSkillsSet\_partialTechnicalSkillsSetList.cshtml" />
+    <Content Include="Views\TechnicalSkillsSet\_partialAddTechnicalSkillsSet.cshtml" />
+    <Content Include="Views\CurrencyConverter\Index.cshtml" />
+    <Content Include="Views\CurrencyConverter\_PartialCurrencyListRecord.cshtml" />
+    <Content Include="Views\GeneralSkillsSet\Index.cshtml" />
+    <Content Include="Views\GeneralSkillsSet\_partialAddGeneralSkillsSet.cshtml" />
+    <Content Include="Views\GeneralSkillsSet\_partialGeneralSkillsSetList.cshtml" />
+    <Content Include="Views\MobileSetting\Index.cshtml" />
+    <Content Include="Views\TimeSheetSettings\Index.cshtml" />
+    <Content Include="Views\AddAssets\Index.cshtml" />
+    <Content Include="Views\AddAssets\_PartialAddAssets.cshtml" />
+    <Content Include="Views\AddAssets\_PartialAddAssetsList.cshtml" />
+    <Content Include="Views\CompanyCustomer\Index.cshtml" />
+    <Content Include="Views\CompanyCustomer\_partialCompanyCustomerList.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\_PartialAddProject.cshtml" />
+    <Content Include="Views\Project\_PartialProjectList.cshtml" />
+    <Content Include="Views\HolidaySettings\Index.cshtml" />
+    <Content Include="Views\HolidaySettings\_partialPublicHolidayCountry.cshtml" />
+    <Content Include="Views\HolidaySettings\_partialBradfordFactor.cshtml" />
+    <Content Include="Views\HolidaySettings\_partialWorkPattern.cshtml" />
+    <Content Include="Views\ActivityType\Index.cshtml" />
+    <Content Include="Views\ActivityType\_partailAddActivityType.cshtml" />
+    <Content Include="Views\ActivityType\_partialActivityTypeList.cshtml" />
+    <Content Include="Views\HolidaySettings\_partialFalseIsRotating.cshtml" />
+    <Content Include="Views\HolidaySettings\_partialTrueIsRotating.cshtml" />
+    <Content Include="Views\CompanyCustomer\_partialAddCompayCustomer.cshtml" />
+    <Content Include="Views\Shared\_ResourcesLayout.cshtml" />
+    <Content Include="Views\EmpolyeeCases\Index.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\EmployeeContacts\Index.cshtml" />
+    <Content Include="Views\Shared\_partialResourceMenu.cshtml" />
+    <Content Include="Views\EmpolyeeCases\_partialCasesList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_PartialBindSubMenuList.cshtml" />
+    <Content Include="Views\Shared\_PartialMenuList.cshtml" />
+    <Content Include="Views\RolesManagement\AssignRole.cshtml" />
+    <Content Include="Views\RolesManagement\Index.cshtml" />
+    <Content Include="Views\RolesManagement\MenuIndex.cshtml" />
+    <Content Include="Views\RolesManagement\_BindSubmenuListTable.cshtml" />
+    <Content Include="Views\RolesManagement\_PartialAddMenu.cshtml" />
+    <Content Include="Views\RolesManagement\_PartialBindMenuListTable.cshtml" />
+    <Content Include="Views\RolesManagement\_PartialMenuList.cshtml" />
+    <Content Include="Views\EmployeeDocument\Index.cshtml" />
+    <Content Include="Views\EmployeeOverView\Index.cshtml" />
+    <Content Include="Views\EmployeeTraining\Index.cshtml" />
+    <Content Include="Views\EmployeeTraining\_PartialTrainingAddSet.cshtml" />
+    <Content Include="Views\EmployeeTraining\_PartialTrainingList.cshtml" />
+    <Content Include="Views\EmployeeBenefits\Index.cshtml" />
+    <Content Include="Views\EmployeeBenefits\_partialAddBenifits.cshtml" />
+    <Content Include="Views\EmployeeCases\Index.cshtml" />
+    <Content Include="Views\EmployeeCases\_partialCasesList.cshtml" />
+    <Content Include="Views\Shared\_MeLayout.cshtml" />
+    <Content Include="Views\Shared\_partialMeMenu.cshtml" />
+    <Content Include="Views\Me\Index.cshtml" />
+    <Content Include="Views\EmployeeCases\_partialAddEditCases.cshtml" />
+    <Content Include="Views\EmployeeTraining\_PartialFiledType.cshtml" />
+    <Content Include="Views\AdminCaseLog\Index.cshtml" />
+    <Content Include="Views\AdminCaseLog\_partialAdminCaseLogList.cshtml" />
+    <Content Include="Views\AdminCaseLog\_partialAddAdminCaseLog.cshtml" />
+    <Content Include="Views\AdminTraining\Index.cshtml" />
+    <Content Include="Views\AdminTraining\_PartialFiledType.cshtml" />
+    <Content Include="Views\AdminTraining\_PartialTrainingAddSet.cshtml" />
+    <Content Include="Views\AdminTraining\_PartialTrainingList.cshtml" />
+    <Content Include="Views\EmployeeContacts\_partialAddEditEmergencyContact.cshtml" />
+    <Content Include="Views\EmployeeContacts\_partialEmergencyContactList.cshtml" />
+    <Content Include="Views\EmployeeBenefits\_partialEmployeeBenifitsList.cshtml" />
+    <Content Include="Views\AdminVisa\Index.cshtml" />
+    <Content Include="Views\AdminVisa\_partialAdminVisaMenu.cshtml" />
+    <Content Include="Views\AdminVisa\_partialAddAdminVisa.cshtml" />
+    <Content Include="Views\AdminVisa\_partialAdminVisaList.cshtml" />
+    <Content Include="Views\AdminTask\Index.cshtml" />
+    <Content Include="Views\AdminTask\_partialAdminTaskMenu.cshtml" />
+    <Content Include="Views\AdminTask\_partialAdminTaskList.cshtml" />
+    <Content Include="Views\AdminTask\_partialAddAdminTask.cshtml" />
+    <Content Include="Views\AdminCertificate\Index.cshtml" />
+    <Content Include="Views\AdminCertificate\_partialAdminCertificateMenu.cshtml" />
+    <Content Include="Views\AdminCertificate\_partialAddAdminCertificate.cshtml" />
+    <Content Include="Views\AdminCertificate\_partialAdminCertificateList.cshtml" />
+    <Content Include="Views\RolesManagement\CreateRole.cshtml" />
+    <Content Include="Views\RolesManagement\_partialCreateRoleList.cshtml" />
+    <Content Include="Views\RolesManagement\_partialAddCreateRole.cshtml" />
+    <Content Include="Views\EmployeeResume\Index.cshtml" />
+    <Content Include="Views\EmployeeResume\ResumePDF.cshtml" />
+    <Content Include="Views\EmployeeResume\_partialAddEditEducation.cshtml" />
+    <Content Include="Views\EmployeeResume\_partialAddEditLanguageDetails.cshtml" />
+    <Content Include="Views\EmployeeResume\_partialAddEditQualification.cshtml" />
+    <Content Include="Views\EmployeeResume\_partialAddEditWorkExperience.cshtml" />
+    <Content Include="Views\EmployeeResume\_partialResumeDetailsList.cshtml" />
+    <Content Include="Views\PerformanceSetting\Index.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialCoreSegmentSection.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialCoWorkerSegmentSection.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialCustomerSegmentSection.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialJobRolesSegmentSection.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialOverallScoreAdd.cshtml" />
+    <Content Include="Views\PerformanceSetting\_PartialPearformanceCreate.cshtml" />
+    <Content Include="Views\Shared\_PartialSettingMenuList.cshtml" />
+    <Content Include="Views\TMSSettings\Index.cshtml" />
+    <Content Include="Views\TMSSettings\_partialTMSSettingList.cshtml" />
+    <Content Include="Views\AdminPearformance\Index.cshtml" />
+    <Content Include="Views\TMSSettings\_partialAddEditTMSSetting.cshtml" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\.bower.json" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\bower.json" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\CONTRIBUTING.md" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css.map" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css.map" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\api.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\example.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\01_basic.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\02_component.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\03_component_options.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\04_events.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\05_transparent.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\06_horizontal.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\07_inline.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\08_palette.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\09_size.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\10_disabled.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\examples\11_modal.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\includes\social.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\layout.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\docs\pages\index.hbs" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\LICENSE" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\README.md" />
+    <Content Include="Scripts\mjolnic-bootstrap-colorpicker\src\less\colorpicker.less" />
+    <Content Include="Views\TMSSettings\_PartialCompetencieSegmentSection.cshtml" />
+    <Content Include="Views\TMSSettings\_PartialStepSegmentSection.cshtml" />
+    <Content Include="Views\AdminNews\Index.cshtml" />
+    <Content Include="Views\AdminNews\_partialAddAdminNews.cshtml" />
+    <Content Include="Views\AdminNews\_partialAdminNewsList.cshtml" />
+    <Content Include="Views\EmployeeEmployment\Index.cshtml" />
+    <Content Include="Views\EmployeePerformance\Index.cshtml" />
+    <Content Include="Views\TMS\Index.cshtml" />
+    <Content Include="Views\TMS\_partialApplicantListView.cshtml" />
+    <Content Include="Views\TMS\_partialVacancyListView.cshtml" />
+    <Content Include="Views\TMS\_partialPoolListView.cshtml" />
+    <Content Include="Views\TMS\_partialTMSIndexView.cshtml" />
+    <Content Include="Views\TMS\_partialAddEditVacancyView.cshtml" />
+    <Content Include="Views\EmployeePlanner\Index.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_AnnualLeave.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialListOfMonthYearWise.cshtml" />
+    <Content Include="Views\Employee\_PartialAddResoureSet.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-1.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-2.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-3.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-4.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-5.cshtml" />
+    <Content Include="Views\Employee\_Partial_Step-6.cshtml" />
+    <Content Include="Views\TMS\_partialVacancyDetailsView.cshtml" />
+    <Content Include="Views\TMSVacancy\Index.cshtml" />
+    <Content Include="Views\Employee\_PartialAddCustomerResourceList.cshtml" />
+    <Content Include="Views\Employee\_PartialAddResoureList.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\Index.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_LateLeave.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_OtherLeave.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_TravelLeave.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialListOfMonthYearWise.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\EmployeeContacts\_PartialEmployeeContactsRecord.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partial_Effactive_PublicHoliday.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAdd_PublicHoliday.cshtml" />
+    <Content Include="Views\TMS\_partialAddEditApplicantView.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\Index.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialAddEndorsementSkillsList.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialAskForEndorsementView.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialSkillsEndorsmentList.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialViewSkillsDetails.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_TravelLeave.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_Scheduling.cshtml" />
+    <Content Include="Views\AdminDocument\Index.cshtml" />
+    <Content Include="Views\AdminDocument\_partialAddEditDocumentView.cshtml" />
+    <Content Include="Views\EmployeeDocument\_partialAddEditEmployeeDocumentView.cshtml" />
+    <Content Include="Views\EmployeeDocument\_partialAddEmployeeSignature.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\EmployeeDocument\_partialShowSendSignature.cshtml" />
+    <Content Include="Views\EmployeeDocument\_partialShowEmployeeSignature.cshtml" />
+    <Content Include="Views\TMSVacancy\_partialAddJobApplyApplicant.cshtml" />
+    <Content Include="Views\AdminPlanner\Index.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\Index.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\Index.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminPartialAddEndorsementSkillsList.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminPartialAddEndrosmentComment.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminPartialAskForEndorsementView.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminPartialViewSkillsDetails.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialAddEndrosmentComment.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialSkillsEndrosementFilter.cshtml" />
+    <Content Include="Views\AdminNews\_PartialAddNewsCommentViewSet.cshtml" />
+    <Content Include="Views\Employee\_PartialAddCustomerSet.cshtml" />
+    <Content Include="Views\Employee\_Partial_Coutomer_Step_1.cshtml" />
+    <Content Include="Views\Employee\_Partial_Coutomer_Step_2.cshtml" />
+    <Content Include="Views\Employee\_Partial_Coutomer_Step_3.cshtml" />
+    <Content Include="Views\Employee\_PartialAddNewsTaskSetList.cshtml" />
+    <Content Include="Views\Employee\_PartialAddTask.cshtml" />
+    <Content Include="Views\EmployeeSkillsEndorsement\_PartialEditAskForEndorsementSkillsSet.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminEditAskForEndorsementSkillsSet.cshtml" />
+    <Content Include="Views\MeEmployeeCases\_partialAddEditCases.cshtml" />
+    <Content Include="Views\MeEmployeeCases\_partialCasesList.cshtml" />
+    <Content Include="Views\MeEmployeeCases\Index.cshtml" />
+    <Content Include="Views\MeEmployeeContacts\_partialAddEditEmergencyContact.cshtml" />
+    <Content Include="Views\MeEmployeeContacts\_partialEmergencyContactList.cshtml" />
+    <Content Include="Views\MeEmployeeContacts\_PartialEmployeeContactsRecord.cshtml" />
+    <Content Include="Views\MeEmployeeContacts\Index.cshtml" />
+    <Content Include="Views\MeEmployeeDocument\_partialAddEditEmployeeDocumentView.cshtml" />
+    <Content Include="Views\MeEmployeeDocument\_partialAddEmployeeSignature.cshtml" />
+    <Content Include="Views\MeEmployeeDocument\_partialShowEmployeeSignature.cshtml" />
+    <Content Include="Views\MeEmployeeDocument\_partialShowSendSignature.cshtml" />
+    <Content Include="Views\MeEmployeeDocument\Index.cshtml" />
+    <Content Include="Views\MeEmployeeEmployment\Index.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\Index.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\Index.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\Index.cshtml" />
+    <Content Include="Views\MeEmployeeResume\_partialAddEditEducation.cshtml" />
+    <Content Include="Views\MeEmployeeResume\_partialAddEditLanguageDetails.cshtml" />
+    <Content Include="Views\MeEmployeeResume\_partialAddEditQualification.cshtml" />
+    <Content Include="Views\MeEmployeeResume\_partialAddEditWorkExperience.cshtml" />
+    <Content Include="Views\MeEmployeeResume\_partialResumeDetailsList.cshtml" />
+    <Content Include="Views\MeEmployeeResume\Index.cshtml" />
+    <Content Include="Views\MeEmployeeResume\ResumePDF.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialAddEndorsementSkillsList.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialAddEndrosmentComment.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialAskForEndorsementView.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialEditAskForEndorsementSkillsSet.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialSkillsEndorsmentList.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialViewSkillsDetails.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\Index.cshtml" />
+    <Content Include="Views\MeEmployeeTraining\_PartialFiledType.cshtml" />
+    <Content Include="Views\MeEmployeeTraining\_PartialTrainingAddSet.cshtml" />
+    <Content Include="Views\MeEmployeeTraining\_PartialTrainingList.cshtml" />
+    <Content Include="Views\MeEmployeeTraining\Index.cshtml" />
+    <Content Include="Views\CompanyCustomer\_PartialCustomerCompanyList.cshtml" />
+    <Content Include="Views\CompanyCustomer\_partialAddEditCustomerCompanyView.cshtml" />
+    <Content Include="Views\CompanyCustomer\_partialEditCustomerCompany.cshtml" />
+    <Content Include="Views\EmployeeProfile\Index.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalary.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalaryDeduction.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalaryDeductionTemp.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalaryEntitlement.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalaryEntitlementTemp.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialAddSalaryList.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialSalaryDeductionListView.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialSalaryDeductionListViewTemp.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialSalaryEntitlementListView.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialSalaryEntitlementListViewTemp.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\Index.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalary.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalaryDeduction.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalaryDeductionTemp.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalaryEntitlement.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalaryEntitlementTemp.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialAddSalaryList.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialProfileUpdaterecord.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialSalaryDeductionListView.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialSalaryDeductionListViewTemp.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialSalaryEntitlementListView.cshtml" />
+    <Content Include="Views\MeEmployeeProfile\_PartialSalaryEntitlementListViewTemp.cshtml" />
+    <Content Include="Views\EmployeePlanner\_PartialAllowanceSettingsView.cshtml" />
+    <Content Include="Views\EmployeePlanner\_PartialAddEditTOILView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_PartialAllowanceSettingsView.cshtml" />
+    <Content Include="Views\EmployeePlanner\_PartialAdd_SickLeavesView.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialNewWorkPattern.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialFalseIsRotating.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialTrueIsRotating.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialReadOnlyWorkPattern.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialReadonlyFalseIsRotating.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialReadonlyTrueIsRotating.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialHistoryWorkPatternView.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialAddMaternityPaternityLeavesView.cshtml" />
+    <Content Include="Views\PerformanceSetting\_partialAddEditCoreSegment.cshtml" />
+    <Content Include="Views\PerformanceSetting\_partialAddEditJobSegment.cshtml" />
+    <Content Include="Views\PerformanceSetting\_partialAddEditCustomerSegment.cshtml" />
+    <Content Include="Views\PerformanceSetting\_partialAddEditCoWorkerSegment.cshtml" />
+    <Content Include="Views\EmployeePlanner\_partialListOfDayMonthYearWise.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\EmployeePlanner\_partialPrintPdfAbsenceLeavesView.cshtml" />
+    <Content Include="Views\EmployeePlanner\AbsenceLeavesPDFView.cshtml" />
+    <Content Include="Views\EmployeePlanner\HolidayLeavesPDFView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\AbsenceLeavesPDFView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\HolidayLeavesPDFView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialFalseIsRotating.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialHistoryWorkPatternView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialNewWorkPattern.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialPrintPdfAbsenceLeavesView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialReadonlyFalseIsRotating.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialReadonlyTrueIsRotating.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialReadOnlyWorkPattern.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialTrueIsRotating.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialListOfDayMonthYearWise.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MePartialAddEditTOILView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAddMaternityPaternityLeavesView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_AnnualLeave.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_LateLeave.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_OtherLeave.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_PublicHoliday.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MePartialAdd_SickLeavesView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialAdd_TravelLeave.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MePartialAllowanceSettingsView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialFalseIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialHistoryWorkPatternView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialListOfDayMonthYearWise.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialListOfMonthYearWise.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialNewWorkPattern.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialReadonlyFalseIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialReadonlyTrueIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialReadOnlyWorkPattern.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_MepartialTrueIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_Mepartial_Effactive_PublicHoliday.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partial_Effactive_PublicHoliday.cshtml" />
+    <Content Include="Views\EmployeePerformance\EmployeePerformance.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\EmployeePerformance\_partialActivePerformanceReview.cshtml" />
+    <Content Include="Views\PerformanceSetting\_partialPerformanceReviewList.cshtml" />
+    <Content Include="Views\EmployeePlanner\_PartialAbsenseLeavesPDFView.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\EmployeePlanner\_PartialHolidaysLeavePDFView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\Index.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partial_Effactive_PublicHoliday.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_Scheduling.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_TravelLeave.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_PartialAddEditTOILView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_PartialAllowanceSettingsView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialFalseIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialHistoryWorkPatternView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialListOfDayMonthYearWise.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialListOfMonthYearWise.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialNewWorkPattern.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialPrintPdfAbsenceLeavesView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialReadonlyFalseIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialReadonlyTrueIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialReadOnlyWorkPattern.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialTrueIsRotating.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\AbsenceLeavesPDFView.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\HolidayLeavesPDFView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\AbsenceLeavesPDFView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\HolidayLeavesPDFView.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_partialPrintPdfAbsenceLeavesView.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_Uplift_Detail.cshtml" />
+    <Content Include="Views\EmployeeProjectPlanner\_partialAdd_Uplift.cshtml" />
+    <Content Include="Views\EmployeePerformance\_partialStartNewReview.cshtml" />
+    <Content Include="Views\ApproveHeader\Details.cshtml" />
+    <Content Include="Views\ApproveHeader\Index.cshtml" />
+    <Content Include="Views\ApproveHeader\TravelApprove.cshtml" />
+    <Content Include="Views\Approve\Index.cshtml" />
+    <Content Include="Views\Approve\_partialAnualleaveapproval.cshtml" />
+    <Content Include="Views\Approve\_partialNewVacancyApproval.cshtml" />
+    <Content Include="Views\Approve\_partialOtherLeaveApproval.cshtml" />
+    <Content Include="Views\Approve\_partialSchedulingApproval.cshtml" />
+    <Content Include="Views\Approve\_partialTimesheetApproval.cshtml" />
+    <Content Include="Views\Approve\_partialTrainingRequestApproval.cshtml" />
+    <Content Include="Views\Approve\_partialTravelApproval.cshtml" />
+    <Content Include="Views\Approve\_partialUpliftApproval.cshtml" />
+    <Content Include="Views\Approval\Index.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\OrganizationChart\Index.cshtml" />
+    <Content Include="Views\Query\Index.cshtml" />
+    <Content Include="Views\Query\_partialAddFilter.cshtml" />
+    <Content Include="Views\Query\_partialAddQuery.cshtml" />
+    <Content Include="Views\Query\_partialQueryResult.cshtml" />
+    <Content Include="Views\Shared\_GetNotificationDetails.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialSkillData.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_Uplift.cshtml" />
+    <Content Include="Views\MeEmployeeProjectPlanner\_partialAdd_Uplift_Detail.cshtml" />
+    <Content Include="Views\MeEmployeePlanner\_partialFalseIsRotating.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_ProjectCalenderPartial.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_PartialMeEmployeeResources.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_PartialMeEmployeeOverViewList.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_Partial_MeOverView_Step_1.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_Partial_MeOverView_Step_2.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_Partial_MeOverView_Step_3.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_Partial_MeOverView_Step_4.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_PartialAddTask.cshtml" />
+    <Content Include="Views\MeEmployeeOverView\_Partial_MeOverView_Step_5.cshtml" />
+    <Content Include="Views\EmployeeOverView\_PartialMeEmployeeResources.cshtml" />
+    <Content Include="Views\EmployeeProfile\_PartialProfileUpdaterecord.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_ProjectDayPartial.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerAdd_Scheduling.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerDrillDown_Scheduling.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerAdd_Travel.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerDrillDown_Traveling.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerDrillDown_Timesheet.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdd_Uplift.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdd_Uplift_Detail.cshtml" />
+    <Content Include="Views\AdminProjectPlanner\_partialAdminProjectPlannerDrillDown_Uplift.cshtml" />
+    <Content Include="Views\AdminPlanner\_ProjectCalenderPartial.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdd_TimeSheet.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdminProjectPlannerDrillDown_Timesheet.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdminProjectPlannerAdd_Travel.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdminProjectPlannerDrillDown_Traveling.cshtml" />
+    <Content Include="Views\AdminPlanner\_ProjectDayPartial.cshtml" />
+    <Content Include="Views\AdminPlanner\_partialAdd_PublicHoliday.cshtml" />
+    <Content Include="Views\AdminSkillEndrosment\_PartialAdminSkillEndorsementRecipientPriview.cshtml" />
+    <Content Include="Views\SysetmSetting\Index.cshtml" />
+    <Content Include="Views\SysetmSetting\_PartialSysetm_SettingList.cshtml" />
+    <Content Include="Views\TMS\_partialAddNewApplicatRejectReason.cshtml" />
+    <Content Include="Views\BulkActions\Index.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_ActivityType.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_Benifit.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_HolidayEntNextYear.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_HolidayEntThisYear.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_ListTraining.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_ListTrainingStep2.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_Scheduling.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_TimeSheet.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_TravelLeave.cshtml" />
+    <Content Include="Views\BulkActions\_partialBulkAdd_TimeSheet_Detail.cshtml" />
+    <Content Include="Views\BulkActions\_PartialSearchData.cshtml" />
+    <Content Include="Views\Approve\_partialMatPatApproval.cshtml" />
+    <Content Include="Views\Approve\_partialSickLeaveApproval.cshtml" />
+    <Content Include="Views\TMSVacancyCompetency\Index.cshtml" />
+    <Content Include="Views\TMSVacancyCompetency\TMSCommentPDf.cshtml" />
+    <Content Include="Views\AdminNews\temp.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_Holiday.cshtml" />
+    <Content Include="Views\BulkActions\_PartialSalaryEntitlementListView.cshtml" />
+    <Content Include="Views\BulkActions\_PartialSalaryEntitlementListViewTemp.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAddSalaryEntitlementTemp.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAddSalaryEntitlement.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAddSalaryDeduction.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAddSalaryDeductionTemp.cshtml" />
+    <Content Include="Views\BulkActions\_partialAdd_Bulk_Salary.cshtml" />
+    <Content Include="Views\BulkActions\_PartialSalaryDeductionListView.cshtml" />
+    <Content Include="Views\BulkActions\_PartialSalaryDeductionListViewTemp.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAddBulkResource.cshtml" />
+    <Content Include="Views\BulkActions\_PartialRejectResourceList.cshtml" />
+    <Content Include="Views\BulkActions\_PartialBulkSendCV_Resume.cshtml" />
+    <Content Include="Views\BulkActions\ResumePDF.cshtml" />
+    <Content Include="Views\BulkActions\_PartialBulkEmployeeSetting.cshtml" />
+    <Content Include="Views\BulkActions\_PartialAdd_Bulk_Accesssetup.cshtml" />
+    <Content Include="Views\AddAssets\_partialAddOtherSetting.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialActiveReviewByRe.cshtml" />
+    <Content Include="Views\EmployeePerformance\_partialReviewDetails.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialCoworkerDetails.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialInviteCoworker.cshtml" />
+    <Content Include="Views\EmployeePerformance\CoWorkerPerformanceRview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_partialInviteCustomer.cshtml" />
+    <Content Include="Views\EmployeePerformance\CustomerPerformanceReview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialCustomerPerformanceReviewDetails.cshtml" />
+    <Content Include="Views\EmployeePerformance\EmployeePerformanceReview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerformanceReview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerformanceSegmentDetails.cshtml" />
+    <Content Include="Views\EmployeePerformance\EmployeePerformanceReviewPDF.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialSharEmployeePerformance.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialUnShareEmployeePerformance.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialClosePerformanceReview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialPastReview.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerformanceQuestionData.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialCutomerPerformanceQuestionData.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerformanceObjective.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerformanceObjectiveList.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerfromanceGoalProgress.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialEmployeePerfromanceGoalComment.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\MeEmployeePerformance.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_partialMeActivePerformanceReview.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMePastReview.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_partialMeStartNewReview.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_partialMeReviewDetails.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceReview.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceSegmentDetails.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceQuestionData.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceObjectiveList.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceObjective.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerfromanceGoalProgress.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerfromanceGoalComment.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\MeEmployeePerformanceReviewPDF.cshtml" />
+    <Content Include="Views\AdminPearformance\_partialPerformanceIndexView.cshtml" />
+    <Content Include="Views\AdminPearformance\_PartialPerformanceOverAllList.cshtml" />
+    <Content Include="Views\AdminPearformance\_partialPerformanceCoreScoreList.cshtml" />
+    <Content Include="Views\AdminPearformance\_PartialPearformanceCompare.cshtml" />
+    <Content Include="Views\EmployeePerformance\_PartialCoworkerSegmentDetails.cshtml" />
+    <Content Include="Upload\Resources\Benifits\lesson2 %281%29_30032018115614.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_03042018031855.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_05042018010135.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_05042018011514.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_05042018125549.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018012347.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018013506.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018013629.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018021814.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018022519.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018023214.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018024207.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018030024.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018030420.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018031401.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018032251.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018032619.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018034220.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018034542.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018040653.pdf" />
+    <Content Include="Upload\Resources\lesson2 %281%29_30032018042205.pdf" />
+    <Content Include="Upload\Resources\lesson2_05042018010010.pdf" />
+    <Content Include="Upload\Resources\lesson2_05042018012859.pdf" />
+    <Content Include="Upload\Resources\lesson2_05042018124957.pdf" />
+    <Content Include="Upload\Resources\lesson2_06042018121725.pdf" />
+    <Content Include="Upload\Resources\lesson2_09042018105728.pdf" />
+    <Content Include="Upload\Resources\lesson2_30032018025605.pdf" />
+    <Content Include="Upload\Resources\OrganizationChartPDf %282%29_05042018011059.pdf" />
+    <Content Include="Upload\Resources\Planner\MaternityOrPaternityLeave\OrganizationChartPDf %282%29_29032018025542.pdf" />
+    <Content Include="Upload\Resources\Planner\OtherLeave\OrganizationChartPDf %282%29_29032018025018.pdf" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\lesson2 %281%29_29032018024419.pdf" />
+    <Content Include="Upload\Resources\Planner\TimeSheet\lesson2 %281%29_29032018025359.pdf" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\Austin_Austin_Resume_17012018114950.pdf" />
+    <Content Include="Upload\Resources\Planner\TravelLeave\lesson2 %281%29_29032018024812.pdf" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Archer_Archer_Resume_17012018114430.pdf" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Archer_Archer_Resume_17012018114430_17012018115849.pdf" />
+    <Content Include="Upload\Resources\ProjectPlanner\TravelLeave\Austin_Austin_Resume_17012018115701.pdf" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialAddTechnicalSkillEndorsement.cshtml" />
+    <Content Include="Views\MeEmployeeSkillsEndorsement\_PartialAddGeneralSkillEndorsement.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceCoworkerListDetails.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\CoWorkerPerformanceReviewMeEmployee.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialMeEmployeePerformanceCustomerListDetails.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\CustomerPerformanceReviewMeEmployee.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\GuestReviewLogin.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\GuestReviewLoginForCustomer.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialShareMeEmployeePerformance.cshtml" />
+    <Content Include="Views\MeEmployeePerformance\_PartialUnShareMeEmployeePerformance.cshtml" />
+    <Content Include="Views\EmployeePerformance\CoWorkerPerformanceReviewEmployee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Upload\AdminCaseLog\" />
+    <Folder Include="Upload\AdminCertificate\" />
+    <Folder Include="Upload\AdminTask\" />
+    <Folder Include="Upload\AdminTraining\" />
+    <Folder Include="Upload\AdminVacancy\" />
+    <Folder Include="Upload\AdminVisa\" />
+    <Folder Include="Upload\Assets\" />
+    <Folder Include="Upload\CompanyCustomer\" />
+    <Folder Include="Upload\Company\" />
+    <Folder Include="Upload\Documents\Benefits\" />
+    <Folder Include="Upload\Resources\Coustomer\" />
+    <Folder Include="Upload\Resources\Planner\NewVacancy\" />
+    <Folder Include="Upload\Resources\Planner\Uplift\" />
+    <Folder Include="Upload\SkillSets\" />
+    <Folder Include="Views\Notification\app\shared\style_switcher\" />
+    <Folder Include="Views\Notification\assets\css\themes\" />
+    <Folder Include="Views\Notification\assets\icons\flags\" />
+    <Folder Include="Views\Notification\assets\icons\material-design-icons\" />
+    <Folder Include="Views\Notification\assets\img\avatars\" />
+    <Folder Include="Views\Notification\assets\js\custom\" />
+    <Folder Include="Views\Notification\bower_components\uikit\css\components\" />
+    <Folder Include="Views\Notification\bower_components\uikit\js\components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10354</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10354/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

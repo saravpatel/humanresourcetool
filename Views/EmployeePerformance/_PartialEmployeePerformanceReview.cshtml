@@ -1,0 +1,158 @@
+﻿@model HRTool.Models.Settings.EditSegmentViewModel
+@{
+    int i = 0;
+    ViewBag.Title = "CustomerPerformanceReview";
+}
+<style>
+    .detail-box {
+        height: 100px;
+        width: 225px;
+        background-color: #b1b1b1;
+        color: #ffffff;
+        margin-top: 5px;
+        text-align: center;
+        vertical-align: top;
+    }
+
+        .detail-box a {
+            color: #ffffff;
+        }
+
+    .main-area {
+        width: 2110px;
+        overflow: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1px;
+    }
+
+    .active {
+        background-color: #ffffff;
+    }
+
+    .btn-customs {
+        border-radius: 50%;
+        background-color: #4CAF50;
+        color: #ffffff;
+        border-color: #4CAF50;
+    }
+
+
+
+    .no-of-box {
+        font-size: 29px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+
+    .detailcoreseg {
+        background-color: #55adef !important;
+    }
+
+    .detailjobroleseg {
+        background-color: #5bc79c !important;
+    }
+
+    .overviewperf {
+        background-color: #deab30 !important;
+    }
+</style>
+
+@*<div class="planner_calendar_header">
+        <div class="changemonth">
+            <a href="#" class="changemonth_previous">
+                <span class="fa fa-chevron-left"></span>
+            </a>
+            <span></span>
+            <a href="#" class="changemonth_next">
+                <span class="fa fa-chevron-right"></span>
+            </a>
+        </div>
+    </div>*@
+@*<div class="boxes" id="AllSegmentsList">
+    <div>
+   
+    <input type="text" style="display:none;" id="IsManagerEmployee" value="@Model.IsManagerEmployee" />
+    <ul class="list-group list-inline main-area ">
+        <li class="segmentList detail-box active" onclick="GetEmployeeSegmentsDetails(0, 0, 2, 2,@Model.IsManagerEmployee,@Model.IsActivePastFlag)">
+            <span class="no-of-box">@{ind++;} @ind</span>
+            <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+            <a class="segmentListLink" id="overview_Segment">Overview</a>
+        </li>        
+            @foreach (var item in Model.CoreSeg)
+            {
+
+                <li class="segmentList segmentListData detail-box coresegmentListData" data-content="@item.CoreId" onclick="GetEmployeeSegmentsDetails(@item.CoreId,@item.QueationType,1,1,@Model.IsManagerEmployee,@Model.IsActivePastFlag)">
+                    <span class="no-of-box">@{ind++;} @ind</span>
+                    <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+                    @item.Title
+                    <a id="SegmentList_@item.CoreId"></a>
+                </li>                             
+            }
+            @foreach (var item in Model.JobRoleSeg)
+            {
+                <li class="JobRolesegmentList JobRolesegmentListData detail-box" data-content="@item.JobRoleIds" onclick="GetEmployeeSegmentsDetails(@item.JobRoleIds,@item.QueationType,0,0,@Model.IsManagerEmployee,@Model.IsActivePastFlag)">
+                    <span class="no-of-box">@{ind++;} @ind</span>
+                    <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+                    @item.Title
+                    <a id="JobRoleSegmentList_@item.JobRoleIds"></a>
+                </li>                
+            }
+        </ul>
+        </div>             
+</div>*@
+
+<div class="boxes" id="AllSegmentsList">
+    <div>
+        @{
+            int ind = 0;
+            int core = 0;
+            int jobRole = 0;
+        }
+        <input type="text" style="display:none;" id="IsManagerEmployee" value="@Model.IsManagerEmployee" />
+        <ul class="list-group list-inline main-area " style="width: 100%">
+            <li class="segmentList detail-box overviewperf active" style="width:150px; height:100px;" onclick="GetEmployeeSegmentsDetails(0, 0, 2, 2,@Model.IsManagerEmployee,@Model.IsActivePastFlag,1)">
+                <span class="no-of-box">@{ind++;} @ind.ToString().PadLeft(2, '0')</span>
+                <button class="btn btn-success btn-customs btn-center performanceoverview" style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+                <a class="segmentListLink" id="overview_Segment">Overview</a>
+            </li>
+            @foreach (var item in Model.CoreSeg)
+            {
+
+                <li class="segmentList segmentListData detail-box detailcoreseg coresegmentListData" style="width:150px; height:100px;" data-content="@item.CoreId" onclick="GetEmployeeSegmentsDetails(@item.CoreId,@item.QueationType,1,1,@Model.IsManagerEmployee,@Model.IsActivePastFlag,1)">
+                    <span class="no-of-box">@{ind++;} @ind.ToString().PadLeft(2, '0')</span>
+                    <button id="performancecoreseg_@{core++;}@core" class="btn btn-success btn-customs btn-center performancecoreseg" buttoncore="@item.CoreId" style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+                    @item.Title
+                    <a class="core" coreid="@item.CoreId" id="SegmentList_@item.CoreId"></a>
+                </li>
+                <input type="hidden" id="hdnCoreID_@item.CoreId" value="@item.CoreId" />
+                <input type="hidden" id="hdnQueationType_@item.CoreId" value="@item.QueationType" />
+                <input type="hidden" id="hdnIsManagerEmployee_@item.CoreId" value="@Model.IsManagerEmployee" />
+                <input type="hidden" id="hdnIsActivePastFlag_@item.CoreId" value="@Model.IsActivePastFlag" />
+
+            }
+            @foreach (var item in Model.JobRoleSeg)
+            {
+                <li class="JobRolesegmentList JobRolesegmentListData detailjobroleseg detail-box" style="width:150px; height:100px;" data-content="@item.JobRoleIds" onclick="GetEmployeeSegmentsDetails(@item.JobRoleIds,@item.QueationType,0,0,@Model.IsManagerEmployee,@Model.IsActivePastFlag,1)">
+                    <span class="no-of-box">@{ind++;} @ind.ToString().PadLeft(2, '0')</span>
+                    <button id="performancejobroleseg_@{jobRole++;}@jobRole" class="btn btn-success btn-customs btn-center performancejobroleseg" buttonjobrole="@item.JobRoleIds" style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+                    @item.Title
+                    <a class="jobrole" jobroleid="@item.JobRoleIds" id="JobRoleSegmentList_@item.JobRoleIds"></a>
+                </li>
+                <input type="hidden" id="hdnJobRoleID_@item.JobRoleIds" value="@item.JobRoleIds" />
+                <input type="hidden" id="hdnJobRoleQueationType_@item.JobRoleIds" value="@item.QueationType" />
+                <input type="hidden" id="hdnJobRoleIsManagerEmployee_@item.JobRoleIds" value="@Model.IsManagerEmployee" />
+                <input type="hidden" id="hdnJobRoleIsActivePastFlag_@item.JobRoleIds" value="@Model.IsActivePastFlag" />
+    }
+        </ul>
+    </div>
+</div>
+<div id="TableQueData" class="tablescompany">
+</div>
+<div class="clearfix"></div>
+<script src="~/JS/Resources/Performance/EmployeePerformanceSegments.js"></script>
+<script>
+</script>
+
+
+

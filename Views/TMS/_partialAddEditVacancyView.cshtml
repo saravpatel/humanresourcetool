@@ -1,0 +1,733 @@
+﻿@model HRTool.Models.Admin.TMSVacancyViewModel
+
+<div id="wizard" class="swMain">
+    <input type="hidden" value="@Model.Id" id="VacancyHiddenId" />
+    <ul class="tablistnew three">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Vacancy Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Job Information
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span>Questions
+            </a>
+        </li>
+    </ul>
+
+    <div id="step-1">
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Vacancy">Vacancy*</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txt_Vacancy" value="@Model.Title" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Vacancy" style="display:none;" data-valmsg-for="Vacancy" data-valmsg-replace="true">Vacancy is required.</span>
+                <span class="field-validation-error" id="lbl-Exist-Vacancy" style="display:none;" data-valmsg-for="Vacancy" data-valmsg-replace="true">Vacancy is Exist.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Summary">Summary*</label>
+            </div>
+            <div class="col-md-6">
+                <textarea class="form-control textarea-resizeNone" id="txt_Summary" data-toggle="tooltip" data-placement="right" name="Summary" title="Summary">@Model.Summary</textarea>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Summary" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Summary is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Status*</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-StatusId" class="form-control">
+                    s
+                    @foreach (var item in Model.StatusList)
+                    {
+                        if (Model.StatusID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-StatusList" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Status is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="ClosingDate">Closing Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="txt_ClosingDate" value="@Model.ClosingDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ClosingDate" style="display:none;" data-valmsg-for="ClosingDate" data-valmsg-replace="true">Closing Date is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="RecruitmentProcess">Recruitment Process*</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-RecruitmentProcessId" class="form-control">
+                    @foreach (var item in Model.RecruitmentProcessList)
+                    {
+                        if (Model.RecruitmentProcessID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-RecruitmentProcess" style="display:none;" data-valmsg-for="RecruitmentProcess" data-valmsg-replace="true">RecruitmentProcess is required.</span>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <div id="step-2">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="SalaryRange">Salary Range </label>
+            </div>
+            <div class="col-md-6">
+                <input type="number" min="0" class="form-control" value="@Model.Salary" id="txt_SalaryRange" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-SalaryRange" style="display:none;" data-valmsg-for="SalaryRange" data-valmsg-replace="true">Salary Range is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Location">Location</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" value="@Model.Location" id="txt_Location" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Location" style="display:none;" data-valmsg-for="Location" data-valmsg-replace="true">Location is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="BusinessList">Business</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-BusinessId" class="form-control">
+                    <option value="0">-- Select Business --</option>
+                    @foreach (var item in Model.BusinessList)
+                    {
+                        if (Model.BusinessID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-BusinessList" style="display:none;" data-valmsg-for="BusinessList" data-valmsg-replace="true">Business is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="DivisionList">Division</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.BusinessID.ToString() != "" && Model.BusinessID.ToString() != "0")
+                {
+                    <select id="drp-DivisionId" class="form-control" onfocus="FillVacancyBusiness()">
+                        <option value="0">-- Select Division --</option>
+                        @foreach (var item in Model.DivisionList)
+                        {
+                            if (Model.DivisionID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            @*else
+                                {
+                                <option value=@item.Value>@item.Text</option>
+                                }*@
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select id="drp-DivisionId" class="form-control">
+                        <option value="0">-- Select Division --</option>
+                        @foreach (var item in Model.DivisionList)
+                        {
+                            if (Model.DivisionID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-DivisionList" style="display:none;" data-valmsg-for="DivisionList" data-valmsg-replace="true">Division is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="PoolList">Pool</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.DivisionID.ToString() != "" && Model.DivisionID.ToString() != "0")
+            {
+                    <select id="drp-PoolId" class="form-control" onfocus="FillVacancyFunctionPool()">
+                        <option value="0">-- Select Pool --</option>
+                        @foreach (var item in Model.PoolList)
+                        {
+                            if (Model.PoolID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select id="drp-PoolId" class="form-control">
+                        <option value="0">-- Select Pool --</option>
+                        @foreach (var item in Model.PoolList)
+                        {
+                            if (Model.PoolID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-PoolList" style="display:none;" data-valmsg-for="PoolList" data-valmsg-replace="true">Pool is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="FunctionList">Function</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.DivisionID.ToString() != "" && Model.DivisionID.ToString() != "0")
+                {
+                    <select id="drp-FunctionId" class="form-control" onfocus="FillVacancyFunctionPool()">
+                        <option value="0">-- Select Function --</option>
+                        @foreach (var item in Model.FunctionList)
+                        {
+                            if (Model.FunctionID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select id="drp-FunctionId" class="form-control">
+                        <option value="0">-- Select Function --</option>
+                        @foreach (var item in Model.FunctionList)
+                        {
+                            if (Model.FunctionID.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-FunctionList" style="display:none;" data-valmsg-for="FunctionList" data-valmsg-replace="true">Function is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="JobDescription">Job Description</label>
+            </div>
+            <div class="col-md-6">
+                <input type="hidden" id="txt_JobDescription" value="@Model.JobDescription" />
+                @*<textarea class="form-control textarea-resizeNone" id="txt_JobDescription" data-toggle="tooltip" data-placement="right" name="JobDescription" title="JobDescription">@Model.JobDescription</textarea>*@
+                <div id="froala-editor"></div>
+            </div>
+            <div class="col-md-3">
+                @*<span class="field-validation-error" id="lbl-error-JobDescription" style="display:none;" data-valmsg-for="JobDescription" data-valmsg-replace="true">Job Description is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="HiringLeadList">Hiring Lead*</label>
+            </div>
+            <div class="col-md-6">
+                <input type="hidden" id="drp-HiringLeadId" value="@Model.HiringLeadID" />
+                <input type="text" class="awesomplete form-control" id="LeadingHeadNameText" value="@Model.HiringLead" size="70" placeholder="Employee Name" />
+                @*<select id="drp-HiringLeadId" class="form-control">
+                        <option value="0">-- Select Hiring Lead --</option>
+                        @foreach (var item in Model.HiringLeadList)
+                        {
+                            if ((Model.HiringLeadID != null ? Model.HiringLeadID : 0) == Convert.ToInt32(item.Value))
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>*@
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-HiringLeadList" style="display:none;" data-valmsg-for="HiringLeadList" data-valmsg-replace="true">Hiring Lead is required.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-3" class="editVDocument">
+        <div class="row marbot10">
+            <label class="col-md-3">Must upload cover letter</label>
+            <div class="col-md-8">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.MustUploadCoverLetter == true)
+                    {
+                        <input type="checkbox" checked id="check_MustUploadCoverLetter" class="form-control">
+                        <label for="check_MustUploadCoverLetter">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_MustUploadCoverLetter" class="form-control">
+                        <label for="check_MustUploadCoverLetter">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Must upload Resume/CV</label>
+            <div class="col-md-8">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.MustUploadResumeCV == true)
+                    {
+                        <input type="checkbox" checked id="check_MustUploadResumeCV" class="form-control">
+                        <label for="check_MustUploadResumeCV">Turn Off &nbsp;</label>
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_MustUploadResumeCV" class="form-control">
+                        <label for="check_MustUploadResumeCV">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="systemListName">Upload Application Form</label>
+            </div>
+            <div class="col-md-3">
+                <label style="font-size:15px;" class="uploadBrowse" id="FilePathName">@Model.ApplicationFormPathOriginal</label>
+                <input type="hidden" id="txt_FilepathName" value="@Model.ApplicationFormPath" />
+            </div>
+            <div class="col-md-3">
+                <label type="file" for="fileToUpload" class="btn btn-success md-btn-small">BROWSE</label>
+                <input type="file" id="fileToUpload" style="display: none">
+
+            </div>
+            <div class="col-md-3">
+                @*<span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Question 1</label>
+            <div class="col-md-3">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.Question1On == true)
+                    {
+                        <input type="checkbox" checked id="check_Question1On" class="form-control">
+                        <label for="check_Question1On">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_Question1On" class="form-control">
+                        <label for="check_Question1On">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                @if (Model.Question1On == true)
+                {
+                    <input type="text" class="form-control" value="@Model.Question1Text" id="txt_Question1Text" />
+
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.Question1Text" id="txt_Question1Text" readonly="readonly" />
+
+                }
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Question 2</label>
+            <div class="col-md-3">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.Question2On == true)
+                    {
+                        <input type="checkbox" checked id="check_Question2On" class="form-control">
+                        <label for="check_Question2On">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_Question2On" class="form-control">
+                        <label for="check_Question2On">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                @if (Model.Question2On == true)
+                {
+                    <input type="text" class="form-control" value="@Model.Question2Text" id="txt_Question2Text" />
+
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.Question2Text" id="txt_Question2Text" readonly="readonly" />
+
+                }
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Question 3</label>
+            <div class="col-md-3">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.Question3On == true)
+                    {
+                        <input type="checkbox" checked id="check_Question3On" class="form-control">
+                        <label for="check_Question3On">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_Question3On" class="form-control">
+                        <label for="check_Question3On">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                @if (Model.Question3On == true)
+                {
+                    <input type="text" class="form-control" value="@Model.Question3Text" id="txt_Question3Text" />
+
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.Question3Text" id="txt_Question3Text" readonly="readonly" />
+
+                }
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Question 4</label>
+            <div class="col-md-3">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.Question4On == true)
+                    {
+                        <input type="checkbox" checked id="check_Question4On" class="form-control">
+                        <label for="check_Question4On">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_Question4On" class="form-control">
+                        <label for="check_Question4On">Turn Off &nbsp;</label>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                @if (Model.Question4On == true)
+                {
+                    <input type="text" class="form-control" value="@Model.Question4Text" id="txt_Question4Text" />
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.Question4Text" id="txt_Question4Text" readonly="readonly" />
+                }
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Question 5</label>
+            <div class="col-md-3">
+                <div class="checkbtn" style="margin-right: 0;">
+                    @if (Model.Question5On == true)
+                    {
+                        <input type="checkbox" checked id="check_Question5On" class="form-control">
+                        <label for="check_Question5On">Turn Off &nbsp;</label>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="check_Question5On" class="form-control">
+                        <label for="check_Question5On">Turn Off &nbsp;</label>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                @if (Model.Question5On == true)
+                {
+                    <input type="text" class="form-control" value="@Model.Question5Text" id="txt_Question5Text" />
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.Question5Text" id="txt_Question5Text" readonly="readonly" />
+                }
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="SourceList">Source</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-SourceId" class="form-control">
+                    @foreach (var item in Model.SourceList)
+                    {
+                        if (Model.SourceID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-HiringLeadList" style="display:none;" data-valmsg-for="HiringLeadList" data-valmsg-replace="true">Source is required.</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    var ledHeadData = {
+        ledData:'@Url.Action("getLeadingHeadVacancy", "TMS")',
+    }
+</script>
+<script>
+    function FillVacancyBusiness() {
+        var value = $("#drp-BusinessId").val();
+        if (value != "0") {
+            $.ajax({
+                url: constantTMS.bindDiv,
+                data: { businessId: value },
+                success: function (data) {
+                    $("#drp-DivisionId").html('');
+                    var toAppend = '';
+                    toAppend += "<option value='0'>--Select Divion--</option>";
+                    $.each(data, function (index, item) {
+                        toAppend += "<option value='" + item.Id + "'>" + item.Name + "</option>";
+                    })
+                    $("#drp-DivisionId").html(toAppend);
+                    if ($("#drp-DivisionId").val() == 0) {
+                        $("#drp-DivisionId").val(0);
+                        $('#drp-PoolId').val(0);
+                        $('#drp-FunctionId').val(0);
+                    }
+                }
+            });
+        }
+        else {
+            $('#drp-DivisionId').empty();
+            // Bind new values to dropdown
+            $('#drp-DivisionId').each(function () {
+                // Create option
+                var option = $("<option />");
+                option.attr("value", '0').text('--Select Division--');
+                $('#drp-DivisionId').append(option);
+            });
+            $('#drp-PoolId').empty();
+            // Bind new values to dropdown
+            $('#drp-PoolId').each(function () {
+                // Create option
+
+                var option = $("<option />");
+                option.attr("value", '0').text('--Select Pool--');
+                $('#drp-PoolId').append(option);
+            });
+            $('#drp-FunctionId').empty();
+            // Bind new values to dropdown
+            $('#drp-FunctionId').each(function () {
+
+                // Create option
+                var option = $("<option />");
+                option.attr("value", '0').text('--Select Function--');
+                $('#drp-FunctionId').append(option);
+            });
+        }
+    }
+    function FillVacancyFunctionPool()
+    {
+        var value = $(this).val();
+        if (value != "0") {
+            $.ajax({
+                url: constantTMS.bindpool,
+                data: { DivisionId: value },
+                success: function (data) {
+                    $("#drp-PoolId").html('');
+                    var toAppend = '';
+                    toAppend += "<option value='0'>--Select Pool--</option>";
+                    $.each(data, function (index, item) {
+                        toAppend += "<option value='" + item.Id + "'>" + item.Name + "</option>";
+                    })
+                    $("#drp-PoolId").html(toAppend);
+                    if ($("#drp-PoolId").val() == 0) {
+                        $("#drp-PoolId").val(0);
+                    }
+                    $.ajax({
+                        url: constantTMS.bindFuncation,
+                        data: { DivisionId: value },
+                        success: function (data) {
+                            $("#drp-FunctionId").html('');
+                            var toAppend = '';
+                            toAppend += "<option value='0'>--Select Function--</option>";
+                            $.each(data, function (index, item) {
+                                toAppend += "<option value='" + item.Id + "'>" + item.Name + "</option>";
+                            })
+                            $("#drp-FunctionId").html(toAppend);
+                            if ($("#drp-FunctionId").val() == 0) {
+                                $("#drp-FunctionId").val(0);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        else {
+
+            $('#drp-PoolId').empty();
+            // Bind new values to dropdown
+            $('#drp-PoolId').each(function () {
+                // Create option
+                var option = $("<option />");
+                option.attr("value", '0').text('--Select Pool--');
+                $('#drp-PoolId').append(option);
+            });
+            $('#drp-FunctionId').empty();
+            // Bind new values to dropdown
+            $('#drp-FunctionId').each(function () {
+                // Create option
+                var option = $("<option />");
+                option.attr("value", '0').text('--Select Function--');
+                $('#drp-FunctionId').append(option);
+            });
+
+        }
+    }
+    $("#txt_SalaryRange").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    LeadingHeadEmployeeData();
+    function LeadingHeadEmployeeData() {
+        var listData = [];
+        $.ajax({
+            url: ledHeadData.ledData,
+            data: {},
+            success: function (data) {
+                $.each(data.HiringLeadList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                var input = document.getElementById("LeadingHeadNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#LeadingHeadNameText').change(function () {
+                    $("#lbl-error-HiringLeadList").hide();
+                    value = $('#LeadingHeadNameText').val();
+                    for (var i = 0; i < data.HiringLeadList.length; i++) {
+                        if (value == data.HiringLeadList[i].Text) {
+                            eid = data.HiringLeadList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#drp-HiringLeadId").val(eid);
+                });            
+            }
+        });
+    }
+</script>

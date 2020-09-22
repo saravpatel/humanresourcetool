@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page_content_inner">
+    <h1 class="page-title">
+        News List
+        <small>Add a new event, join the discussion or simply find out what’s happening in your company.</small>
+    </h1>
+  
+        <div id="tableDiv">
+                @Html.Action("List", "AdminNews")
+            </div>
+</div>
+
+
+<script>
+    var constantAdminNews = {
+        addEdit: '@Url.Action("AddEditAdminNews", "AdminNews")',
+        saveData: '@Url.Action("SaveData", "AdminNews")',
+        ImageUrl: '@Url.Action("ImageData", "AdminCaseLog")',
+        DeleteData: '@Url.Action("DeleteData", "AdminNews")',
+        AddCommentsUrl: '@Url.Action("AddComments", "AdminNews")',
+        SaveCommentUrl: '@Url.Action("SaveCommentsRecvords", "AdminNews")',
+        EditCommentUrl: '@Url.Action("EditCommentsRecord", "AdminNews")',
+        DeleteCommentUrl: '@Url.Action("DeleteComment", "AdminNews")',
+        DeleteEndrosment: '@Url.Action("DeleteEndrosment", "AdminNews")',
+        searchByFromToDate: '@Url.Action("searchByFromToDate", "AdminNews")',
+    }
+</script>
+<script src="~/JS/Admin/AdminNews/AdminNewsJS.js"></script>

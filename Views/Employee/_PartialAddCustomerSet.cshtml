@@ -1,0 +1,37 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+<div id="wizard" class="swMain">
+    <ul class="tablistnew three">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span>Profile
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Customer Company
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span>Done
+            </a>
+        </li>
+    </ul>
+    <div id="step-1">
+        <div>
+            @Html.Partial("_Partial_Coutomer_Step_1", Model)
+        </div>
+    </div>
+    <div id="step-2">
+        <div>
+            @Html.Partial("_Partial_Coutomer_Step_2", Model)
+        </div>
+    </div>
+    <div id="step-3">
+        <div>
+            @Html.Partial("_Partial_Coutomer_Step_3", Model)
+        </div>
+    </div>
+</div>
+
+

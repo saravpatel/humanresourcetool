@@ -1,0 +1,26 @@
+﻿@model int
+<div class="row marbot10 OverallScore" id="divOverall_@Model" data-id="@Model">
+    <label class="col-md-3"></label>
+    <div class="col-md-6">
+        <div class="marbot10">
+            <div class="row">
+                <div class="col-md-9">
+                    <input type="text" name="overallScore" id="Overall_@Model" data-id="@Model" class="form-control" required="required">
+                </div>
+                <div class="col-md-2">
+                    <span id="SpanOverall_@Model" data-id="@Model">@Model</span>
+                    <a class="RemoveOverall" id="Remove_@Model" data-id="@Model"><span class="fa fa-close" cursor:pointer"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+<script>
+    $("#page_content_inner").find("#Createperformance").find(".RemoveOverall").on('click', function () {
+        
+        var id = $(this).attr("data-id");
+        $("#divOverall_" + id).remove();
+    })
+</script>

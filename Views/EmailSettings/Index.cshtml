@@ -1,0 +1,101 @@
+﻿@model HRTool.Models.Settings.EmailSettingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<div id="page_content_inner">
+    <br />
+    
+
+
+    <h1 class="page-title">
+        Email Settings
+        <small>Here you can define settings for your email account to be used when sending emails.</small>
+    </h1>
+
+
+
+
+
+    <div class="md-card" style="padding:30px;">
+        <div >
+            @using (Html.BeginForm("Index", "EmailSettings", new { @class = "uk-form-stacked ng-pristine ng-valid-email ng-valid-min ng-valid-max ng-valid-pattern ng-valid ng-valid-required", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                <div class="row marbot10">
+                    <label class="col-md-3">From Name</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="This name that will be displayes in the from filed in email messages">
+                        @Html.TextBoxFor(m => m.FromName, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.FromName)
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <label class="col-md-3">From Email</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Email Aaddress that will be displayed in the from field in email messages">
+                        @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.FromEmail)
+                    </div>
+                </div>
+                <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                    <label class="col-md-3">User Name</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="User name associated to log into this email account">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control ng-valid-required" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <label class="col-md-3" for="EmailPassword">Email Password</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Password associated with this email account">
+                        @Html.PasswordFor(m => m.EmailPassword, new { value = Model.EmailPassword, @class = "form-control ng-valid-required" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.EmailPassword)
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <label class="col-md-3">Server</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="The domain/host name of your email account(i.e smtp.google.com)">
+                        @Html.TextBoxFor(m => m.Server, new { @class = "form-control ng-valid-required", maxwhitespaces = "0" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.Server)
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <label class="col-md-3">Port</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="The port number you would like to use">
+                        @Html.TextBoxFor(m => m.Port, new { @class = "form-control ng-valid-max ng-valid-pattern ng-valid ng-valid-required", name = "Port", step = "1", min = "1", max = "65535" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(m => m.Port)
+                    </div>
+                </div>
+
+
+
+                
+
+
+                <div class="row  marbot10">
+                    <label for="EnableSSL" class="col-md-3">Enable SSL</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Select Yes if this server requires an encrypted connection (SSL).">
+                        @Html.CheckBoxFor(m => m.EnableSSL, new { @class = "ng-pristine ng-untouched ng-valid" })
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div align="center">
+                        <button type="submit" class="btn btn-success setting_btn">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

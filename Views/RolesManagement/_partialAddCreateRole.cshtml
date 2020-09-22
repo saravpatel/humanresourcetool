@@ -1,0 +1,205 @@
+﻿@model HRTool.Models.RolesManagement.CreateRoleViewModel
+@{
+    int i = 0;
+}
+<style>
+    td:nth-child(1) {
+        width: 30px;
+        text-align: center;
+    }
+
+    td:nth-child(3) {
+        width: 100px;
+        text-align: center;
+    }
+
+    .displayClass {
+        display: none !important;
+    }
+</style>
+<div class="row marbot10">
+    <br />
+    <div class="col-md-6">
+        <b style="font-size:20px;">Add New Role</b>
+    </div>
+    <div class="col-md-6" style="text-align:right">
+        <button id="btn-backToList" class="btn btn-primary">Back To List</button>
+    </div>
+</div>
+<hr />
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Role Name *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="hidden" id="hidden_id" value="@Model.Id"/>
+        <input type="text" value="@Model.Name" id="txt_Name" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Name" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Description </label>
+    </div>
+    <div class="col-md-6">
+        <textarea id="textArea_Description" class="form-control textarea-resizeNone">@Model.Description</textarea>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Active</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.Active)
+        {
+            <input type="checkbox" id="chk_Active" checked="checked" />
+        }
+        else
+        {
+            <input type="checkbox" id="chk_Active" />
+        }
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table-bordered display table style2 dataTable no-footer main_table" id="menuTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Menu Name</th>
+                        <th class="role_checkbox"><input type="checkbox" id="selectAll" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.menuList.Where(x => x.submenuId == 0))
+                {
+                    i = i + 1;
+                        <tr id="table_@item.submenuId" class="@(item.submenuId == 0 ? "" : "displayClass")" data-parentid="@(item.submenuId == 0 ? "0" : item.submenuId.ToString())">
+                            <td>
+                                @if (Model.menuList.Where(x => x.submenuId == item.menuId).Count() > 0)
+                            {
+                                    <i class="fa fa-plus-square openTr" style="cursor: pointer; font-size: 20px;" data-id="@item.menuId"></i>
+                            }
+                            </td>
+
+                            <td>
+                                @item.menuName
+                            </td>
+
+                            <td>
+                                @if (item.isAlreadyAssign)
+                            {
+                                    <input type="checkbox" class="checkbox" checked="checked" id="@item.menuId">
+                            }
+                            else
+                            {
+                                    <input type="checkbox" class="checkbox" id="@item.menuId">
+                            }
+                            </td>
+                        </tr>
+
+                    if (Model.menuList.Where(x => x.submenuId == item.menuId).ToList().Count > 0)
+                    {
+                            @Html.Partial("_BindSubmenuListTable", new Tuple<IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>, int>(Model.menuList, item.menuId))
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-md-12">
+        <button id="btn-save" class="btn btn-success" style="float:right;">Save</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".main_table").on("click", '.openTr', function () {
+        var id = $(this).attr('data-Id');
+        $(this).addClass('fa-minus-square');
+        $(this).addClass('closeTr');
+        $(this).removeClass('fa-plus-square');
+        $(this).removeClass('openTr');
+        $('tr[data-parentid="' + id + '"]').removeClass('displayClass')
+    });
+
+    $(".main_table").on("click", '.closeTr', function () {
+        var id = $(this).attr('data-Id');
+        $(this).removeClass('fa-minus-square');
+        $(this).removeClass('closeTr');
+        $(this).addClass('fa-plus-square');
+        $(this).addClass('openTr');
+        $('tr[data-parentid="' + id + '"]').addClass('displayClass')
+    });
+
+    $(".main_table").on("change", '#selectAll', function () {
+        if ($(this).is(":checked")) {
+            $.each($('td').find(".checkbox"), function (index, item) {
+                $(this).prop('checked', 'checked');
+            });
+        }
+        else {
+            $.each($('td').find(".checkbox"), function (index, item) {
+                $(this).prop('checked', '');
+            });
+        }
+    });
+
+    $(".main_table").on("change", '.checkbox', function () {
+        debugger;
+        var isuncheck = false;
+        $.each($('td').find(".checkbox"), function (index, item) {
+            if (!$(this).prop('checked')) {
+                isuncheck = true;
+            }
+        });
+        if (isuncheck) {
+            $("#selectAll").prop('checked', '');
+        }
+        else {
+            $("#selectAll").prop('checked', 'checked');
+        }
+
+        $.ajax({
+            url: '@Url.Action("returnselectedOrunselectedMenuId", "RolesManagement")',
+            data: { MenuId: $(this).attr('id') },
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    if (item.Text == "un") {
+                        $(".main_table").find("#" + item.Value).prop('checked', '');
+                    }
+                    else {
+                        $(".main_table").find("#" + item.Value).prop('checked', 'checked');;
+                    }
+                });
+
+                var isuncheck = false;
+                $.each($('td').find(".checkbox"), function (index, item) {
+                    if (!$(this).prop('checked')) {
+                        isuncheck = true;
+                    }
+                });
+                if (isuncheck) {
+                    $("#selectAll").prop('checked', '');
+                }
+                else {
+                    $("#selectAll").prop('checked', 'checked');
+                }
+            }
+        });
+    });
+</script>

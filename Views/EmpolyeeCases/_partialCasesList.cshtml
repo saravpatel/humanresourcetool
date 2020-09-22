@@ -1,0 +1,110 @@
+﻿<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-Customer" data-toggle="modal" data-target="#addCustomer" title="Add Business"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-Customer" data-toggle="modal" data-target="#addCustomer" title="Edit" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-Customer" data-toggle="modal" data-target="#deleteCustomer" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+</div>
+@*<table id="example1" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Mobile</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th >
+                <input type="text" class="form-control SearchCustomerName" placeholder="Customer Name">
+            </th>
+            <th >
+                <input type="number" class="form-control SearchCustomerPhone" placeholder="Customer Phone">
+            </th>
+            <th >
+                <input type="text" class="form-control SearchCustomerEmail" placeholder="Customer Email">
+            </th>
+            <th >
+                <input type="number" class="form-control SearchCustomerMobile" placeholder="Customer Mobile">
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model.customerList)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Name</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>@item.Mobile</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title CaseLogTitle" id="myModalLabel">Add Customer</h4>
+
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddEditCaseLog">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-CaseLog">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteCustomer" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Warning
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="row marbot10">
+                    <div class="col-md-12">
+                        <label class="control-label">
+                            Are you sure, you want to delete a record?
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-delete-Customer">Ok</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>*@

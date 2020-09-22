@@ -1,0 +1,63 @@
+﻿@model HRTool.Models.Settings.MobileSettingViewModel
+@{
+    ViewBag.Title = "Mobile Setting";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+    <br />
+    <h1 class="page-title">
+        Mobile Settings
+        <small>Here you can customise the system’s default settings to match the values set by your company.</small>
+    </h1>
+    
+    
+    <div class="md-card">
+        <div >
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="icheck-inline">
+                        @if (Model.AllowMobileUse == true)
+                        {
+                            <input type="checkbox" name="AllowMobileUse" id="allowMobileUse" checked="checked">
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="AllowMobileUse" id="allowMobileUse">
+                        }
+                        <label for="AllowMobileUse" class="inline-label" data-toggle="tooltip" data-placement="right" title="Allow Mobile Use">Allow Mobile Use</label>
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="icheck-inline">
+                        @if (Model.ShowPhoneNumber == true)
+                        {
+                            <input type="checkbox" name="ShowPhoneNumbers" id="ShowPhoneNumbers" checked="checked">
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="ShowPhoneNumbers" id="ShowPhoneNumbers">
+                        }
+                        <label for="ShowPhoneNumbers" class="inline-label" data-toggle="tooltip" data-placement="right" title="Show phone number on company dirictory for pepole outside of the team that the employees work in">Show Phone Numbers</label>
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <button id="btn-save" class="md-btn md-btn-success setting_btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var constantMobileSetting = {
+        saveData : '@Url.Action("SaveData", "MobileSetting")'
+    }
+</script>
+<script src="~/JS/Settings/MobileSetting/MobileSettingJS.js"></script>

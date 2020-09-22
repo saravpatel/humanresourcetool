@@ -1,0 +1,78 @@
+﻿@model HRTool.Models.Settings.TechnicalSkillsSetViewModel
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <label class="control-label" for="systemListName">Upload picture</label>
+    </div>
+    <div class="col-md-6">
+
+        <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">BROWSE</label>
+        <input type="file" id="fileToUpload" onchange="readURL(this)" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+
+        @if (!string.IsNullOrEmpty(Model.Picture))
+        {
+            <img src="~/Upload/SkillSets/@Model.Picture" class="editpic" />
+        }
+        else
+        {
+            <img src="~/Images/no-image.jpg" class="editpic" />
+        }
+        @*<input type="text" class="form-control" value="@Model.Value" id="txt-SystemListValueName" placeholder="Skill Name" data-toggle="tooltip" name="Value" title="Skill Name">*@
+    </div>
+    <div class="col-md-4">
+        @*<span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>*@
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="skillsetName">Skill set Name</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" value="@Model.Name" id="txt-SkillsetName" maxlength="100" placeholder="Skill set Name" data-toggle="tooltip" data-placement="right" name="Value" title="Skill set Name">
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-SkillsetName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The Skill set name is required.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="systemListName">Description</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt-SystemListDescription" placeholder="Description" data-toggle="tooltip" name="Description" data-placement="right" title="Skill Description">@Model.Description</textarea>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="systemListName">Technical Skills</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist">
+        <select class="form-control" id="drp-TechnicalSkills" multiple="multiple" title="-- Select --">
+            @foreach (var item in Model.SkillValueList)
+            {
+                if (Model.Id > 0)
+                {
+                    if (Model.selectedValues.Contains(item.Value))
+                    {
+                        <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>

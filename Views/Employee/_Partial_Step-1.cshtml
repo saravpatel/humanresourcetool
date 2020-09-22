@@ -1,0 +1,222 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+
+<input type="hidden" id="Applicant_ID" value="@Model.ApplicantID" />
+<input type="hidden" id="Vacancy_ID" value="@Model.VacancyId" />
+<div class="row marbot10">
+    <label class="col-md-3">Title*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpTitle">
+            @foreach (var Title in Model.TitleList)
+            {
+                <option value="@Title.Value">@Title.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">First Name*</label>
+    <div class="col-md-6">
+        <input type="text" name="FirstName" class="form-control" id="FirstName" value="@Model.FirstName" placeholder="First name">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidFirstName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Last Name*</label>
+    <div class="col-md-6">
+        <input type="text" name="LastName" class="form-control" id="LastName" value="@Model.LastName" placeholder="Last name">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidLastName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Other Name(s)</label>
+    <div class="col-md-6">
+        <input type="text" name="OtherName" class="form-control" id="OtherName" value="" placeholder="Other name">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidOtherName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Known as</label>
+    <div class="col-md-6">
+        <input type="text" name="Knownas" class="form-control" id="Knownas" value="" placeholder="Know as">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidKnownas" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">SSO *</label>
+    <div class="col-md-6">
+        <input type="text" name="SSO" class="form-control" id="SSO" value="@Model.SSO" onchange="chkForSSO()">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidSSO" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        <span class="field-validation-error" id="ValidSSONo" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">SSO Number Already Exist.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Email*</label>
+    <div class="col-md-6">
+        <input type="text" name="Email" class="form-control" id="Email" value="@Model.UserNameEmail" placeholder="Email" onchange="chkForEmailId()">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        <span class="field-validation-error" id="ValidEmailId" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">EmailId Is Already Exist.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">IM Address</label>
+    <div class="col-md-6">
+        <input type="text" name="IMAddress" class="form-control" id="IMAddress" value="" placeholder="IM Address">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+@*<div class="row marbot10">
+    <label class="col-md-3">Gender*</label>
+    <div class="col-md-6">
+        <label class="radio-btn">
+            <input type="radio" name="Gender" id="MaleId" value="1" checked>
+            <span>Male</span>
+        </label>
+        <label class="radio-btn">
+            <input type="radio" name="Gender" id="FemaleId" value="0">
+            <span>Female</span>
+        </label>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidGender" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>*@
+<div class="row marbot10">
+    <label class="col-md-3">Gender</label>
+    <div class="col-md-6" align="left">
+        @foreach (var items in Model.GenderList)
+        {
+            if (Model.Gender.ToString() == items.Value)
+            {
+                <label class="radio-btn selectGender">
+                    <input type="radio" checked="checked" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                    <span>@items.Text</span>
+                </label>
+            }
+            else
+            {
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                    <span>@items.Text</span>
+                </label>
+            }
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-GenderList" style="display:none;" data-valmsg-for="GenderList" data-valmsg-replace="true">The Gender Name is required.</span>
+    </div>
+</div>
+@*<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="GenderList">Gender</label>
+    </div>
+    <div class="col-md-6">
+        @foreach (var items in Model.GenderList)
+        {
+            if (Model.Gender.ToString() == items.Value)
+            {
+                <label class="radio-btn selectGender">
+                    <input type="radio" checked="checked" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                    <span>@items.Text</span>
+                </label>
+            }
+            else
+            {
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="Gender_@items.Value" value="@items.Value">
+                    <span>@items.Text</span>
+                </label>
+            }
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-GenderList" style="display:none;" data-valmsg-for="GenderList" data-valmsg-replace="true">The Gender Name is required.</span>
+    </div>
+</div>*@
+
+<div class="row marbot10">
+    <label class="col-md-3">Date Of Birth*</label>
+    <div class="col-md-6">
+        <input type="text" name="DateOfBirth" class="form-control Datepiker" id="DateOfBirth" value="@Model.DateOfBirth">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDateOfBirth" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        <span class="field-validation-error" id="validAge" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Valid Age Of Employee.</span>
+
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Nationality*</label>
+    <div class="col-md-6 dropdown">
+        <select class="form-control" id="drpNationality">
+            @foreach (var Nationality in Model.NationalityList)
+            {
+                <option value="@Nationality.Value">@Nationality.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidNationality" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">NI Number/SSN</label>
+    <div class="col-md-6">
+        <input type="text" name="NINumber" min="0" class="form-control" id="NINumber" value="" >
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="Validssn" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Enter valid SSN Number.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label type="file" for="fileToUpload" class="col-md-3">
+        Upload Image
+    </label>
+    <div class="col-md-6">
+        <input type="hidden" id="ImageData" value="" />
+        <label type="file" for="fileToUpload" class="btn btn-clr md-btn-primary">BROWSE</label>
+        <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        @if (!string.IsNullOrEmpty(Model.Picture))
+        {
+            <img src="~/Upload/Resource/@Model.Picture" class="editpic" />
+        }
+        else
+        {
+            <img src="~/Images/no-image.jpg" class="editpic" />
+        }
+    </div>
+</div>
+
+<script>
+
+     $("#NINumber").keypress(function (e) {            
+         if (e.which === 32)
+             return false;         
+     });
+    
+</script>

@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+<div class="col-md-2 mCustomScrollbar" style="padding-right:4PX;padding-left:4PX;">
+    @Html.Action("BindMenuIndex", "Me")
+</div>
+
+<div class="col-md-10">    
+    @RenderBody()
+</div>

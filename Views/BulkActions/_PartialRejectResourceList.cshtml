@@ -1,0 +1,41 @@
+﻿@model IList<HRTool.DataModel.AspNetUser>
+<div class="md-card">
+        <div class="md-card-content">
+            <div id="tableDivResourercords">
+               <div class="uk-overflow-container">
+                    <div class="table-responsive " style="width:3600px;">
+                        <table id="ResoureListtable" class="table-bordered display table style2 " cellspacing="0">
+                            <thead>
+                                <tr class="tblHeading">
+                                    <th>UserName</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>SSO</th>
+                                </tr>
+                            </thead>
+                            <tbody class="employee_list_fix">
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="dataTr">
+                                        <td>
+                                            @item.UserName
+                                        </td>
+                                        <td>
+                                            @item.FirstName
+                                        </td>
+                                        <td>
+                                            @item.LastName
+                                        </td>
+                                        <td>
+                                            @item.SSOID
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

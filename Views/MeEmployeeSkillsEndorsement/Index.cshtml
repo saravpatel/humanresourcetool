@@ -1,0 +1,294 @@
+﻿@using HRTool.CommanMethods;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MeLayout.cshtml";
+}
+
+@if (SessionProxy.IsCustomer == true)
+{
+    <div id="page_content_inner">
+        <input type="hidden" id="UserId" value="@Model.Id" />
+        <input type="hidden" id="EmployeeUserId" value="@Model.EmployeeId" />
+        @*<h4 class="heading_a uk-margin-bottom">
+                <div class="icon"><img src="~/Images/listicons/icn-skillendorsement.png" alt=""></div>
+                <div class="titletext">
+                    Skills Endorsement
+                    <p></p>
+                </div>
+                <div class="clearfix"></div>
+            </h4>*@
+        <h1 class="page-title">
+            Skills Endorsement
+            <small></small>
+        </h1>
+        @*<div id="tableDivResource">
+                @Html.Action("SkilListRecord", "MeEmployeeSkillsEndorsement", new { EmployeeId = @Model.Id })
+            </div>*@
+        <div class="givethanks">
+            <div class="row">
+                @*<div class="col-md-4">
+                        <a class="md-btn md-btn-primary" id="AskForEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">Ask for Endorsement</a>
+                    </div>*@
+                <div class="col-md-3">
+                    <a class="md-btn md-btn-primary" id="FilterbySkillsEndorsedbyyou">Filter by Skills Endorsed by you</a>
+                    @*<a class="md-btn md-btn-primary" ng-click="editHandler(0)">Endorse Somebody</a>*@
+                </div>
+                @*<div class="col-md-3">
+                        <a class="md-btn md-btn-primary" id="AskSomeBodyEndorsement" data-toggle="modal" data-target="#EditAskForEndorsementModelSkill">ENDORSE SOMEBODY</a>
+                        @*<a class="md-btn md-btn-primary" ng-click="editHandler(0)">Endorse Somebody</a>
+                    </div>*@
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row custms-labs" style="margin-top:10px;">
+                    <div class="col-md-3 dropdown">
+                        <label>Job Title</label>
+                        <select class="form-control" id="drpJobtitle" onchange="FilterByAll();">
+                            @foreach (var jobtitle in Model.JobTitleList)
+                            {
+                                <option value="@jobtitle.Value">@jobtitle.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3 dropdown">
+                        <label>Skill</label>
+                        <select class="form-control" id="drpSkill" onchange="FilterByAll();">
+                            @foreach (var skill in Model.SkillsetList)
+                            {
+                                if (Model.SkillsetList.ToString() == skill.Value)
+                                {
+                                    <option value="@skill.Value" selected="selected">@skill.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@skill.Value">@skill.Text</option>
+                                }
+                                @*<option value="@skill.Value">@skill.Text</option>*@
+                            }
+
+
+                        </select>
+                    </div>
+                    <div class="col-md-3 dropdown">
+                        <label>Pool</label>
+                        <select class="form-control" id="drpPool" onchange="FilterByAll();">
+                            @foreach (var Pool in Model.PoolListDis)
+                            {
+                                if (Model.PoolListDis.ToString() == Pool.Value)
+                                {
+                                    <option value="@Pool.Value" selected="selected">@Pool.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@Pool.Value">@Pool.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3 dropdown">
+                        <p class="thanks-select-btn">Resource</p>
+                        <div class="dropdown">
+                            <input type="hidden" id="selectID" />
+                            <input type="text" class="awesomplete form-control" id="empNameText" size="70" value="" placeholder="Employee Name" />
+                            @*<select class="form-control form-control skillsEndorsementSelect" id="drpResource">
+                                    @foreach (var Resource in Model.AllResourceList)
+                                    {
+                                        <option value="@Resource.Value">@Resource.Text</option>
+                                    }
+                                </select>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="AssignskillsListRecords">
+            @Html.Action("EndorsementList", "MeEmployeeSkillsEndorsement", new { EmployeeId = @Model.EmployeeId })
+            <input type="hidden" id="EndrosementId" value="@Model.EndrosementId">
+        </div>
+    </div>
+
+
+}
+else
+{
+    <div id="page_content_inner">
+        <input type="hidden" id="UserId" value="@Model.Id" />
+        <input type="hidden" id="EmployeeUserId" value="@Model.EmployeeId" />
+        <h4 class="heading_a uk-margin-bottom">
+            <div class="icon"><img src="~/Images/listicons/icn-skillendorsement.png" alt=""></div>
+            <div class="titletext">
+                Skills Endorsement
+
+            </div>
+            <div class="clearfix"></div>
+        </h4>
+
+        <div id="tableDivResource">
+            @Html.Action("SkilListRecord", "MeEmployeeSkillsEndorsement", new { EmployeeId = @Model.Id })
+        </div>
+        <div class="givethanks">
+            <div class="row">
+                <div class="col-md-4">
+                    <a class=" btn btn-success md-btn md-btn-primary" id="AskForEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">Ask for Endorsement</a>
+                </div>
+                <div class="col-md-3">
+                    <a class="btn btn-primary    md-btn md-btn-success" id="AskSomeBodyEndorsement" data-toggle="modal" data-target="#EditAskForEndorsementModelSkill">ENDORSE SOMEBODY</a>
+                    @*<a class="md-btn md-btn-primary" ng-click="editHandler(0)">Endorse Somebody</a>*@
+                </div>
+            </div>
+        </div>
+        <div id="AssignskillsListRecords">
+            @Html.Action("EndorsementList", "MeEmployeeSkillsEndorsement", new { EmployeeId = @Model.EmployeeId })
+            <input type="hidden" id="EndrosementId" value="@Model.EndrosementId">
+        </div>
+    </div>
+}
+<div class="modal fade" id="AskForEndorsementModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Ask For Ensorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AskForEndorsementBody">
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="EditAskForEndorsementModelSkill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails"> Ask For Ensorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="EditAskForEndorsementModelSkillBody">
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ViewTask_Details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Add Skill Set</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="ViewSkillsDetailsBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="cancelSkillViewDetail">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/JS/Me/SkillsEndorsemen/MeEmployeeSkillsEndorsementJS.js"></script>
+<script>
+    var constantSet = {
+        SaveTechnicalUrl: '@Url.Action("SaveTechnicalSkill", "MeEmployeeSkillsEndorsement")',
+        SaveGeneralUrl: '@Url.Action("SaveGeneralSkill", "MeEmployeeSkillsEndorsement")',
+        DeleteTechnicalUrl: '@Url.Action("DeleteSalaryRecord", "MeEmployeeSkillsEndorsement")',
+        DeleteGeneralUrl: '@Url.Action("DeleteSalaryRecord", "MeEmployeeSkillsEndorsement")',
+        ViewSkillslUrl: '@Url.Action("ViewSkillSTechnicalDetails", "MeEmployeeSkillsEndorsement")',
+        ViewSkillsGenerallUrl: '@Url.Action("ViewSkillSGeneralDetails", "MeEmployeeSkillsEndorsement")',
+        AskForEndorsementUrl: '@Url.Action("AskForEndorsement", "MeEmployeeSkillsEndorsement")',
+        AskSomebodyEndorsementUrl: '@Url.Action("AskSomeBodyEndrosment", "MeEmployeeSkillsEndorsement")',
+        GenerallUrl: '@Url.Action("GeneralSetDetails", "MeEmployeeSkillsEndorsement")',
+        technicalUrl: '@Url.Action("TechnicalSetDetails", "MeEmployeeSkillsEndorsement")',
+        AssignskillsUrl: '@Url.Action("AssignEndrosementSkills", "MeEmployeeSkillsEndorsement")',
+        EditAssignskillsUrl: '@Url.Action("GetEditAssignEndrosementSkills", "MeEmployeeSkillsEndorsement")',
+        AddCommentsUrl: '@Url.Action("AddComments", "MeEmployeeSkillsEndorsement")',
+        SaveCommentUrl: '@Url.Action("SaveCommentsRecvords", "MeEmployeeSkillsEndorsement")',
+        EditCommentUrl: '@Url.Action("EditCommentsRecord", "MeEmployeeSkillsEndorsement")',
+        DeleteCommentUrl: '@Url.Action("DeleteComment", "MeEmployeeSkillsEndorsement")',
+        DeleteEndrosment: '@Url.Action("DeleteEndrosment", "MeEmployeeSkillsEndorsement")',
+        DeleteDataGeneral: '@Url.Action("DeleteGeneralSkills", "MeEmployeeSkillsEndorsement")',
+        DeleteDataTechnical: '@Url.Action("DeleteTechnicalSkills", "MeEmployeeSkillsEndorsement")',
+        getResourceList: '@Url.Action("getResource", "MeEmployeeSkillsEndorsement")',
+        getResourceListBy: '@Url.Action("SkillsEndorsedbyYou", "MeEmployeeSkillsEndorsement")',
+        getFilterByJobTitle: '@Url.Action("skillFilterByJobTitle", "MeEmployeeSkillsEndorsement")',
+        getFilterByName: '@Url.Action("skillFilterByName", "MeEmployeeSkillsEndorsement")',
+        getFilterBySkillId: '@Url.Action("SkillsBySkillId", "MeEmployeeSkillsEndorsement")',
+        skillFilterByPool: '@Url.Action("skillFilterByPool", "MeEmployeeSkillsEndorsement")',
+        getEmp: '@Url.Action("getEmplyeeUserList", "MeEmployeeSkillsEndorsement")',
+        getSkillFilterByAll: '@Url.Action("FilterByAll", "MeEmployeeSkillsEndorsement")',
+        GetDetailOfTechnicalDetail: '@Url.Action("GetDetailOfTechnicalDetail", "MeEmployeeSkillsEndorsement")',
+        GetDetailOfGeneralDetail: '@Url.Action("GetDetailOfGeneralDetail", "MeEmployeeSkillsEndorsement")',
+
+
+    }
+</script>
+<script>
+  
+    getResourceList();
+    function getResourceList() {
+        var listData = [];
+        var EmpId = $('#EmployeeUserId').val();
+        $.ajax({
+            url: constantSet.getResourceList,
+            data: { CustomerId: EmpId },
+            success: function (data) {
+                debugger;
+                $.each(data.AllResourceList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                $('#empNameText').change(function () {
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.AllResourceList.length; i++) {
+                        if (value == data.AllResourceList[i].Text) {
+                            var eid = data.AllResourceList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+            }
+        });
+    }
+
+</script>

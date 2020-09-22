@@ -1,0 +1,52 @@
+﻿@model IList<HRTool.Models.Settings.AddSkillsViewModel>
+
+<div id="addSkillsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Skills</h4>
+            </div>
+            <div class="modal-body" id="addSkillsBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-addSkills">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-addSkills" title="Add task" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#addSkillsModal"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-addSkills" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#addSkillsModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    @*<a class="btn btn-primary btn-circle  btn-delete-addSkills" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i></a>*@
+    <a class="btn btn-primary btn-circle  btn-export2excel-addSkills" href="@Url.Action("ExportExcel", "AddSkills", new { SkillType = "Technical" })" target="_blank" title="export2excel"><i class="fa fa-rocket"></i></a>
+</div>
+
+<table id="AddSkillsTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td style="width:50%;">
+                    @item.Value
+                </td>
+                <td style="width:50%;">
+                    @item.Description
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

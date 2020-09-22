@@ -1,0 +1,18 @@
+﻿@model HRTool.Models.Resources.EmployeeQualificationsViewModel
+
+<input type="hidden" id="QualificationId" value="@Model.Id" />
+<input type="hidden" id="Employeeid" value="@Model.EmployeeID" />
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Qualification">Qualification *</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt_Qualification" data-toggle="tooltip" data-placement="right" name="Qualification" title="Other Information">@Model.Detail</textarea>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-Qualification" style="display:none;" data-valmsg-for="Qualification" data-valmsg-replace="true">The OtherInformation is required.</span>
+    </div>
+</div>
+
+

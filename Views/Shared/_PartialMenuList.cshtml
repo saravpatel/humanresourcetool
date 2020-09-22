@@ -1,0 +1,129 @@
+﻿@model HRTool.Models.DynamicMenuViewModel
+@using HRTool.CommanMethods;
+
+
+<ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-light" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+    @if (Model.Dashboard)
+    {
+        <li class="nav-item liDashboard"><a href="@Url.Action("Index","Home")" title="Dashboard"><i class="fa fa-home"></i> <span class="title">Dashboard</span></a></li>
+    }
+    @if (Model.News)
+    {
+        <li class="nav-item linews" ><a href="@Url.Action("Index","AdminNews")"><i class="fa fa-newspaper-o"></i> <span class="title">News</span></a></li>
+    }
+    @if (Model.Resources)
+    {
+        <li class="nav-item liresources"><a href="@Url.Action("Index","Employee")"><i class="fa fa-users"></i> <span class="title">Resources</span></a></li>
+    }
+
+    @if (SessionProxy.IsCustomer == true)
+    {
+        if (Model.Me)
+        {
+            <li class="nav-item lime"><a href="@Url.Action("Index","MeEmployeeProfile",new { EmployeeId = SessionProxy.UserId })"><i class="fa fa-user-o"></i> <span class="title">Me</span></a></li>
+        }
+    }
+    else
+    {
+        if (Model.Me)
+        {
+            <li class="nav-item lime"><a href="@Url.Action("Index","MeEmployeeOverView",new { EmployeeId = SessionProxy.UserId })"><i class="fa fa-user-o"></i> <span class="title">Me</span></a></li>
+        }
+    }
+
+    @if (Model.Document)
+    {
+        <li class="nav-item liDocument"><a href="@Url.Action("Index", "AdminDocument")"><i class="fa fa-file-text-o"></i> <span class="title">Documents</span></a></li>
+    }
+    @if (Model.Planner)
+    {
+        <li class="nav-item liPlanner"><a href="@Url.Action("Index", "AdminPlanner")"><i class="fa fa-calendar"></i> <span class="title">Planner</span></a></li>
+    }
+    @if (Model.ProjectPlanner)
+    {
+        <li class="nav-item liProjectPlanner"><a href="@Url.Action("Index", "AdminProjectPlanner")"><i class="fa fa-list-alt"></i> <span class="title">Project Planner</span></a></li>
+    }
+    @if (Model.Performance)
+    {
+        <li class="nav-item liPearformance"><a href="@Url.Action("Index","AdminPearformance")"><i class="fa fa-line-chart disable"></i> <span class="title">Performance</span> </a></li>
+    }
+    @if (Model.SkillsEndorsement)
+    {
+        <li class="nav-item liSkillEndrosment"><a href="@Url.Action("Index", "AdminSkillEndrosment")"><i class="fa fa-book"></i> <span class="title">Skills Endorsement</span> </a></li>
+    }
+    @if (Model.Training)
+    {
+        <li class="nav-item liTraining"><a href="@Url.Action("Index", "AdminTraining")"><i class="fa fa-graduation-cap"></i> <span class="title">Training</span> </a></li>
+    }
+    @if (Model.Certification)
+    {
+        <li class="nav-item liCertificates"><a href="@Url.Action("Index", "AdminCertificate")"><i class="fa fa-certificate"></i> <span class="title">Certification</span> </a></li>
+    }
+    @if (Model.Visa)
+    {
+        <li class="nav-item liVisa"><a href="@Url.Action("Index", "AdminVisa")"><i class="fa fa-cc-visa"></i> <span class="title">Visa</span> </a></li>
+    }
+    @if (Model.Tasks)
+    {
+        <li class="nav-item liTasks"><a href="@Url.Action("Index", "AdminTask")"><i class="fa fa-tasks"></i> <span class="title">Tasks</span> </a></li>
+    }
+    @if (Model.Cases)
+    {
+        <li class="nav-item liCases"><a href="@Url.Action("Index", "AdminCaseLog")"><i class="fa fa-briefcase"></i> <span class="title">Cases</span> </a></li>
+    }
+    @if (Model.Approve)
+    {
+        <li class="nav-item liapprove"><a href="@Url.Action("Index", "Approve")"><i class="fa fa-check-square-o"></i> <span class="title">Approve</span> </a></li>
+    }
+    @if (Model.TMS)
+    {
+        <li class="nav-item liTMS"><a href="@Url.Action("Index","TMS")"><i class="fa fa-home"></i> <span class="title">TMS</span> </a></li>
+    }
+    @if (Model.Notifications)
+    {
+        <li class="nav-item linotificationss"><a href="@Url.Action("Index", "Notification")"><i class="fa fa-bell-o"></i> <span class="title">Notifications</span> </a></li>
+    }
+    @if (Model.Queries)
+    {
+        <li class="nav-item liquery"><a href="@Url.Action("Index", "Query")"><i class="fa fa-question"></i> <span class="title">Queries</span> </a></li>
+    }
+    @if (Model.BulkActions)
+    {
+        <li class="nav-item libulkActions"><a href="@Url.Action("Index", "BulkActions")"><i class="fa fa-cart-arrow-down"></i> <span class="title">Bulk Actions</span> </a></li>
+    }
+    @if (Model.Reports)
+    { 
+        <li class="nav-item disabled liReports"><a href="#"><i class="fa fa-file-text-o"></i> <span class="title">Reports</span> </a></li>
+    }
+    @if (Model.OrganizationChart)
+    {
+        @*<li class="nav-item libulkActions"><a href="@Url.Action("Index", "BulkActions")"><i class="fa fa-cart-arrow-down"></i> <span class="title">Organization Chart</span> </a></li>*@
+        <li class="nav-item liorganizationCharts"><a href="@Url.Action("Index", "OrganizationChart")"><i class="fa fa-bar-chart"></i> <span class="title">Organization Chart</span> </a></li>
+        @*<li class="nav-item liorganizationCharts"><a href="OrganizationChart"><i class="fa fa-bar-chart"></i> <span class="title">Organization Chart</span> </a></li>*@
+    }
+    @if (Model.Settings)
+    {
+        <li class="nav-item otherSettings"><a href="@Url.Action("Index", "TMSSettings")"><i class="fa fa-cogs"></i> <span class="title">Settings</span> </a></li>
+    }
+</ul>
+<script>
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".page-sidebar-menu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href.substring(0, href.indexOf('?')) === path) {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    })
+ 
+</script>
+

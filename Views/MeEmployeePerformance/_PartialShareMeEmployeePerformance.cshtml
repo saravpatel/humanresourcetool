@@ -1,0 +1,15 @@
+﻿@model HRTool.Models.Settings.ShareEmployeeReview
+
+<input type="hidden" id="ManagerId" value="@Model.MaanegrId" />
+<input type="hidden" id="Employeeid" value="@Model.EmployeeId" />
+<div>
+    @if (Model.MaanegrId == 0 || Model.MaanegrId == null)
+    {
+        <p>If you share this review your feedback will be made available to all customers. Do you wish to countinue?</p>
+    }
+    else
+
+    {
+    <p>If you share this review your feedback will be made available to @Model.ManagerName. Do you wish to countinue?</p>
+    }
+</div>

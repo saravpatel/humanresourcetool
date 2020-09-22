@@ -1,0 +1,205 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_OtherLeaveViewModel
+
+<div id="wizard" class="swMain">
+    <ul class="tablistnew two">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Detail
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Document
+            </a>
+        </li>
+    </ul>
+    <div id="step-1">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <input type="hidden" value="@Model.Id" id="HiddenId" />
+                <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+                <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+                <input type="hidden" value="@Model.day" id="HiddendayId" />
+                <label class="control-label" for="StatusList">Reason For Leave *</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-ReasonForLeaveId" class="form-control">
+                    @foreach (var item in Model.ReasonForLeaveList)
+                    {
+                        if (Model.ReasonForLeaveId.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ReasonForLeave" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Reason is required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <span class="icheck-inline icheck-inline-custome text-center">
+                    <label class="inline-label">
+                        @if (Model.IsLessThenADay == true)
+                        {
+                            <input type="radio" name="lessThanADay" id="adayormore" class="Other_leave_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="lessThanADay" id="adayormore" class="Other_leave_radio" checked="checked">
+                        }
+                        A day or more
+                    </label>
+                </span>
+                <span class="icheck-inline icheck-inline-custome  text-center">
+                    <label class="inline-label">
+                        @if (Model.IsLessThenADay == true)
+                        {
+                            <input type="radio" name="lessThanADay" id="lessThanADay" class="Other_leave_radio" checked="checked">
+                        }
+                        else
+                        {
+                            <input type="radio" name="lessThanADay" id="lessThanADay" class="Other_leave_radio">
+                        }
+                        Less than a day
+                    </label>
+                </span>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+        <div id="div_ADayOrMore">
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Start Date *</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">End Date *</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+                    <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Duration</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" value="@Model.Duration" id="txt_Duration" class="form-control" readonly="readonly" />
+                </div>
+                <div class="col-md-4" style="padding-left:0px;">
+                    <label style="margin-top:5px;">Days</label>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="div_LessThenADay" style="display:none;">
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Start Date *</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" value="@Model.StartDate" id="txt_LessThenStartDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-LessThenStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Duration</label>
+                </div>
+                <div class="col-md-1">
+                    <div class="input-group spinner">
+                        <select id="drp-HourseListSDTimesheet" class="form-control" onchange="ChangeHour()">
+                            @foreach (var item in Model.HoursList)
+                            {
+                                if (Model.Hour.ToString() == item.Value)
+                                {
+                                    <option value=@item.Value selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="input-group spinner">
+                        <select id="drp-MinutesListSDTimesheet" class="form-control" onchange="ChangeHour()">
+                            @foreach (var item in Model.MinutesList)
+                            {
+                                if (Model.Min.ToString() == item.Value)
+                                {
+                                    <option value=@item.Value selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-HowLate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Hour is required.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Supporting Comments*</label>
+            </div>
+            <div class="col-md-6">
+                <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comment</textarea>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-2">
+        <div class="browse-attach">
+            <label type="file" for="OtherLeaveFileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="OtherLeaveFileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        </div>
+
+        <div id="filesList">
+            @foreach (var item in Model.DocumentList)
+            {
+                <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+</div>

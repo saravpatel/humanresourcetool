@@ -1,0 +1,201 @@
+﻿@model HRTool.Models.Me.MeMenuModel
+@using HRTool.CommanMethods;
+@using Microsoft.AspNet.Identity;
+
+@*<div class="imgprofile">
+    <img id="imgPicture" class="mCS_img_loaded" src="/Images/defaultPicture.png">
+    <h6 id="hName" class="ng-binding"></h6>
+    <div class="typeuser">
+        <span id="spnRole" class="accessuser">Employee</span>
+        <span class="accessuser">@Model.JobTitle</span>
+    </div>
+</div>*@
+<style>
+
+   
+</style>
+
+
+
+ 
+
+
+
+
+
+<div class="profile-userpic">
+    @if (!string.IsNullOrEmpty(Model.EmployeeImage))
+    {
+        <img src="~/Upload/Resources/@Model.EmployeeImage" id="imgPicture" class="img-responsive" />
+    }
+    else
+    {
+        <img id="imgPicture" class="mCS_img_loaded" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+    }
+
+
+    <div class="profile-usertitle">
+        <div id="hName" class="profile-usertitle-name">@Model.EmployeeName</div>
+        <div class="profile-usertitle-job">@Model.Jobtilte</div>
+        @*<span id="spnRole" class="accessuser hide">@Model.EmployeeRole</span>*@
+    </div>
+</div>
+<div class="profile-usermenu memenuList">
+    <ul class="nav memenuListData">
+
+        @if (Model.Me_OverView)
+        {
+            <li class="active filter_Class" title="Overview">
+
+                <a href="@Url.Action("Index", "MeEmployeeOverView", new { EmployeeId = SessionProxy.UserId })">
+                    <i class="fa fa-home"></i> Overview
+                </a>
+
+            </li>
+        }
+        @if (Model.Me_Planner)
+        {
+           <li class="filter_Class" title="Planner">
+
+                <a href="@Url.Action("Index", "MeEmployeePlanner", new { EmployeeId = SessionProxy.UserId })" class="planner">
+                    <i class="fa fa-calendar"></i>  Planner
+                </a>
+
+            </li>
+        }
+        @if (Model.Me_ProjectPlanner)
+        {
+
+            <li class="filter_Class" title="Project Planner">
+                <a href="@Url.Action("Index", "MeEmployeeProjectPlanner", new { EmployeeId = SessionProxy.UserId })" class="projectPlanner">
+                    <i class="fa fa-line-chart"></i> Project Planner
+                </a>
+            </li>
+
+            
+        }
+        @if (Model.Me_Performance)
+        {
+            <li class="filter_Class" title="Performance">
+                <a href="@Url.Action("MeEmployeePerformance", "MeEmployeePerformance", new {EmployeeId=SessionProxy.UserId })" class="performance">
+                    <i class="fa fa-bar-chart"></i>Performance 
+                </a>
+            </li>
+           
+        }
+        @if (Model.Me_SkillsEndorsement)
+        {
+            <li class="filter_Class" title="Skills Endorsement">
+                <a href="@Url.Action("Index", "MeEmployeeSkillsEndorsement", new { EmployeeId = SessionProxy.UserId})" class="skillsEndorsement">
+                    <i class="fa fa-briefcase"></i> Skills Endorsement
+                </a>
+            </li>
+            
+        }
+        @*@if (Model.Me_Skills)
+            {
+                <li title="Skills">
+                    <a href="#" class="skillsEndorsement disable">
+                        <div class="icn"></div> Skills
+                    </a>
+                </li>
+            }*@
+        @if (Model.Me_Training)
+        {
+            <li class="filter_Class" title="Training">
+                <a href="@Url.Action("Index", "MeEmployeeTraining", new { EmployeeId = SessionProxy.UserId})" class="training">
+                    <i class="fa fa-book"></i> Training
+                </a>
+            </li>
+        }
+        @if (Model.Me_Documents)
+        {
+            <li class="filter_Class" title="Documents">
+                <a href="@Url.Action("Index", "MeEmployeeDocument", new { EmployeeId = SessionProxy.UserId})" class="documents">
+                    <i class="fa fa-file"></i> Documents
+                </a>
+            </li>
+        }
+        @if (Model.Me_Resume_CV)
+        {
+            <li class="filter_Class" title="Resume/CV">
+                <a href="@Url.Action("Index", "MeEmployeeResume", new { EmployeeId = SessionProxy.UserId})" class="resume">
+                    <i class="fa fa-file-text-o"></i> Resume/CV 
+                </a>
+            </li>
+        }
+        @if (Model.Me_Profile)
+        {
+            <li class="filter_Class" title="Profile">
+                <a href="@Url.Action("Index", "MeEmployeeProfile", new { EmployeeId = SessionProxy.UserId })" class="profile">
+                    <i class="fa fa-user"></i> Profile
+                </a>
+            </li>
+        }
+
+        @if (Model.Me_Contacts)
+        {
+            <li class="filter_Class" title="Contacts">
+                <a href="@Url.Action("Index", "MeEmployeeContacts", new { EmployeeId = SessionProxy.UserId })" class="profile">
+                    <i class="fa fa-address-card"></i> Contacts    
+                </a>
+            </li>
+        }
+        @*@if (Model.Me_Benefits)
+            {
+                <li title="Benefits">
+                    <a href="#" class=" benefits disable" >
+                        <div class="icn"></div> Benefits
+                    </a>
+                </li>
+            }*@
+        @if (Model.Me_Caselog)
+        {
+            <li class="filter_Class" title="CaseLog">
+                <a href="@Url.Action("Index", "MeEmployeeCases", new { EmployeeId = SessionProxy.UserId })" class="caseLog">
+                    <i class="fa fa-list-ol"></i> CaseLog  
+                </a>
+            </li>
+        }
+    </ul>
+    </div>
+<script>
+   
+    onMeMenuNaviation();
+    function onMeMenuNaviation() {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".profile-usermenu a").each(function () {
+                debugger;            
+            var href = $(this).attr('href');            
+            if (path.substring(0, href.length) === href) {
+                $('.profile-usermenu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href.substring(0, href.indexOf('?')) === path) {
+                $('.profile-usermenu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+        $(".page-sidebar-menu a").each(function () {
+            var href = $(this).attr('href');
+            if (path.substring(0, href.length) === href) {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+            else if (href.substring(0, href.indexOf('?')) === '/MeEmployeeOverView') {
+                $('.page-sidebar-menu li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+            }
+        })
+    })
+    
+ 
+</script>

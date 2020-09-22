@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Technical Skills Set";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<style>
+    .form-control {
+        width: 100% !important;
+    }
+       
+</style>
+<div id="page_content_inner">
+    <br />
+    
+
+
+    <h1 class="page-title">
+        Technical Skills Set
+        <small>Choose which badges can be awarded, or create a new badge.</small>
+    </h1>
+
+
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("List", "TechnicalSkillsSet")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var constantTechnicalSkillsSet = {
+        addEdit: '@Url.Action("AddEditTechnicalSkillsSet", "TechnicalSkillsSet")',
+        saveData: '@Url.Action("SavData", "TechnicalSkillsSet")'
+    }
+</script>
+
+<script src="~/JS/Settings/SkillsSet/TechnicalSkillsSetJS.js"></script>

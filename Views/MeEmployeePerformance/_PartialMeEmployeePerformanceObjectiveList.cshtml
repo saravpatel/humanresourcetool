@@ -1,0 +1,679 @@
+﻿@model HRTool.Models.Settings.ObjectiveOfEmployeePerformance
+
+@*<style>
+    .graphgoals {
+        float: left;
+        height: 400px;
+        margin-bottom: 70px;
+        margin-left: 50px;
+        position: relative;
+        width: 438px;
+         border-left: 2px solid silver;
+    height: 410px;
+    }
+
+
+
+    
+
+        .graphgoals .svg {
+            height: 402px;
+            position: relative;
+            width: 480px;
+        }
+
+        .graphgoals .axisx {
+            bottom: -57px;
+            font-size: 11px;
+            font-weight: 600;
+            left: 0;
+            position: absolute;
+            width: 560px;
+        }
+
+        .graphgoals .axisy {
+            font-size: 15px;
+            font-weight: 900;
+            /* height: 411px; */
+            left: -280px;
+            line-height: 20px;
+            padding: 16px 0;
+            position: relative;
+            text-align: right;
+            top: -249px;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            right: 10px;
+        }
+
+            .graphgoals .axisy i {
+                display: block;
+                float: left;
+                font-style: normal;
+                text-align: center;
+                width: 149px;
+                font-size: 15px;
+                font-weight: 900;
+            }
+
+            .graphgoals .axisy > span {
+                display: block;
+                font-size: 15px;
+                text-align: center;
+                width: 100%;
+            }
+
+        .graphgoals .axisx i {
+            display: block;
+            float: left;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 900;
+            text-align: center;
+            width: 182px;
+        }
+
+        .graphgoals .axisx > span {
+            display: block;
+            font-size: 15px;
+            padding-top: 15px;
+            text-align: center;
+            font-weight: 900;
+            width: 100%;
+        }
+
+        .graphgoals  {
+          
+           
+          
+        }
+</style>*@
+<style>
+
+    .axis path, .axis line {
+        fill: none;
+        stroke: grey;
+        shape-rendering: crispEdges;
+    }
+
+    .line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1.5px;
+    }
+
+        .line.second {
+            stroke: grey;
+        }
+
+    .area {
+        fill: none;
+        opacity: 0.5;
+    }
+
+    .dot {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1.5px;
+    }
+
+    .graphgoals {
+        float: left;
+        height: 400px;
+        margin-bottom: 70px;
+        margin-left: 50px;
+        position: relative;
+        width: 438px;
+        border-left: 2px solid silver;
+        height: 410px;
+    }
+
+
+
+
+
+        .graphgoals .svg {
+            height: 402px;
+            position: relative;
+            width: 480px;
+        }
+
+        .graphgoals .axisx {
+            bottom: -57px;
+            font-size: 11px;
+            font-weight: 600;
+            left: 0;
+            position: absolute;
+            width: 560px;
+        }
+
+        .graphgoals .axisy {
+            font-size: 15px;
+            font-weight: 900;
+            /* height: 411px; */
+            left: -280px;
+            line-height: 20px;
+            padding: 16px 0;
+            position: relative;
+            text-align: right;
+            top: -249px;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            right: 10px;
+        }
+
+            .graphgoals .axisy i {
+                display: block;
+                float: left;
+                font-style: normal;
+                text-align: center;
+                width: 149px;
+                font-size: 15px;
+                font-weight: 900;
+            }
+
+            .graphgoals .axisy > span {
+                display: block;
+                font-size: 15px;
+                text-align: center;
+                width: 100%;
+            }
+
+        .graphgoals .axisx i {
+            display: block;
+            float: left;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 900;
+            text-align: center;
+            width: 182px;
+        }
+
+        .graphgoals .axisx > span {
+            display: block;
+            font-size: 15px;
+            padding-top: 15px;
+            text-align: center;
+            font-weight: 900;
+            width: 100%;
+        }
+
+    .graphgoals {
+    }
+</style>
+<input type="hidden" value="@Model.EmpPerformanceId" id="EmpPerId" />
+<div id="EmployeePerformnceGoalList">
+    <div class="table-responsive">
+        <div class="table-btns">
+            <div class="resource-table-btns">              
+                    <a class="btn btn-success btn-circle  btn-invite-coworker" title="Invite Coworker" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#GoalPerformnceReviewModal" onclick="EmployeeObjectiveOfPerformance()"><i class="fa fa-plus"></i></a>                
+            </div>
+            <div>
+                <select style="padding:5px;" id="drpStatusOfGoal" onchange="FilterByGoalStatus(@Model.EmployeeId)">
+                    @foreach (var item in Model.Status)
+                    {
+                        if (Model.SelectedStatus == item.Text)
+                        {
+                            <option value="@item.Text" selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Text">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="uk-overflow-container">
+        <div class="table-responsive employeeList_fix_height">
+            <table id="EmployeeGoalListtable" class="table-bordered display table style2 table-striped">
+                <thead class="tblHeading">
+                    <tr>
+                        <th>Goals</th>
+                        <th>Due Date</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                        <th>Since Start</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.EmployeePerformanceGoalList)
+                    {
+                        <tr id="@item.Id" class="dataTr">
+                            <td>
+                                @item.GoalName
+                            </td>
+                            <td>
+                                @item.DueDate
+                            </td>
+                            <td>
+                                <div class="progress proj-div" data-toggle="modal" data-target="#GoalPerformnceProgressModal" onclick="GetProgressData(@item.Id,@item.EmployeeId,@item.EmpPerformanceId)">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:@item.UnitPercent%">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.GoalStatus</td>
+                            <td>@item.StartDate <span style="float:right;"><i class="fa fa-pencil" data-toggle="modal" data-target="#GoalPerformnceReviewModal" onclick="EditObjective(@item.Id);"></i></span></td>                            
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <input type="text" class="form-control SearchGoalName" placeholder="Name">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control SearchDueDate" placeholder="Due Date">
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                            <input type="text" class="form-control SearchGoalStatus" placeholder="Status">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control SearchGoalStartDate" placeholder="Since Start">
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="graphgoals">
+    <div class="svg">
+        <svg class="chart-background">
+          
+        </svg>
+        <div class="axisx">
+            <i>Low</i>
+            <i>Medium</i>
+            <i>High</i>
+            <span>Effort</span>
+        </div>
+        <div class="axisy">
+
+            <i>Low</i>
+            <i>Medium</i>
+            <i>High</i>
+            <span>Value</span>
+        </div>
+    </div>
+</div>
+<script>
+    DataTableDesign();
+    GoalChart();
+    function DataTableDesign() {
+        $('#EmployeeGoalListtable tfoot tr').appendTo('#EmployeeGoalListtable thead');
+        var table = $("#EmployeeGoalListtable").DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+            "scrollX": true
+        });
+        $("#EmployeeGoalListtable").find(".dataTables_filter").hide();
+        $("#EmployeeGoalListtable").find(".dataTables_info").hide();
+        $("#EmployeePerformnceGoalList thead .SearchGoalName").keyup(function () {
+            table.column(0).search(this.value).draw();
+        });
+        $("#EmployeePerformnceGoalList thead .SearchDueDate").keyup(function () {
+            table.column(1).search(this.value).draw();
+        });
+        $("#EmployeePerformnceGoalList thead .SearchDueDate").Zebra_DatePicker({
+            //direction: false,
+            showButtonPanel: false,
+            format: 'd-m-Y',
+            default_position: 'below',
+            onSelect: function () {
+                var date = $("#EmployeePerformnceGoalList").find('.SearchDueDate').val();
+                table.column(1).search(date).draw();
+            }
+        });
+        $("#EmployeePerformnceGoalList thead .SearchGoalStatus").keyup(function () {
+            table.column(3).search(this.value).draw();
+        });
+        $("#EmployeePerformnceGoalList thead .SearchGoalStartDate").keyup(function () {
+            table.column(4).search(this.value).draw();
+        });
+        $("#EmployeePerformnceGoalList thead .SearchGoalStartDate").Zebra_DatePicker({
+            //direction: false,
+            showButtonPanel: false,
+            format: 'd-m-Y',
+            default_position: 'below',
+            onSelect: function () {
+                var date = $("#EmployeePerformnceGoalList").find('.SearchGoalStartDate').val();
+                table.column(4).search(date).draw();
+            }
+        });
+        $(".dp_clear").on('click', function () {
+            var date=$("#EmployeePerformnceGoalList").find("thead").find('.SearchDueDate').val();
+            table.column(1).search(date).draw();
+            var date2 = $("#EmployeePerformnceGoalList").find("thead").find('.SearchGoalStartDate').val();
+            table.column(4).search(date2).draw();
+        });
+    }
+
+    //function GoalChart() {
+    //    var EmpId = $("#Hiddemn_EmployeeId").val();
+    //    var StatusOfGoal = $("#drpStatusOfGoal").val();
+    //    $.ajax({
+    //        data: { EmpId: EmpId, StatusOfGoal: StatusOfGoal },
+    //        url: MeconstantEmpPerformance.GetGoalChart,
+    //        success: function (data) {
+    //            var GoalData = JSON.stringify(data);
+    //            var svg = d3.select("svg"),
+    //            width = +svg.attr("width"),
+    //            height = +svg.attr("height");
+    //            var start_x, start_y;
+    //            var radius = 10;
+    //            var Circle_arr = [];
+    //            var circle_data = $.each(data.EmployeePerformanceGoalList, function (i) {
+    //                var cir = {
+    //                    //x: Math.round(data.EmployeePerformanceGoalList[i].GoalXValue * (width - radius * 2) + radius),
+    //                    //y: Math.round(data.EmployeePerformanceGoalList[i].GoalYValue * (height - radius * 2) + radius),
+    //                    x: Math.round(data.EmployeePerformanceGoalList[i].GoalXValue),
+    //                    y: Math.round(data.EmployeePerformanceGoalList[i].GoalYValue),
+    //                    Id: data.EmployeePerformanceGoalList[i].Id,
+    //                    Text: data.EmployeePerformanceGoalList[i].Id
+    //                };
+    //                Circle_arr.push(cir);
+    //            });
+    //            var rect = svg.append("g")
+    //                 .attr("class", "rect")
+    //                 .append("rect")
+    //                 .attr("width", width)
+    //                 .attr("height", height)
+    //                .style("fill", "#36c6d3");
+
+    //            var circles = d3.select("svg")
+    //                .append("g")
+    //                .attr("class", "circles")
+    //                .selectAll("circle")
+    //                    .data(Circle_arr)
+    //                    .enter()
+    //                    .append("circle")
+    //                    .attr("cx", function (d) { return (d.x) })
+    //                    .attr("cy", function (d) { return (d.y) })
+    //                    .attr("r", radius)
+    //                    .attr("fill", "#3d4957")
+    //                    .attr("data-toggle", "tooltip")
+    //                    .attr("title", "Hooray!");
+    //            var drag_handler = d3.drag()
+    //                   .on("start", drag_start)
+    //                   .on("drag", drag_drag).on("end", dragended);
+
+
+    //            function drag_start() {
+    //                start_x = +d3.event.x;
+    //                start_y = +d3.event.y;
+    //            }
+    //            function drag_drag(d) {
+
+    //                
+    //                if (this.getAttribute("transform") === null) {
+    //                    current_scale = 1;
+    //                }
+    //                else {
+    //                    current_scale_string = this.getAttribute("transform").split(' ')[1];
+    //                    current_scale = +current_scale_string.substring(6, current_scale_string.length - 1);
+    //                }
+    //                var value_CX = d.x = start_x + ((d3.event.x - start_x) / current_scale);
+    //                var value_CY = d.y = start_y + ((d3.event.y - start_y) / current_scale);
+    //                if (value_CX > 550) {
+    //                    value_CX = 545;
+    //                }
+    //                else if (value_CX < 10) {
+    //                    value_CX = 10;
+    //                }
+    //                if (value_CY < 16) {
+    //                    value_CY = 16;
+    //                }
+    //                else if (value_CY > 400) {
+    //                    value_CY = 400;
+    //                }
+    //                d3.select(this)
+    //                    //.attr("cx", d.x = start_x + ((d3.event.x - start_x) / current_scale))
+    //                    //.attr("cy", d.y = start_y + ((d3.event.y - start_y) / current_scale));
+    //                    .attr("cx", value_CX)
+    //                    .attr("cy", value_CY);
+
+    //            }
+    //            function dragended(d) {
+    //                
+    //                var value_x = parseFloat(d.x);
+    //                var value_y =parseFloat(d.y);
+    //                var mul = value_x *value_y;
+    //                var unitvalue = mul/(2*100);
+
+
+    //                if (value_x < 10) {
+    //                    value_x = 10;
+    //                }
+    //                else if (value_x > 545) {
+    //                    value_x = 545;
+    //                }
+    //                if (value_y > 400) {
+    //                    value_y = 400;
+    //                }
+    //                else if (value_y < 10) {
+    //                    value_y = 10;
+    //                }
+    //                var Id = d.Id;
+
+    //                $.ajax({
+    //                    url: MeconstantEmpPerformance.UpdateGoalChart,
+    //                    data: { Id: Id, value_x: value_x, value_y: value_y, unitvalue },
+    //                    success: function (data) {
+    //                        location.reload(true);
+    //                    }
+    //                })
+
+    //            }
+    //            drag_handler(circles);
+    //            var zoom_handler = d3.zoom()
+    //                .on("zoom", zoom_actions);
+    //            function zoom_actions() {
+    //                circles.attr("transform", d3.event.transform);
+    //            }
+    //        }
+    //    })
+    //}
+    function GoalChart() {
+        var EmpId = $("#Hiddemn_EmployeeId").val();
+        var StatusOfGoal = $("#drpStatusOfGoal").val();
+        $.ajax({
+            data: { EmpId: EmpId, StatusOfGoal: StatusOfGoal },
+            url: MeconstantEmpPerformance.GetGoalChart,
+            success: function (data) {
+                var GoalData = JSON.stringify(data);
+                var svg = d3.select("svg"),
+                    width = +svg.attr("width"),
+                    height = +svg.attr("height");
+                var start_x, start_y;
+                var radius = 10;
+                var Circle_arr = [];
+                var circle_data = $.each(data.EmployeePerformanceGoalList, function (i) {
+                    var cir = {
+                        //x: Math.round(data.EmployeePerformanceGoalList[i].GoalXValue * (width - radius * 2) + radius),
+                        //y: Math.round(data.EmployeePerformanceGoalList[i].GoalYValue * (height - radius * 2) + radius),
+                        x: Math.round(data.EmployeePerformanceGoalList[i].GoalXValue),
+                        y: Math.round(data.EmployeePerformanceGoalList[i].GoalYValue),
+                        Id: data.EmployeePerformanceGoalList[i].Id,
+                        Text: data.EmployeePerformanceGoalList[i].Id
+                    };
+                    Circle_arr.push(cir);
+                });
+                var rect = svg.append("g")
+                    .attr("class", "rect")
+                    .append("rect")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .style("fill", "#36c6d3");
+
+                var circles = d3.select("svg")
+                    .append("g")
+                    .attr("class", "circles")
+                    .selectAll("circle")
+                    .data(Circle_arr)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function (d) { return (d.x) })
+                    .attr("cy", function (d) { return (d.y) })
+                    .attr("r", radius)
+                    .attr("fill", "#3d4957")
+                    .attr("data-toggle", "tooltip")
+                    .attr("title", "Hooray!");
+                var drag_handler = d3.drag()
+                    .on("start", drag_start)
+                    .on("drag", drag_drag).on("end", dragended);
+
+
+                function drag_start() {
+                    start_x = +d3.event.x;
+                    start_y = +d3.event.y;
+                }
+                function drag_drag(d) {
+
+                    if (this.getAttribute("transform") === null) {
+                        current_scale = 1;
+                    }
+                    else {
+                        current_scale_string = this.getAttribute("transform").split(' ')[1];
+                        current_scale = +current_scale_string.substring(6, current_scale_string.length - 1);
+                    }
+                    var value_CX = d.x = start_x + ((d3.event.x - start_x) / current_scale);
+                    var value_CY = d.y = start_y + ((d3.event.y - start_y) / current_scale);
+                    if (value_CX > 550) {
+                        value_CX = 545;
+                    }
+                    else if (value_CX < 10) {
+                        value_CX = 10;
+                    }
+                    if (value_CY < 16) {
+                        value_CY = 16;
+                    }
+                    else if (value_CY > 400) {
+                        value_CY = 400;
+                    }
+                    d3.select(this)
+                        //.attr("cx", d.x = start_x + ((d3.event.x - start_x) / current_scale))
+                        //.attr("cy", d.y = start_y + ((d3.event.y - start_y) / current_scale));
+                        .attr("cx", value_CX)
+                        .attr("cy", value_CY);
+
+                }
+                function dragended(d) {
+                    var value_x = parseFloat(d.x);
+                    var value_y = parseFloat(d.y);
+                    var mul = value_x * value_y;
+                    var unitvalue = mul / (2 * 100);
+
+
+                    if (value_x < 10) {
+                        value_x = 10;
+                    }
+                    else if (value_x > 545) {
+                        value_x = 545;
+                    }
+                    if (value_y > 400) {
+                        value_y = 400;
+                    }
+                    else if (value_y < 10) {
+                        value_y = 10;
+                    }
+                    var Id = d.Id;
+
+                    $.ajax({
+                        url: MeconstantEmpPerformance.UpdateGoalChart,
+                        data: { Id: Id, value_x: value_x, value_y: value_y, unitvalue },
+                        success: function (data) {
+                            getGoalsDetails(@Model.EmpPerformanceId,"",@Model.EmployeeId,0);
+                            //location.reload(true);
+                        }
+                    })
+
+                }
+                drag_handler(circles);
+                var zoom_handler = d3.zoom()
+                    .on("zoom", zoom_actions);
+                function zoom_actions() {
+                    circles.attr("transform", d3.event.transform);
+                }
+
+                var margin = { top: 0, right: 0, bottom: 0, left: 0 },
+                    width = 1400 - margin.left - margin.right;
+                    height = 1020 - margin.top - margin.bottom;
+
+                var svg = d3.select("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom);
+                // horizontal lines
+                svg.selectAll(".hline").data(d3.range(5)).enter()
+                    .append("line")
+                    .attr("y1", function (d) {
+                        return d * (height / 10);
+                    })
+                    .attr("y2", function (d) {
+                        return d * (height / 10);
+
+                    })
+                    .attr("x1", function (d) {
+                        return 0;
+                    })
+                    .attr("x2", function (d) {
+                        return width;
+                    })
+                    .style("stroke", "grey")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                //vertical lines
+                svg.selectAll(".vline").data(d3.range(5)).enter()
+                    .append("line")
+                    .attr("x1", function (d) {
+                        return d * (width / 10);
+                    })
+                    .attr("x2", function (d) {
+                        return d * (width / 10);
+                    })
+                    .attr("y1", function (d) {
+                        return 0;
+                    })
+                    .attr("y2", function (d) {
+                        return height;
+                    })
+                    .style("stroke", "grey")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                var line = d3.svg.line()
+                    .x(function (d, i) {
+                        return x(i);
+                    })
+                    .y(function (d) {
+                        return y(d);
+                    });
+
+                var area = d3.svg.area()
+                    .x(line.x())
+                    .y1(line.y())
+                    .y0(y(0));
+
+                var lines = svg.selectAll("g")
+                    .data(data);
+
+                var aLineContainer = lines.enter().append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                aLineContainer.append("path")
+                    .attr("class", "area")
+                    .attr("d", area);
+
+                aLineContainer.append("path")
+                    .attr("class", "line")
+                    .attr("d", line);
+
+            }
+        })
+    }
+
+
+</script>

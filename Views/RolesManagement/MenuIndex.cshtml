@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "MenuIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page_content_inner">
+     <h1 class="page-title">
+        Menu List
+        <small>View assets or create a new one.</small>
+    </h1>
+<div class="md-card">
+        <div >
+            <div id="tableDivMenu">
+                @Html.Action("RolesList", "RolesManagement")
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/RolesManagement/MenuManagmentJS.js"></script>
+<script>
+    var constantMenu = {
+        saveMenuData: '@Url.Action("CreateMenu", "RolesManagement")',
+        addEdit: '@Url.Action("CreateMenu", "RolesManagement")',
+        DeleteMenuUrl: '@Url.Action("DeleteMenuRecord", "RolesManagement")'
+    };
+</script>

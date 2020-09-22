@@ -1,0 +1,72 @@
+﻿@model HRTool.Models.Settings.SegmentViewModel
+@{
+    int i = 0;
+}
+<div id="wizard" class="swMain">
+    <ul class="tablistnew two">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span>Segment
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Questions
+            </a>
+        </li>
+    </ul>
+    <div id="step-1">
+        <div class="row marbot10">
+            <div class="form-group">
+                <input type="hidden" value="@Model.SegmentId" id="txt_SegmentId" />
+                <label class="col-md-3">Title *</label>
+                <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Values Of the Cost">
+                    <input type="text" name="Title" id="Title" placeholder="Title" value="@Model.Title" class="form-control" ng-required="false">
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="validationmessageTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Title is required</span>
+                </div>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="form-group">
+                <label class="col-md-3">Description</label>
+                <div class="col-md-6">
+                    <textarea class="form-control textarea-resizeNone" id="Description" placeholder="Description">@Model.Description</textarea>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="step-2">
+        <div class="cf nestable-lists">
+            <div class="dd JobRoleQuestionSegmentNestable">
+                <ol id="JobRolesSegmentQuestionList" class="dd-list" data-uk-nestable="{maxDepth:0}">
+                    @foreach (var item in Model.JobroleQueList)
+                    {
+                        i++;
+                        <li class="dd-item liQuestion_@i" data-id="@i" id="@i">
+                            <div class="dd-handle dd3-handle" data-id="@i" id="@i">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="dd3-content row AddEditRow">
+                                <div class="col-lg-10">@item.questionData</div>
+                                <div class="col-lg-2" style='text-align: right;'>
+                                    <div class="icons">
+                                        <a><i class="material-icons uk-text-success EditJobRolesSegmetQuestion" data-question="@item.questionData" data-id="@item.QueId" data-questionJsonString="@item.FiledId,@item.CValue,@item.FiledText" data-toggle="modal" data-target="#JobRolesSegmentAddQuestionModel">edit</i></a>
+                                        <a class="removeJobSegmentQuestionLi"><i class="material-icons uk-text-danger">delete</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ol>
+            </div>
+        </div>
+        <div data-toggle="modal" data-target="#JobRolesSegmentAddQuestionModel">
+            <a class="md-btn btn-default" id="JobRolesSegmentAddQuestion">Add Questions</a>
+        </div>
+    </div>
+</div>
+

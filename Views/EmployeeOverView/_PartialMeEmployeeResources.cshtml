@@ -1,0 +1,44 @@
+﻿@model List<HRTool.Models.Me.MeEmployeeResourceDetail_Overview>
+    <div class="clearfix"></div>
+<div class="span-label">Responsible For Following Resources: </div><br/>
+<div id="tableDiv" class="table-responsive">
+    <table id="DocumentModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0" role="grid">
+        <thead>
+            <tr class="tblHeading">
+                <th><b>Name</b></th>
+                <th><b>Location</b></th>
+                <th><b>Business</b></th>
+                <th><b>Division</b></th>
+                <th><b>Pool</b></th>
+                <th><b>Function</b></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th ><input type="text" class="form-control SearchName" placeholder="Name"></th>
+                <th ><input type="text" class="form-control SearchLocation" placeholder="Description"></th>
+                <th ><input type="text" class="form-control SearchBusiness" placeholder="Business"></th>
+                <th ><input type="text" class="form-control SearchDivision" placeholder="Division"></th>
+                <th ><input type="text" class="form-control SearchPool" placeholder="Pool"></th>
+                <th ><input type="text" class="form-control SearchFunction" placeholder="Function"></th>              
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="dataTr">
+                    <td>@item.Name</td>
+                    <td>@item.Location</td>
+                    <td>@item.business</td>
+                    <td>@item.Division</td>
+                    <td>@item.pool</td>
+                    <td>@item.FunctionName</td>                   
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+

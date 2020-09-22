@@ -1,0 +1,144 @@
+﻿@model IList<HRTool.Models.Admin.AdminDocumentViewModel>
+@using HRTool.CommanMethods;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="DocumentModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title DocumentTitle">Add Document</h4>
+            </div>
+            <div class="modal-body" id="AddDocumentBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btn-submit-Document">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<h1 class="page-title">
+    Document List
+    <small>View company documents or upload a new one.</small>
+</h1>
+ 
+ <div class="clearfix"></div>
+
+<div class="md-card">
+    <div>
+        <div class="uk-overflow-container">
+           
+                <div id="tableDiv">
+                   @if(Model.Count > 0)
+                   {
+                    
+                    <div class="table-btns">
+                        <a class="btn btn-success btn-circle   btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                        <a class="btn btn-primary btn-circle   btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="material-icons">edit</i></a>
+                        <a class="btn btn-danger btn-circle   btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                        <button title="Refresh" class="btn btn-primary btn-circle   btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                        <button title="Clear Sorting" class="btn btn-warning btn-circle   btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                        <button class="btn btn-info btn-circle   btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                    </div>
+                    
+                   }
+                   else
+                   {
+                        <div class="table-btns 11">
+                            <a class="btn btn-success btn-circle   btn-add-Document" title="Add Document" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-plus"></i></a>
+                            <a class="btn btn-primary btn-circle   btn-edit-Document" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DocumentModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-danger btn-circle   btn-delete-Document" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                            <button title="Refresh" class="btn btn-primary btn-circle   btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                            <button title="Clear Sorting" class="btn btn-warning btn-circle   btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                            <button class="btn btn-danger btn-circle   btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                        </div>
+                    }
+
+                    <div class="table-responsive profile-table">
+                        <table id="DocumentModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Document/Link</th>
+                                    <th>Category</th>
+                                    <th>Business</th>
+                                    <th>Division</th>
+                                    <th>Pool</th>
+                                    <th>Function</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.Id" class="dataTr">
+                                        <td>@item.Type</td>
+                                        @if (@item.Type == "Document")
+                                        {
+                                            <td>@item.Description</td>
+                                        }
+                                        else if (@item.Type == "Link")
+                                        {
+                                            <td>@item.LinkDisplayText</td>
+                                        }
+                                        @if (@item.Type == "Document")
+                                        {
+                                            <td><a href="~/Upload/AdminDocument/@item.DocumentPath" target="_blank" download="@item.DocumentOriginalPath">@item.DocumentOriginalPath</a></td>
+                                        }
+                                        else if (@item.Type == "Link")
+                                        {
+                                            <td><a href="@item.LinkURL" target="_blank">@item.LinkURL</a></td>
+                                        }
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.Business</td>
+                                        <td>@item.Division</td>
+                                        <td>@item.Pool</td>
+                                        <td>@item.Function</td>
+                                        <td>@item.CreateDate</td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th><input type="text" class="form-control SearchType" placeholder="Type"></th>
+                                    <th><input type="text" class="form-control SearchDescription" placeholder="Description"></th>
+                                    <th><input type="text" class="form-control SearchName" placeholder="Document/Link"></th>
+                                    <th><input type="text" class="form-control SearchCategory" placeholder="Category"></th>
+                                    <th><input type="text" class="form-control SearchBusiness" placeholder="Business"></th>
+                                    <th><input type="text" class="form-control SearchDivision" placeholder="Division"></th>
+                                    <th><input type="text" class="form-control SearchPool" placeholder="Pool"></th>
+                                    <th><input type="text" class="form-control SearchFunction" placeholder="Function"></th>
+                                    <th><input type="text" class="form-control SearchCreated" placeholder="Created"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var AdminconstantDocument =
+        {
+            Index:'@Url.Action("Index","AdminDocument")',
+            Open:'@Url.Action("AddDocument", "AdminDocument")',
+            AddEdit: '@Url.Action("SaveDocument", "AdminDocument")',
+            ImageData: '@Url.Action("ImageData", "AdminDocument")',
+            bindDiv: '@Url.Action("bindDivisionList", "AdminDocument")',
+            bindpool: '@Url.Action("bindPoolList", "AdminDocument")',
+            bindFuncation: '@Url.Action("bindFuncationList", "AdminDocument")',
+            deleteDocument:'@Url.Action("DeleteDocument", "AdminDocument")'
+        }
+</script>
+<script src="~/JS/Admin/AdminDocument/AdminDocumentJS.js"></script>

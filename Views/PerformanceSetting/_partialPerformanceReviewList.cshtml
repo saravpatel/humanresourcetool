@@ -1,0 +1,109 @@
+﻿@model  IList<HRTool.Models.Settings.PerformanceSettingViewModel>
+<div class="md-card">
+    <div >
+        <div id="tableDivProject">
+             
+            <div class="table-btns">
+                <a class="btn btn-success btn-circle btn-lg btn-add-Performance" title="Add Project"><i class="fa fa-plus"></i></a>
+                <a class="btn btn-primary btn-circle btn-lg btn-edit-Performance" title="Edit"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger btn-circle btn-lg btn-delete-Performance" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+                <button title="Refresh" class="btn btn-primary btn-circle btn-lg btn-Refresh-Performance" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                <button title="Clear Sorting" class="btn btn-info btn-circle btn-lg btn-ClearSorting-Performance" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                <button class="btn btn-warning btn-circle btn-lg btn-clearFilter-Performance" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                <div class="pull-right" id="checksave">
+                    <input type="checkbox" class="form-control-performance" id="InUSe">
+                    <label class="inline-label">In Use</label>
+                    <input type="button" class="btn btn-success" value="Save" />
+                </div>
+            </div>
+                <div class="table-responsive">
+                    <br />
+                 
+
+                    <table id="PerformanceListtable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                        <thead>
+                            <tr class="tblHeading">
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Location</th>
+                                <th>Business</th>
+                                <th>Division</th>
+                                <th>Pool</th>
+                                <th>Function</th>
+                                <th>Job Title</th>
+                                <th>Employee Type</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th >
+                                    <input type="text" class="form-control Name">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Company">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Location">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Business">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Division">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Pool">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control Function">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control JobTitle">
+                                </th>
+                                <th >
+                                    <input type="text" class="form-control EmployeeType">
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="@item.Id" class="dataTr">
+                                    <td>
+                                        @item.ReviewText
+                                    </td>
+                                    <td>
+                                        @item.CompanyCSV
+                                    </td>
+                                    <td>
+                                        @item.LocationCSV
+                                    </td>
+                                    <td>
+                                        @item.BusinessCSV
+                                    </td>
+                                    <td>
+                                        @item.DivisionCSV
+                                    </td>
+                                    <td>
+                                        @item.PoolCSV
+                                    </td>
+                                    <td>
+                                        @item.FunctionCSV
+                                    </td>
+                                    <td>
+                                        @item.JobRoleCSV
+                                    </td>
+                                    <td>
+                                        @item.EmploymentTypeCSV
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            
+
+        </div>
+    </div>
+</div>

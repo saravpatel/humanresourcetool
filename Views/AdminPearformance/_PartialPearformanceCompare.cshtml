@@ -1,0 +1,344 @@
+﻿@model HRTool.Models.Admin.PerformanceIndexPageViewModel
+
+<h1 class="page-title">
+    Recent Pearformance Compared To Previous Review
+    <small></small>
+</h1>
+<div class="row">
+
+    <div class="col-md-2">
+        <label class="control-label" for="ReviewList">Review</label>
+        <select class="form-control" id="drpReviewList">
+            <option value="0">--Select--</option>
+            @foreach (var item in Model.PerformanceReviewList)
+            {
+            if (Model.SelectedReviewId == item.Value)
+            {
+            <option value="@item.Value" selected="selected">@item.Text</option>
+            }
+            else
+            {
+            <option value="@item.Value">@item.Text</option>
+            }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="control-label" for="EmployeeList">Manager</label>
+        <select class="form-control" id="drpEmployeeList">
+            <option value="0">--Select--</option>
+            @foreach (var item in Model.ManagerResourceList)
+            {
+            if (Model.SelectedManagerId == item.Value)
+            {
+            <option value="@item.Value" selected="selected">@item.Text</option>
+            }
+            else
+            {
+            <option value="@item.Value">@item.Text</option>
+            }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="control-label" for="JobTitleList">JobTitle</label>
+        <select class="form-control" id="drpJobTitleList">
+            <option value="0">--Select--</option>
+            @foreach (var item in Model.JobTitleList)
+            {
+                if (Model.SelectedJobTitleId == item.Value)
+                {
+                    <option value="@item.Value" selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="control-label" for="ReviewList">Bussiness</label>
+        <select class="form-control" id="drpBussinessList" onchange="GetDivisonByBusinessId(this)">
+            <option value="0">--Select--</option>
+            @foreach (var item in Model.BussinessList)
+            {
+            if (Model.SelectedBussinessId == item.Value)
+            {
+            <option value="@item.Value" selected="selected">@item.Text</option>
+            }
+            else
+            {
+            <option value="@item.Value">@item.Text</option>
+            }
+            }
+        </select>
+    </div>
+    
+    <div class="col-md-2">
+        <label for="normal_working">Division</label>
+        <select class="form-control" id="drpDivision" onchange="GetPoolByDivisonID(this)"></select>
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Pool</label>
+        <select class="form-control" id="drpPool" onchange="GetFunctionByPoolId(this)"></select>
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Function</label>
+        <select class="form-control" id="drpFunction" onchange="GetResourceByFunctionAnyPool(this)"></select>
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Overall Score</label>
+        <input class="form-control" type="text" placeholder="OverallScore" id="txtOverallScore" />
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Core Strengths</label>
+        <input class="form-control" type="text" placeholder="Core Strengths" id="txtCoreStrengths" />
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Customer</label>
+        <input class="form-control" type="text" placeholder="Customer" id="txtCustomerScore" />
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Average Score</label>
+        <input class="form-control" type="text" placeholder="Average Score" id="txtAverageScore" />
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-9">
+        <ul class="list-group list-inline" style="margin: 12px 0px 0px 0px;">
+            <li>  <button class="btn btn-success pull-right" onclick="ApplyFilterOnPerformanceCompareGraph()">Apply Filter</button></li>
+            <li><button class="btn btn-info pull-right" onclick="GetTopImprovertsEmployeeChart()">Top Improvers</button></li>
+            <li><button class="btn btn-default pull-right" onclick="GetBigestDropEmployeeChart()" style="color: #ffffff;background-color: #5c4b4b;">Biggest Drops</button></li>
+            <li><button class="btn btn-danger pull-right" onclick="GetMostConsistanceEmployeeChart()">Most Consistents</button></li>
+            <li><button class="btn btn-success pull-right" onclick="AllEmployeePerformance()" style="background-color:#2b3643;border-color: #2b3643;">All Employees</button></li>
+            <li><button class="btn btn-success pull-right" onclick="ClearFilterCompareGraph()" style="background-color: #2b3643;border-color: #2b3643;">Clear Filter</button></li>
+         </ul>
+    </div>
+    <div class="col-md-2">
+        <ul class="list-group list-inline"style="margin: 12px 0px 0px 0px;">
+            <li><button name="button" type="button" id="DownloadId" class="fa fa-file-pdf-o  btn btn-success btn-circle" onclick="GeneratePDF()"></button></li>
+            <li><button class="btn btn-danger btn-circle  btn-export2excel-Resoure" href="@Url.Action("ExportToExcelChart", "AdminPearformance")" title="export2excel"><i class="fa fa-upload"></i></button></li>
+        </ul>
+    </div>
+    <div>
+   </div>
+</div>
+<div id="container" style="width:100%;height:350px;">
+</div>
+
+
+
+<script>
+    var AdminPerformanceGraph = {
+        GetEmployeePerformanceGraph: '@Url.Action("GetEmployeePerformanceGraph", "AdminPearformance")',
+        GetEmployeeAllPerformance: '@Url.Action("GetEmployeeAllPerformance", "AdminPearformance")',
+    }
+</script>
+
+
+  
+<script>
+    $("#txtOverallScore").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txtCoreStrengths").keypress(function (event) {        
+        if(event.which!=8 && event.which!=0 && (event.which<48 || event.which>57)){
+            return false;
+        }
+    });
+    $("#txtCustomerScore").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txtAverageScore").keypress(function (event) {        
+        if(event.which!=8 && event.which!=0 && (event.which<48 || event.which>57))
+        {
+            return false;
+        }
+    })
+    GetPerformanceGraph();
+    function GetPerformanceGraph()
+    {
+        var EmpNameList = [];
+        var EmpLastScore = [];
+        var EmpPrevScore = [];
+        var EmployeeId = [];
+        var EmplImage = [];
+        $.ajax({
+            url: AdminPerformanceGraph.GetEmployeePerformanceGraph,
+            success: function (data) {
+                $.each(data, function (i) {                    
+                    var EmpName = data[i].EmployeeName;
+                    var EmpId = data[i].EmpID;                    
+                    var EmpImage = data[i].EmployeeImage;
+                    EmpNameList.push(EmpName);
+                    EmployeeId.push(EmpId);
+                    EmplImage.push($("<img>").attr("src", data[i].EmployeeImage));
+                    var ScoreList = data[i].ListOfPerformanceReviewGraph;
+                    $.each(ScoreList, function (j) {
+                        var LastScore = ScoreList[j].LastReview;
+                        EmpLastScore.push(LastScore);
+                        var PrevScore = ScoreList[j].PerviouseReview;
+                        EmpPrevScore.push(PrevScore);
+                    })
+                });
+                var chart = new Highcharts.chart('container', {
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: ' Performance Review'
+                    },
+                    subtitle: {
+                        text: ''
+                    },                                        
+                    xAxis: {                       
+                        categories: 
+                                  $.each(EmpNameList, function (i) {
+                                      "'"+EmpNameList[i]+"',"
+                                  }),                        
+                        
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Score'
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value;
+                            }
+                        }
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        shared: true,                       
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        },
+                
+                    },
+                    id: $.each(EmployeeId, function (i) {
+                        "'" + EmployeeId[i] + "',"
+                    }),
+                    series: [{
+                        name: 'Last Review',
+                        marker: {
+                            symbol: 'square'
+                        },
+                        data: $.each(EmpLastScore, function (i) {
+                            "'" + EmpLastScore[i] + "',"
+                        }),
+                        
+                        events: {                           
+                            click: function (event) {
+                                debugger;
+                                console.log(event);
+                                var EmpName = event.point.category;
+                                var EmpSSOId = EmpName.split("-");
+                                getEmployeePerformanceReview(EmpSSOId);
+                            }
+                        }
+                    }, {
+                        name: 'Previouse Review',
+                        marker: {
+                            symbol: 'diamond'
+                        },
+                        data: $.each(EmpPrevScore, function (i) {
+                            "'" + EmpPrevScore[i] + "',"
+                        }),
+                        events: {
+                            click: function (event) {
+                                debugger;
+                                var EmpName = event.point.category;
+                                var EmpSSOId = EmpName.split("-");
+                                getEmployeePerformanceReviewFilter(EmpSSOId);
+                            }
+                        }
+
+                    }]
+                });
+                //$('#preview').html(chart.getCSV());
+            }
+        });
+    }
+    function getEmployeePerformanceReview(EmpSSOId)
+    {
+        var ssoId = EmpSSOId[1];
+        $.ajax({
+            url: AdminPerformanceGraph.GetEmployeeAllPerformance,
+            data: { ssoId: ssoId },
+            success: function (data) {
+                var ReviewList = [];                
+                var ScoreList = [];
+                $("#contantBody").find("#container").html('');
+                $.each(data, function (i) {
+                    var ReviewName = data[i].ReviewName;
+                    ReviewList.push(ReviewName);
+                    var ScoreValue = data[i].ReviewScore;
+                    ScoreList.push(ScoreValue);
+                });
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: 'Review'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories:
+                                  $.each(ReviewList, function (i) {
+                                      "'" + ReviewList[i] + "',"
+                                  })
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Score'
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value;
+                            }
+                        }
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Score',
+                        marker: {
+                            symbol: 'square'
+                        },
+                        data: $.each(ScoreList, function (i) {
+                            "'" + ScoreList[i] + "',"
+                        }),
+                    }]
+                });
+            }
+        })
+    }
+
+
+</script>

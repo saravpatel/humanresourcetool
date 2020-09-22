@@ -1,0 +1,292 @@
+﻿@model HRTool.Models.Admin.AdminProjectPlannerViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="page-title">Project Planner
+
+</h1>
+<div class="col-sm-12 pdg-left-none" id="projectPlanner_main">
+    <div class="">
+        @*<div class="row">
+            <div class="col-sm-12">
+                <h4>Showing Planner For</h4>
+            </div>
+        </div>*@
+        <div class="showingselect">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <label for="normal_working">Business</label>
+                    @if (Model.Flag == 1)
+                    {
+                        <select class="form-control" id="drpBusiness" disabled>                            
+                            @foreach (var item in Model.listOfBusiness)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        <select class="form-control" id="drpBusiness" onchange="GetDivisonByBusinessId(this)">
+                            <option value="0">-- Select Business --</option>
+                            @foreach (var item in Model.listOfBusiness)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                </div>
+                <div class="col-md-3 ">
+                    <label for="normal_working">Division</label>
+                    @if (Model.Flag == 1)
+                    {
+                        <select class="form-control" id="drpDivision" disabled>
+                            @foreach (var item in Model.listOfDivision)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpDivision" onchange="GetPoolByDivisonID(this)">
+                    </select>
+                    }
+                </div>
+                <div class="col-md-3 ">
+                    <label for="normal_working">Pool</label>
+                    @if (Model.Flag == 1)
+                    {
+                        <select class="form-control" id="drpPool" disabled>
+                            @foreach (var item in Model.listOfPool)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpPool" onchange="GetFunctionByPoolId(this)">
+                    </select>
+                    }
+                </div>
+                <div class="col-md-3 ">
+                    <label class="" for="normal_working">Function</label>
+                    @if (Model.Flag == 1)
+                    {
+                        <select class="form-control" id="drpFunction" disabled>
+                            @foreach (var item in Model.listOfFunction)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpFunction" onchange="GetResourceByFunctionAnyPool(this)">
+                    </select>
+                    }
+                </div>
+                <div class="col-sm-3 ">
+                    <label class="showingTitle">Resource</label>
+                    @if (Model.Flag == 1)
+                    {
+                        <select class="form-control" id="drpResource">
+                            <option value="0">-- Select Resource --</option>
+                            @foreach (var item in Model.listOfEmployee)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                    <select class="form-control" id="drpResource">
+                    </select>
+                    }
+                </div>
+                <div class="col-sm-3 ">
+                    <label for="normal_working" >Project</label>
+                    <select class="form-control" id="drpProject">
+                        <option value="0">-- Select Project --</option>
+                        @foreach (var item in Model.listOfProject)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-3 ">
+                    <label for="normal_working" >Year</label>
+                    <select class="form-control" id="drpYear">
+                        @foreach (var item in Model.ListOfYear)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+                @*<div class="col-sm-3 ">
+                    <label for="normal_working" >Month</label>
+                    <select class="form-control" id="drpMonth" onchange="applyFilterMonth();">
+                        @foreach(var item in Model.ListOfSelectedYear_Month)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>*@
+                <div class="col-sm-3" style="padding-top:33px;">
+                        <button onclick="resetAll();" class="btn btn-primary"> Reset</button>
+                        <button onclick="ApplyFilter(@Model.AdminPlannerYearModel.YearId)" class="btn btn-success pull-right">Apply filter</button>                    
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="ResourceList">
+        <div id="EmployeeSchedulDrillDownModel">
+            <div id="EmployeeSchedulDrillDownModelBody">
+            </div>
+        </div>
+        <div id="EmployeeBenefitModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div id="hideHeadder">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Scheduling</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="EmployeeBenefitBody">
+                    </div>
+                    <div id="hideFooter">
+                        <div class="modal-footer" id="divfooter">
+                            <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_Scheduling">Add</button>
+                            <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="EmployeeProjectPlanner_TravelLeaveModel" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Travel</h4>
+                    </div>
+                    <div class="modal-body" id="EmployeeProjectPlanner_TravelLeaveBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                        <button type="button" class="btn btn-warning closeModel" data-dismiss="modal" disabled>Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="EmployeeProjectPlanner_TimeSheetModel" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">TimeSheet</h4>
+                    </div>
+                    <div class="modal-body" id="EmployeeProjectPlanner_TimeSheetBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                        <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="EmployeeProjectPlanner_UpliftModel" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Uplift</h4>
+                    </div>
+                    <div class="modal-body" id="EmployeeProjectPlanner_UpliftBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                        <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="projectCalendar">
+        @Html.Partial("_ProjectCalenderPartial", Model.AdminPlannerYearModel)
+    </div>
+</div>
+@*<div class="col-sm-3">
+    <div class="line-chartMain">
+        <div id="containerHeatMap" class="plannerMain-chart" style="height: 200px" data-highcharts-chart="13"></div>
+    </div>
+    <div class="inner_header_right">
+        <p>Sick Days Heat Map</p>
+    </div>
+</div>*@
+<!-- <div class="optionscompany">
+    <ul class="inline companyPlannerFilterList">
+        <li class="rhtAnchore"><a class="button medium blue withicon calendarfeed fltRht" href="#">Calendar Feed</a></li>
+    </ul>
+</div> -->
+
+<div id="EmployeeFilterDataModal">                    
+               <div id="EmployeeFilterDataModalBody">
+               </div>
+</div>
+
+<script type="text/javascript" src="~/JS/Admin/ProjectPlanner/AdminProjectPlanner.js"></script>
+<script>
+    var AdminProjectPlanner = {
+        GetDivisonByBusinessID: '@Url.Action("GetDivisonByBusinessId", "AdminProjectPlanner")',
+        GetPoolByDivisonID: '@Url.Action("GetPoolByDivisonID", "AdminProjectPlanner")',
+        GetFunctionByPoolId: '@Url.Action("GetFunctionByPoolId", "AdminProjectPlanner")',
+        GetResourceByFunctionAndPoolID: '@Url.Action("GetResourceByFunctionAndPoolID", "AdminProjectPlanner")',
+        GetResultByFilter: '@Url.Action("GetResultByFilter", "AdminProjectPlanner")',
+        GetResultByFilterMonth: '@Url.Action("GetResultByFilter_Month", "AdminProjectPlanner")',
+        getProjectPlannerData: '@Url.Action("getAdminProjectPlannerData", "AdminProjectPlanner")',
+        saveSchedulingData: '@Url.Action("SaveData_SchedulingLeaves", "AdminProjectPlanner")',
+        getProjectPlannerDrillDownData: '@Url.Action("getProjectPlannerDrillDownData", "AdminProjectPlanner")',
+        editScheduling: '@Url.Action("EditResourceScheduling", "AdminProjectPlanner")',
+        exportToExcel: '@Url.Action("ExportExcelCoustomer", "AdminProjectPlanner")',
+        validateSchedulStDate: '@Url.Action("validateSchedule_Resource", "AdminProjectPlanner")',
+        getAdmin_ProjectPlannerTravel: '@Url.Action("getAdminProjectPlannerTravel", "AdminProjectPlanner")',
+        BindState: '@Url.Action("BindStateDropdown", "AdminProjectPlanner")',
+        BindCity: '@Url.Action("BindCityDropdown", "AdminProjectPlanner")',
+        BindAirport: '@Url.Action("BindAirportDropdown", "AdminProjectPlanner")',
+        ImageData_TravelLeave: '@Url.Action("TravelLeaveImageData", "AdminProjectPlanner")',
+        SaveData_TravelLeaveData: '@Url.Action("SaveData_TravelLeave", "AdminProjectPlanner")',
+        getAdminProjectPlannerDrillDown:'@Url.Action("getProjectPlannerTravelDrillDownData", "AdminProjectPlanner")',
+        editResourceTravel:'@Url.Action("EditResourceTravel", "AdminProjectPlanner")',
+        getAdminTimesheet: '@Url.Action("getAdminTimesheet", "AdminProjectPlanner")',
+        addEdit_TimeSheet_Detail: '@Url.Action("AddEdit_TimeSheet_Detail", "AdminProjectPlanner")',
+        SaveData_TimeSheet: '@Url.Action("SaveData_TimeSheet", "AdminProjectPlanner")',
+        TimeSheetImageData: '@Url.Action("TimeSheetImageData", "AdminProjectPlanner")',
+        workPattenData: '@Url.Action("GetWorkPatternData", "AdminProjectPlanner")',
+        timesheetDrillDown: '@Url.Action("getProjectPlannerTimesheetDrillDownData", "AdminProjectPlanner")',
+        editResourceTimesheet: '@Url.Action("editResourceTimesheet", "AdminProjectPlanner")',
+        addEdit_Uplift: '@Url.Action("AddEdit_Uplift", "AdminProjectPlanner")',
+        addEdit_Uplift_Detail: '@Url.Action("AddEdit_Uplift_Detail", "AdminProjectPlanner")',
+        SaveData_Uplift: '@Url.Action("SaveData_Uplift", "AdminProjectPlanner")',
+        ImageData_Uplift: '@Url.Action("UpliftImageData", "AdminProjectPlanner")',
+        getUpliftDrillDownData: '@Url.Action("getUpliftDrillDownData", "AdminProjectPlanner")',
+        Edit_Uplift: '@Url.Action("EditUpliftData", "AdminProjectPlanner")',
+    };
+</script>

@@ -1,0 +1,139 @@
+﻿@model HRTool.Models.Resources.EmergencyContactsViewModel
+
+
+<input type="hidden" id="emergancyContactId" value="@Model.Id" />
+<input type="hidden" id="EmployeeID" value="@Model.EmployeeId" />
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Name">Name *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="txt_Name" value="@Model.Name" data-toggle="tooltip" name="Name" title="First Name" required>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-Name" style="display:none;" data-valmsg-for="Name" data-valmsg-replace="true">The Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="RelationshipList">Relationship</label>
+    </div>
+    <div class="col-md-6">
+
+        <select id="drp_Relationship" class="form-control">
+            @foreach (var items in Model.RelationshipList)
+            {
+                if (Model.RelationshipValue == @items.Text)
+                {
+                    <option class="selTitles" selected="selected" id="@items.Value" value="@items.Value">@items.Text</option>
+                }
+                else
+                {
+                    <option class="selTitles" id="@items.Value" value="@items.Value">@items.Text</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+       
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="HouseNumber">House Number</label>
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="txt_HouseNumber" min="0" value="@Model.HouseNumber" data-toggle="tooltip" name="HouseNumber" title="HouseNumber" required>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Postcode">Post Code</label>
+    </div>
+    <div class="col-md-3">
+        <input type="text" max="10" class="form-control" id="txt_PostCode" value="@Model.Postcode" data-toggle="tooltip" name="Postcode" title="Post Code" required>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" id="findAddress">Find Address</button>
+
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-PostCode" style="display:none;" data-valmsg-for="Name" data-valmsg-replace="true">Post Code is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Address">Address</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt_Address" data-toggle="tooltip" data-placement="right" name="Address" title="Address">@Model.Address</textarea>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Telephone">Telephone</label>
+    </div>
+    <div class="col-md-6">
+        <input type="number" max="14" class="form-control" id="txt_Telephone" min="0" value="@Model.Telephone" data-toggle="tooltip" name="Telephone" title="Telephone" required>
+    </div>
+    <div class="col-md-4">
+       
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Mobile">Mobile</label>
+    </div>
+    <div class="col-md-6">
+        <input type="number" max="14" class="form-control" id="txt_Mobile" min="0" value="@Model.Mobile" data-toggle="tooltip" name="Mobile" title="Mobile" required>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="Comments">Comments</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt_Comments" data-toggle="tooltip" data-placement="right" name="Comments" title="Comments">@Model.Comments</textarea>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
+<script>
+    $("#txt_HouseNumber").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_Mobile").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_Telephone").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

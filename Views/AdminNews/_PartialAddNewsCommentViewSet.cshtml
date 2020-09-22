@@ -1,0 +1,21 @@
+﻿@model HRTool.Models.Admin.AdminNewsViewModel
+    <input type="hidden" id="NewsId" value="@Model.NewsId" />
+<input type="hidden" id="CommentId" value="@Model.Id" />
+    <div class="row marbot10">
+        <div class="col-md-12">
+            <div id="froala-editor-comment"></div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-Comment" style="display:none;" data-valmsg-for="Comment" data-valmsg-replace="true">Comment is required.</span>
+        </div>
+    </div>
+    @*<div class="row marbot10">
+        <div class="col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="chk_NotifyEmployees">                    
+                    <span>Notify employees via email</span>
+                </label>
+            </div>
+        </div>
+    </div>*@

@@ -1,0 +1,405 @@
+﻿@model HRTool.Models.Resources.EmployeeEmploymentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+<style>
+    .btn-help-me {
+        background: #2196f3;
+        color: #fff;
+    }
+</style>
+<div id="page_content_inner">
+    @*<h4 class="heading_a uk-margin-bottom">
+        <div class="icon"><img src="~/Images/listicons/icn-resources.png" /></div>
+        <div class="titletext">
+            <div>
+                Resource Employment
+                <p>
+
+                </p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </h4>*@
+  <h1 class="page-title">
+      Resource Employment
+      <small></small>
+  </h1>
+    <div class="md-card">
+        <div >
+            <input type="hidden" value="@Model.EmployeeId" id="currntEmployeeId" />
+            <div id="tableDiv">
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Activity Type</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="drpActivityList" onchange="getRate()">
+                            @foreach (var Copy in Model.ActivityTypeList)
+                            {
+                                <option value="@Copy.Value">@Copy.Text</option>
+                            }
+                        </select>
+                        @*<select id="ddluserId" name="userId" class="form-control" onchange="GetRolesByUser()"></select>*@
+                        @*<input type="hidden" id="selectActivitytype" value="@Model.ActivityTypeId" />
+                        <input type="text" class="awesomplete form-control" id="activityType" size="50" value="@Model.ActivityTypeName" placeholder="Activity Type" />*@
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="lblerrorActivitytype" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Activity Type</span>
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Recovery Rate</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Recovry Rate" value="@Model.rate" id="RecovryRate" class="form-control" disabled/>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="lblerrorRecovryRate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Activity Type</span>
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Rate</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" placeholder="Rate" value="@Model.WorkerRate" id="rRate" class="form-control" disabled/>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" placeholder="Currency " value="@Model.CurruncyName" id="currencyName" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Probation End Date*</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Probation End Date" value="@Model.ProbationEndDate" id="ProbationEndDate" class="form-control Datepiker" />
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="ValidProbationEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Next Probation Review Date</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Next Probation Review Date" value="@Model.NextProbationReviewDate" id="NextProbationReviewDate" class="form-control Datepiker" />
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="ValidNextProbationReviewDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                        <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select next probation date grater then probation end date.</span>
+
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Notice Period*</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="drpNoticePeriod" class="form-control">
+                            @foreach (var item in Model.NoticePeriodList)
+                            {
+                                if (Model.NoticePeriod.ToString() == item.Value)
+                                {
+                                    <option value=@item.Value selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="ValidNoticePeriod" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Fixed Term End Date</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Fixed Term End Date" value="@Model.FixedTermEndDate" id="FixedTermEndDate" class="form-control Datepiker" />
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="ValidFixedTermEndDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Valid Fixed TermEnd Date.</span>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Method of Recruitment Setup</label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea placeholder="Method of Recruitment Setup" id="MethodofRecruitmentSetup" class="form-control textarea-resizeNone">@Model.MethodofRecruitmentSetup</textarea>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Recruitment Cost</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input placeholder="Recruitment Cost" type="number" min="0" value="@Model.RecruitmentCost" id="RecruitmentCost" class="form-control" oninput="if(value.length>8)value=value.slice(0,8)"/>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <label class="control-label" for="StatusList">Holidays</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6" style="padding-left:0px;">
+                            <label class="control-label" for="StatusList">This Year</label>
+                            <br />
+                            <input type="text" placeholder="This Year Holidays" value="@Model.notincludeThisYear" id="Thisyear" class="form-control" readonly/>
+                        </div>
+                        <div class="col-md-6" style="padding-right:0px;">
+                            <label class="control-label" for="StatusList">Next Year</label>
+                            <br />
+                            <input type="number" placeholder="Next Year Holidays" value="@Model.NextYearHolidays" min="0"   id="Nextyear" class="form-control" readonly/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-6">
+                        <div id="HelpmecalculateEmployeeMent" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content" >
+                                    <div class="segmentsBox">
+                                        <div class="performance-grid">
+                                            <div class="">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Holiday Entitlement Calculator</h4>
+                                                </div>
+                                                <div class="modal-body" id="AddHelpmecalculateBody">
+                                                    <div class="row marbot10">
+                                                        <label class="col-md-3">Full Time Entitlement*</label>
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="FullTimeEntitlement" class="form-control" id="FullTimeEntitlement" value="@Model.HolidayEnti">
+                                                            <span class="form-control-bar"></span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="field-validation-error" id="ValidFullTimeEntitlement" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row marbot10">
+                                                        <label class="col-md-3">Days Per Week*</label>
+                                                        <div class="col-md-6">
+                                                            <input type="number" name="DaysPerWeek" class="form-control" id="DaysPerWeek" value="5" readonly="readonly">
+                                                            <span class="form-control-bar"></span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row marbot10">
+                                                        <label class="col-md-3">Entitlement Includes Public Holidays?*</label>
+                                                        <div class="col-md-6">
+                                                            <input type="checkbox" name="EntitlementIncludesPublicHoliday" class="form-control" id="EntitlementIncludesPublicHoliday" checked" >
+                                                            <span class="form-control-bar"></span>
+                                                            <input type="hidden" id="includeInThisYear" value="@Model.includeThisYear" />
+                                                            <input type="hidden" id="NotincludeInThisYear" value="@Model.notincludeThisYear" />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="field-validation-error" id="EntitlementIncludes" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row marbot10">
+                                                        <label class="col-md-3">This Year- 16 Days</label>
+                                                        <div class="col-md-8">
+                                                            <button type="button" name="EntitlementIncludesPublicHoliday" class="md-btn md-btn-primary" id="ThisYear-16Days" value=""><span class="fa fa-question-circle"></span></button>
+                                                            <div class="holidayinfobox" id="btnThisYear" style="display:none">
+                                                                <h3>How the entitlement is calculated</h3>
+                                                                <p>
+                                                                    Entitlement = 22/5x 5x37.29/52=15.78
+                                                                </p>
+                                                                <p>
+                                                                    Where:
+                                                                    1.122/5 = No of weeks holiday a full time employee gets
+                                                                    2.25 = No of days this employee works
+                                                                    3.337.29/52 = No of weeks remaining in the year / 52
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row marbot10">
+                                                        <label class="col-md-3">Next Year- 22 Days</label>
+                                                        <div class="col-md-8">
+                                                            <button type="button" name="NextYear-22Days" class="md-btn md-btn-primary" id="NextYear-22Days" value=""><span class="fa fa-question-circle"></span></button>
+                                                            <div class="holidayinfobox" id="btnNextYear" style="display:none">
+                                                                <h3>How the entitlement is calculated</h3>
+                                                                <p>
+                                                                    Entitlement = 22/5x 5=22
+                                                                </p>
+                                                                <p>
+                                                                    Where:
+                                                                    1.122/5 = No of weeks holiday a full time employee gets
+                                                                    2.25 = No of days this employee works
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success" id="btn-submit-Helpmecalculate">Done</button>
+                                                    <button type="button" class="btn btn-warning" id="closeHelpmecalculate">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-info btn-help-me" data-toggle="modal" data-target="#HelpmecalculateEmployeeMent" id="ShowHelpmecalculate">Help me calculate</button>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        <button class="btn btn-success" style="margin-left:0px;" id="btn-save">Save</button>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var constantEmployment = {
+        updateEmployment: '@Url.Action("UpdateEmployment", "EmployeeEmployment")',
+        HelpCalculate: '@Url.Action("HelpMeCalculate", "EmployeeEmployment")',
+        calculateHoliday: '@Url.Action("CalculateHoliday", "EmployeeEmployment")',
+        getAllActivitytype: '@Url.Action("getAllActivityType", "EmployeeEmployment")',
+        getRateAndcurrencies: '@Url.Action("getRateAndCurrencies", "EmployeeEmployment")',
+    }
+    getActivityType();
+    $("#ThisYear-16Days").click(function () {
+        $("#btnThisYear").toggle();
+    });
+    $("#NextYear-22Days").click(function () {
+        $("#btnNextYear").toggle();
+    });
+
+    $("#closeHelpmecalculate").click(function () {
+        $("#HelpmecalculateEmployeeMent").hide();
+        $(".modal-backdrop").hide();
+    });
+    $("#ShowHelpmecalculate").click(function () {
+        $("#HelpmecalculateEmployeeMent").show();
+    });
+
+    function doalert() {
+        if (this.checked) {
+            var a = $("#NotincludeInThisYear").val();
+            $("#Thisyear").val(a);
+
+        }
+        else{
+            var a = $("#includeInThisYear").val();
+            $("#Thisyear").val(a);
+        }
+    }
+    $("#RecruitmentCost").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    getActivityType();
+    function getActivityType() 
+    {
+        $("#drpActivityList").select2();
+    }
+    function getRate()
+    {
+        var eid = $("#drpActivityList").val();
+        $.ajax({
+               url: constantEmployment.getRateAndcurrencies,
+               data: { activityId:eid},
+               success: function (data) {
+              var curruncyName = data.CurruncyName;
+                var WorkerRate = data.WorkerRate;
+                      $("#rRate").val(WorkerRate);
+                      $("#currencyName").val(curruncyName);
+                    }
+              });
+    }
+    //function getActivityType() {
+    //    var listActivityType = [];
+    //    $.ajax({
+    //        url: constantEmployment.getAllActivitytype,
+    //        data: {},
+    //        success: function (data) {
+    //            $.each(data.ActivityTypeList, function (index, item) {
+    //                listActivityType.push(item.Text);
+    //            });
+
+    //            var inpActivityType = document.getElementById("activityType");
+    //            var awsActivityType = new Awesomplete(inpActivityType, {
+    //                minChars: 1,
+    //                autoFirst: true,
+    //            });
+    //            awsActivityType.list = listActivityType;
+    //            $('#activityType').change(function () {
+    //                value = $('#activityType').val();
+    //                for (var i = 0; i < data.ActivityTypeList.length; i++) {
+    //                    if (value == data.ActivityTypeList[i].Text) {
+    //                        var eid = data.ActivityTypeList[i].Value;
+    //                        break;
+    //                    }
+    //                    else {
+    //                        eid = '';
+    //                    }
+    //                }
+    //                $("#selectActivitytype").val(eid);
+    //                $.ajax({
+    //                    url: constantEmployment.getRateAndcurrencies,
+    //                    data: { activityId:eid},
+    //                    success: function (data) {
+    //                        var curruncyName = data.CurruncyName;
+    //                        var WorkerRate = data.WorkerRate;
+    //                        $("#rRate").val(WorkerRate);
+    //                        $("#currencyName").val(curruncyName);
+    //                    }
+    //                });
+    //            });
+
+    //        }
+    //    });
+    //}
+
+</script>
+<script src="~/JS/Resources/Employment/EmployeeEmploymentJS.js"></script>

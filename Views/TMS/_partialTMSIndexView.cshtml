@@ -1,0 +1,291 @@
+﻿@model HRTool.Models.Admin.TMSIndexPageViewModel
+    <style>
+        .center-data {  
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+}  
+    </style>
+<h1 class="page-title">
+    Recruitment Overview
+    <small>Here is your snapshot overview of all applicants and job vacancies. You can visit each area to explore more detail.</small>
+</h1>
+
+<div class="row" style="padding-bottom:15px;">
+    <div class="col-md-2">
+        <label for="normal_working">Vacancy</label>
+        <select class="form-control" id="drpVacancyList" onchange="getAllCount()">
+            <option value="0">--Select--</option>
+            @foreach (var vac in Model.VacancyList)
+            {
+                <option value="@vac.Value">@vac.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Recruitment Process</label>
+        <select class="form-control" id="drpRecProcessList">
+            <option value="0">--Select--</option>
+            @foreach (var rec in Model.RecruitmentProcessList)
+            {
+                <option value="@rec.Value">@rec.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2 ">
+        <label for="normal_working">Business</label>
+        <select class="form-control" id="drpTMSBusiness">
+            @foreach (var business in Model.BusinessList)
+            {
+                <option value="@business.Value" @(business.Selected ? "Selected" : "")>@business.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2 ">
+        <label for="normal_working">Division</label>
+        <select class="form-control" id="drpTMSDivision">
+            @foreach (var Division in Model.DivisionList)
+            {
+                <option value="@Division.Value" @(Division.Selected ? "Selected" : "")>@Division.Text</option>
+            }
+        </select>
+
+
+
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Pool</label>
+        <select class="form-control" id="drpTMSPool">
+            @foreach (var Pool in Model.PoolList)
+            {
+                <option value="@Pool.Value" @(Pool.Selected ? "Selected" : "")>@Pool.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="normal_working">Function</label>
+        <select class="form-control" id="drpTMSFunction">
+            @foreach (var Function in Model.FunctionList)
+            {
+                <option value="@Function.Value" @(Function.Selected ? "Selected" : "")>@Function.Text</option>
+            }
+        </select>
+
+    </div>
+
+
+    @*<div class="col-md-3 ">
+            <label for="normal_working">Pool</label>
+            <select class="form-control" id="drpTMSPool">
+                @foreach (var Pool in Model.PoolList)
+            {
+                    <option value="@Pool.Value" @(Pool.Selected ? "Selected" : "")>@Pool.Text</option>
+                }
+            </select>
+        </div>*@
+
+</div>
+
+<div class="row" style="padding:0px 0px 0px 13px;">
+
+
+    <div class="col-md-4 panel panel-default image-chart-box" style="height:206px;">
+        <div id="chartdivStatus">
+        </div>
+
+    </div>
+    <div class="col-md-4">
+         
+           <div class="panel panel-default image-chart-box">
+                <div class="panel-body center-data">
+                    <img src="~/img/TMSDashboard/careerTMs.png" height="50" width="50" id="imgPicture" class="mCS_img_loaded" />
+                    <span class="text">Active Careers</span>
+                    <span class="big timer" id="ActiveVacancy">@Model.ActiveVacancies</span>
+                </div>
+            </div>
+        <div class="panel panel-default image-chart-box">
+            <div class="panel-body center-data">
+                <img src="~/img/TMSDashboard/applicantTMS.jpg" height="50" width="50" id="imgPicture" class="mCS_img_loaded" />
+                <span class="big timer" id="newApplicant">@Model.NewApplicent</span>
+                <span class="text">Applicants</span>
+            </div>
+        </div>
+        <div class="panel panel-default image-chart-box">
+            <div class="panel-body center-data">
+                <img src="~/img/TMSDashboard/RecrutmentTMS.png" height="50" width="50" id="imgPicture" class="mCS_img_loaded" />
+                <span class="big timer" id="Accepted">@Model.Accepted</span>
+                <span class="text">Accepted</span>
+            </div>
+        </div>
+         
+
+    </div>
+    <div class="col-md-4 panel panel-default image-chart-box" style="width:32%;">
+        <div style="height:200px;" id="chartdiv">
+            
+            
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-4">
+       <div class="panel panel-default image-chart-box ">
+            <div class="panel-body center-data">
+                <img src="~/img/TMSDashboard/talantPool.png" height="50" width="50" id="imgPicture" class="mCS_img_loaded" />
+                <span class="big timer" id="TalantPool">@Model.TalentStep</span>
+                <span class="text">Talent Pool</span>
+            </div>
+        </div>
+
+    </div>
+   
+
+    <div class="col-md-4">
+        <div class="panel panel-default image-chart-box">
+            <div class="panel-body center-data">
+                <img src="~/img/TMSDashboard/warningTMS.jpg" height="50" width="50" id="imgPicture" class="mCS_img_loaded" />
+                <span class="big timer" id="Rejected">@Model.RejectStep</span>
+                <span class="text">Rejected</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <script>
+    var constantVacTMS = {
+        constantTMS: '@Url.Action("getVacancyList", "TMS")',
+        constantFilterBusi: '@Url.Action("GetPiechartJSON", "TMS")',
+        constantFi: '@Url.Action("GetPiechartByStatusJSON", "TMS")',
+        getCountByVacancyId: '@Url.Action("GetCountByVacancyId", "TMS")',
+    }
+    </script>
+    @*<script src="http://code.jquery.com/jquery-1.8.2.js"></script>*@
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+        // Global variable to hold data
+        google.load('visualization', '1', { packages: ['corechart'] });
+    </script>
+    <script type="text/javascript">
+        //searchVacFrom();
+        drawStatusChart();
+        getRectProcess();
+        getVacancyType();
+        function getVacancyType() {
+           // $("#drpVacancyList").select2();
+            $("#drpVacancyList").select2();
+        }
+        function getRectProcess()
+        {
+            $("#drpRecProcessList").select2();
+        }
+        function getAllCount() {            
+            var VacId = $("#drpVacancyList").val();
+            $.ajax({
+                url: constantVacTMS.getCountByVacancyId,
+                data: { VacancyId: VacId },
+                success: function (data) {
+                    $("#newApplicant").html(data.NewApplicent);
+                    $("#Accepted").html(data.Accepted);
+                    $("#Rejected").html(data.RejectStep);
+                    $("#TalantPool").html(data.TalentStep);
+                }
+            })
+            drawStatuschartByVac();
+        }
+        $("#TMSTabPanel").on('click', '.btn-click-TMSIndex', function () {
+
+            $(".hrtoolLoader").show();
+            $.ajax({
+                url: constantTMS.Index,
+                success: function (data) {
+                    $("#contantBody").html('');
+                    $('#contantBody').html(data);
+                    drawStatusChart();
+                    $(".Vacancy, .Applicant, .Pool").removeClass('active');
+                    $(".TMSIndex").addClass('active');
+                    $(".hrtoolLoader").hide();
+                    $(".modal-backdrop").hide();
+                }
+            });
+
+        });
+        function drawStatusChart() {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: constantVacTMS.constantFi,
+                data: '{}',
+                success:
+                function (response) {
+                    debugger;
+                    drawchartStatus(response);
+                },
+
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+        }
+        function drawchartStatus(dataValues) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Column Name');
+            data.addColumn('number', 'Column Value');
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].Name, dataValues[i].Count]);
+            }
+            new google.visualization.PieChart(document.getElementById('chartdivStatus')).
+                draw(data, { title: "Status" });
+        }
+$(function () {
+$.ajax({
+type: 'POST',
+dataType: 'json',
+contentType: 'application/json',
+url: constantVacTMS.constantFilterBusi,
+data: '{}',
+success:
+function (response) {
+    debugger;
+drawchart(response);
+},
+
+error: function () {
+alert("Error loading data! Please try again.");
+}
+});
+})
+function drawchart(dataValues) {
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Column Name');
+data.addColumn('number', 'Column Value');
+for (var i = 0; i < dataValues.length; i++) {
+    data.addRow([dataValues[i].Name, dataValues[i].BusinessNameCount]);
+}
+new google.visualization.PieChart(document.getElementById('chartdiv')).
+draw(data, { title: "Bussiness,Division,Pool,Function" });
+    }
+function drawStatuschartByVac()
+{
+    var VacId=$("#drpVacancyList").val();
+    $.ajax({
+        url: constantVacTMS.constantFi,
+        data: { VacId: VacId },
+        success:
+        function (response) {
+            drawchartStatus(response);
+        },
+        error: function () {
+            alert("Error loading data! Please try again.");
+        }
+    });
+}
+     </script>

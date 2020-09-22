@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .stepContainer {
+        height: 680px !important;
+    }
+
+    #filesList {
+        height: 350px;
+    }
+
+    .bottom {
+        margin-top: 10px;
+    }
+</style>
+<h1 class="page-title">
+    Certificates
+    <small>Select a certificate to view more options. You can filter the certificates using the tabs on the left.</small>
+</h1>
+
+<div class="col-md-2">
+    <ul class="in-submenu listCertification">
+        @Html.Action("CertificateMenu", "AdminCertificate")
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div id="page_content_inner">               
+        <div class="md-card">
+            <div >
+                <div id="tableDiv">
+                    @Html.Action("List", "AdminCertificate")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var constantAdminCertificate = {
+        addEdit: '@Url.Action("AddEditCertificate", "AdminCertificate")',
+        ImageUrl: '@Url.Action("ImageData", "AdminCertificate")',
+        SaveData: '@Url.Action("SaveData", "AdminCertificate")',
+        DeleteData: '@Url.Action("DeleteData", "AdminCertificate")',
+        ListData: '@Url.Action("List", "AdminCertificate")',
+        updateCount: '@Url.Action("CertificateMenu", "AdminCertificate")',
+    };
+
+</script>
+<script src="~/JS/Admin/AdminCertificate/AdminCertificateJS.js"></script>
+
+

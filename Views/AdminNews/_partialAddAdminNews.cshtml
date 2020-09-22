@@ -1,0 +1,319 @@
+﻿@model HRTool.Models.Admin.AdminNewsViewModel
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="Summary">Subject *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="hidden" class="form-control" id="hiddenId" value="@Model.Id" />
+        <input type="text" class="form-control" id="txt_Subject" value="@Model.Subject" data-toggle="tooltip" data-placement="right" title="News Subject" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Subject" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Subject is required.</span>
+    </div>
+
+    <div class=" ">
+        <div class="col-md-12">
+            <label class="control-label" for="Summary">Enter your news into the box below then hit 'Publish' to share it with your company. *</label>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-Body" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Body is required.</span>
+        </div>
+        <div class="col-md-12">
+            <input type="hidden" id="EditNewRecords" value="@Model.Description" />
+            <div id="froala-editor"></div>
+        </div>
+    </div>
+    <div class="row marbot10" id="btn-Employee-Access">
+
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.EmployeeAccess == true)
+                    {
+                        <input id="check_EmployeeAccess" type="checkbox" checked="checked" name="field" value="@Model.EmployeeAccess">
+                        <label for="check_EmployeeAccess"><span><span></span></span>Employee Access</label>
+                    }
+                    else
+                    {
+                        <input id="check_EmployeeAccess" type="checkbox" name="field" value="@Model.EmployeeAccess">
+                        <label for="check_EmployeeAccess"><span><span></span></span>Employee Access</label>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.SpecificWorker == true)
+                    {
+
+                        <input id="check_SpecificWorker" type="checkbox" checked="checked" name="grpChk" value="@Model.SpecificWorker">
+                        <label for="check_SpecificWorker"><span><span></span></span>Specific Worker</label>
+                    }
+                    else
+                    {
+                        <input id="check_SpecificWorker" type="checkbox" name="grpChk" value="@Model.SpecificWorker">
+                        <label for="check_SpecificWorker"><span><span></span></span>Specific Worker</label>
+
+                    }
+                </div>
+            </div>
+            <div class="col-md-5 selection_custom">
+                <input type="hidden" id="SpecificWorker_Id" value="@Model.SpecificWorker" />
+                @if (Model.SpecificWorker == true)
+            {
+                    <div id="Worker_Show">
+                        <input type="hidden" id="drpWorker" value="@Model.WorkerID" />
+                        <input type="text" class="awesomplete form-control" id="empNameText" size="70" value="@Model.SpecificWorkerName" placeholder="Employee Name" />
+                    </div>
+            }
+            else
+            {
+                    <div class="hide" id="Worker_Display">
+                        <input type="hidden" id="drpWorker" value="@Model.WorkerID" />
+                        <input type="text" class="awesomplete form-control" id="empNameText" size="70" value="@Model.SpecificWorkerName" placeholder="Employee Name" />
+                    </div>
+            }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-SpecificWorker" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Specific worker is required.</span>
+            </div>
+        </div>
+    </div>
+    <div class=" " id="btn-Manager-Access">
+
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.ManagerAccess == true)
+                    {
+                        <input id="check_ManagerAccess" checked="checked" type="checkbox" value="@Model.ManagerAccess">
+                        <label for="check_ManagerAccess"><span><span></span></span>Manager Access</label>
+                    }
+                    else
+                    {
+                        <input id="check_ManagerAccess" type="checkbox" value="@Model.ManagerAccess">
+                        <label for="check_ManagerAccess"><span><span></span></span>Manager Access</label>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.SpecificManager == true)
+                    {
+                        <input id="check_SpecificManager" checked="checked" type="checkbox" name="grpChk" value="@Model.SpecificManager">
+                        <label for="check_SpecificManager"><span><span></span></span>Specific Manager</label>
+                    }
+                    else
+                    {
+                        <input id="check_SpecificManager" type="checkbox" name="grpChk" value="@Model.SpecificManager">
+                        <label for="check_SpecificManager"><span><span></span></span>Specific Manager</label>
+                    }
+                    <span class="field-validation-error" id="lbl-error-Specificmanager" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Specific manager is required.</span>
+
+                </div>
+            </div>
+            <div class="col-md-5 selection_custom">
+                <input type="hidden" id="SpecificManager_Id" value="@Model.SpecificManager" />
+                @if (Model.SpecificManager == true)
+            {
+                    <div id="Manager_Show">
+                        <input type="hidden" id="drpManager" value="@Model.ManagerID" />
+                        <input type="text" class="awesomplete form-control" value="@Model.SpecificManagerName" id="empManagerID" size="70" placeholder="Manager Name" />
+                    </div>
+            }
+            else
+            {
+                    <div class="hide" id="Manager_Display">
+                        <input type="hidden" id="drpManager" value="@Model.ManagerID" />
+                        <input type="text" class="awesomplete form-control" id="empManagerID" value="@Model.SpecificManagerName" size="70" placeholder="Manager Name" />
+                    </div>
+            }
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+    <div class=" " id="btn-Customer-Access">
+
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.CustomerAccess == true)
+                    {
+                        <input id="check_CustomerAccess" checked="checked" type="checkbox" value="@Model.CustomerAccess">
+                        <label for="check_CustomerAccess"><span><span></span></span>Customer Access</label>
+                    }
+                    else
+                    {
+                        <input id="check_CustomerAccess" type="checkbox" value="@Model.CustomerAccess">
+                        <label for="check_CustomerAccess"><span><span></span></span>Customer Access</label>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @if (Model.SpecificCustomer == true)
+                    {
+                        <input id="check_SpecificCustomer" checked="checked" name="grpChk" type="checkbox" value="@Model.SpecificCustomer">
+                        <label for="check_SpecificCustomer"><span><span></span></span>Specific Customer</label>
+                    }
+                    else
+                    {
+                        <input id="check_SpecificCustomer" name="grpChk" type="checkbox" value="@Model.SpecificCustomer">
+                        <label for="check_SpecificCustomer"><span><span></span></span>Specific Customer</label>
+                    }
+                    <span class="field-validation-error" id="lbl-error-Specificcustomer" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Specific cutomer is required.</span>
+                </div>
+            </div>
+            <div class="col-md-5 selection_custom">
+                <input type="hidden" id="SpecificCustomer_Id" value="@Model.SpecificCustomer" />
+                @if (Model.SpecificCustomer == true)
+            {
+                    <div id="Customer_Show">
+                        <input type="hidden" id="drpCustomer" value="@Model.CustomerID" />
+                        <input type="text" class="awesomplete form-control" id="empCustomerID" size="70" placeholder="Customer Name" value="@Model.SpecificCustomerName" />
+                    </div>
+
+            }
+            else
+            {
+                    <div class="hide" id="Customer_Display">
+                        <input type="hidden" id="drpCustomer" value="@Model.CustomerID" />
+                        <input type="text" class="awesomplete form-control" id="empCustomerID" size="70" placeholder="Customer Name" value="@Model.SpecificCustomerName" />
+                    </div>
+            }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+    <div class=" ">
+        <div class="  col-md-12">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <input id="chk_NotifyEmployees" type="checkbox" checked="@Model.NotifyEmployeeViaEmail">
+                    <label for="chk_NotifyEmployees"><span><span></span></span>Notify employees via email</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <input id="chk_AllowComments" type="checkbox" checked="@Model.AllowCustomer">
+                    <label for="chk_AllowComments"><span><span></span></span>Allow Comments</label>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                @*<span class="field-validation-error" id="lbl-error-chkbox" style="display:none;" data-valmsg-for="ValidateCheckbox" data-valmsg-replace="true">Please Select Specific Worker Or Manager Or Customer.</span>*@
+                <span class="field-validation-error" id="lbl-error-drpdown" style="display:none;" data-valmsg-for="ValidateCheckbox" data-valmsg-replace="true">Please Select Resource Name.</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var constantvar = {
+        getEmp: '@Url.Action("getWorker_CustomerList", "AdminNews")',
+    }
+</script>
+<script>
+   
+    $("input[name='grpChk']").change(function () {
+      
+        $(".hrtoolLoader").hide();
+        $(".modal-backdrop").hide();
+    });
+    searchCopyFrom();
+    function searchCopyFrom() {
+        var listRepTo = [];
+        var listDataManager = [];
+        var listDataCustomer = [];
+        $.ajax({
+            url: constantvar.getEmp,
+            data: {},
+            success: function (data) {
+                debugger;
+                $.each(data.WorkerList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                $.each(data.ManagerList, function (index, item) {
+                    listDataManager.push(item.Text);
+                });
+                $.each(data.CustomerList, function (index, item) {
+                    listDataCustomer.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listRepTo;
+                $('#empNameText').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.WorkerList.length; i++) {
+                        if (value == data.WorkerList[i].Text) {
+                            var eid = data.WorkerList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#drpWorker").val(eid);
+                });
+                //ManagerList
+                var addRpTo = document.getElementById("empManagerID");
+                var awsAdRpTo = new Awesomplete(addRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsAdRpTo.list = listDataManager;
+                $('#empManagerID').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empManagerID').val();
+                    for (var i = 0; i < data.ManagerList.length; i++) {
+                        if (value == data.ManagerList[i].Text) {
+                            var meid = data.ManagerList[i].Value;
+                            break;
+                        }
+                        else {
+                            meid = '';
+                        }
+                    }
+                    $("#drpManager").val(meid);
+                });
+                //CustomerList
+                var HRRpTo = document.getElementById("empCustomerID");
+                var awsHrRpTo = new Awesomplete(HRRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsHrRpTo.list = listDataCustomer;
+                $('#empCustomerID').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empCustomerID').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            var ceid = data.CustomerList[i].Value;
+                            break;
+                        }
+                        else {
+                            ceid = '';
+                        }
+                    }
+                    $("#drpCustomer").val(ceid);
+                });
+
+            }
+        });
+    }
+</script>

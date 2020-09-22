@@ -1,0 +1,32 @@
+﻿@model HRTool.Models.Resources.ViewSkillsViewModel
+
+@{
+    ViewBag.Title = "_PartialSkillData";
+}
+
+    
+    <div class="row">
+            @foreach (var item in Model.GeneralSkillSet)
+            {
+                if (item.SelectedSkills == true)
+                {
+                    <div class="col-md-6 Listskilss" align="center" id="@item.Id" style="border-color: rgba(74, 127, 173, 1); ">
+                        <div class="inner-Listskils">
+                            <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="60px" /></span><p> @item.Name</p>
+                            <span class="radio-btn"><input type="radio" class="GeneralSkillSet" data-id="@item.Id " value="@item.Id" name="GeneralSkillSet" id="SelectGeneralskill_@item.Id" checked /></span>
+                        </div>
+                        <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal">View</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-6 Listskilss" align="center" id="@item.Id">
+                        <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="60px" /></span><p> @item.Name</p>
+                        <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal">View</a>
+                        <span class="radio-btn"><input type="radio" class="GeneralSkillSet" data-id="@item.Id " value="@item.Id" id="SelectGeneralskill_@item.Id" name="GeneralSkillSet" /></span>
+                    </div>
+                }
+
+            }
+        </div>
+

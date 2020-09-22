@@ -1,0 +1,375 @@
+﻿@model  HRTool.Models.Notification.NotificationDetail
+
+<div>
+    @if (Model != null)
+    {
+
+
+        <div class="table-responsive">
+            <table class="display table style2 table-striped dataTable">
+                @if (Model.HeaderType == "TimeSheet Request")
+            {
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Cost Code</th>
+                <th>Project</th>
+                <th>Customer</th>
+                <th>Asset</th>
+                @if(Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>
+                    }
+            </tr>
+            <tr>
+                <td>@Model.Day</td>
+                <td>@Model.Date</td>
+                <td>@Model.Hours</td>
+                <td>@Model.CostCode</td>
+                <td>@Model.ProjectName</td>
+                <td>@Model.CustomerName</td>
+                <td>@Model.AssetName</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=timesheetId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>
+                    }
+            </tr>
+            }
+            else if (Model.HeaderType == "Scheduling Request")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration</th>
+                <th>Hours</th>
+                <th>Project</th>
+                <th>Customer</th>
+                <th>Asset</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>
+                    }
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Duration</td>
+                <td>@Model.Hours</td>
+                <td>@Model.ProjectName</td>
+                <td>@Model.CustomerName</td>
+                <td>@Model.AssetName</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=scheduleId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>
+                     }
+            </tr>
+            }
+            else if (Model.HeaderType == "Travel Request")
+            {
+            <tr>
+                <th>Type</th>
+                <th>From Country</th>
+                <th>From Town</th>
+                <th>From Place</th>
+                <th>To Country</th>
+                <th>To Town</th>
+                <th>To Place</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration</th>
+                <th>Hour</th>
+                <th>Customer</th>
+                <th>Project</th>
+                <th>Cost Code</th>
+                <th>Total Cost In Functional Currency</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>}
+            </tr>
+            <tr>
+                <td>@Model.TravelType</td>
+                <td>@Model.FromCountry</td>
+                <td>@Model.FromTown</td>
+                <td>@Model.FromPlace</td>
+                <td>@Model.ToCountry</td>
+                <td>@Model.ToTown</td>
+                <td>@Model.Toplace</td>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Duration</td>
+                <td>@Model.Hours</td>
+                <td>@Model.CustomerName</td>
+                <td>@Model.ProjectName</td>
+                <td>@Model.CostCode</td>
+                <td>@Model.TotalCostInFunctionalCurrency</td>
+                @*<td><a href="~/Approve/#@Model.EmployeeId">Approve Link</a></td>*@
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=tavelId&id=@Model.EmployeeId" id="travelLink" target="_blank">Approve Link</a></td>
+                    }
+            </tr>
+            }
+            else if (Model.HeaderType == "ProjectPlanner TimeSheet Request")
+            {
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Cost Code</th>
+                <th>Project</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            }
+            else if (Model.HeaderType == "Annual Leave Request")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Days</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>}
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Duration</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=anualId&id=@Model.EmployeeId" id="anualLink" target="_blank">Approve Link</a></td>
+                    }
+            </tr>
+            }
+            else if (Model.HeaderType == "Other Leave Request")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration</th>
+                <th>Reason</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>
+                    }
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Duration</td>
+                <td>@Model.Reason</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=otherleaveId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>}
+            </tr>
+            }
+            else if (Model.HeaderType == "Training Request")
+            {
+            <tr>
+                <th>Training Name</th>
+                <th>Importance</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Days</th>
+                <th>Provider</th>
+                <th>Cost</th>
+            </tr>
+            <tr>
+                <td>@Model.TrainingName</td>
+                <td>@Model.Importance</td>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Day</td>
+                <td>@Model.Provider</td>
+                <td>@Model.Cost</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "New Vacancy")
+            {
+            <tr>
+                <th>Vacancy</th>
+                <th>Closing Date</th>
+                <th>Recruitement Process</th>
+                <th>Salary Range</th>
+                <th>Location</th>
+                <th>Business</th>
+                <th>Division</th>
+                <th>Pool</th>
+                <th>Function</th>
+            </tr>
+            <tr>
+                <td>@Model.Vacancy</td>
+                <td>@Model.ClosingDate</td>
+                <td>@Model.RecruitementProcess</td>
+                <td>@Model.SalaryRange</td>
+                <td>@Model.Location</td>
+                <td>@Model.Business</td>
+                <td>@Model.Division</td>
+                <td>@Model.Pool</td>
+                <td>@Model.Function</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "Uplift Submission")
+            {
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Uplift Position</th>
+                <th>Hour</th>
+                <th>Project</th>
+                <th>Customer</th>
+                <th>Change In Worker Rate</th>
+                <th>Change In Customer Rate</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>}
+            </tr>
+            <tr>
+                <td>@Model.Day</td>
+                <td>@Model.Date</td>
+                <td>@Model.UpliftPosition</td>
+                <td>@Model.Hours</td>
+                <td>@Model.ProjectName</td>
+                <td>@Model.CustomerName</td>
+                <td>@Model.ChangeInWorkRate</td>
+                <td>@Model.ChangeInCustomerRate</td>
+                @if (Model.AppStatus == "Pending")
+                            {
+                    <td><a href="~/Approve?name=upliftId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>}
+
+            </tr>
+            }
+            else if(Model.HeaderType== "Maternity/Paternity Leave")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Due Date</th>
+                <th>Link</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Approve Link</th>}
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.dueDate</td>
+                <td>@Model.Link</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=matpatleaveId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>
+                    }
+
+            </tr>
+            }
+            else if(Model.HeaderType== "Sick Leave Request")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration</th>
+                <th>Doctor Consulted</th>
+                <th>Paid</th>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <th>Link</th>}
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Duration</td>
+                <td>@Model.DoctConsulted</td>
+                <td>@Model.Paid</td>
+                @if (Model.AppStatus == "Pending")
+                    {
+                    <td><a href="~/Approve?name=sickId&id=@Model.EmployeeId" id="sickLink" target="_blank">Approve Link</a></td>}
+            </tr>
+            }
+            else if (Model.HeaderType == "Skill Added")
+            {
+            <tr>
+                <th>General Skill</th>
+                <th>Technical Skill</th>
+                <th>Created Date</th>
+            </tr>
+            <tr>
+                <td>@Model.generalSkill</td>
+                <td>@Model.technicalskill</td>
+                <td>@Model.StartDate</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "Training Request Worker")
+            {
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.TrainingDescription</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "New Resource")
+            {
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>@Model.EmployeeName</td>
+                <td>@Model.StartDate</td>
+                <td>@Model.email</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "Delete employee")
+            {
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>@Model.EmployeeName</td>
+                <td>@Model.StartDate</td>
+                <td>@Model.email</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "New Document")
+            {
+            <tr>
+                <th>Document Name</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+            <tr>
+                <td>@Model.DocumentName</td>
+                <td>@Model.Description</td>
+                <td>@Model.DocLink</td>
+            </tr>
+            }
+            else if (Model.HeaderType == "Document Signature")
+            {
+            <tr>
+                <th>Document Name</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+            <tr>
+                <td>@Model.DocumentName</td>
+                <td>@Model.Description</td>
+                <td>@Model.DocLink</td>
+            </tr>
+            }
+            </table>
+        </div>
+    }
+</div>

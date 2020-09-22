@@ -1,0 +1,51 @@
+﻿@model HRTool.Models.Resources.FiledViewModel
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Filed Type*</label>
+    </div>
+    <div class="col-md-6 dropdown-selectlist" data-toggle="tooltip" data-placement="right" title=" Select General Skills this Project represents">
+        <select class="form-control" id="drp-FiledType">
+            @foreach (var FiledType in Model.BindFiledTypeList)
+            {
+                <option value="@FiledType.Value">@FiledType.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Lable*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Values Of the Cost">
+            <input type="text" placeholder="Label for text field" id="Labletext" name="label" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched"></input>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10 AdddrpCustome" style="display:none">
+    <div class=" form-group" data-id="0">
+        <label class="col-md-3">Note</label>
+        <div class="col-md-6">
+            <textarea class="form-control" id="Additemlist" placeholder="Item for Drop Down like i.e abc,abc,"></textarea>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group">
+        <label class="col-md-3">Mandatory</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Values Of the Cost">
+            <input type="checkbox" class="ng-valid ng-dirty ng-valid-parse ng-touched">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+

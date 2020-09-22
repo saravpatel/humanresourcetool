@@ -1,0 +1,59 @@
+﻿@model HRTool.Models.Resources.EmployeeContactViewModel
+
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-EmergencyContact" data-toggle="modal" data-target="#addEmergencyContact" title="Add Business"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-EmergencyContact" data-toggle="modal" data-target="#addEmergencyContact" title="Edit" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-EmergencyContact" data-toggle="modal" data-target="#deleteEmergencyContact" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+</div>
+
+<table id="EmergencyContactTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Relationship</th>
+            <th>Telephone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmergencyContactsList)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Name</td>
+                <td>@item.RelationshipValue</td>
+                <td>@item.Telephone</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="addEmergencyContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title emergencyContactTitle" id="myModalLabel">Add Emergency Contact</h4>
+
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="EmergencyContactBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-EmergencyContact">ADD</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>

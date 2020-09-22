@@ -1,0 +1,25 @@
+﻿@model HRTool.Models.Settings.AddSkillsViewModel
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <label class="control-label" for="systemListName">Name *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" value="@Model.Value" id="txt-SystemListValueName" maxlength="100" placeholder="Skill Name" data-toggle="tooltip" data-placement="right" name="Value" title="Skill Name">
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="systemListName">Description</label>
+    </div>
+    <div class="col-md-6">
+        <textarea class="form-control textarea-resizeNone" id="txt-SystemListDescription" placeholder="Description" data-toggle="tooltip" data-placement="right" name="Description" title="Skill Description">@Model.Description</textarea>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>

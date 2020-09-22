@@ -1,0 +1,654 @@
+﻿@model HRTool.Models.Resources.EmployeeDocumentViewModel
+<ul class="nav nav-tabs" align="left">
+    <li class="active"><a href=""> DOCUMENT</a></li>
+    <li><a href="">LINK </a></li>
+</ul>
+@*<div class="to_doc_btn">
+    <button class="btn btn-Document active">DOCUMENT</button>
+    <button class="btn btn-Link">LINK</button>
+</div>*@
+
+<input type="hidden" id="Document_ID" value="@Model.Id" />
+
+<input type="hidden" id="Employee_ID" value="@Model.EmployeeID"/>
+
+<input type="hidden" id="IpAddress" value="@Model.IpAddress">
+
+<div class="md-card"> 
+        <div id="DocumentButton">
+            <div class="form-group col-md-12">
+                <div class="row marbot10">
+                    <div class="col-md-12">
+                        <label id="txt_FilepathName">@Model.DocumentOriginalPath</label>
+                        <input type="hidden" id="FilePathName" value="@Model.DocumentPath" />
+                    </div>
+                    <div class="col-md-12 dropdown">
+                        <div class="browse-attach">
+                            <label type="file" for="fileToUpload" onchange="errorMessage()" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                                <p>Drop docs,pdfs or images here or click to upload</p>
+                                <p class="uk-text-muted">or</p>
+                                <span class="btn">Choose File</span>
+                            </label>
+                            <input type="file" id="fileToUpload" onchange="errorMessage()" accept=".jpg,.jpeg,.bmp,.png,.pdf,.docx" style="display: none">
+                        </div>
+                    </div>
+                    <div class="col-md-12 marbot10">
+                        <span class="field-validation-error" id="lbl-error-fileToUpload" style="display:none;" data-valmsg-for="fileToUpload" data-valmsg-replace="true">file To Upload  is required.</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3">Description *</label>
+                        <div class="col-md-6 dropdown">
+                            <input type="text" class="ImageDescription form-control" id="txt_Description" value="@Model.Description" placeholder="Description">
+                        </div>
+                        <div class="col-md-3">
+                            <span class="field-validation-error" id="lbl-error-Description" style="display:none;" data-valmsg-for="Description" data-valmsg-replace="true">The Description  is required.</span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+
+    <div class="hide" id="Linkbutton">
+
+        <div class="form-group col-md-12">
+            <div class="row marbot10"> 
+                <div class="form-group col-md-12">
+                    <div class="col-md-3">
+                        <label class="control-label" for="DisplayText">Display Text*</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="txt_DisplayText" value="@Model.LinkDisplayText" data-toggle="tooltip" data-placement="right" name="DisplayText" title="Display Text" required>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="lbl-error-DisplayText" style="display:none;" data-valmsg-for="DisplayText" data-valmsg-replace="true">The Display Text  is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row marbot10"> 
+                <div class="form-group col-md-12">
+                    <div class="col-md-3">
+                        <label class="control-label" for="LinkURL">URL*</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="txt_LinkURL" value="@Model.LinkURL" data-toggle="tooltip" data-placement="right" name="LinkURL" title="URL" required>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="lbl-error-LinkURL" style="display:none;" data-valmsg-for="LinkURL" data-valmsg-replace="true">The Link URL is required.</span>
+                        <span class="field-validation-error" id="lbl-error-WebsiteValid" style="display:none;" data-valmsg-for="Website" data-valmsg-replace="true">This Website is Not Valid.</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row marbot10">
+
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Business</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBusiness">
+                <option value="0">-- Select Business --</option>
+                @foreach (var Business in Model.BusinessList)
+                {
+                    if (Model.BusinessID.ToString() == Business.Value)
+                    {
+                        <option selected="selected" value="@Business.Value">@Business.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Business.Value">@Business.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Division</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpDivision">
+                <option value="0">-- Select Division --</option>
+
+                @foreach (var Division in Model.DivisionList)
+                {
+                    if (Model.DivisionID.ToString() == Division.Value)
+                    {
+                        <option selected="selected" value="@Division.Value">@Division.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Division.Value">@Division.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Pool</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpPool">
+                <option value="0">-- Select Pool --</option>
+
+                @foreach (var Pool in Model.PoolList)
+                {
+                    if (Model.PoolID.ToString() == Pool.Value)
+                    {
+                        <option selected="selected" value="@Pool.Value">@Pool.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Pool.Value">@Pool.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Function</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpFunction">
+                <option value="0">-- Select Function --</option>
+
+                @foreach (var Function in Model.FunctionList)
+                {
+                    if (Model.FunctionID.ToString() == Function.Value)
+                    {
+                        <option selected="selected" value="@Function.Value">@Function.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Function.Value">@Function.Text</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Category</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpCategory">
+                @foreach (var Category in Model.CategoryList)
+                {
+                    if (Model.Category.ToString() == Category.Value)
+                    {
+                        <option selected="selected" value="@Category.Value">@Category.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@Category.Value">@Category.Text</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row" id="btn-Employee-Access">
+    <div class="form-group col-md-12">
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.EmployeeAccess == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_EmployeeAccess" value="@Model.EmployeeAccess" >
+                    <span>Employee Access</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_EmployeeAccess" value="@Model.EmployeeAccess" >
+                    <span>Employee Access</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.SpecificWorker == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_SpecificWorker" value="@Model.SpecificWorker" Name = "grpChk">
+                    <span>Specific Worker</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_SpecificWorker" value="@Model.SpecificWorker" Name = "grpChk">
+                    <span>Specific Worker</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-5 selection_custom">
+        <input type="hidden" id="SpecificWorker_Id"  value="@Model.SpecificWorker"  />
+        @if (Model.SpecificWorker == true)
+        {
+            <div id="Worker_Show">
+                <input type="hidden" id="selectID" value="@Model.WorkerID"/>
+                <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.SpecificWorkerName" size="70" placeholder="Employee Name" />
+                @*<select class="form-control" id="drpWorker">
+                    <option value="0">-- Select Worker --</option>
+                    @foreach (var Worker in Model.WorkerList)
+                    {
+                        if (Model.WorkerID == Worker.Value)
+                        {
+                            <option selected="selected" value="@Worker.Value">@Worker.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Worker.Value">@Worker.Text</option>
+                        }
+
+                    }
+                </select>*@
+            </div>
+        }
+        else
+        {
+            <div class="hide" id="Worker_Display">
+                <input type="hidden" id="selectID" value="@Model.WorkerID"/>
+                <input type="text" class="awesomplete form-control" value="@Model.SpecificWorkerName" id="empNameText" size="70" placeholder="Employee Name" />
+                @*<select class="form-control" id="drpWorker">
+                    <option value="0">-- Select Worker --</option>
+                    @foreach (var Worker in Model.WorkerList)
+                    {
+                        if (Model.WorkerID == Worker.Value)
+                        {
+                            <option selected="selected" value="@Worker.Value">@Worker.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Worker.Value">@Worker.Text</option>
+                        }
+
+                    }
+                </select>*@
+            </div>
+        }
+
+    </div>
+    <div class="col-md-3">
+    </div>
+    </div>
+</div>
+<div class="row" id="btn-Manager-Access">
+    <div class="form-group col-md-12">
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.ManagerAccess == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_ManagerAccess" value="@Model.ManagerAccess" >
+                    <span>Manager Access</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_ManagerAccess" value="@Model.ManagerAccess" >
+                    <span>Manager Access</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.SpecificManager == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_SpecificManager" value="@Model.SpecificManager" Name = "grpChk">
+                    <span>Specific Manager*</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_SpecificManager" value="@Model.SpecificManager" Name = "grpChk">
+                    <span>Specific Manager*</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-5 selection_custom">
+        <input type="hidden" id="SpecificManager_Id" value="@Model.SpecificManager" />
+        @if (Model.SpecificManager == true)
+        {
+            <div id="Manager_Show">
+                <input type="hidden" id="selectManagerID" value="@Model.ManagerID"/>
+                <input type="text" class="awesomplete form-control" id="empManagerID" value="@Model.SpecificManagerName" size="70" placeholder="Manager Name" />
+
+                @*<select class="form-control" id="drpManager">
+                    <option value="0">-- Select Manager --</option>
+                    @foreach (var Manager in Model.ManagerList)
+                    {
+                        if (Model.ManagerID == Manager.Value)
+                        {
+                            <option selected="selected" value="@Manager.Value">@Manager.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Manager.Value">@Manager.Text</option>
+                        }
+
+                    }
+                </select>*@
+            </div>
+        }
+        else
+        {
+            <div class="hide" id="Manager_Display">
+                <input type="hidden" id="selectManagerID" value="@Model.ManagerID"/>
+                <input type="text" class="awesomplete form-control" id="empManagerID" value="@Model.SpecificManagerName" size="70" placeholder="Manager Name" />
+
+                @*<select class="form-control" id="drpManager">
+                    <option value="0">-- Select Manager --</option>
+                    @foreach (var Manager in Model.ManagerList)
+                    {
+                        if (Model.ManagerID == Manager.Value)
+                        {
+                            <option selected="selected" value="@Manager.Value">@Manager.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Manager.Value">@Manager.Text</option>
+                        }
+
+                    }
+                </select>*@
+            </div>
+        }
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    </div>
+</div>
+
+<div class="row" id="btn-Customer-Access">
+    <div class="form-group col-md-12">
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.CustomerAccess == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_CustomerAccess" value="@Model.CustomerAccess" >
+                    <span>Customer Access</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_CustomerAccess" value="@Model.CustomerAccess" >
+                    <span>Customer Access</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.SpecificCustomer == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_SpecificCustomer" value="@Model.SpecificCustomer" Name = "grpChk">
+                    <span>Specific Customer</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_SpecificCustomer" value="@Model.SpecificCustomer" Name = "grpChk">
+                    <span>Specific Customer</span>
+                }
+            </label>
+        </div>
+    </div>
+    <div class="col-md-5 selection_custom">
+        <input type="hidden" id="SpecificCustomer_Id" value="@Model.SpecificCustomer" />
+        @if (Model.SpecificCustomer == true)
+        {
+
+            <div class="hide" id="Customer_Show">
+                <input type="hidden" id="selectCustomerID" value="@Model.CustomerID"/>
+                <input type="text" class="awesomplete form-control" id="empCustomerID" size="70" value="@Model.SpecificCustomerName" placeholder="Manager Name" />
+
+                @*<select class="form-control" id="drpCustomer">
+                    <option value="0">-- Select Customer --</option>
+                    @foreach (var Customer in Model.CustomerList)
+                    {
+                        if (Model.CustomerID == Customer.Value)
+                        {
+                            <option selected="selected" value="@Customer.Value">@Customer.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Customer.Value">@Customer.Text</option>
+                        }
+
+                    }
+                </select>*@
+            </div>
+
+        }
+        else
+        {
+            <div class="hide" id="Customer_Display">
+                <input type="hidden" id="selectCustomerID" value="@Model.CustomerID" />
+                <input type="text" class="awesomplete form-control" id="empCustomerID" value="@Model.SpecificCustomerName" size="70" placeholder="Manager Name" />
+                @*<select class="form-control" id="drpCustomer">
+                    <option value="0">-- Select Customer --</option>
+                    @foreach (var Customer in Model.CustomerList)
+                    {
+                        if (Model.CustomerID == Customer.Value)
+                        {
+                            <option selected="selected" value="@Customer.Value">@Customer.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Customer.Value">@Customer.Text</option>
+                        }
+
+                    }
+                </select>*@
+
+            </div>
+        }
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-12">
+    <div class="col-md-3">
+        <div class="checkbox">
+            <label>
+                @if (Model.SignatureRequire == true)
+                {
+                    <input type="checkbox" checked="checked" id="check_Signature" value="@Model.SignatureRequire">
+                    <span>Signature Required</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="check_Signature" value="@Model.SignatureRequire">
+                    <span>Signature Required</span>
+                }
+            </label>
+        </div>
+        <div>
+            <span class="field-validation-error" id="lbl-error-chkbox" style="display:none;" data-valmsg-for="ValidateCheckbox" data-valmsg-replace="true">Select atleast one checkbox.</span>
+            <span class="field-validation-error" id="lbl-error-drpdown" style="display:none;" data-valmsg-for="ValidateCheckbox" data-valmsg-replace="true">Employee Name Is Required.</span>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+    var constantvar = {
+        getEmp: '@Url.Action("getCustomer_WorkertList", "EmployeeDocument")',
+    }
+</script>
+<script>
+    searchCopyFrom();
+    function searchCopyFrom() {
+        var listRepTo = [];
+        var listDataManager = [];
+        var listDataCustomer = [];
+        $.ajax({
+            url: constantvar.getEmp,
+            data: {},
+            success: function (data) {
+                debugger;
+                $.each(data.WorkerList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                $.each(data.ManagerList, function (index, item) {
+                    listDataManager.push(item.Text);
+                });
+                $.each(data.CustomerList, function (index, item) {
+                    listDataCustomer.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listRepTo;
+                $('#empNameText').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.WorkerList.length; i++) {
+                        if (value == data.WorkerList[i].Text) {
+                            var eid = data.WorkerList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+                //ManagerList
+                var addRpTo = document.getElementById("empManagerID");
+                var awsAdRpTo = new Awesomplete(addRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsAdRpTo.list = listDataManager;
+                $('#empManagerID').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empManagerID').val();
+                    for (var i = 0; i < data.ManagerList.length; i++) {
+                        if (value == data.ManagerList[i].Text) {
+                            var meid = data.ManagerList[i].Value;
+                            break;
+                        }
+                        else {
+                            meid = '';
+                        }
+                    }
+                    $("#selectManagerID").val(meid);
+                });
+                //CustomerList
+                var HRRpTo = document.getElementById("empCustomerID");
+                var awsHrRpTo = new Awesomplete(HRRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsHrRpTo.list = listDataCustomer;
+                $('#empCustomerID').change(function () {
+                    $("#lbl-error-drpdown").hide();
+                    value = $('#empCustomerID').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            var ceid = data.CustomerList[i].Value;
+                            break;
+                        }
+                        else {
+                            ceid = '';
+                        }
+                    }
+                    $("#selectCustomerID").val(ceid);
+                });
+
+            }
+        });
+    }
+</script>
+@*<script>
+    $("#drpCustomer").change(function () {
+        var CustomerID = $("#DocumentModal").find("#AddDocumentBody").find("#drpCustomer").val();
+        if (CustomerID == 0) {
+            isError = true;
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").show();
+            $(".hrtoolLoader").hide();
+            $(".modal-backdrop").hide();
+        }
+        else {
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").hide();
+        }
+    });
+    $("#drpManager").change(function () {
+        var ManagerID = $("#DocumentModal").find("#AddDocumentBody").find("#drpManager").val();
+        if (ManagerID == 0) {
+            isError = true;
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").show();
+            $(".hrtoolLoader").hide();
+            $(".modal-backdrop").hide();
+        }
+        else {
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").hide();
+
+        }
+    });
+    $("#drpWorker").change(function () {
+        var WorkerID = $("#DocumentModal").find("#AddDocumentBody").find("#drpWorker").val();
+        if (WorkerID == 0) {
+            isError = true;
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").show();
+            $(".hrtoolLoader").hide();
+            $(".modal-backdrop").hide();
+        }
+        else {
+            $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").hide();
+        }
+    });
+    $("input[name='grpChk']").change(function () {
+        $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-chkbox").hide();
+        $("#DocumentModal").find("#AddDocumentBody").find("#lbl-error-drpdown").hide();
+        $(".hrtoolLoader").hide();
+        $(".modal-backdrop").hide();
+    });
+</script>*@

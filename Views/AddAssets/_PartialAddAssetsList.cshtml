@@ -1,0 +1,102 @@
+﻿@model  IList<HRTool.Models.Settings.AddAssetsViewModel>
+
+<div id="AddAssesetModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title AssetTitle">Add Asset</h4>
+            </div>
+            <div class="modal-body" id="addAssetsBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-AddAssetsRecord">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-addAssets" title="Add Assets" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddAssesetModel"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-addAssets" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddAssesetModel" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-addAssets" data-toggle="tooltip" data-placement="right" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-addAssets" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-addAssets" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-warning btn-circle  btn-clearFilter-addassets" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+</div>
+<div class="table-responsive">
+    <table id="AddAssetListRecord" class="table-bordered display table style2 table-striped  dataTable">
+        <thead>
+            <tr class="tblHeading">
+                <th>Name</th>
+                <th>Asset Type</th>
+                <th>Asset Type 2</th>
+                <th>Asset Owner</th>
+                <th>Picture</th>
+            </tr>
+        </thead>
+   
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="@item.Id" class="dataTr">
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.AssetsTypeName_1
+                    </td>
+                    <td>
+                        @item.AssetsTypeName_2
+                    </td>
+                    <td>
+                        @item.OwnerName
+                    </td>
+                    <td>
+                     @if (!string.IsNullOrEmpty(item.Picture))
+                    {
+                            <img src="~/Upload/Assets/@item.Picture";" class="md-user-image"/>
+                    }
+                    </td>
+                </tr>
+        }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th><input type="text" class="form-control SearchName" placeholder="Name"></th>
+                <th><input type="text" class="form-control SearchAssetType" placeholder="Asset Type"></th>
+                <th><input type="text" class="form-control SearchAssetType2" placeholder="Asset Type2"></th>
+                <th><input type="text" class="form-control SearchAssetOwner" placeholder="Asset Owner"></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    DataTableDesignAssetList();
+    function DataTableDesignAssetList() {
+        $('#AddAssetListRecord tfoot tr').appendTo('#AddAssetListRecord thead');
+        var table = $('#AddAssetListRecord').DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+            "scrollX": true
+        });
+        $('#tableDiv').find('.dataTables_filter').hide();
+        $('#tableDiv').find('.dataTables_info').hide();
+        $('#tableDiv thead .SearchName').keyup(function () {
+            table.column(0).search(this.value).draw();
+        });
+        $('#tableDiv thead .SearchAssetType').keyup(function () {
+            table.column(1).search(this.value).draw();
+        });
+        $("#tableDiv thead .SearchAssetType2").keyup(function () {
+            table.column(2).search(this.value).draw();
+        });
+        $("#tableDiv thead .SearchAssetOwner").keyup(function () {
+            table.column(3).search(this.value).draw();
+        });
+    }
+</script>

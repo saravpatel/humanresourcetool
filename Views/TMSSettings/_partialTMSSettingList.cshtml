@@ -1,0 +1,37 @@
+﻿@model HRTool.Models.Settings.TMSSettingsViewModel
+
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-TMSSetting"  title="Add TMSSetting"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-TMSSetting" data-toggle="modal" data-target="#addTMSSetting" title="Edit" disabled="disabled"><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-TMSSetting" data-toggle="modal" data-target="#deleteTMSSetting" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+    <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-TMSSetting" data-toggle="tooltip" data-placement="right"><i class="fa fa-reply"></i></button>
+    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-TMSSetting" data-toggle="tooltip" data-placement="right"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-info btn-circle  btn-clearFilter-TMSSetting" title="Clear Filter"><i class="fa fa-filter" data-toggle="tooltip" data-placement="right"></i></button>
+</div>
+<div class="table-responsive profile-table">
+    <table id="example1" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th >
+                    <input type="text" class="form-control SearchTMSSettingName" placeholder="TMS Setting Name">
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model.TMSSettingSaveList)
+            {
+                <tr id="@item.Id" class="dataTr">
+                    <td>@item.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,191 @@
+﻿
+@{ var NAME = ""; }
+
+<div class="tab-pane" id="1">
+    <div id="page_content_inner0">
+        <h4 class="heading_a uk-margin-bottom">
+            <div class="icon"></div>
+            <div class="titletext">
+                <div class="span-label">
+                    Timesheet Submission for @TempData["Name"]
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </h4>
+        
+                <div class="row">
+                <div class="table-btns table-btn-right-space">
+                    <button title="Refresh" class="btn  btn-primary btn-circle  btn-Refresh-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                    <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Document" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+                    <button class="btn btn-success btn-circle  btn-clearFilter-Document" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                    <button class="btn btn-info btn-circle  btn-Excel-Resoure" title="Clear Filter"><i class="fa fa-rocket"></i></button>
+                   
+                   <ul class="list-group list-inline">
+                       <li> <input type="text" class="form-control " id="WorkerId" style="display:none" value="@TempData["Id"]"></li>
+                       <li><input type="text" class="form-control " placeholder="Worker" id="WorkerName" value="@TempData["Name"]" readonly></li>
+                       <li><input type="text" class="form-control " placeholder="Hours" id="totalhour" value="0:00" readonly></li>
+                       <li><input type="text" class="form-control " placeholder="Days" value="0" id="totalday" readonly></li>
+                       <li><button name="button" class="btn btn-sm btn-success buttonApprv" id="Timeshetapprvebtn" value="Approve" type="button">Approve</button></li>
+                       <li><button name="button" class="btn btn-sm btn-danger buttonRejct" id="Timeshetrejectbtn" value="Reject" type="button">Reject</button></li>
+                      </ul>
+                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive profile-table">
+                                <table id="DocumentModalTable" class="display table style2 table-striped table-bordered dataTable" cellspacing="0">
+                                    <thead>
+                                        <tr class="tblHeading">
+                                            <th style="display:none">ID</th>
+                                            <th>Day</th>
+                                            <th>Date</th>
+                                            <th>Hour</th>
+                                            <th>Cost Code</th>
+                                            <th>Project</th>
+                                            <th>Customer</th>
+                                            <th>Asset</th>
+                                            <th>Supporting Document</th>
+                                            <th>Status</th>
+                                            <th style="width:10%">Approve</th>
+                                            <th style="width:10%">Reject</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="display:none"></th>
+                                            <th><input type="text" class="form-control SearchDay" placeholder="Day"></th>
+                                            <th><input type="text" class="form-control SearchDate" placeholder="Date"></th>
+                                            <th><input type="text" class="form-control SearchHours" placeholder="Hours"></th>
+                                            <th><input type="text" class="form-control SearchCostCode" placeholder="Cost Code"></th>
+                                            <th><input type="text" class="form-control SearchProject" placeholder="Project"></th>
+                                            <th><input type="text" class="form-control SearchCustomer" placeholder="Customer"></th>
+                                            <th><input type="text" class="form-control SearchAsset" placeholder="Asset"></th>
+                                            <th></th>
+                                            <th><input type="text" class="form-control SearchStatus" placeholder="Status"></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                    {
+                                            <tr>
+                                                <td style="display:none">@item.Id</td>
+                                                <td>@item.Day</td>
+                                                <td>@item.Date</td>
+                                                <td>@item.Hours</td>
+                                                <td>@item.CostCode</td>
+                                                <td>@item.Project</td>
+                                                <td>@item.Customer</td>
+                                                <td>@item.Asset</td>
+                                                @*<td>@item.FileName</td>*@
+                                                @if (string.IsNullOrEmpty(@item.FileName))
+                                            {
+                                                    <td>
+                                                        No Document
+                                                    </td>
+                                            }
+                                            else
+                                            {
+                                                    <td>
+                                                        <input type="hidden" value="@item.FileName" />
+                                                        <button name="button" class="btn btn-xs btn-success downloadbtn" value="Approve" type="button">View Document</button>
+                                                    </td>
+                                            }
+                                                <td>Pending</td>
+                                                <td> <input  style="width:20%" id="approveCheckBox" type="checkbox" name="Approve" class="cbCheck"> Check</td>
+                                                <td><input  style="width:20%" id="RejectCheckBox" type="checkbox" name="Reject" class="cbCheck1"> Check</td>
+
+                                            </tr>
+                                    }
+
+                                    </tbody>
+
+                                    @*<tfoot>
+                            <tr>
+                                <th  style="display:none"></th>
+                                <th ><input type="text" class="form-control SearchDay" placeholder="Day"></th>
+                                <th ><input type="text" class="form-control SearchDate" placeholder="Date"></th>
+                                <th ><input type="text" class="form-control SearchHours" placeholder="Hours"></th>
+                                <th ><input type="text" class="form-control SearchCostCode" placeholder="Cost Code"></th>
+                                <th ><input type="text" class="form-control SearchProject" placeholder="Project"></th>
+                                <th ><input type="text" class="form-control SearchCustomer" placeholder="Customer"></th>
+                                <th ><input type="text" class="form-control SearchAsset" placeholder="Asset"></th>
+                                <th ></th>
+                                <th ></th>
+                                <th ></th>
+                                <th ></th>
+                            </tr>
+                        </tfoot>*@
+                                </table>
+
+                                <div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-3">
+                        <div class="table-responsive">
+                            <table class="table-bordered display table style2 table-striped  dataTable">
+                                <tr>
+                                    <td>Worker</td>
+                                    <td>
+                                       
+                                      
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Hours</td>
+                                    <td>
+                                     
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Days</td>
+                                    <td>
+                                       
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                       
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>*@
+
+ 
+        </div>
+    </div>
+</div>
+<script src="~/JS/Approve/UpdateApproveReject.js"></script>
+<script>
+
+    var constantApproval = {
+        TimesheetApprove: '@Url.Action("TimeSheetApprove", "Approve")',
+        TimesheetApprovebtnClk: '@Url.Action("UpdateTimeSheetApproval", "Approve")',
+        TimesheetRejectbtnClk: '@Url.Action("UpdateTimeSheetReject", "Approve")',
+    }
+
+    $('#DocumentModalTable').on('click', '.downloadbtn', function () {//replace table selector with an id selector, if you are targetting a specific table
+        var Text = 'TimeSheet';
+        var filename = $(this).parent().find("input[type='hidden']").val()
+        $.ajax(
+            {
+                url: '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text,
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                data: {
+                    FileName: filename
+                },
+                type: "GET",
+                success: function () {
+                    window.location = '@Url.Action("Download", "Approve")?FilePath=' + filename + '&Text=' + Text;
+                }
+            });
+    });
+
+</script>
+@*<script src="~/JS/Approve/Approval.js"></script>*@

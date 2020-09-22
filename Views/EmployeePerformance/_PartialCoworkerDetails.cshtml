@@ -1,0 +1,110 @@
+﻿@model HRTool.Models.Resources.Coworker
+
+@{
+    ViewBag.Title = "_PartialCoworkerDetails";
+}
+
+<div id="coworkerList">
+    <div class="table-responsive">
+        <br />
+        <div class="table-btns">
+            <div class="resource-table-btns">
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <a class="btn btn-success btn-circle  btn-invite-coworker" title="Invite Coworker" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#InviteCoworkerModel" onclick="AddInviteToCoworker()"><i class="fa fa-plus"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="uk-overflow-container">
+        <div class="table-responsive employeeList_fix_height">
+            <table id="CustomerListtable" class="table-bordered display table style2 table-striped">
+                <thead class="tblHeading">
+                    <tr>
+                        <th>Name</th>
+                        <th>Status <span style="float:right;font-weight:bold">@Model.TotalInvitedCoworker</span></th>
+                    </tr>
+                </thead>
+                <tbody style="font-weight:bold">
+                    @foreach (var item in Model.CoworkerInviteList)
+                    {
+
+                        <tr id="@item.coworkerId" class="dataTr">
+                            <td>
+                                @item.EmpName
+                            </td>
+                            <td>
+                                @if (item.Status == "Invited")
+                                {
+                                    @item.Status
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-link" onclick="getCoworkerResponse(@item.Id)">@item.Status</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="CustomerListDiv" style="display:none;">
+    <div class="table-responsive">
+        <div class="table-btns">
+            <div class="resource-table-btns">
+                @if (Model.IsActivePastFlag == 1)
+                {
+                    <a class="btn btn-success btn-circle  btn-invite-customer" title="Invite Customer" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#InvitePerCustomerModel" onclick="AddInviteToCustomer()"><i class="fa fa-plus"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="uk-overflow-container">
+        <div class="table-responsive employeeList_fix_height">
+            <table id="CustomerListtableDiv" class="table-bordered display table style2 table-striped">
+                <thead class="tblHeading">
+                    <tr>
+                        <th>
+                            Customer Name <span style="float:right;">@Model.TotalInvitedCustomer</span>
+                            @*<th>Status</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var CustomerItem in Model.CustomerInviteList)
+                    {
+                        <tr id="@CustomerItem.CustomerID" class="dataTr">
+                            <td>
+                                @CustomerItem.CustomerName
+                            </td>
+                            @*<td>
+                                    @CustomerItem.Status
+                                </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    var constantCoWorkerResponse = {
+        getCoWorkerResponse: '@Url.Action("getCoWorkerResponse", "EmployeePerformance")',
+    }
+</script>
+<script>
+    function getCoworkerResponse(Id) {
+        debugger;
+       var link = '@Url.Action("getCoWorkerResponse", "EmployeePerformance", new { Id = "", PerCoworkerId = "replace" })';
+        link = link.replace("replace", Id);
+        var win = window.open(link, '_blank');
+        win.focus();
+    }
+    //function getCoworkerResponse(Id)
+    //{
+    //    debugger;
+    //    var ReviewId = $("#hdnReview").val();
+    //}
+</script>

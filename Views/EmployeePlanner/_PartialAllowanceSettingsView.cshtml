@@ -1,0 +1,272 @@
+﻿@model HRTool.Models.Resources.EmployeeAllowanceSettings
+
+
+
+<div id="EmployeePlanner_TOIL" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" id="btn-TOIL-closeModel" @*data-dismiss="modal"*@>&times;</button>
+                <h4 class="modal-title plnner-TOIL">Time off in liue</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_TOILBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_TOIL">Save</button>
+                <button type="button" class="btn btn-warning btn-TOIL-closeModel" @*data-dismiss="modal"*@>Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<input type="hidden" value="@Model.Id" id="EmployeeSettingsID" />
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Holiday Year</label>
+    </div>
+    <div class="col-md-6">
+        <select class="form-control" id="drp_Holiday_Year" data-toggle="tooltip" data-placement="right" name="Holiday Year" title="Holiday Year List">
+            @foreach (var item in Model.holidayYearList)
+            {
+                if (Model.HolidayYear.ToString() == item.Value)
+                {
+                    <option selected="selected" value=@item.Value>@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+
+            }
+        </select>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="systemListName">Measured In</label>
+    </div>
+    <div class="col-md-6">
+        <select class="form-control" id="drp_MeasuredIn" data-toggle="tooltip" data-placement="right" name="Measured In" title="Measured In List">
+            @foreach (var item in Model.MeasuredList)
+            {
+                if (Model.MeasuredIn.ToString() == item.Value)
+                {
+                    <option selected="selected" value=@item.Value>@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+
+            }
+        </select>
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <label class="col-md-3">This Year</label>
+    <div class="col-md-6">
+        <input type="number" data-toggle="tooltip" data-placement="right" name="Thisyear" title="This year holidays" class="form-control" id="Thisyear" value="@Model.Thisyear" placeholder="This year">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-2">
+        <label>inc. Carried Over</label>
+    </div>
+    <div class="col-md-2">
+        <input type="number" data-toggle="tooltip" data-placement="right" name="CarriedOver" title="Carried Over" readonly="readonly" class="form-control" id="CarriedOver" value="@Model.CarriedOver" placeholder="This year">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-5">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+        <label>TOIL</label>
+    </div>
+    <div class="col-md-2">
+        <input type="number" data-toggle="tooltip" data-placement="right" name="TOIL" title="TOIL" readonly="readonly" class="form-control" id="TOIL" value="@Model.TOIL" placeholder="This year">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-2">
+        <input type="button" class="form-control btn btn-primary" id="ADDLeaves" name="ADD" value="ADD" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeePlanner_TOIL" />
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <label class="col-md-3">Next year</label>
+    <div class="col-md-6">
+        <input type="number" data-toggle="tooltip" data-placement="right" name="Nextyear" title="Next year holidays" class="form-control" id="Nextyear" value="@Model.Nextyear" placeholder="Next year">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <label class="col-md-3">Re-route authorisations to</label>
+    <div class="col-md-6 dropdown">       
+        <input type="hidden" id="selectauthID" value="@Model.AuthoriseUserId" />
+        <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.authorisationEmployeeName" size="70" placeholder="Employee Name" />
+        @*<select class="form-control" id="drp_authorisations" data-toggle="tooltip" data-placement="right" name="authorisation" title="Authorisation List">
+            @foreach (var item in Model.authorisationsList)
+            {
+                if (Model.AuthoriseUserId == item.Value)
+                {
+                    <option selected="selected" value=@item.Value>@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+
+            }
+        </select>*@
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="EntitlementIncludes">Entitlement Includes Public Holiday?</label>
+    </div>
+    <div class="col-md-6 dropdown" data-toggle="tooltip">
+        @if (Model.EntitlementIncludesPublicHoliday == true)
+        {
+            <input type="checkbox" id="check_EntitlementIncludes" data-toggle="tooltip" data-placement="right" name="EntitlementIncludes" title="Entitlement Includes Public Holiday?" checked="checked" />
+        }
+        else
+        {
+            <input type="checkbox" id="check_EntitlementIncludes" data-toggle="tooltip" data-placement="right" name="EntitlementIncludes" title="Entitlement Includes Public Holiday?" />
+        }
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageEntitlementIncludes" data-valmsg-for="EntitlementIncludes" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="AutoApproveHolidays">Auto Approve Holidays</label>
+    </div>
+    <div class="col-md-6 dropdown" data-toggle="tooltip">
+        @if (Model.AutoApproveHolidays == true)
+        {
+            <input type="checkbox" id="check_AutoApproveHolidays" checked="checked" data-toggle="tooltip" data-placement="right" name="AutoApproveHolidays" title="Auto Approve Holidays" />
+
+        }
+        else
+        {
+            <input type="checkbox" id="check_AutoApproveHolidays" data-toggle="tooltip" data-placement="right" name="AutoApproveHolidays" title="Auto Approve Holidays" />
+        }
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageAutoApproveHolidays" data-valmsg-for="AutoApproveHolidays" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="ExceedAllowance">Exceed Allowance</label>
+    </div>
+    <div class="col-md-6 dropdown" data-toggle="tooltip">
+        @if (Model.ExceedAllowance == true)
+        {
+            <input type="checkbox" id="check_ExceedAllowance" checked="checked" data-toggle="tooltip" data-placement="right" name="Exceed Allowance" title="Exceed Allowance" />
+
+        }
+        else
+        {
+            <input type="checkbox" id="check_ExceedAllowance" data-toggle="tooltip" data-placement="right" name="Exceed Allowance" title="Exceed Allowance" />
+        }
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="validationmessageExceedAllowance" data-valmsg-for="ExceedAllowance" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+
+<script>
+    var empData = { getreRoueAtuho: '@Url.Action("getreRouteauthorisaton", "EmployeePlanner")' }
+</script>
+<script type="text/javascript">
+    $("#btn-TOIL-closeModel").click(function () {
+        $("#EmployeePlanner_TOIL").hide();
+    });
+    $(".btn-TOIL-closeModel").click(function () {
+        $("#EmployeePlanner_TOIL").hide();
+    });
+    $("#ADDLeaves").click(function () {
+        $("#EmployeePlanner_TOIL").show();
+    });
+    getAthoWorker();
+    function getAthoWorker() {
+        var listData = [];
+        var resourceList = [];
+        var id = $("#EmployeeSettingsID").val();
+        $.ajax({
+            url: empData.getreRoueAtuho,
+            data: { Id :id},
+            success: function (data) {
+                $.each(data.authorisationsList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                
+                debugger;
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.authorisationsList.length; i++) {
+                        if (value == data.authorisationsList[i].Text) {
+                            eid = data.authorisationsList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectauthID").val(eid);
+                });              
+            }
+        });
+    }
+</script>
+
+

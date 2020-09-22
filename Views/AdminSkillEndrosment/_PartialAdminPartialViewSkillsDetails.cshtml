@@ -1,0 +1,80 @@
+﻿@model HRTool.Models.Resources.ViewSkillsViewModel
+<div class="panel-body modalaboutbadge">
+    <div class="badgeinfo">
+        <div class="row">
+            <div class="col-md-3">
+                <img id="imgBadgeIcon" class="img-layout" src="~/Upload/SkillSets/@Model.Picture" class="listpic" /><span></span>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-responsive  table-striped custab">
+                    <tbody>
+                        <tr>
+                            <td><b>Skill Set Name:</b></td>
+                            <td id="spnBadgeName">@Model.Name </td>
+
+                        </tr>
+
+                        <tr>
+                            <td><b>Who Deserves This Skill Set?:</b></td>
+                            <td id="pDesc"> @Model.Description</td>
+
+                        </tr>
+                        <tr>
+                            <td><b>Skills:</b></td>
+                            <td>This skill set adds these skills to the recipient's profile:</td>
+                            </tr>
+                        <tr>
+                            <td>
+                                @foreach (var item in Model.SkillValueList)
+                                {
+                                  
+                                        <span id="spnBadgeName" class="tag biggest blue2">@item</span>
+                                  
+                                }
+                            </td>
+                            <td></td>
+
+                        </tr>
+                        
+
+
+
+                    </tbody>
+                </table>
+            </div>
+ 
+            <div class="col-sm-6">
+                <div class="skills">
+                    <label class="block"></label>
+                    <p></p>
+                    <ul class="ng-hide">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="statistics">
+        <label class="block">Statistics</label>
+        <ul class="actions">
+            <li>
+                <div class="withborder">
+                    <span id="spnThisMonth">0</span>
+                    <span>This Month</span>
+                </div>
+            </li>
+            <li>
+                <div class="withborder">
+                    <span id="spnTotalCount">0</span>
+                    <span>Total</span>
+                </div>
+            </li>
+            <li>
+                <div class="withborder">
+                    <span id="spnMostPopular">9st</span>
+                    <span id="spnMostPopularTitle">Most Popular</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

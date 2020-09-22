@@ -1,0 +1,75 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_TimeSheetViewModel
+
+<div id="wizard" class="swMain">
+    <ul class="tablistnew two">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Detail
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Document
+            </a>
+        </li>
+    </ul>
+    <div id="step-1">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <input type="hidden" value="@Model.Id" id="HiddenId" />
+                <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+                <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+                <input type="hidden" value="@Model.day" id="HiddendayId" />
+                <label class="control-label" for="StatusList">Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.Date" id="txt_Date" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Date" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Date is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10" id="TimeSheet_detail">
+            @foreach (var item in Model.DetailList)
+            {
+            @Html.Partial("_partialAdd_TimeSheet_Detail", item);
+            }
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-12">
+                <input type="button" value="Add New" id="btn_AddNew_TimesheetDetail" class="md-btn md-btn-primary" />
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Supporting Comments</label>
+            </div>
+            <div class="col-md-6">
+                <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comment</textarea>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-2">
+        <div class="browse-attach">
+            <label type="file" for="TimeSheetFileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="TimeSheetFileToUpload" style="display: none">
+        </div>
+
+        <div id="filesList">
+            @foreach (var item in Model.DocumentList)
+            {
+            <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+</div>
+

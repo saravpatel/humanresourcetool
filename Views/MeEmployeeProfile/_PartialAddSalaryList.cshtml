@@ -1,0 +1,57 @@
+﻿@model IList<HRTool.Models.Resources.AddSalaryViewModel>
+
+<div class="modal fade" id="addsalaryContact"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btn-close-Salary" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabel">Add Salary</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddSalaryBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-success" id="btn-submit-Salary">ADD</button>*@
+                <button type="button" class="btn btn-warning" id="btn-Cancel-Salary" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-btns">
+    @*<a class="btn btn-success btn-circle  btn-add-salary" data-toggle="modal" data-backdrop="static" data-target="#addsalaryContact"><i class="fa fa-plus"></i></a>*@
+    <a class="btn btn-primary btn-circle  btn-edit-salary" title="Edit" disabled="disabled" data-backdrop="static" data-toggle="modal" data-target="#addsalaryContact"><i class="fa fa-pencil"></i></a>
+    @*<a class="btn btn-danger btn-circle  btn-delete-salary" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>*@
+</div>
+
+<table id="salaryTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Salary</th>
+            <th>Effective From</th>
+            <th>Reason for Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Amount</td>
+                <td>@item.EffectiveFrom</td>
+                <td>@item.ReasonforChangeName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->

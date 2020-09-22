@@ -1,0 +1,416 @@
+﻿@model HRTool.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" media="all">
+<link href="~/Content/loginNew.css" rel="stylesheet"/>
+@*<link rel="stylesheet" href="~/Content/login_page.min.css" media="all">*@
+@*<link rel="stylesheet" href="~/Content/custom.css" media="all">*@
+@*<link rel="stylesheet" href="~/Content/Site.css" media="all">*@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Log in</title>
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="~/Content/Login.css"/>*@
+    <style>
+        .login-textbox {
+            width: 100%;
+            padding: 10px 0;
+            border: #a0a9b4;
+            border-bottom: 1px solid;
+            color: #868e97;
+            font-size: 14px;
+            margin-bottom: 30px;
+            border-radius: 0 !important;
+        }
+    </style>
+
+</head>
+<body class="login">
+    <!-- BEGIN : LOGIN PAGE 5-1 -->
+    <div class="user-login-5">
+        <div class="row bs-reset">
+            <div class="col-md-6 bs-reset mt-login-5-bsfix">
+                <div class="login-bg" style="background-image: url('../img/bg1.jpg');">
+
+                    <img class="login-logo" src="~/img/logo_main.png" />
+                </div>
+            </div>
+            <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+                <div class="login-content">
+                    <h1><b>Evolution Log in</b></h1>
+                    <p> </p>
+                    @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr />
+                        @Html.ValidationSummary(true)
+
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            <span>Enter any username and password. </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "login-textbox", placeholder = "Username" })
+                                @Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @class = "login-textbox", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="rem-password">
+                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                        @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="forgot-password">
+                                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 pull-right">
+                                <input type="submit" value="Log in" class="btn green pull=right" />
+                            </div>
+                        </div>
+                    }
+                    <!-- BEGIN FORGOT PASSWORD FORM -->
+                    <!-- <form class="forget-form" action="javascript:;" method="post"> -->
+                    <!-- <h3 class="font-green">Forgot Password ?</h3> -->
+                    <!-- <p> Enter your e-mail address below to reset your password. </p> -->
+                    <!-- <div class="form-group"> -->
+                    <!-- <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" /> </div> -->
+                    <!-- <div class="form-actions"> -->
+                    <!-- <button type="button" id="back-btn" class="btn green btn-outline">Back</button> -->
+                    <!-- <button type="submit" class="btn btn-success uppercase pull-right">Submit</button> -->
+                    <!-- </div> -->
+                    <!-- </form> -->
+                    <!-- END FORGOT PASSWORD FORM -->
+                </div>
+                <div class="login-footer">
+                    <div class="row bs-reset">
+                        <div class="col-xs-5 bs-reset">
+                            <ul class="login-social">
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-7 bs-reset">
+                            <div class="login-copyright text-right">
+                                <p>Copyright &copy; 2017 - Evolution.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/JS/Login/jquery.min.js"></script>
+    <script src="~/JS/Login/jquery.validate.min.js"></script>
+
+    <script src="~/JS/Login/login-5.min.js"></script>
+    <script src="~/JS/Login/jquery.backstretch.min.js"></script>
+
+</body>
+
+
+
+
+
+
+
+@*<body id="loginForm">
+        <div class="container">
+            @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            <div class="col-lg-4 col-md-6 col-sm-8 comon">
+                <div class="logo">
+                    <img src="~/img/logo_main.png" id="" alt="">
+                </div>
+                <div class="row loginbox">
+                    @Html.AntiForgeryToken()
+                   <div class="col-lg-12">
+                        <span class="singtext">Log in</span>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="font-size: 15px!important;">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control font-sizess" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="col-lg-12  col-md-12 col-sm-12" style="font-size: 15px!important;">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control font-sizess" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                        @Html.ValidationSummary(true)
+                    </div>
+                    <div class="col-lg-12  col-md-12 col-sm-12">
+                        <button type="submit" class="btn submitButton login-btn" value="Log in">Login</button>
+                    </div>
+                </div>
+                <div class="forGotPassword">
+                    <a href="#">Forgot Username / Password? </a>
+
+                    <br>
+                    <span>Having Problems?</span> <a href=""http://www.energymanpower.com"> Visit Our Support Site</a>
+                </div>
+            </div>
+            }
+        </div>
+        <!-- /.container -->
+        <div id="particles-js"></div>
+        <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>-->
+    <script>
+    $.getScript("https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js", function(){
+        particlesJS('particles-js',
+          {
+            "particles": {
+              "number": {
+                "value": 180,
+                "density": {
+                  "enable": true,
+                  "value_area": 800
+                }
+              },
+              "color": {
+                "value": "#ffffff"
+              },
+              "shape": {
+                "type": "circle",
+                "stroke": {
+                  "width": 0,
+                  "color": "#000000"
+                },
+                "polygon": {
+                  "nb_sides": 5
+                },
+                "image": {
+                  "width": 100,
+                  "height": 100
+                }
+              },
+              "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                  "enable": false,
+                  "speed": 1,
+                  "opacity_min": 0.1,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 5,
+                "random": true,
+                "anim": {
+                  "enable": false,
+                  "speed": 40,
+                  "size_min": 0.1,
+                  "sync": false
+                }
+              },
+              "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+              },
+              "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "attract": {
+                  "enable": false,
+                  "rotateX": 600,
+                  "rotateY": 1200
+                }
+              }
+            },
+            "interactivity": {
+              "detect_on": "canvas",
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "repulse"
+                },
+                "onclick": {
+                  "enable": true,
+                  "mode": "push"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 400,
+                  "line_linked": {
+                    "opacity": 1
+                  }
+                },
+                "bubble": {
+                  "distance": 400,
+                  "size": 40,
+                  "duration": 2,
+                  "opacity": 8,
+                  "speed": 3
+                },
+                "repulse": {
+                  "distance": 200
+                },
+                "push": {
+                  "particles_nb": 4
+                },
+                "remove": {
+                  "particles_nb": 2
+                }
+              }
+            },
+            "retina_detect": true,
+            "config_demo": {
+              "hide_card": false,
+              "background_color": "#b61924",
+              "background_image": "",
+              "background_position": "50% 50%",
+              "background_repeat": "no-repeat",
+              "background_size": "cover"
+            }
+          }
+        );
+
+    });
+        </script>
+    </body>*@
+</html>
+@*<div class="fotfix">
+    <div data-ui-view="" class="">
+        <div class="container ">
+            <section id="loginForm">
+                @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="loginbox">
+                            <p class="login_account text-right"> Having Problems? <a target="_blank" href="http://www.energymanpower.com">Visit Our Support Site</a></p>
+                            <div class="head">
+                                <h1>
+                                    <img src="~/img/logo_main.png" id="" alt="">
+                                </h1>
+                                <p class="logintext">Login</p>
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <div class="formbox">
+                                <p>Please enter your login details below.</p>
+                                <div class="form tool">
+                                    <div class="block">
+
+                                        <label class="block">Email Address</label>
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.UserName)
+
+                                    </div>
+                                    <div class="block">
+                                        <label class="block">Password</label>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Password)
+                                        @Html.ValidationSummary(true)
+                                    </div>
+                                </div>
+                                <div class="block">
+                                    <a class="left linkforgot" href="#/forgotPassword">Forgot Your Password?</a>
+                                    <button type="submit" class="pull-right md-btn md-btn-primary login-btn" value="Log in">Login</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+    <div class="col-md-4">
+        @*<section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>*@
+@* </div>
+    </div>*@
+
+
+
+
+
+@*<div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <hr />
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Register", "Register")
+                    </p>
+                }
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

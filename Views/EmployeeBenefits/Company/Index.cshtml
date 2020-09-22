@@ -1,0 +1,294 @@
+﻿@model HRTool.Models.Settings.CompanyViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<div id="page_content_inner">
+    <h4 class="heading_a uk-margin-bottom">
+        <div class="icon"><img src="~/Images/listicons/icn-company.png" /></div>
+        <div class="titletext">
+            <div>
+                Company
+                <p>
+                    Edit basic company details and set the Company Planner access given to your staff
+                </p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </h4>
+    <div class="md-card">
+        <div class="md-card-content large-padding">
+            @using (Html.BeginForm("Index", "Company", FormMethod.Post, new { @class = "uk-form-stacked ng-pristine ng-valid-email ng-valid-min ng-valid-max ng-valid-pattern ng-valid ng-valid-required", enctype = "multipart/form-data", role = "form" }))
+            {
+                //logo
+                <div class="row marbot10">
+                    <div class="col-md-3">
+                        @Html.HiddenFor(m => m.Id)
+                        <label class="control-label" for="fileToUpload">Upload Logo</label>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <input autocomplete="off" accept=".jpg,.jpeg,.bmp,.png" style="display: block;" class="btn btn-sm btn-purple btn-upload" type="file" id="fileToUpload" name="fileUpload" title="Upload Logo" /> -->
+                        <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">BROWSE</label>
+                        <input type="file" id="fileToUpload" name="fileToUpload" onchange="readURL(this)" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+
+                        @if (!string.IsNullOrEmpty(Model.Logo))
+                        {
+
+                            <img src="~/Upload/Company/@Model.Logo" class="editpic" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/no-image.jpg" class="editpic" />
+                        }
+
+
+                        @*<input type="text" class="form-control" value="@Model.Value" id="txt-SystemListValueName" placeholder="Skill Name" data-toggle="tooltip" name="Value" title="Skill Name">*@
+                    </div>
+                    <div class="col-md-3">
+                        @*<span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The List Skill is required.</span>*@
+                    </div>
+                </div>
+                        //statement
+                        <div class="row marbot10">
+                            <label class="col-md-3">Message (20 chars min, 100 max)</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Message">
+                                @Html.TextAreaFor(m => m.Statement, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.Statement)
+                            </div>
+                        </div>
+                        //Industry
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Industry</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Industry">
+
+                                @Html.DropDownListFor(model => model.IndustryID, Model.IndustryList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.IndustryList)
+                            </div>
+                        </div>
+                        //Date Format
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Date Format</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Date Format">
+                                @Html.DropDownListFor(model => model.DateFormat, Model.DateFormatList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.DateFormatList)
+                            </div>
+                        </div>
+                        //Time Format
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Time Format</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Time Format">
+                                @Html.DropDownListFor(model => model.TimeFormat, Model.TimeFormatList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.TimeFormatList)
+                            </div>
+                        </div>
+                        //Base Currency
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Base Currency</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Base Currency">
+                                @Html.DropDownListFor(model => model.BaseCurrency, Model.BaseCurrencyList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.BaseCurrencyList)
+                            </div>
+                        </div>
+
+                        //Daily admin email
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Daily admin email</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Daily admin email">
+                                @Html.CheckBoxFor(m => m.DailyAdminEmail)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.DailyAdminEmail)
+                            </div>
+                        </div>
+
+                        //Weekly manager email
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Weekly manager email</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Weekly manager email">
+                                @Html.CheckBoxFor(m => m.WeeklyManagerEmail)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.WeeklyManagerEmail)
+                            </div>
+                        </div>
+
+                        //Weekly employee email
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Weekly employee email</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Weekly employee email">
+                                @Html.CheckBoxFor(m => m.WeeklyEmployeeEmail)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.WeeklyEmployeeEmail)
+                            </div>
+                        </div>
+
+                        //Manager can see employee salary
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Manager can see employee salary</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Manager can see employee salary">
+                                @Html.CheckBoxFor(m => m.ManagerSeeEmployeeSalary)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.ManagerSeeEmployeeSalary)
+                            </div>
+                        </div>
+
+                        //Employee can see their own salary
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Employee can see their own salary</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Employee can see their own salary">
+                                @Html.CheckBoxFor(m => m.EmployeeSeeSalary)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.EmployeeSeeSalary)
+                            </div>
+                        </div>
+
+                        //Organisation chart
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Organisation charty</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Organisation charty">
+                                @Html.CheckBoxFor(m => m.OrganisationChart)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.OrganisationChart)
+                            </div>
+                        </div>
+
+                        //Organisation chart external link
+                        <div class="row marbot10">
+                            <label class="col-md-3">Organisation chart external link</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Organisation chart external link">
+                                @Html.TextBoxFor(m => m.OrganisationChartExternalLink, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.OrganisationChartExternalLink)
+                            </div>
+                        </div>
+
+                        //Allow employee to upload photo
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Allow employee to upload photo</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Allow employee to upload photo">
+                                @Html.CheckBoxFor(m => m.AllowEmployeeUploadPhoto)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.OrganisationChart)
+                            </div>
+                        </div>
+
+                        //Manager can see employee contact detail
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Manager can see employee contact detail</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Manager can see employee contact detail">
+                                @Html.CheckBoxFor(m => m.ManagerSeeEmployeeContactDetail)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.ManagerSeeEmployeeContactDetail)
+                            </div>
+                        </div>
+
+                        //Manager can upload document
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Manager can upload document</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Manager can upload document">
+                                @Html.CheckBoxFor(m => m.ManagerUploadDocument)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.ManagerUploadDocument)
+                            </div>
+                        </div>
+
+                        //Top Facts About Our Company Report
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Top Facts About Our Company Report</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Top Facts About Our Company Report">
+                                @Html.CheckBoxFor(m => m.CompanyReport)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.CompanyReport)
+                            </div>
+                        </div>
+
+                        //Probation Period //textbox radiobutton
+                        <div class="row marbot10">
+                            <label class="col-md-3">Probation Period</label>
+                            <div class="col-md-3" data-toggle="tooltip" data-placement="right" title="Probation Period">
+                                @Html.TextBoxFor(m => m.ProbationPeriod, new { @class = "form-control", maxwhitespaces = "1", blockonlywhitespaces = "" })
+                            </div>
+                            <div class="col-md-3" data-toggle="tooltip" data-placement="right" title="Probation Period">
+                                @Html.RadioButtonFor(m => m.ProbationPeriodValue, "Months")
+                                <label>Months</label>
+                                &nbsp;&nbsp;
+                                @Html.RadioButtonFor(m => m.ProbationPeriodValue, "Weeks")
+                                <label>Weeks</label>
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.ProbationPeriod)
+                            </div>
+                        </div>
+
+                        //Company Planner
+                        <h4 class="CompanyTitle">Company Planner</h4>
+
+                        //Employee Access
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Employee Access</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Employee Access">
+                                @Html.DropDownListFor(model => model.EmployeeAccess, Model.EmployeeList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.EmployeeList)
+                            </div>
+                        </div>
+
+                        //Manager Access
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Manager Access</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Manager Access">
+                                @Html.DropDownListFor(model => model.ManagerAccess, Model.ManagerList, new { @class = "form-control" })
+
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.ManagerList)
+                            </div>
+                        </div>
+
+                        //Other Leave Reasons
+                        <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+                            <label class="col-md-3">Other Leave Reasons</label>
+                            <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Other Leave Reasons">
+                                @Html.CheckBoxFor(m => m.OtherLeaveReasons)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ValidationMessageFor(m => m.OtherLeaveReasons)
+                            </div>
+                        </div>
+
+                        <div class="uk-grid">
+                            <div class="uk-width-1-1">
+                                <button type="submit" class="md-btn md-btn-success setting_btn">Save</button>
+                            </div>
+                        </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/JS/Settings/Company/CompanyJS.js"></script>

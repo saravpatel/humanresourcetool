@@ -1,0 +1,35 @@
+﻿@model HRTool.Models.Admin.AdminTaskMenuViewModel
+
+
+
+<div class="profile-usermenu">
+    <ul class="nav userTask">
+        <li class="active filter_Class">    
+        <a class="MyVisa"> <span class="pad-left"> My Task</span><strong class="pull-right  badge badge-light">@Model.MyTask</strong></a>
+        </li>
+
+        <li class="filter_Class">
+            <a lass="Expired"> <span class="pad-left">OverDue</span><strong class="pull-right badge badge-danger">@Model.OverDue</strong></a>
+        </li>
+
+        <li class="filter_Class">
+            <a class="New"> <span class="pad-left"> New</span><strong class="pull-right  badge badge-info">@Model.New</strong></a>
+        </li>
+
+        <li class="filter_Class" >
+            <a class="ExpiringToday"> <span class="pad-left">Due Today</span><strong class="pull-right badge badge-primary">@Model.DueToday</strong></a>
+        </li>
+
+        <li class="filter_Class" >
+            <a class="Upcoming"> <span class="pad-left">Upcoming</span><strong class="pull-right  badge badge-warning">@Model.Upcoming</strong></a>
+        </li>
+        <li class="filter_Class"  >
+            <a class="Valid"> <span class="pad-left">Complete</span><strong class="pull-right  badge badge-success">@Model.Complete</strong></a>
+        </li>
+        <li class="filter_Class" >
+            <a class="AllVisa"> <span class="pad-left">All Task</span><strong class="pull-right  badge badge-info">@Model.AllTask</strong></a>
+        </li>
+    </ul>
+</div>
+
+

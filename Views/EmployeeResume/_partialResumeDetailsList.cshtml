@@ -1,0 +1,390 @@
+﻿@model HRTool.Models.Resources.EmployeeResumeViewModel
+@using HRTool.CommanMethods;
+
+<input type="hidden" id="EmployeeID" value="@Model.EmployeeID">
+
+    <!--  <div id="resume_person">
+        <p id="resumetext" class="hide" style="font-weight:bolder">Resume</p>
+       <div class="resume_person_details">
+          <img src="Content/img/defaultPicture.png" alt="">
+          <p class="resume_person_name ng-binding">Chintu Patel</p>
+          </div>
+    </div>-->
+    <div id="resume_cv_details" class="resume_cv_detail">
+        <div class="form-group">
+            <div id="Resume_Editor">
+                <label class="control-label resume_subject_title" for="detail">Resume Text</label>
+                <input type="hidden" id="resumeTextID" value="@Model.ResumeID" />
+                <input type="hidden" id="resume_test" value="@Model.ResumeText" />
+                <button type="button" class="btn btn-primary btn-add-resume" style="float:right;">Save</button> </br>
+                <div>
+
+                    @if (SessionProxy.IsCustomer == true)
+                    {
+                        <textarea cols="50" rows="4" readonly> @Model.ResumeText                           
+                        </textarea>
+                    }
+                    else
+                    {
+                        <div id="froala-editor"></div>
+                    }
+                    <span class="field-validation-error" id="lbl-error-Resume" style="display:none;" data-valmsg-for="Resume" data-valmsg-replace="true">The Resume text is required.</span>
+                </div>
+                <div class="resume_cv_details">
+                    <div class="resume_details_left">
+                        <div id="workExperienceInfo">
+                            <div class="resume_details_title">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                @if (SessionProxy.IsCustomer == true)
+                                {
+                                    <i class="fa fa-plus-circle pull-right " title="Add Work Experience" disabled></i>
+                                    @*<i class="fa fa-plus-circle pull-right btn-add-WorkExperience" data-toggle="modal" data-target="#addWorkExprience" title="Add Work Experience"></i>*@
+                                }
+                                else
+                                {
+                                    <i class="fa fa-plus-circle pull-right btn-add-WorkExperience" data-toggle="modal" data-target="#addWorkExprience" title="Add Work Experience"></i>
+                                }
+                                
+                                <h4 class="resume_subject_title">Employment</h4>
+                            </div>
+                            <table>
+                                <tbody>
+                                    @foreach (var item in Model.WorkExperienceList.OrderByDescending(x => x.JobStartDate).ToList())
+                                    {
+                                    <tr class="noselect1">
+                                        <td data-title-text="">
+                                            <i class="fa fa-minus-circle pull-right btn-delete-WorkExperience hide" title="Remove Work Experience" style="color: red;"></i>
+                                            <i class="fa fa-pencil pull-right btn-edit-WorkExperience hide" data-toggle="modal" data-target="#addWorkExprience" title="Edit Work Experience"></i>
+                                            <input type="hidden" id="workExperienceID" value="@item.Id" />
+                                            <input type="hidden" id="employeeID" value="@item.EmployeeID" />
+                                            <div class="skills_description">
+                                                <div class="skills_description_name">
+                                                    <h3>@item.JobTitle</h3>
+                                                    <p>@item.CompanyName</p>
+                                                </div>
+                                                <div class="skills_description_date">
+                                                    @item.JobStartDate - @item.JobEndDate
+                                                </div>
+                                                <p class="skills_description_txt">@item.OtherInformation</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <br />
+                        <br />
+                        <div id="educationInfo">
+                            <div class="resume_details_title">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                @if (SessionProxy.IsCustomer == true)
+                                {
+                                    <i class="fa fa-plus-circle pull-right" title="Add Education"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-plus-circle pull-right btn-add-Education" data-toggle="modal" data-target="#addEducation" title="Add Education"></i>
+                                }
+                                <h4 class="resume_subject_title">Education</h4>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="header">
+                                            <div> </div>
+                                    </tr>
+                                    <tr>
+                                        <th class="filter">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.EductionList.OrderByDescending(x => x.StartDate).ToList())
+                                    {
+                                    <tr class="noselect1">
+                                        <td data-title-text=" ">
+                                            <i class="fa fa-minus-circle pull-right btn-delete-Education hide" title="Remove Education" style="color: red;"></i>
+                                            <i class="fa fa-pencil pull-right btn-edit-Education hide" data-toggle="modal" data-target="#addEducation" title="Edit Education"></i>
+                                            <input type="hidden" id="EducationID" value="@item.Id" />
+                                            <input type="hidden" id="employeeID" value="@item.EmployeeID" />
+                                            <div class="skills_description">
+                                                <div class="skills_description_name">
+                                                    <h3>@item.CourseName</h3>
+                                                    <p>@item.InstitutionName</p>
+                                                </div>
+                                                <div class="skills_description_date">
+                                                    @item.StartDate - @item.EndDate
+                                                </div>
+                                                <p class="skills_description_txt">@item.OtherInformation</p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="resume_details_right">
+                        <div class="clearfix"></div>
+                        <div id="qulificationInfo">
+                            <div class="resume_details_title">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                @if (SessionProxy.IsCustomer == true)
+                                {
+                                    <i class="fa fa-plus-circle pull-right" title="Add Qualification"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-plus-circle pull-right btn-add-Qualification" data-toggle="modal" data-target="#addQualification" title="Add Qualification"></i>
+                                }
+                                <h4 class="resume_subject_title">Qualification</h4>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="header">
+                                            <div> </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="filter">
+                                            <!-- ngRepeat: (name, filter) in column.filter -->
+                                        </th>
+                                        <!-- end ngRepeat: column in $columns -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.QualificationList.OrderByDescending(x => x.Id).ToList())
+                                    {
+                                        <tr class="noselect1">
+                                            <td data-title-text=" ">
+                                                <i class="fa fa-minus-circle pull-right btn-delete-Qualification hide" title="Remove Qualification" style="color: red;"></i>
+                                                <i class="fa fa-pencil pull-right btn-edit-Qualification hide" data-toggle="modal" data-target="#addQualification" title="Edit Qualification"></i>
+                                                <input type="hidden" id="QualificationID" value="@item.Id" />
+                                                <input type="hidden" id="employeeID" value="@item.EmployeeID" />
+                                                <div class="skills_description">
+                                                    <div class="skills_description_name">
+                                                        <h3></h3>
+                                                        <p>@item.Detail</p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <br>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <br />
+                        <div class="resume_details_title">
+                            <i class="fa fa-arrow-circle-right"></i>
+                            <h4 class="resume_subject_title">Technical Skills</h4>
+                        </div>
+
+                        <div class="progress_custome">
+                            <div class="progress-bar progress-bar-success"> <span>Swimming</span></div>
+                            <div class="progress-bar progress-bar-warning" style="width:45%; border-radius:0 4px 4px 0;">
+                                <span class="sr-only"></span>
+                            </div>
+                            <p class="progress_percentage">90%</p>
+                        </div>
+
+                        <div class="progress_custome">
+                            <div class="progress-bar progress-bar-success"> <span>Driving</span></div>
+                            <div class="progress-bar progress-bar-warning" style="width:45%; border-radius:0 4px 4px 0;">
+                                <span class="sr-only"></span>
+                            </div>
+                            <p class="progress_percentage">90%</p>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <br>
+                        <div class="resume_details_title">
+                            <i class="fa fa-arrow-circle-right"></i>
+                            <h4 class="resume_subject_title">General Skills</h4>
+                        </div>
+
+                        <div class="progress_custome">
+                            <div class="progress-bar progress-bar-success"> <span>Swimming</span></div>
+                            <div class="progress-bar progress-bar-warning" style="width:45%; border-radius:0 4px 4px 0;">
+                                <span class="sr-only"></span>
+                            </div>
+                            <p class="progress_percentage">90%</p>
+                        </div>
+
+                        <div class="progress_custome">
+                            <div class="progress-bar progress-bar-success"> <span>Driving</span></div>
+                            <div class="progress-bar progress-bar-warning" style="width:45%; border-radius:0 4px 4px 0;">
+                                <span class="sr-only"></span>
+                            </div>
+                            <p class="progress_percentage">90%</p>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <br>
+                        <div id="languageInfo">
+                            <div class="resume_details_title">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                @if (SessionProxy.IsCustomer == true)
+                                {
+                                    <i class="fa fa-plus-circle pull-right" title="Add Language"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-plus-circle pull-right btn-add-Language" data-toggle="modal" data-target="#addLanguage" title="Add Language"></i>
+                                }
+                                <h4 class="resume_subject_title">Language Skills</h4>
+                            </div>
+                            <table class="table style2">
+                                <tbody>
+                                    @foreach (var item in Model.LanguageDetailsList.OrderByDescending(x => x.Id).ToList())
+                                    {
+                                        <tr class="noselect1">
+                                            <td data-title-text=" ">
+                                                <i class="fa fa-minus-circle pull-right btn-delete-Language hide" title="Remove Language" style="color: red;"></i>
+                                                <i class="fa fa-pencil pull-right btn-edit-Language hide" data-toggle="modal" data-target="#addLanguage" title="Edit Language"></i>
+                                                <input type="hidden" id="LanguageID" value="@item.Id" />
+                                                <input type="hidden" id="employeeID" value="@item.EmployeeID" />
+                                                <div class="progress_custome">
+                                                    <div class="progress-bar progress-bar-success"> <span>@item.LanguageName</span></div>
+                                                    <div class="progress-bar progress-bar-warning" style="width:35%; border-radius:0 4px 4px 0;">
+                                                        <span class="sr-only"></span>
+                                                    </div>
+                                                    <p class="progress_percentage">70%</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+        </div>
+    </div>
+    
+
+    <!--Work Experience Modal -->
+    <div class="modal fade" id="addWorkExprience" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title workExperienceTitle" id="myModalLabel">Add Work Experience</h4>
+
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" id="AddEditWorkExperience">
+
+                </div>
+                <br />
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btn-submit-WorkExprience">ADD</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Education Modal -->
+    <div class="modal fade" id="addEducation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title educationTitle" id="myModalLabel">Add Education</h4>
+
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" id="AddEditEducation">
+
+                </div>
+                <br />
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btn-submit-Education">ADD</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Qualification Modal -->
+    <div class="modal fade" id="addQualification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title qualificationTitle" id="myModalLabel">Add Qualification</h4>
+
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" id="AddEditQualification">
+
+                </div>
+                <br />
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btn-submit-Qualification">ADD</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Language Modal -->
+    <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title languageTitle" id="myModalLabel">Add Language</h4>
+
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" id="AddEditLanguage">
+
+                </div>
+                <br />
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btn-submit-Language">ADD</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>

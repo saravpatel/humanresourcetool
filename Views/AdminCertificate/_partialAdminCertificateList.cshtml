@@ -1,0 +1,109 @@
+﻿@model IList<HRTool.Models.Admin.AdminCertificateIdViewModel>
+@using HRTool.CommanMethods;
+<div id="AdminCertificateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Certificate</h4>
+            </div>
+            <div class="modal-body" id="AdminCertificateBody">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="table-btns">
+
+    @if (SessionProxy.IsCustomer == true)
+    {
+            @*<a class="btn btn-success btn-circle  btn-add-AdminCertificate" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCertificateModal"><i class="fa fa-plus"></i></a>*@
+            <a class="btn btn-primary btn-circle  btn-edit-AdminCertificate" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCertificateModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+            @*<a class="btn btn-danger btn-circle  btn-delete-AdminCertificate" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>*@
+            <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminCertificate" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+            <button title="Clear Sorting" class="btn btn-info btn-circle  btn-ClearSorting-AdminCertificate" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+            <button class="btn btn-warning btn-circle  btn-clearFilter-AdminCertificate" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+     
+
+    }
+    else
+    {
+        <a class="btn btn-success btn-circle  btn-add-AdminCertificate" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCertificateModal"><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary btn-circle  btn-edit-AdminCertificate" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCertificateModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-circle  btn-delete-AdminCertificate" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i></a>
+        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminCertificate" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminCertificate" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+       @*<button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminCertificate" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"</i></button>*@
+        <button class="btn btn-info btn-circle  btn-clearFilter-AdminCertificate" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+    }
+
+    </div>
+
+
+<div class="table-responsive">
+    <table id="AdminCertificateTable" class="table-bordered display table style2 table-striped dataTable" cellspacing="0">
+        <thead>
+            <tr class="tblHeading">
+                <th>Assigned</th>
+                <th>Job Title</th>
+                <th>Pool</th>
+                <th>Function</th>
+                <th>Certificate</th>
+                <th>Type</th>
+                <th>Due Date</th>
+                <th>Expire in Days</th>
+                <th>Body</th>
+                <th>Number</th>
+                <th>Relation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="@item.Id" class="dataTr">
+                    <td>
+                        @if (item.Status == "Complete")
+                        {
+                            <input type="checkbox" checked="checked" disabled="disabled" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" disabled="disabled" />
+                        }
+                        @item.AssignTo
+                    </td>
+                    <td>@item.JobTitle</td>
+                    <td>@item.Pool</td>
+                    <td>@item.Function</td>
+                    <td>@item.Name</td>
+                    <td>@item.Type</td>
+                    <td>@item.ExpiryDate</td>
+                    <td>@item.AlertBeforeDays</td>
+                    <td>@item.Body</td>
+                    <td>@item.Number</td>
+                    <td>@item.InRelationTo</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="searchTh"><input type="text" class="form-control SearchAssigned" placeholder="Assigned"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchJobTitle" placeholder="Job Title"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchPool" placeholder="Pool"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchFunction" placeholder="Function"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchCertificate" placeholder="Certificate"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchType" placeholder="Type"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchDueDate" placeholder="Due Date"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchExpireinDays" placeholder="Expire in Days"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchBody" placeholder="Body"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchNumber" placeholder="Number"></th>
+                <th class="searchTh"><input type="text" class="form-control SearchRelation" placeholder="Relation"></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

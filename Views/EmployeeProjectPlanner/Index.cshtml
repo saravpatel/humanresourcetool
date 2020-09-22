@@ -1,0 +1,644 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlannerViewModel
+    @using HRTool.CommanMethods;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+
+<style>
+    a {
+        cursor: pointer;
+    }
+
+    #EmployeePlanner_OtherLeaveBody .stepContainer {
+        height: 350px !important;
+    }
+</style>
+
+<div id="EmployeeProjectPlanner_Settings" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel btn-sub-closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title plnner-ProjectSettingsTitle">Employee Allowance Settings</h4>
+            </div>
+            <div class="modal-body" id="EmployeeProjectPlanner_SettingsBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_Settings">Add</button>*@
+                <button type="button" class="btn btn-warning btn-Project-closeModel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="DefaultWorkPatternModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close Close_work" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Work Pattern</h4>
+            </div>
+            <div class="modal-body" id="DefaultWorkPatternBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-DefaultWorkPattern">Add</button>
+                <button type="button" class="btn btn-warning Close_work" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="ReadOnlyWorkPatternModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close Close_work" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Work Pattern</h4>
+            </div>
+            <div class="modal-body" id="ReadOnlyWorkPatternBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-ReadOnlyWorkPattern">Add</button>
+                <button type="button" class="btn btn-warning Close_work" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeeProjectPlanner_Effactive_PublicholidayModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel_Public" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Public Holiday</h4>
+            </div>
+            <div class="modal-body" id="Effactive_PublicholidayModal">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-EmployeeProjectPlanner-EffactiveDateSave">Add</button>
+                <button type="button" class="btn btn-warning closeModel_Public" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="HistoryWorkPattern" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Work Pattern History</h4>
+                <p>View all historic changes made to this part of the employee’s record.</p>
+            </div>
+            <div class="modal-body" id="HistoryWorkPatternBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-DefaultWorkPattern">Add</button>*@
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="PrintPdfModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Print Absence Detail</h4>
+            </div>
+            <div class="modal-body" id="PrintPdfBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-PrintPdf">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+<input type="hidden" value="@Model.cflag" id="isCustomer"/>
+<input type="hidden" value="@Model.yearId" id="serYear"/>
+<input type="hidden" value="@Model.LastCountryId" id="holidayCountryId"/>
+<input type="hidden" value="@Model.currentMonth" id="monthId"/>
+ <section id="hrtool-planner">
+    <div id="planner_main">
+        <div class="planner_header">
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <h3>Project Days</h3>
+                    <div>Days worked in the year : @Model.ProjectDayWorkedInYear</div>
+                    <div>Days worked since ever : @Model.ProjectDayWorkedsinceYear</div>
+                    <div>Days Planned : @Model.ProjectDayPlanned</div>
+                    <div>Total days : @Model.ProjectTotalDays</div>
+                    @*<div class="planner_pieChart widthExtra">
+                        <div class="planner_pieChart_inner secound">
+                            <div id="containerHoliday" style="height: 200px" class="planner-pei-chart-one">
+                            </div>
+                        </div>
+                        <p class="chart-full-data"></p>
+                    </div>
+                    <div class="chart-data">
+                        <span>0</span>
+                        <span>0</span>
+                        <span></span>
+                    </div>
+                    <div class="inner_header_right">
+                        <p>Project (Days)</p>
+                        <ul>
+                            <li class="first">
+                                <span class="co"></span>
+                                <span class="leaveDays ng-binding">@Model.ProjectbookDays booked</span>
+                            </li>
+                            <li class="secound">
+                                <span class="co co2nd"></span>
+                                <span class="leaveDays ng-binding">@Model.ProjectRemainingDays remaining</span>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+
+                <div class="col-sm-3">
+                    <h3>Travel Days</h3>
+                    <div>Travel days in the year : @Model.TravelDayInYear</div>
+                    <div>Travel days since ever : @Model.TravelDaySinceYear</div>
+                    <div>Travel Planned : @Model.TravelDayPlanned</div>
+                    <div>Total Travel days : @Model.TravelTotalDays</div>
+                    @*<div class="planner_pieChart widthExtra-one">
+                        <div class="planner_pieChart_inner chartWidth">
+                            <div id="containerTravelLeave" style="height: 200px" class="planner-pei-chart-one">
+                            </div>
+                        </div>
+                        <p class="chart-full-data"></p>
+                    </div>
+                    <div class="chart-data">
+                        <span>0</span>
+                        <span>365</span>
+                        <span>365</span>
+                    </div>
+                    <div class="inner_header_right">
+                        <p>Travel(Days)</p>
+                        <ul>
+                            <li class="first">
+                                <span class="co"></span>
+                                <span class="leaveDays">@Model.TravelDays days travel</span>
+                            </li>
+                            <li class="secound">
+                                <span class="co co2nd"></span>
+                                <span class="leaveDays">@Model.TravelWorkingDays working day</span>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+
+                <div class="col-sm-3">
+                    <h3>Uplift Days</h3>
+                    <div>Uplift days in the year : @Model.UpliftDayInYear</div>
+                    <div>Uplift days since ever : @Model.UpliftDaySinceYear</div>
+                    <div>Total Uplift days : @Model.UpliftTotalDays</div>
+                    @*<div class="planner_pieChart widthExtra">
+                        <div class="planner_pieChart_inner secound">
+                            <div id="containerTimeSheet" style="height: 200px" class="planner-pei-chart-one">
+                            </div>
+                        </div>
+                        <p class="chart-full-data"></p>
+                    </div>
+                    <div class="chart-data">
+                        <span>0</span>
+                        <span>0</span>
+                        <span></span>
+                    </div>
+                    <div class="inner_header_right">
+                        <p>Timesheet (Days)</p>
+                        <ul>
+                            <li class="first">
+                                <span class="co"></span>
+                                <span class="leaveDays ng-binding">@Model.TimeSheetbookDays booked</span>
+                            </li>
+                            <li class="secound">
+                                <span class="co co2nd"></span>
+                                <span class="leaveDays ng-binding">@Model.TimeSheetRemainingDays remaining</span>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+                @if (SessionProxy.IsCustomer == true)
+                {
+
+                }
+                else
+                {
+                <div class="col-sm-3">
+                    <h3>Timesheet Days</h3>
+                    <div>Timesheet approved in the year : @Model.TimesheetApprovedIntheYear</div>
+                    <div>Timesheet approved since ever : @Model.TimesheetApprovedSinceYear</div>
+                    <div>Timesheet awaiting for approval : @Model.TimesheetAwaitingForApproval</div>
+                    @*<div class="planner_pieChart widthExtra">
+                        <div class="planner_pieChart_inner secound">
+                            <div id="containerUpliftLeaves" style="height: 200px" class="planner-pei-chart-one">
+                            </div>
+                        </div>
+                        <p class="chart-full-data"></p>
+                    </div>
+                    <div class="chart-data">
+                        <span>0</span>
+                        <span>0</span>
+                        <span></span>
+                    </div>
+                    <div class="inner_header_right">
+                        <p>Uplift (Days)</p>
+                        <ul>
+                            <li class="first">
+                                <span class="co"></span>
+                                <span class="leaveDays ng-binding">@Model.UpliftbookDays booked</span>
+                            </li>
+                            <li class="secound">
+                                <span class="co co2nd"></span>
+                                <span class="leaveDays ng-binding">@Model.UpliftRemainingDays remaining</span>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+                }
+            </div>
+        </div>
+        <div class="row">            
+            <div class="col-sm-3">
+                @if (SessionProxy.IsCustomer == true)
+                {
+                <label for="normal_working" >Filter by Projects</label>
+                    <select id="drp-project" class="form-control">
+                        @foreach (var item in Model.ProjectList)
+                        {
+                                <option value="@item.Value">@item.Text</option>                            
+                        }
+                    </select>
+                }
+                else { }
+            </div>
+            <div class="col-sm-3">
+                @if (SessionProxy.IsCustomer == true)
+                {
+                <label for="normal_working" >Filter by Year</label>
+                <select class="form-control" id="drpYear">
+                    <option value="0">-- Select Year --</option>
+                     @foreach (var item in Model.ListOfYear)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                     }
+                </select>}
+                else { }
+            </div>
+
+        </div>
+        <div class="planner_calendar_header">
+            <div class="planner_settings">
+                <ul>
+                    <li class="dropdown">
+                        <div class="calculation">
+                            <div class="innerCalculation">
+                                Public Holiday :
+                            </div>
+                            <input type="hidden" id="Employee_CountryID" value="@Model.LastCountryId" />
+                            @if (SessionProxy.IsCustomer == true)
+                            {
+                                <select id="drp-publicHolidayCountry" class="planner-select" disabled>
+                                    <option value="0">-- Select --</option>
+                                    @foreach (var item in Model.CountryList)
+                                    {
+                                        if (item.Value == Model.LastCountryId.ToString())
+                                        {
+                                            <option value="@item.Value" selected="selected">@item.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <select id="drp-publicHolidayCountry" class="planner-select">
+                                    <option value="0">-- Select --</option>
+                                    @foreach (var item in Model.CountryList)
+                                    {
+                                        if (item.Value == Model.LastCountryId.ToString())
+                                        {
+                                            <option value="@item.Value" selected="selected">@item.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+
+                                </select>
+                            }
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="calculation">
+                            <div class="innerCalculation">
+                                @if (SessionProxy.IsCustomer == true)
+                                {
+                                    <a class="btn-PlannerProjectSettings" data-backdrop="static" data-keyboard="false">Settings</a>
+                                }
+                                else
+                                {
+                                    <a class="btn-PlannerProjectSettings" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#EmployeeProjectPlanner_Settings">Settings</a>
+                                }
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fixwidthcalculation">
+                        <div class="calculation">
+                            <div class="innerCalculation">
+                                Work Pattern :
+                            </div>
+                            <input type="hidden" id="Employee_WorkPatternID" value="@Model.WorkPattern" />
+                            @if (SessionProxy.IsCustomer == true)
+                            {
+                                <select id="drp_DefaultWorkPattern" class="planner-select" disabled>
+                                    @foreach (var item in Model.WorkPatternList)
+                                    {
+                                        if (item.Value == Model.WorkPattern.ToString())
+                                        {
+                                            <option data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal" value="@item.Value" selected="selected">@item.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal" value="@item.Value">@item.Text</option>
+                                        }
+
+                                    }
+                                    <option value="AddNew_WorkPattern" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal"> + Add New</option>
+                                    @*
+                                        <option>Monday to Friday 9am to 5.00pm (35 Hrs)</option>
+                                        <option>Monday to Friday 9am to 17.30pm (37.5 Hrs)</option>
+                                        <option>Rotating Monday to Friday 9am to 17.00pm (35 Hrs)</option>*@
+                                </select>
+                                <a class="spritesheet" data-backdrop="static" data-keyboard="false"></a>
+                            }
+                            else
+                            {
+                                <select id="drp_DefaultWorkPattern" class="planner-select">
+                                @foreach (var item in Model.WorkPatternList)
+                                {
+                                    if (item.Value == Model.WorkPattern.ToString())
+                                    {
+                                        <option data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal" value="@item.Value" selected="selected">@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal" value="@item.Value">@item.Text</option>
+                                    }
+
+                                }
+                                <option value="AddNew_WorkPattern" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal"> + Add New</option>
+                                @*
+                                    <option>Monday to Friday 9am to 5.00pm (35 Hrs)</option>
+                                    <option>Monday to Friday 9am to 17.30pm (37.5 Hrs)</option>
+                                    <option>Rotating Monday to Friday 9am to 17.00pm (35 Hrs)</option>*@
+                            </select>
+                            <a class="spritesheet WorkPatternHistory" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#HistoryWorkPattern"></a>
+
+                            }
+                        </div>
+                    </li>
+                    <li>
+
+                        <a onclick="showPrintOption()" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#PrintPdfModel" class="spritesheet planner_settings_print">
+                            <span class="icnprint"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="changemonth">
+                <a class="changemonth_previous" data-yearid="@Model.yearId">
+                    <span class="plannerarrowleft"></span>
+                </a>
+                <span class="yearsName">January @Model.yearId - December @Model.yearId</span>
+                <a class="changemonth_next" data-yearid="@Model.yearId">
+                    <span class="plannerarrowright"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="currentEmployeeId" value="@Model.EmployeeId">
+    <div class="accordion_container">
+        @Html.Action("ListOfMonth", "EmployeeProjectPlanner", new { year = Model.yearId, EmployeeId = Model.EmployeeId, HolidayCountryId = Model.LastCountryId })
+    </div>
+</section>
+
+<script>
+    var constantProjectPlanner = {
+        ListOfMonth: '@Url.Action("ListOfMonth", "EmployeeProjectPlanner")',
+        currentMonth: '@Model.currentMonth',
+        userFullName: '@Model.LoginUserName',
+        addEdit_TimeSheet: '@Url.Action("AddEdit_TimeSheet", "EmployeeProjectPlanner")',
+        addEdit_TimeSheet_Detail: '@Url.Action("AddEdit_TimeSheet_Detail", "EmployeeProjectPlanner")',
+        SaveData_TimeSheet: '@Url.Action("SaveData_TimeSheet", "EmployeeProjectPlanner")',
+        ImageData_TimeSheet: '@Url.Action("TimeSheetImageData", "EmployeeProjectPlanner")',
+        addEdit_TravelLeave: '@Url.Action("AddEdit_Travel", "EmployeeProjectPlanner")',
+        BindState: '@Url.Action("BindStateDropdown", "EmployeeProjectPlanner")',
+        BindCity: '@Url.Action("BindCityDropdown", "EmployeeProjectPlanner")',
+        BindAirport: '@Url.Action("BindAirportDropdown", "EmployeeProjectPlanner")',
+        ImageData_TravelLeave: '@Url.Action("TravelLeaveImageData", "EmployeeProjectPlanner")',
+        SaveData_TravelLeave: '@Url.Action("SaveData_TravelLeave", "EmployeeProjectPlanner")',
+        addEdit_ResourceScheduling: '@Url.Action("AddEdit_Scheduling", "EmployeeProjectPlanner")',
+        BindSettings: '@Url.Action("AnnualSettings", "EmployeeProjectPlanner")',
+        SaveAnnualSettings: '@Url.Action("SaveAnnualSettings", "EmployeeProjectPlanner")',
+        AddEditTOIL: '@Url.Action("AddEditTOIL", "EmployeeProjectPlanner")',
+        SaveTOIL: '@Url.Action("SaveTOIL", "EmployeeProjectPlanner")',
+        BindPublicHolidayTemplate: '@Url.Action("BindPublicHolidayTemplate", "EmployeeProjectPlanner")',
+        SavePublicHolidayTemplate: '@Url.Action("SavePublicHolidayTemplate", "EmployeeProjectPlanner")',
+        addEdit_PublicHoliday: '@Url.Action("GetHolidayDetail", "EmployeeProjectPlanner")',
+        workPatten: '@Url.Action("workPatten", "EmployeeProjectPlanner")',
+        TrueIsRotating: '@Url.Action("TrueIsRotating", "EmployeeProjectPlanner")',
+        SaveFalseRoatingData: '@Url.Action("SaveFalseRoatingData", "EmployeeProjectPlanner")',
+        SaveTrueRoatingData: '@Url.Action("SaveTrueRoatingData", "EmployeeProjectPlanner")',
+        FalseIsRotating: '@Url.Action("FalseIsRotating", "EmployeeProjectPlanner")',
+        SaveEmployeeWorkPattern: '@Url.Action("SaveEmployeeWorkPattern", "EmployeeProjectPlanner")',
+        workPattenHistory: '@Url.Action("WorkPatternHistory", "EmployeeProjectPlanner")',
+        AddAbsencePdfView: '@Url.Action("BindAbsencePdfView", "EmployeeProjectPlanner")',
+        PrintPdf: '@Url.Action("PrintPdfAbsenceLeaves", "EmployeeProjectPlanner")',
+        SaveData_Scheduling: '@Url.Action("SaveData_SchedulingLeaves", "EmployeeProjectPlanner")',
+        addEdit_Uplift: '@Url.Action("AddEdit_Uplift", "EmployeeProjectPlanner")',
+        addEdit_Uplift_Detail: '@Url.Action("AddEdit_Uplift_Detail", "EmployeeProjectPlanner")',
+        SaveData_Uplift: '@Url.Action("SaveData_Uplift", "EmployeeProjectPlanner")',
+        ImageData_Uplift: '@Url.Action("UpliftImageData", "EmployeeProjectPlanner")',
+        workPattenData: '@Url.Action("GetWorkPatternData", "EmployeeProjectPlanner")',
+        searchByProject: '@Url.Action("searchByProject", "EmployeeProjectPlanner")',
+        searchByYear: '@Url.Action("searchByYear", "EmployeeProjectPlanner")',
+    }
+</script>
+
+<script src="~/JS/Resources/ProjectPlanner/EmployeeProjectPlaneerJS.js"></script>
+
+<script type="text/javascript">
+    Highcharts.chart('containerHoliday', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true //,
+                // alpha: 45
+
+            }
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                //innerSize: 100,
+                //depth: 45,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                }
+            }
+        },
+        series: [{
+            name: 'Project Days',
+            data: [
+                [@Model.ProjectbookDays],
+                [@Model.ProjectRemainingDays],
+            ]
+        }]
+    });
+
+    Highcharts.chart('containerTravelLeave', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true //,
+                // alpha: 45
+
+            }
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                //innerSize: 100,
+                //depth: 45,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                }
+            }
+        },
+        series: [{
+            name: 'Travel Days',
+            data: [
+                [@Model.TravelDays],
+                [@Model.TravelWorkingDays],
+            ]
+        }]
+    });
+
+    Highcharts.chart('containerTimeSheet', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true //,
+                // alpha: 45
+
+            }
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                //innerSize: 100,
+                //depth: 45,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                }
+            }
+        },
+        series: [{
+            name: 'TimeSheet',
+            data: [
+                [@Model.TimeSheetbookDays],
+                [@Model.TimeSheetRemainingDays],
+            ]
+        }]
+    });
+    
+   Highcharts.chart('containerUpliftLeaves', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true //,
+                // alpha: 45
+
+            }
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                //innerSize: 100,
+                //depth: 45,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                }
+            }
+        },
+        series: [{
+            name: 'Uplift',
+            data: [
+                [@Model.UpliftbookDays],
+                [@Model.UpliftRemainingDays],
+            ]
+        }]
+    });
+</script>

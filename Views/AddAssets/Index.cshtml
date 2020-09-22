@@ -1,0 +1,48 @@
+﻿@model HRTool.Models.Settings.AddAssetsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<div id="otherSettingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Other Settings</h4>
+            </div>
+            <div class="modal-body" id="otherSettingBody">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-othersetting" onclick="AddOtherSettingValue_Asset()">Add</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="btn-Close-AssetsOtherSetting">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="page_content_inner">
+    <br />
+    <h1 class="page-title">Asset List</h1>
+    
+    <div class="">
+        <div class="">
+            <div id="tableDiv">
+                @Html.Action("List", "AddAssets")
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/Settings/AddAssets/AddAssetsJS.js"></script>
+
+<script>
+    var constant = {
+        saveAssetsData: '@Url.Action("CreateAssestRecord", "AddAssets")',
+        addEdit: '@Url.Action("AddEditAssetSkillsSet", "AddAssets")',
+        DeleteAsseteUrl: '@Url.Action("DeleteAssetRecord", "AddAssets")',
+        AddeditOtherSetting: '@Url.Action("AddEditOtherSetting", "AddAssets")',
+        saveOtherSetting: '@Url.Action("saveOtherSetting", "AddAssets")',
+    };
+</script>

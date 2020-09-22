@@ -1,0 +1,84 @@
+﻿@model HRTool.Models.Settings.TimeSheetViewModel
+@{
+    ViewBag.Title = "TimeSheet Setting";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+    <br/>
+
+
+
+
+    <h1 class="page-title">
+        Timesheet (Assignment)
+        <small>Define the parameters for time recording within your company</small>
+    </h1>
+
+
+    <div class="md-card">
+        <div >
+            <div class="row marbot10" style="padding:10px;">
+                <div class="col-md-2">
+                    <label class="control-label" for="systemListName">Assignment</label>
+                </div>
+                <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="First level of time recording Such as name of a project">
+                    <select class="form-control" id="Project">
+                        @foreach (var Project in Model.ProjectList)
+                        {
+                            <option value="@Project.Value">@Project.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-Assignment" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row marbot10" style="padding:10px;">
+                <div class="col-md-2">
+                    <label class="control-label" for="systemListName">Frequency</label>
+                </div>
+                <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Second level of time recording such as a specific task with a project">
+                    <select class="form-control" id="Frequency">
+                        @foreach (var Frequency in Model.FrequencyList)
+                        {
+                            <option value="@Frequency.Value">@Frequency.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-Frequency" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row marbot10" style="padding:10px;">
+                <div class="col-md-2">
+                    <label class="control-label" for="systemListName">Detail</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" id="Detail" data-toggle="tooltip" data-placement="right" title="Further breakdown of a task">
+                        @foreach (var Detail in Model.DetailList)
+                        {
+                            <option value="@Detail.Value">@Detail.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-Detail" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row"style="padding:10px;">
+                <div class="col-lg-12">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var constantTimeSetting = {
+        saveData: '@Url.Action("SaveData", "TimeSheetSettings")'
+    }
+</script>
+<script src="~/JS/Settings/TimeSheetSettingsJS.js"></script>

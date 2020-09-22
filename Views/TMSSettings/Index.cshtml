@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<div id="page_content_inner" class="settingPage">
+    <br />
+
+    <h1 class="page-title">
+        Talent Management System
+        <small>Here you can create and define different categories for your recruitment pipeline</small>
+    </h1>
+    <div class="md-card">
+       
+            <div id="tableDiv">
+                @Html.Action("TMSSettingsList", "TMSSettings")
+            </div>
+
+<script type="text/javascript">
+    var constantTMSSettings = {
+        tmsList:'@Url.Action("TMSSettingsList", "TMSSettings")',
+        addEdit: '@Url.Action("AddEditTMSSetting", "TMSSettings")',
+        bindSteps:'@Url.Action("AddStep","TMSSetting")',
+        Save: '@Url.Action("SaveTMSSetting", "TMSSettings")',
+        Edit: '@Url.Action("EditTMSSetting", "TMSSettings")',
+        Delete: '@Url.Action("DeleteTMSSetting", "TMSSettings")',
+        Copy: '@Url.Action("CopyTMSSetting", "TMSSettings")',
+        StepMove: '@Url.Action("StepMoveTMSSetting", "TMSSettings")',
+        StaticStepMoveTmsSetting: '@Url.Action("StaticStepMoveTmsSetting", "TMSSettings")',
+        StepMoveCompetency: '@Url.Action("StepMoveCompetencyTMSSetting", "TMSSettings")',
+        StepSwapData: '@Url.Action("SegmentStepSectionCreate", "TMSSettings")',
+        CompetencySwapData: '@Url.Action("SegmentCompetencieSectionCreate", "TMSSettings")',
+    };
+
+</script>
+
+<script src="~/JS/Settings/TMSSettings/TMSSettingsJS.js"></script>
+

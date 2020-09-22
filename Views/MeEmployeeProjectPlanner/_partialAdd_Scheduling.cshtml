@@ -1,0 +1,319 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlanner_Scheduling_DocumentsViewModel
+
+<style>
+    .Display {
+        display: none;
+    }
+</style>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+        <input type="hidden" value="@Model.Id" id="HiddenId" />
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+        <span class="icheck-inline icheck-inline-custome text-center">
+            <label class="inline-label">
+                <input type="radio" name="lessThanADay" id="adayormore" class="Scheduling_radio" @(Model.IsDayOrMore == true ? "checked" : "")>
+                A day or more
+            </label>
+        </span>
+        <span class="icheck-inline icheck-inline-custome  text-center">
+            <label class="inline-label">
+
+                <input type="radio" name="lessThanADay" id="lessThanADay" class="Scheduling_radio" @(Model.IsLessThenADay == true ? "checked" : "")>
+
+                Less than a day
+            </label>
+        </span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div id="div_ADayOrMore" class="@(Model.IsDayOrMore == true ? "" : "Display")">
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Start Date *</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">End Date *</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Duration</label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" value="@Model.DurationDays" id="txt_DurationDays" class="form-control" readonly="readonly" />
+        </div>
+        <div class="col-md-4" style="padding-left:0px;">
+            <label style="margin-top:5px;">Days</label>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+<div id="div_LessThenADay" class="@(Model.IsDayOrMore == true ? "Display" : "")">
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Date *</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" value="@Model.StartDate" id="txt_LessThenStartDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-LessThenStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="InTimeSD">Start*</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                <select id="drp-HourseListSD" class="form-control" >
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.InTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                <select id="drp-MinutesListSD" class="form-control" >
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.InTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">In time is required.</span>
+            <span class="field-validation-error" id="lbl-error-validtimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">Please select valid time.</span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="InTimeED">End*</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                <select id="drp-HourseListED" class="form-control">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.EndTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                <select id="drp-MinutesListED" class="form-control">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.EndTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTimeED" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">In time is required.</span>
+
+        </div>
+    </div>
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="Duration">Duration</label>
+        </div>
+        <div class="col-md-2">
+            <input type="text" value="@Model.DurationHr" id="txt_DurationHours" class="form-control" readonly="readonly" />
+        </div>
+        <div class="col-md-4" style="padding-left:0px;">
+            <label style="margin-top:5px;">Hours</label>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-DurationHours" style="display:none;" data-valmsg-for="DurationHours" data-valmsg-replace="true">Please select valid time.</span>
+        </div>
+    </div>
+
+    </div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+
+        <label class="control-label" for="StatusList">Customer</label>
+    </div>
+    <div class="col-md-6">
+        <input type="hidden" id="selectID" value="@Model.CustomerId"/>
+        <input type="text" class="awesomplete form-control" id="empNameText" size="70" value="@Model.Customer" placeholder="Employee Name" />
+        @*<select id="drp-Customer" class="form-control">
+            @foreach (var item in Model.CustomerList)
+            {
+                if (Model.Customer == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>*@
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Customer" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Please select Customer .</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+
+        <label class="control-label" for="StatusList">Project</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-Project" class="form-control">
+            @foreach (var item in Model.ProjectList)
+            {
+                if (Model.Project.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Project" style="display:none;" data-valmsg-for="Project" data-valmsg-replace="true">Please select Project .</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+
+        <label class="control-label" for="StatusList">Asset</label>
+    </div>
+    <div class="col-md-6">
+        <select id="drp-Asset" class="form-control">
+            @foreach (var item in Model.AssetList)
+            {
+                if (Model.Asset.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Asset" style="display:none;" data-valmsg-for="Asset" data-valmsg-replace="true">Please select Asset .</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Supporting Comments</label>
+    </div>
+    <div class="col-md-6">
+        <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comments</textarea>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+    </div>
+</div>
+<script>
+        var getEmpployee = { getEmpData: '@Url.Action("getEmployee", "MeEmployeeProjectPlanner")', }
+</script>
+<script type="text/javascript">
+    var listData = [];
+    getEmployeeData();
+    function getEmployeeData()
+    {
+        var id = $("#currentEmployeeId").val();
+        $.ajax({
+            url: getEmpployee.getEmpData,
+            data: { Id: id },
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                debugger;
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+            }
+        });
+    }
+  
+</script>

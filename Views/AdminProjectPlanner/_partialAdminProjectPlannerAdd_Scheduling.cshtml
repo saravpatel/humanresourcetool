@@ -1,0 +1,594 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlanner_Scheduling_DocumentsViewModel
+
+
+
+<style>
+    .Display {
+        display: none;
+    }
+</style>
+<input type="hidden" value="@Model.isScheduling" id="isSchedulingDrillDown" />
+<input type="hidden" value="@Model.isMonth" id="isSchedulingmonth" />
+<input type="hidden" value="@Model.isWorkPatternExist" id="isWorkpatternExistModel" />
+<input type="hidden" value="@Model.isWorkPatternLeave" id="isWorkpatternLeave" />
+
+<div class="row marbot10">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+        @*<input type="hidden" value="@Model.Id" id="HiddenId" />*@
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+        <span class="icheck-inline icheck-inline-custome text-center">
+            <label class="inline-label">
+                @if(Model.flag == 1){
+                 <input type="radio" name="lessThanADay" id="adayormore" class="Scheduling_radio" @(Model.IsDayOrMore == true ? "checked" : "")>
+                }
+                else
+                {
+                    <input type="radio" name="lessThanADay" id="adayormore" class="Scheduling_radio" @(Model.IsDayOrMore == true ? "checked" : "") disabled>
+                }
+                A day or more
+            </label>
+        </span>
+        <span class="icheck-inline icheck-inline-custome  text-center">
+            <label class="inline-label">
+                @if (Model.flag == 1) {
+                    <input type="radio" name="lessThanADay" id="lessThanADay" class="Scheduling_radio" @(Model.IsLessThenADay == true ? "checked" : "")>                }
+                else
+                {
+                    <input type="radio" name="lessThanADay" id="lessThanADay" class="Scheduling_radio" @(Model.IsLessThenADay == true ? "checked" : "") disabled>
+                }
+                Less than a day
+            </label>
+        </span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Select Resource</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.EmployeeName == null)
+        {
+        <input type="hidden" id="selectResourceID" />
+        <input type="text" class="awesomplete form-control" id="ResourceNameText" size="70" placeholder="Employee Name" />
+        }
+        else
+        {
+            <input type="hidden" id="selectResourceID" value="@Model.EmployeeId"/>
+            <input type="text" class="awesomplete form-control" id="ResourceNameText" value="@Model.EmployeeName" size="70" placeholder="Employee Name" disabled/>
+        }
+
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Resource" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Please select Resource.</span>
+    </div>
+</div>
+<div id="div_ADayOrMore" class="@(Model.IsDayOrMore == true ? "" : "Display")">
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Start Date *</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.flag == 1 && Model.isScheduling == 0)
+            {
+                <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+            }
+            else
+            {
+                <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" disabled/>
+            }
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-StartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+            <span class="field-validation-error" id="lbl-error-ExistStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">You Already Filled Scheduling Sheet.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">End Date *</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.flag == 1)
+            {
+                <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+            }
+            else
+            {
+                <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" disabled/>
+            }
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+            <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Duration</label>
+        </div>
+        <div class="col-md-2">
+            @if (Model.flag == 1)
+            {
+                <input type="text" value="@Model.DurationDays" id="txt_DurationDays" class="form-control" readonly="readonly" />
+            }
+            else
+            {
+                <input type="text" value="@Model.DurationDays" id="txt_DurationDays" class="form-control" readonly="readonly" disabled/>
+            }
+        </div>
+        <div class="col-md-4" style="padding-left:0px;">
+            <label style="margin-top:5px;">Days</label>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+</div>
+
+<div id="div_LessThenADay" class="@(Model.IsDayOrMore == true ? "Display" : "")">
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="StatusList">Date *</label>
+        </div>
+        <div class="col-md-6">
+            @if (Model.flag == 1 && Model.isScheduling == 0)
+            {
+                 <input type="text" value="@Model.StartDate" id="txt_LessThenStartDate" class="form-control" />
+            }
+            else
+            {
+                <input type="text" value="@Model.StartDate" id="txt_LessThenStartDate" class="form-control" disabled/>
+            }
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-LessThenStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+            <span class="field-validation-error" id="lbl-error-EndExistStartDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">You Already Filled Scheduling Sheet.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="InTimeSD">Start*</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                @if (Model.flag == 1)
+                {
+                    <select id="drp-HourseListSD" class="form-control">
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.InTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }                
+                </select>
+                }
+                else
+                {
+                    <select id="drp-HourseListSD" class="form-control" disabled>
+                        @foreach (var item in Model.HoursList)
+                        {
+                            if (Model.InTimeHr.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                @if (Model.flag ==1)
+                {
+                    <select id="drp-MinutesListSD" class="form-control" >
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.InTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+                }
+                else
+                {
+                    <select id="drp-MinutesListSD" class="form-control"  disabled>
+                        @foreach (var item in Model.MinutesList)
+                        {
+                            if (Model.InTimeMin.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">In time is required.</span>
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="InTimeED">End*</label>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group spinner">
+                @if (Model.flag == 1)
+                {
+                <select id="drp-HourseListED" class="form-control" >
+                    @foreach (var item in Model.HoursList)
+                    {
+                        if (Model.EndTimeHr.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>}
+                else
+                {
+                    <select id="drp-HourseListED" class="form-control" disabled>
+                        @foreach (var item in Model.HoursList)
+                        {
+                            if (Model.EndTimeHr.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group spinner">
+                @if (Model.flag == 1)
+                {
+                <select id="drp-MinutesListED" class="form-control">
+                    @foreach (var item in Model.MinutesList)
+                    {
+                        if (Model.EndTimeMin.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>}
+                else
+                {
+                    <select id="drp-MinutesListED" class="form-control" disabled>
+                        @foreach (var item in Model.MinutesList)
+                        {
+                            if (Model.EndTimeMin.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-InTimeED" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">In time is required.</span>
+            <span class="field-validation-error" id="lbl-error-validtimeSD" style="display:none;" data-valmsg-for="InTimeSD" data-valmsg-replace="true">Please select valid time.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <div class="col-md-3">
+            <label class="control-label" for="Duration">Duration</label>
+        </div>
+        <div class="col-md-2">
+            @if (Model.flag==1)
+            {
+            <input type="text" value="@Model.DurationHr" id="txt_DurationHours" class="form-control" readonly="readonly" />}
+            else
+            {
+                <input type="text" value="@Model.DurationHr" id="txt_DurationHours" class="form-control" readonly="readonly" disabled/>
+            }
+        </div>
+        <div class="col-md-4" style="padding-left:0px;">
+            <label style="margin-top:5px;">Hours</label>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-DurationHours" style="display:none;" data-valmsg-for="DurationHours" data-valmsg-replace="true">Please select valid time.</span>
+        </div>
+    </div>
+
+    </div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+
+        <label class="control-label" for="StatusList">Customer *</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.flag == 1)
+        {
+            <input type="hidden" id="selectID" value="@Model.CustomerId"/>
+            <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.Customer" size="70" placeholder="Employee Name" />
+        }
+        else
+        {
+            <input type="hidden" id="selectID" value="@Model.CustomerId" />
+            <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.Customer" size="70" placeholder="Employee Name" disabled/>
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Customer" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Please select Customer.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+
+        <label class="control-label" for="StatusList">Project *</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.flag == 1)
+        {
+        <select id="drp-Project" class="form-control">
+            @foreach (var item in Model.ProjectList)
+            {
+                if (Model.Project.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+        }
+        else
+        {
+            <select id="drp-Project" class="form-control" disabled>
+                @foreach (var item in Model.ProjectList)
+                {
+                    if (Model.Project.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Project" style="display:none;" data-valmsg-for="Project" data-valmsg-replace="true">Please select Project .</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Asset *</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.flag == 1)
+        {<select id="drp-Asset" class="form-control">
+            @foreach (var item in Model.AssetList)
+            {
+                if (Model.Asset.ToString() == item.Value)
+                {
+                    <option value=@item.Value selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
+            }
+        </select>
+        }
+        else
+        {
+            <select id="drp-Asset" class="form-control" disabled>
+                @foreach (var item in Model.AssetList)
+                {
+                    if (Model.Asset.ToString() == item.Value)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Asset" style="display:none;" data-valmsg-for="Asset" data-valmsg-replace="true">Please select Asset .</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Supporting Comments</label>
+    </div>
+    <div class="col-md-6">
+        @if (Model.flag == 1)
+        {
+            <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comments</textarea>
+        }
+        else
+        {
+            <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone" disabled>@Model.Comments</textarea>
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+    </div>
+</div>
+<script>
+    var getEmpployee = {
+        getEmpData: '@Url.Action("getEmployee", "AdminProjectPlanner")',
+        getCustomerData: '@Url.Action("getCusetomerListData", "AdminProjectPlanner")',
+        checkEmployeeWorkPattern: '@Url.Action("EmployeeWorkPatternExist", "AdminProjectPlanner")',
+    }
+</script>
+<script>
+    test();
+    testCustomer();
+    function test() {
+        var resourceList = [];
+        $.ajax({
+            url: getEmpployee.getEmpData,
+            data: { },
+            success: function (data) {
+                //$.each(data.CustomerList, function (index, item) {
+                //    listData.push(item.Text);
+                //});
+                $.each(data.ResourceList, function (index, item) {
+                    resourceList.push(item.Text);
+                })
+                var resInput = document.getElementById("ResourceNameText");
+                debugger;
+                var reAwso = new Awesomplete(resInput, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                reAwso.list = resourceList;
+                var resvalue = '';
+                var reseid = '';
+                $('#ResourceNameText').change(function () {
+                    $("#lbl-error-Resource").hide();
+                    resvalue = $('#ResourceNameText').val();
+                    for (var i = 0; i < data.ResourceList.length; i++) {
+                        if (resvalue == data.ResourceList[i].Text) {
+                            reseid = data.ResourceList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectResourceID").val(reseid);
+                    if (reseid != "" && reseid != 0) {
+                        var edate = $("#txt_StartDate").val().trim();
+                        if ($('input[id=lessThanADay]:checked').length > 0) {
+                            edate = $("#txt_LessThenStartDate").val().trim();
+                        }
+                        $.ajax({
+                            url: getEmpployee.checkEmployeeWorkPattern,
+                            type: 'POST',
+                            data: { EmployeeId: reseid, sdate: edate },
+                            success: function (data) {
+                                debugger;
+                                var booleanWork = JSON.stringify(data);
+                                if (data == "True" || data == true) {
+                                    $("#selectResourceID").val(reseid);
+                                }
+                                else if (data == "False" || data == false) {
+                                    $("#selectResourceID").val(0);
+                                    $("#ResourceNameText").val('');
+                                    alert("Please Select Employee WorkPattern");
+                                }
+                            }
+                        });
+                    }
+                    else {
+                    }
+                });
+                //var input = document.getElementById("empNameText");
+                //var awesomplete = new Awesomplete(input, {
+                //    minChars: 1,
+                //    autoFirst: true,
+                //});
+                //awesomplete.list = listData;
+                //var value = '';
+                //var eid = '';
+                //$('#empNameText').change(function () {
+                //    $("#lbl-error-Customer").hide();
+                //    value = $('#empNameText').val();
+                //    for (var i = 0; i < data.CustomerList.length; i++) {
+                //        if (value == data.CustomerList[i].Text) {
+                //            eid = data.CustomerList[i].Value;
+                //            break;
+                //        }
+                //    }
+                //    $("#selectID").val(eid);
+                //});
+             
+            }
+        });
+    }
+    function testCustomer() {
+        var listData = [];
+        var id = $("#currentEmployeeId").val();
+        $.ajax({
+            url: getEmpployee.getCustomerData,
+            data: { Id: id },
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    $("#lbl-error-Customer").hide();
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+            }
+        });
+    }
+
+</script>
+  

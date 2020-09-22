@@ -1,0 +1,389 @@
+﻿@model HRTool.Models.Resources.EmployeeProjectPlanner_UpliftViewModel
+@using HRTool.CommanMethods;
+<input type="hidden" value="@Model.isUpliftDrillDown" id="isUpliftDrillDown" />
+<input type="hidden" value="@Model.isMonth" id="isMonthUplift"/>
+<input type="hidden" value="@Model.isWorkPatternExist" id="isWorkpatternExistModel" />
+<input type="hidden" value="@Model.isWorkPatternLeave" id="isWorkpatternLeave" />
+<input type="hidden" value="@Model.FlagD" id="isEditUplift" />
+<div id="wizard" class="swMain">
+    <ul class="tablistnew two">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Detail
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Document
+            </a>
+        </li>
+    </ul>
+
+    @*<ul class="nav nav-tabs">
+            <li>
+                <a href="#step-1" class="s1">
+                    <span>1</span> Detail
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span> Document
+                </a>
+            </li>
+        </ul>*@
+    <div id="step-1">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <input type="hidden" value="@Model.Id" id="HiddenId" />
+                <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+                <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+                <input type="hidden" value="@Model.day" id="HiddendayId" />
+                <label class="control-label" for="StatusList">Date *</label>
+            </div>
+
+            <div class="col-md-6">
+                @if (Model.FlagD == 1 && Model.isUpliftDrillDown == 0)
+                {
+                    <input type="text" value="@Model.Date" id="txt_Date" class="form-control" />
+                }
+                else
+                {
+                    <input type="text" value="@Model.Date" id="txt_Date" class="form-control" disabled />
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Date" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Date is required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Select Resource</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.FlagD == 1)
+                {
+                    <input type="hidden" id="selectResourceID" value="@Model.EmployeeId" />
+                    <input type="text" class="awesomplete form-control" id="ResourceNameText" value="@Model.EmployeeName" size="70" placeholder="Employee Name" />
+                }
+                else
+                {
+                    <input type="hidden" id="selectResourceID" value="@Model.EmployeeId" disabled />
+                    <input type="text" class="awesomplete form-control" id="ResourceNameText" value="@Model.EmployeeName" size="70" placeholder="Employee Name" disabled />}
+
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Resource" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Please select Resource.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Uplift Position</label>
+            <div class="col-md-6 dropdown">
+                @if (Model.FlagD == 1)
+            {
+                    <select class="form-control" id="drpJobTitle">
+                        @foreach (var Job in Model.JobTitleList)
+                        {
+                            <option value="@Job.Value" @(Job.Value == Model.UpliftPostionId.ToString() ? "Selected" : "")>@Job.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" id="drpJobTitle" disabled>
+                        @foreach (var Job in Model.JobTitleList)
+                        {
+                            <option value="@Job.Value" @(Job.Value == Model.UpliftPostionId.ToString() ? "Selected" : "")>@Job.Text</option>
+                        }
+                    </select>
+                }
+
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10" id="Uplift_detail">
+            @if (Model.FlagD == 1)
+            {
+                foreach (var item in Model.DetailList)
+                {
+                    @Html.Partial("_partialAdd_Uplift_Detail", item);
+                }
+            }
+            else
+            {
+                foreach (var item in Model.DetailList)
+                {
+                    @Html.Partial("_partialAdd_Uplift_Detail", item);
+                }
+            }
+
+        </div>
+
+
+        <div class="row marbot10">
+            <div class="col-md-12">
+                @if (Model.FlagD == 1)
+                {
+                    <input type="button" value="Add New" id="btn_AddNew_UpliftDetail" class="md-btn md-btn-primary" />
+                }
+                else
+                {
+                }
+
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Customer</label>
+            <div class="col-md-6 dropdown">
+                @if (Model.FlagD == 1)
+                {
+                    <input type="hidden" id="selectID" value="@Model.CustomerId " />
+                    <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.Customer" size="70" placeholder="Employee Name" />
+                }
+                else
+                {
+                    <input type="hidden" id="selectID" value="@Model.CustomerId " disabled />
+                    <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.Customer" size="70" placeholder="Employee Name" disabled />
+                }
+
+                @*<select class="form-control" id="drp-Customer">
+                        @foreach (var Job in Model.CustomerList)
+                        {
+                            <option value="@Job.Value" @(Job.Value == Model.CustomerId.ToString() ? "Selected" : "")>@Job.Text</option>
+                        }
+                    </select>*@
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Project</label>
+            <div class="col-md-6 dropdown">
+                @if (Model.FlagD == 1)
+                {
+                    <select class="form-control" id="drp-Project">
+                        @foreach (var Job in Model.ProjectList)
+                        {
+                            <option value="@Job.Value" @(Job.Value == Model.ProjectId.ToString() ? "Selected" : "")>@Job.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="form-control" id="drp-Project" disabled>
+                        @foreach (var Job in Model.ProjectList)
+                        {
+                            <option value="@Job.Value" @(Job.Value == Model.ProjectId.ToString() ? "Selected" : "")>@Job.Text</option>
+                        }
+                    </select>
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="row row-eq-height">
+                <div class="col-sm-3">
+                    <div class="well .col-eq-height" id="totalTodayTime"> Today <br /> @Model.totalHrToday</div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well .col-eq-height">This Week <br />@Model.totalHrOfWeek </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">This Month  <br />@Model.totoalHrInMonth </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Comments</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.FlagD == 1)
+                {
+                    <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone">@Model.Comment</textarea>
+                }
+                else
+                {
+                    <textarea placeholder="Supporting Comments" id="text_Comments" class="form-control textarea-resizeNone" disabled>@Model.Comment</textarea>
+                }
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Comments" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Supporting Comments is required.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-2">
+        <div class="browse-attach">
+            <label type="file" for="UpliftFileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            @if (Model.FlagD == 1)
+            {
+                <input type="file" id="UpliftFileToUpload" style="display: none">
+            }
+            else
+            {
+                <input type="file" id="UpliftFileToUpload" style="display: none" disabled>
+            }
+        </div>
+
+        <div id="filesList">
+            @if (Model.FlagD == 1)
+            {
+                foreach (var item in Model.DocumentList)
+                {
+                    <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+                }
+            }
+            else
+            {
+                foreach (var item in Model.DocumentList)
+                {
+                    <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div></div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<script>
+    var getEmpployee = {
+        getEmpData: '@Url.Action("getEmployee", "AdminProjectPlanner")',
+        getCustomerData: '@Url.Action("getCusetomerListData", "AdminProjectPlanner")',
+        checkEmployeeWorkPattern: '@Url.Action("EmployeeWorkPatternExist", "AdminProjectPlanner")',
+    }
+
+</script>
+<script type="text/javascript">
+    var listData = [];
+    test();
+    testCustomer();
+    function test() {
+        var listData = [];
+        var resourceList = [];
+        $.ajax({
+            url: getEmpployee.getEmpData,
+            data: {},
+            success: function (data) {
+                //$.each(data.CustomerList, function (index, item) {
+                //    listData.push(item.Text);
+                //});
+                $.each(data.ResourceList, function (index, item) {
+                    resourceList.push(item.Text);
+                })
+                debugger;
+                //var input = document.getElementById("empNameText");
+                //var awesomplete = new Awesomplete(input, {
+                //    minChars: 1,
+                //    autoFirst: true,
+                //});
+                //awesomplete.list = listData;
+                //var value = '';
+                //var eid = '';
+                //$('#empNameText').change(function () {
+                //    $("#lbl-error-Customer").hide();
+                //    value = $('#empNameText').val();
+                //    for (var i = 0; i < data.CustomerList.length; i++) {
+                //        if (value == data.CustomerList[i].Text) {
+                //            eid = data.CustomerList[i].Value;
+                //            break;
+                //        }
+                //    }
+                //    $("#selectID").val(eid);
+                //});
+                var resInput = document.getElementById("ResourceNameText");
+                var reAwso = new Awesomplete(resInput, {
+                    minChars: 1,
+                    autoFirst: true,
+                    maxItems: 3,
+                });
+                reAwso.list = resourceList;
+                var resvalue = '';
+                var reseid = '';
+                $('#ResourceNameText').change(function () {
+                    $("#lbl-error-Resource").hide();
+                    resvalue = $('#ResourceNameText').val();
+                    for (var i = 0; i < data.ResourceList.length; i++) {
+                        if (resvalue == data.ResourceList[i].Text) {
+                            reseid = data.ResourceList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectResourceID").val(reseid);
+                    if(reseid!="" && reseid!=0)
+                    {
+                        var edate = $("#EmployeeProjectPlanner_UpliftModel").find("#EmployeeProjectPlanner_UpliftBody").find("#txt_Date").val().trim();
+                        $.ajax({
+                            url: getEmpployee.checkEmployeeWorkPattern,
+                            type: 'POST',
+                            data: { EmployeeId: reseid, sdate: edate },
+                            success: function (data) {
+                               debugger;
+                               var booleanWork = JSON.stringify(data);
+                               if (data == "True" || data == true) {
+                                    $("#selectResourceID").val(reseid);
+                                }
+                               else if (data == "False" || data == false) {
+                                   $("#selectResourceID").val(0);
+                                   $("#ResourceNameText").val('');
+                                   alert("Please Select Employee WorkPattern");
+                                }
+                            }
+                        });
+                    }
+                    else {
+
+                    }
+
+                });
+            }
+        });
+    }
+
+
+
+
+    function testCustomer() {
+        var id = $("#currentEmployeeId").val();
+        $.ajax({
+            url: getEmpployee.getCustomerData,
+            data: { Id: id },
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listData.push(item.Text);
+                });
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    $("#lbl-error-Customer").hide();
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+            }
+        });
+    }
+
+</script>

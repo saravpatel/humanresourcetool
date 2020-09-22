@@ -1,0 +1,28 @@
+﻿@model HRTool.Models.Settings.ProjectViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<div id="page_content_inner">
+    
+     
+    <h1 class="page-title">
+        Project List
+        <small>View company projects or upload a new one.</small>
+    </h1>
+    <div class="md-card">
+        <div >
+            <div id="tableDivProject">
+                @Html.Action("List", "Project")
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/Settings/Project/ProjectJS.js"></script>
+<script>
+    var constantSet = {
+        SaveProject: '@Url.Action("SavData", "Project")',
+        addEdit: '@Url.Action("AddEditProjectSet", "Project")',
+        DeleteProjectUrl: '@Url.Action("DeleteProjectRecord", "Project")'
+    };
+</script>

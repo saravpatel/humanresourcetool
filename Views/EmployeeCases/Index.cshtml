@@ -1,0 +1,47 @@
+﻿@model HRTool.Models.Resources.CaseLogEmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+<style>
+    .stepContainer {
+        height:345px !important;
+    }
+</style>
+
+<div id="page_content_inner">
+    @*<h4 class="heading_a uk-margin-bottom">
+        <div class="icon"><img src="~/Images/listicons/icn-case.png" alt=""></div>*@        
+        <h1 class="page-title">
+            Case Management
+            <small>Manage case details for employees.</small>
+        </h1>
+        <div class="clearfix"></div>
+    @*</h4>*@
+
+    <div class="md-card">
+        <div >
+            <input type="hidden" value="@Model.EmployeeId" id="currntEmployeeId" />
+            <div id="tableDiv">
+                @Html.Action("List", "EmployeeCases", new { EmployeeId = Model.EmployeeId })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+   
+    var constantEmployeeCaseLog = {
+        addEdit: '@Url.Action("AddEditEmployeeCaseLog", "EmployeeCases")',
+        saveData: '@Url.Action("SaveData", "EmployeeCases")',
+        ImageUrl: '@Url.Action("ImageData", "EmployeeCases")',
+        userId: '@Model.EmployeeId',
+        userFullName: '@Model.Name',
+        DeleteData: '@Url.Action("DeleteData", "EmployeeCases")',
+    }
+</script>
+<script src="~/JS/Resources/CaseLog/EmployeeCaseLogJS.js"></script>

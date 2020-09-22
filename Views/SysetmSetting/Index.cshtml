@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "System Settings";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+    <h4 class="heading_a uk-margin-bottom">
+        <br />
+        <div class="icon"><img src="~/Images/listicons/icn-alllists.png" alt=""></div>
+        <div class="titletext">
+            Sysetm Settings
+            <p></p>
+        </div>
+        <div class="clearfix"></div>
+    </h4>
+
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("SystemSetting_List", "SysetmSetting");
+            </div>
+        </div>
+    </div>
+</div>

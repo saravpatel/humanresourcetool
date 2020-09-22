@@ -1,0 +1,73 @@
+﻿@model HRTool.Models.Resources.EmployeePrintPdfViewModel
+
+<style>
+    .Display {
+        display: none;
+    }
+</style>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+        <input type="hidden" value="@Model.EmployeeId" id="EmployeeID" />
+    </div>
+    <div class="col-md-6">
+        <span class="icheck-inline icheck-inline-custome text-center">
+            <label class="inline-label">
+                <input type="radio" name="Absence" id="absenceId" value="Absences" class="Other_leave_radio" @(Model.Absence == true ? "checked" : "")>
+                Absences
+            </label>
+        </span>
+        <span class="icheck-inline icheck-inline-custome  text-center">
+            <label class="inline-label">
+                <input type="radio" name="Absence" id="holidayId" value="Holidays" class="Other_leave_radio" @(Model.Absence == true ? "" : "checked")>
+                Holidays
+            </label>
+        </span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Start Date *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" value="@Model.StartDate" id="txt_StartDate" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error @(Model.StartDateError == true ? "" : "Display")" id="lbl-error-StartDate" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Start Date is required.</span>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">End Date *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" value="@Model.EndDate" id="txt_EndDate" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error @(Model.EndDateError == true ? "" : "Display")" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+        <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+    </div>
+</div>
+
+
+
+<div class="btn-print-pdf">
+    <button type="button" style="float:right;" class="btn btn-warning closeModel_Public" data-dismiss="modal">Close</button>
+
+    <button type="submit" class="btn btn-success" style="float:right;" id="btn-submit-PrintPdf">Print</button>
+</div>
+
+<script type="text/javascript">
+    var constantPdf =
+        {
+            Absence: '@(Model.Absence == true ? "True" : "False")',
+            Holidays: '@(Model.Absence == true ? "False" : "True")',
+            StartDate: '@Model.StartDate',
+            EndDate: '@Model.EndDate'
+        }
+</script>

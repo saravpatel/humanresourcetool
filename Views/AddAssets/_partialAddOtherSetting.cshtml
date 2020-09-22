@@ -1,0 +1,71 @@
+﻿@model HRTool.Models.Settings.OtherSettingViewModel
+@{
+    int count = 0;
+}
+<div class="row marbot10">
+    <div class="col-md-2">
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <label class="control-label" for="systemListName">List Name</label>
+    </div>
+    <div class="col-md-6" style="padding-right:6px;">
+        <input type="text" class="form-control" value="@Model.SystemListName" id="txt-SystemListName" placeholder="List Name" data-toggle="tooltip" data-placement="right" name="SystemListName" title="System List Name" readonly>
+    </div>
+    <div class="col-md-4">
+        <span class="field-validation-error" id="lbl-error-style" SystemListName="display:none;" data-valmsg-for="SystemListName" data-valmsg-replace="true">The List Name is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-2">
+        <label class="control-label" for="systemListName">Values</label>
+    </div>
+    <div class="col-md-10">
+        <table class="table-bordered display table style2 table-striped  dataTable" id="table-value-setting">
+            <thead>
+                <tr>                    
+                    <th>
+                        <input type="text" class="form-control" id="txt-value" placeholder="Add List Value" />
+                        <input type="hidden" id="hidden" value=""/>
+                    </th>
+                    <th>
+                        <button class="btn btn-primary" id="btn-add-value" onclick="AddOtherSettingAssets()"> 
+                            Add Value
+                        </button>
+                        <button class="btn btn-primary" id="btn-edit-value"  style="display: none;">
+                            Edit 
+                        </button>
+                        <button class="btn btn-warning" id="btn-cancel-value" style="display: none;">
+                            Cancel 
+                        </button>
+
+                    </th>
+                </tr>
+                <tr>
+                    <th>List Value</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.valueList)
+                    {
+                        count += 1;
+                    <tr class="valuetr_@item.Id">
+                        <td style="display:none" id="@item.Id">
+                            <input type="hidden" value="@item.Id" id="hidden_@count">@item.Id                        </td>
+                        <td>
+                            @*<label data-valueid="@item.Id">@item.Value</label>*@
+                            <label id="Value_@count">@item.Value</label>
+                            @*<input type="text" id="Value_@count" value="@item.Value" disabled/>@item.Value*@
+                        </td>
+                        <td>
+                            <input type="button" id="btn_@count" class="select-btn" onclick="EditSystemListValue(@count)" value="Edit"/>                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <span class="field-validation-error" id="lbl-error-SystemListValueName" style="display:none;">The List Value is required.</span>
+    </div>
+</div>

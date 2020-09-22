@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //string currentEmployeeId = Request["EmployeeId"].ToString();
+    string currentEmployeeId = Url.RequestContext.RouteData.Values["EmployeeId"].ToString();
+}
+
+<div id="Resource_Menu" class="col-md-2" style="padding-right:4px;padding-left:4px;">
+    @Html.Action("BindMenuIndex", "Employee", new { EmployeeId = currentEmployeeId })
+</div>
+<div class="col-md-10">
+    
+    @RenderBody()
+</div>

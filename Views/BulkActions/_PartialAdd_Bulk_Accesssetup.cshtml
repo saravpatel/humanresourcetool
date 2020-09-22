@@ -1,0 +1,63 @@
+﻿@model HRTool.Models.BulkActions.BulkAccessSetup
+
+<div id="findbtn">
+    <div class="row marbot10">
+        <label class="col-md-3">Access Profile</label>
+        <div class="col-md-6 dropdown">
+            <div class="col-md-6 dropdown">
+                <input type="hidden" id="selectAccesProfile" value="" />
+                <input type="text" class="awesomplete form-control" id="empAccesProfile" size="70" value="" placeholder="Role Name" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="lbl-error-empAccesProfileName" style="display:none;" data-valmsg-for="Value" data-valmsg-replace="true">The access profile name is required.</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btnBulkAccessSetup">Save</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>
+</div>
+<script>
+    var bulkAccesRole = {
+                getEmpAccesRole: '@Url.Action("getAccesRoleData", "BulkActions")',
+    }
+</script>
+<script>
+    searchAccesRole();
+    function searchAccesRole() {
+        var listAccesRole = [];
+        $.ajax({
+            url: bulkAccesRole.getEmpAccesRole,
+            data: {},
+            success: function (data) {
+                $.each(data.AspnetUsersRoleList, function (index, item) {
+                    listAccesRole.push(item.Text);
+                });                
+                //Report To
+                var inpRpTo = document.getElementById("empAccesProfile");
+                var awsRpTo = new Awesomplete(inpRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsRpTo.list = listAccesRole;
+                $('#empAccesProfile').change(function () {
+                    $("#lbl-error-empAccesProfileName").hide();
+                    value = $('#empAccesProfile').val();
+                    for (var i = 0; i < data.AspnetUsersRoleList.length; i++) {
+                        if (value == data.AspnetUsersRoleList[i].Text) {
+                            var eid = data.AspnetUsersRoleList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectAccesProfile").val(eid);
+                });              
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,436 @@
+﻿@model HRTool.Models.Settings.TMSSettingsViewModel
+
+<style>
+    .colorpicker.colorpicker-visible {
+        z-index: 999999 !important;
+    }
+   
+</style>
+
+@*<script src="~/js/jquery-3.3.1.min.js"></script>*@
+@*<script src="~/JS/pick-a-color-1.1.6.min.js"></script>*@
+<script src="~/js/farbtastic.js"></script>
+<link href="~/JS/farbtastic12/farbtastic/farbtastic.css" rel="stylesheet" />
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#picker').farbtastic('#StepColor');
+  });
+</script>
+
+<div class="segments-box">
+    <div class="color-st blue"></div>
+    <h4 class="heading_a">Steps</h4>
+    <div class="performance-grid">
+        <div class="cf nestable-lists">
+            <div class="StepSegmentNestable " style="width:100%">
+               @if(Model.Id != 0)
+               {
+                if (Model.StepList.Count > 0)
+                {
+                    <ol id="MainPageStepSegmentList" class="sortable ui-sortable nestable-static">
+                        @foreach (var item in Model.StepList.OrderBy(x => x.SortId).ToList())
+                        {
+                            if (item.StepName == "Rejected")
+                            {
+                                <li class="ui-state-default static static-item" data-id="@item.Id">
+                                    <div class="spanel">
+                                        <div class="rowsm">
+                                            <div class="col-md-1 col1">
+                                                @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                                <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                                <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                                @*<div class="dd-handle dd3-handle" data-id="@i" id="@i"><i class="fa fa-bars"></i></div>*@
+                                            </div>
+                                            <div class="col-md-11 col11">
+                                                <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                    @item.SortId &nbsp; <b class="liName">@item.StepName</b>
+                                                    @*@item.Id &nbsp; @item.StepName*@ 
+                                                    <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName">
+                                                    <input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                </span>
+                                                <div class="steps_icon">
+                                                    <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                    <a onclick="editRejected(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                                    <a onclick="deleteLi(@item.Id)" style="position: inherit; display: initial;"><i class="material-icons uk-text-danger" style="position: inherit; display: initial;">delete</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else if (item.StepName == "New Applicants")
+                            {
+                                <li class="ui-state-default static static-item" data-id="@item.Id">
+                                    <div class="spanel">
+                                        <div class="rowsm">
+                                            <div class="col-md-1 col1">
+                                                @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                                <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                                <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                            </div>
+                                            <div class="col-md-11 col11">
+                                                <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                    @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                    @*@item.Id &nbsp; @item.StepName*@
+                                                    <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName"><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                </span>
+                                                <div class="steps_icon">
+                                                    <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                    <a onclick="editRejected(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else if (item.StepName == "Talent Pool")
+                            {
+                                <li class="ui-state-default static static-item" data-id="@item.Id">
+                                    <div class="spanel">
+                                        <div class="rowsm">
+                                            <div class="col-md-1 col1">
+                                                @*<i class="material-icons" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                                <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                                <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                            </div>
+                                            <div class="col-md-11 col11">
+                                                <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                    @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                    @*@item.Id &nbsp; @item.StepName*@
+                                                    <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName"><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                </span>
+                                                <div class="steps_icon">                                                                                                        
+                                                    <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                    <a onclick="editTalantPool(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else if (item.StepName == "Accepted")
+                            {
+                                <li class="ui-state-default static static-item" data-id="@Model.stepCount">
+                                    <div class="spanel">
+                                        <div class="rowsm">
+                                            <div class="col-md-1 col1">
+                                                @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                                <i class="fa fa-long-arrow-up" ></i>
+                                                <i class="fa fa-long-arrow-down"></i>
+                                            </div>
+                                            <div class="col-md-11 col11">
+                                                <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                    @item.SortId &nbsp;<b class="liName">@item.StepName</b> 
+                                                    <input type="hidden" class="AddStepName" id="AddStepName_@Model.stepCount" value='@item.StepName'><input type="hidden" class="AddStepColor" id="AddStepColor_@Model.stepCount" value='@item.ColorCode'>
+                                                </span>
+                                                <div class="steps_icon">
+                                                    <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                    <a onclick="editAccepted(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            //else if (item.StepName != "Rejected" && item.StepName != "Talent Pool" && item.StepName != "New Applicants" && item.StepName != "Accepted")
+                            else
+                            {
+                                <li class="ui-state-default static-item" data-id='@item.Id' id='@item.Id'>
+                                    <div class="spanel"> <div class="rowsm"> <div class="col-md-1 col1"> 
+                                       @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                      <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                      <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                        </div> <div class="col-md-11 col11"> <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">@item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                        <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value='@item.StepName'><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode"> </span> 
+                                        <div class="steps_icon"> <a> <i class="fa fa-square" style="color:@item.ColorCode; position: inherit; display: initial;"></i></a>
+                                        <a onclick="editOthers(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                        <a onclick="deleteLi(@item.Id)" style="position: inherit; display: initial;"><i class="material-icons uk-text-danger" style="position: inherit; display: initial;">delete</i></a></div></div></div></div>
+                                </li>
+                            }
+
+                        }
+                    </ol>
+                   }
+               }
+
+               else
+               {
+                <ol id="MainPageStepSegmentList" class="sortable ui-sortable nestable-static">
+                    @foreach (var item in Model.StepList)
+                    {
+                        if (item.StepName == "Rejected")
+                        {
+                            <li class="ui-state-default static static-item" data-id="@item.Id">
+                                <div class="spanel">
+                                    <div class="rowsm">
+                                        <div class="col-md-1 col1">
+                                            @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                            <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                            <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                            @*<div class="dd-handle dd3-handle" data-id="@i" id="@i"><i class="fa fa-bars"></i></div>*@
+                                        </div>
+                                        <div class="col-md-11 col11">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                @item.SortId &nbsp; <b class="liName">@item.StepName</b>
+                                                @*@item.Id &nbsp; @item.StepName*@
+                                                <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName">
+                                                <input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                <input type="hidden" class="AddID"  value="@item.Id">
+                                                <input type="hidden" class="SortID" value="@item.SortId">
+
+
+                                            </span>
+                                            <div class="steps_icon">
+                                                <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                <a onclick="editRejected(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                           
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else if (item.StepName == "New Applicants")
+                        {
+                            <li class="ui-state-default static static-item" data-id="@item.Id">
+                                <div class="spanel">
+                                    <div class="rowsm">
+                                        <div class="col-md-1 col1">
+                                            @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                            <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                            <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                        </div>
+                                        <div class="col-md-11 col11">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                @*@item.Id &nbsp; @item.StepName*@
+                                                <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName"><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                <input type="hidden" class="AddID" value="@item.Id">
+                                                <input type="hidden" class="SortID" value="@item.SortId">
+
+
+                                            </span>
+                                            <div class="steps_icon">
+                                                <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                <a onclick="editRejected(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else if (item.StepName == "Talent Pool")
+                        {
+                            <li class="ui-state-default static static-item" data-id="@item.Id">
+                                <div class="spanel">
+                                    <div class="rowsm">
+                                        <div class="col-md-1 col1">
+                                            @*<i class="material-icons" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                            <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                            <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                        </div>
+                                        <div class="col-md-11 col11">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                @*@item.Id &nbsp; @item.StepName*@
+                                                <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value="@item.StepName"><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                <input type="hidden" class="AddID" value="@item.Id">
+                                                <input type="hidden" class="SortID" value="@item.SortId">
+
+
+                                            </span>
+                                            <div class="steps_icon">
+                                                <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                <a onclick="editTalantPool(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else if (item.StepName == "Accepted")
+                        {
+                            <li class="ui-state-default static static-item" data-id="@Model.stepCount">
+                                <div class="spanel">
+                                    <div class="rowsm">
+                                        <div class="col-md-1 col1">
+                                            @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                            <i class="fa fa-long-arrow-up" ></i>
+                                            <i class="fa fa-long-arrow-down" ></i>
+                                        </div>
+                                        <div class="col-md-11 col11">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                <input type="hidden" class="AddStepName" id="AddStepName_@Model.stepCount" value='@item.StepName'><input type="hidden" class="AddStepColor" id="AddStepColor_@Model.stepCount" value='@item.ColorCode'>
+                                                <input type="hidden" class="AddID" value="@item.Id">
+                                                <input type="hidden" class="SortID" value="@item.SortId">
+
+
+                                            </span>
+                                            <div class="steps_icon">
+                                                <a><i class="fa fa-square" style="color: @item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                <a onclick="editAccepted(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        //else if (item.StepName != "Rejected" && item.StepName != "Talent Pool" && item.StepName != "New Applicants" && item.StepName != "Accepted")
+                        else
+                        {
+                            <li class="ui-state-default static-item" data-id='@item.Id' id='@item.Id'>
+                                <div class="spanel">
+                                    <div class="rowsm">
+                                        <div class="col-md-1 col1">
+                                            @*<i class="material-icons swap_verticon" onclick="swapData(@item.Id,@item.SortId,@Model.Id)">swap_vert</i>*@
+                                            <i class="fa fa-long-arrow-up tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,1)"></i>
+                                            <i class="fa fa-long-arrow-down tmscursor-size" onclick="swapData(@item.Id,@item.SortId,@Model.Id,0)"></i>
+                                        </div> <div class="col-md-11 col11">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;">
+                                                @item.SortId &nbsp;<b class="liName">@item.StepName</b>
+                                                <input type="hidden" class="AddStepName" id="AddStepName_@item.Id" value='@item.StepName'><input type="hidden" class="AddStepColor" id="AddStepColor_@item.Id" value="@item.ColorCode">
+                                                <input type="hidden" class="AddID" value="@item.Id">
+                                                <input type="hidden" class="SortID" value="@item.SortId">
+
+
+                                            </span>
+                                            <div class="steps_icon">
+                                                <a> <i class="fa fa-square" style="color:@item.ColorCode; position: inherit; display: initial;"></i></a>
+                                                <a onclick="editOthers(@item.Id)" data-toggle="modal" data-target="#StepSegmentModel" style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a>
+                                                <a onclick="deleteLi(@item.Id)" style="position: inherit; display: initial;"><i class="material-icons uk-text-danger" style="position: inherit; display: initial;">delete</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    }
+                </ol>
+               }
+
+            </div>
+        </div>
+        <div data-toggle="modal" data-target="#StepSegmentModel">
+            <button class="btn btn-info" onclick="btnAddStep()" style="margin-top: 30px;width:100%;" id="StepSegmentclass">Add Step</button>
+        </div>
+    </div>
+</div>
+
+<div id="StepSegmentModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title stepsTitle">Add Step</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row marbot10">
+                            <div class="form-group">
+
+                                <input type="hidden" id="stepCountID" value="" />
+
+                                <label class="col-md-3">Step Name*</label>
+                                  <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Step Name">
+                                    <input type="text" name="StepName" id="StepName" value="" class="form-control">
+                                </div>
+                                    <div class="col-md-3">
+                                    <span class="field-validation-error" id="validationmessageStepName" data-valmsg-for="StepName" data-valmsg-replace="true" style="display:none">Step Name Is Require.</span>
+                                    <span class="field-validation-error" id="ExistStepName" data-valmsg-for="StepName" data-valmsg-replace="true" style="display:none">This Step Name Is Exist.</span>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row marbot10">
+                            <div class="form-group">
+                                <label class="col-md-3">Step Colour* (e.g. #2233344)</label>
+                                <div class="col-md-6">
+                                    <div class="input-group demo2">
+
+                                        <input type="text" value="#e01ab5" id="StepColor" name="StepColour" class="form-control" />
+                                        <span class="input-group-addon"><i id="setColorCode"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="row marbot10">
+                            <div class="form-group">
+                                <label class="col-md-3">Step Colour* (e.g. #2233344)</label>
+                                <div class="col-md-6">
+                                    <div class="input-group demo2">
+                                        <input type="text" value="#e01ab5" id="StepColor" name="StepColour" class="form-control" />
+                                        <span class="input-group-addon"><i id="setColorCode"></i></span>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-3">
+                                </div>
+                               
+                            </div>
+                            <div id="picker" style="margin-top:50px; margin-left:250px;"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btn-submit-Steps">ADD</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                    </div>
+}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script type="text/javascript">
+           $(document).ready(function () {
+               $('.demo2').colorpicker();
+               $("#MainPageStepSegmentList").sortable({
+                   placeholder: "ui-state-highlight",
+                   helper: 'clone',
+                   sort: function (e, ui) {
+                       $(ui.placeholder).html(Number($("#MainPageStepSegmentList > li:visible").index(ui.placeholder)) + 1);
+                   },
+                   update: function (event, ui) {
+                       var $lis = $(this).children('li');
+                       $lis.each(function () {
+                           var $li = $(this);
+                           var newVal = $(this).index() + 1;
+                           $(this).children('.sortable-number').html(newVal);
+                           $(this).children('#item_display_order').val(newVal);
+                       });
+                   },
+                   items: ':not(.static)',
+                   start: function () {
+                       $('.static', this).each(function () {
+                           var $this = $(this);
+                           $this.data('pos', $this.index());
+                       });
+                   },
+                   change: function () {
+                       $sortable = $(this);
+                       $statics = $('.static', this).detach();
+                       //$helper = $('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s sortable-number" style="display: initial;"><i class="fa fa-square" style="position: inherit; display: initial;"></i><a style="position: inherit; display: initial;"><i class="material-icons uk-text-success" style="position: inherit; display: initial;">edit</i></a><a style="position: inherit; display: initial;"><i class="material-icons uk-text-danger" style="position: inherit; display: initial;">delete</i><a></span></li>').prependTo(this);
+                       $helper = $('<li></li>').prependTo(this);
+                       $statics.each(function () {
+                           
+                           var $this = $(this);
+                           var target = $this.data('pos');
+
+                           $this.insertAfter($('li', $sortable).eq(target));
+                       });
+                       $helper.remove();
+                   }
+
+               });
+               $("#MainPageStepSegmentList").disableSelection();
+
+           });
+    </script>*@
+

@@ -1,0 +1,67 @@
+﻿@model HRTool.Models.Admin.AdminCertificateMenuViewModel
+@using HRTool.CommanMethods;
+@if (SessionProxy.IsCustomer == false)
+{
+  <div class="profile-usermenu ">
+            <ul class="nav userCeritificate">
+                <li class="active filter_Class" title="My visaw">
+
+                    <a class="MyCertificate">
+                        <span class="pad-left">My Certificate</span><strong class="pull-right badge badge-light">@Model.MyCertificate</strong>
+                    </a>
+
+                </li>
+
+                <li class="filter_Class">
+
+                    <a class="Expired">
+                        <span class="pad-left">Expired</span><strong class="pull-right badge badge-danger"> @Model.Expired</strong>
+                    </a>
+
+                </li>
+                <li class="filter_Class" title=">New">
+
+                    <a class="New">
+                        <span class="pad-left">New</span><strong class="pull-right badge badge-primary"> @Model.New</strong>
+                    </a>
+                </li>
+
+                <li class="filter_Class" title="ExpiringToday">
+
+                    <a class="ExpiringToday">
+                        <span class="pad-left">Expiring Today</span><strong class="pull-right badge badge-info">@Model.ExpiringToday</strong>
+                    </a>
+
+                </li>
+
+                <li class="filter_Class" title="Upcoming">
+
+                    <a class="Upcoming">
+                        <span class="pad-left">Upcoming</span><strong class="pull-right badge badge-warning">@Model.Upcoming</strong>
+                    </a>
+
+                </li>
+
+                <li class="filter_Class" title="Valid">
+
+                    <a class="Valid">
+                        <span class="pad-left">Valid</span><strong class="pull-right badge badge-success ">@Model.Valid</strong>
+                    </a>
+
+                </li>
+                <li class="filter_Class" title="AllVisa">
+
+                    <a class="AllVisa">
+                        <span class="pad-left">All Certificate </span><strong class="pull-right badge badge-secondary"> @Model.AllCertificate</strong>
+
+                    </a>
+
+                </li>
+
+            </ul>
+        </div>
+
+}
+
+ 
+

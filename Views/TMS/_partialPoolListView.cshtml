@@ -1,0 +1,391 @@
+﻿@model IEnumerable<HRTool.Models.Admin.TMSApplicantListViewModel>
+@{
+
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+    .startrating button{
+        background:#dddddd;
+            padding: 1px 3px;
+    display: inline-block;
+    min-width: 15px !important;
+    min-height: 15px !important;
+    white-space: normal;
+    font-size: 9px;
+    line-height: 13px;
+    }
+    
+
+.star1 button:nth-child(1),
+       .star2 button:nth-child(1),
+       .star2 button:nth-child(2),
+       .star3 button:nth-child(1),
+       .star3 button:nth-child(2),
+       .star3 button:nth-child(3),
+       .star4 button:nth-child(1),
+       .star4 button:nth-child(2),
+       .star4 button:nth-child(3),
+       .star4 button:nth-child(4),
+       .star5 button:nth-child(1),
+       .star5 button:nth-child(2),
+       .star5 button:nth-child(3),
+       .star5 button:nth-child(4),
+       .star5 button:nth-child(5){
+           color: #fff;
+           background: #f0ad4e;
+           border: #eea236;
+   }
+     .star1haf button:nth-child(2),        
+     .star2haf button:nth-child(3),       
+.star3haf button:nth-child(4),
+.star4haf button:nth-child(5){
+background: #f0ad4e;
+background: -moz-linear-gradient(left, #f0ad4e 50%, #dddddd 50%);
+background: -webkit-linear-gradient(left, #f0ad4e 50%,#dddddd 50%);
+background: linear-gradient(to right, #f0ad4e 50%,#dddddd 50%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ad4e', endColorstr='#dddddd',GradientType=1 );
+    border: 0px;
+}
+</style>
+<div id="ApplicantModel" data-backdrop="static" class="modal fade lg-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="performance-grid">
+                <div class="">
+                    <div class="modal-header">
+                        <button type="button" id="modelClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title applicantTitle">Add Applicant</h4>
+                    </div>
+                    <div class="modal-body" id="AddApplicantBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-success" id="btn-submit-Steps">ADD</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="heading_a uk-margin-bottom">
+   
+     
+
+
+
+    <h1 class="page-title">
+        Talent Overview
+        <small> Below is list of all your applicants in talent pool. You can use filters to view applicants.</small>
+    </h1>
+
+
+    <div class="clearfix"></div>
+</h4>
+
+<div class="md-card">
+    
+        
+            <div class="table-responsive">
+                <div id="tableDiv">
+                    <div class="table-btns">
+                        <a class="btn btn-primary btn-circle  btn-edit-Talent" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#ApplicantModel"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-circle  btn-delete-Talent" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i> </a>
+                        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-Talent" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+                        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-Talent" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>                    
+                        <button class="btn btn-info btn-circle  btn-clearFilter-Talent" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+                        <select id="drp-RecriProcesId" style="height: 34px;padding-left: 10px;margin-left: 1px;border: 1px solid #D0D0D0;background-color: #f4f4f4;">
+                            <option value="0">Select The Hiring Process</option>
+                            @*@foreach (var item in Model.FirstOrDefault().RecruitmentProcessList)
+                            {
+
+                                if (Model.FirstOrDefault().SelectedListId.ToString() == item.Value)
+                                {
+
+                                    <option value=@item.Value selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }*@
+                        </select>                        
+                   </div>
+                    
+                    <table id="TalentModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+                        <thead>
+                            <tr class="tblHeading">
+                                <th>Name</th>
+                                <th>Vacancy</th>
+                                <th>Recruitment Process</th>
+                                <th>Star Rating</th>
+                                <th>Business</th>
+                                <th>Division</th>
+                                <th>Pool</th>
+                                <th>Function</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>                            
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th ><input type="text"  class="form-control TSearchName" placeholder="Name"></th>
+                                <th ><input type="text"   class="form-control TSearchVacancy" placeholder="Vacancy"></th>
+                                <th ><input type="text"  class="form-control TSearchRecruitment" placeholder="Process"></th>
+                                <th ><input type="text"   class="form-control TSearchStarRating" placeholder="Star Rating"></th>
+                                <th ><input type="text"   class="form-control TSearchBusiness" placeholder="Business"></th>
+                                <th ><input type="text"   class="form-control TSearchDivision" placeholder="Division"></th>
+                                <th ><input type="text"   class="form-control TSearchPool" placeholder="Pool"></th>
+                                <th ><input type="text"   class="form-control TSearchFunction" placeholder="Function"></th>
+                                <th ><input type="text"   class="form-control TSearchStatus" placeholder="Status"></th>
+                                <th ><input type="text"   class="form-control TSearchCreated" placeholder="Created"></th>
+                            </tr>
+
+                        </tfoot>
+                        <tbody>
+                            
+                            @foreach (var item in Model.OrderBy(x => x.FirstName).ToList())
+                            {
+                                if (item.Id != 0)
+                                {
+                                <tr id="@item.Id" class="dataTr">                                    
+                                    <td>@item.FirstName @item.LastName</td>
+                                    <td>@item.VacancyName</td>
+                                    <td>@item.RecruitmentProcess</td>
+                                    <td>            
+                                        @*<div class="starrr star2"></div>*@
+                                        @if (item.comScore == 1)
+                                        {
+                                            <div class="startrating star1 star1">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (item.comScore > 1 && item.comScore < 2)
+                                        {
+                                            <div class="startrating star1 star1haf">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (item.comScore == 2)
+                                        {
+                                            <div class="startrating star2 star2">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (item.comScore > 2 && item.comScore <3)
+                                        {
+                                            <div class="startrating star2 star2haf">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (item.comScore == 3)
+                                        {
+                                            <div class="startrating star3 star3">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else if (item.comScore > 3 && item.comScore <3)
+                                        {
+                                            <div class="startrating star3 star3haf">
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }                                      
+                                         else if (item.comScore == 4)
+                                                {
+                                                <div class="startrating star4 star4">
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                }
+                                                else if (item.comScore > 4 && item.comScore <5)
+                                                {
+                                                <div class="startrating star4 star4haf">
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                }
+                                                else if (item.comScore >= 5)
+                                                {
+                                                <div class="startrating star5 star5">
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                }
+                                                else
+                                                {
+                                                <div class="startrating">
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                }
+</td>
+                                    <td>@item.Business</td>
+                                    <td>@item.Division</td>
+                                    <td>@item.Pool</td>
+                                    <td>@item.Function</td>
+                                    <td>@item.Status</td>
+                                    <td>@item.CreateDate</td>
+                                </tr>
+
+                                }
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+       
+     
+</div>
+<script src="~/JS/starrating.js"></script>
+ <script>   
+     $(document).ready(function () {
+         $('.starrr').starrr();                      
+     });
+     $("#contantBody").find("#TalentModalTable").on('click', '.dataTr', function () {
+         if ($(this).hasClass('dataTr')) {
+             $('#TalentModalTable tbody').find('tr.selected').removeClass('selected');
+             $(this).addClass('selected');
+             $("#tableDiv").find(".btn-edit-Talent").removeAttr('disabled');
+             $("#tableDiv").find(".btn-delete-Talent").removeAttr('disabled');
+         }
+     });
+ </script>

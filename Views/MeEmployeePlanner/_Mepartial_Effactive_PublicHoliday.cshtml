@@ -1,0 +1,50 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_publicHolidayCounty
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <label class="control-label" for="StatusList">Effective Date *</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" readonly="readonly" value="@Model.EffavtiveFromDate" id="txt_EffectiveDate" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-EffectiveDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Effective Date is required.</span>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+        <input type="hidden" id="countryId" value="@Model.Id" />
+        <label class="control-label" for="StatusList">Country</label>
+    </div>
+    <div class="col-md-6">
+        <input type="text" readonly="readonly" value="@Model.Name" id="txt_EndDate" class="form-control" readonly="readonly" />
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-9">
+        <table id="HolidayTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.holidayList)
+                {
+                    <tr id="@item.Id" class="dataTr">
+                        <td style="width:50%;">@item.Name</td>
+                        <td style="width:50%;">@item.Date</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

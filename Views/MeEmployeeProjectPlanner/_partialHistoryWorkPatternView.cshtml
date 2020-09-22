@@ -1,0 +1,23 @@
+﻿@model IList<HRTool.Models.Resources.EmployeeWorkPatternHistoryViewModel>
+
+<table id="WorkPatternHistoryTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Change On</th>
+            <th>Change By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.OldValue</td>
+                <td>@item.NewValue</td>
+                <td>@item.ChangeDate</td>
+                <td>@item.ChangeBy</td>
+            </tr>
+        }
+    </tbody>
+</table>

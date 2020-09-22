@@ -1,0 +1,82 @@
+﻿@model HRTool.Models.Resources.EmployeeResumeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MeLayout.cshtml";
+}
+<style>
+    .resume_btn a {
+        color: #fff;
+        display: block;
+        font-weight: 700;
+    }
+
+    .activate a {
+        text-align: center;
+    }
+
+    .deactivate a {
+        text-align: center;
+        color: #fff !important;
+    }
+</style>
+
+@*<h4 class="heading_a resumePage uk-margin-bottom">
+    <div class="icon"><img src="~/Images/listicons/icn-resources.png" alt=""></div>
+    <div class="titletext">
+        Resume / CV
+    </div>
+    <div class="clearfix"></div>
+</h4>*@
+<h1 class="page-title">
+    Resume / CV
+    <small></small>
+</h1>
+<div id="wrapper">
+    <div id="top_btn_section">
+        <div class="top_btn_section">
+            <div class=" btn btn-warning top_btn send_via_email deactivate">
+                <a href="#">Send via email</a>
+            </div>
+            <div class="btn btn-success top_btn print_pdf_btn deactivate">
+                <a href="@Url.Action("genaratePDF", "MeEmployeeResume", new { EmployeeId = Model.EmployeeID })" target="_blank">Print to PDF</a>
+            </div>
+            <div class="btn btn-info top_btn add_edit_btn deactivate">
+                <a id="add_edit_btn">Add/Edit</a>
+                <!--<a type="submit" ng-click="submit(employeeProfileForm)" ng-disabled=" isSubmittingData">{{addOrSaveText}}</a>-->
+            </div>
+            <div class=" btn   btn btn-danger resume_btn deactivate">
+                <a href="" type="submit">Resume</a>
+            </div>
+            <div class="btn btn-primary top_btn cv_btn_last deactivate">
+                <a href="" type="submit">CV</a>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div >
+        <div id="tableDiv">
+            @Html.Action("ResumeDetailsList", "EmployeeResume", new { EmployeeID = Model.EmployeeID })
+        </div>
+    </div>
+</div>
+
+<script>
+    var constantResume = {
+        ResumeList: '@Url.Action("ResumeDetailsList", "MeEmployeeResume")',
+        AddWorkExperience: '@Url.Action("AddEditWorkExperience","MeEmployeeResume")',
+        SaveWorkExperirnce: '@Url.Action("SaveWorkExperirnce", "MeEmployeeResume")',
+        DeleteWorkExperience: '@Url.Action("DeleteWorkExperience", "MeEmployeeResume")',
+        AddEducation: '@Url.Action("AddEditEducation", "MeEmployeeResume")',
+        SaveEducation: '@Url.Action("SaveEducation", "MeEmployeeResume")',
+        DeleteEducation: '@Url.Action("DeleteEducation", "MeEmployeeResume")',
+        AddQualification: '@Url.Action("AddEditQualification", "MeEmployeeResume")',
+        SaveQualification: '@Url.Action("SaveQualification", "MeEmployeeResume")',
+        DeleteQualification: '@Url.Action("DeleteQualification", "MeEmployeeResume")',
+        AddLanguage: '@Url.Action("AddEditLanguage", "MeEmployeeResume")',
+        SaveLanguage: '@Url.Action("SaveLanguage", "MeEmployeeResume")',
+        DeleteLanguage: '@Url.Action("DeleteLanguage", "MeEmployeeResume")',
+        SaveResume:'@Url.Action("SaveResumeText", "MeEmployeeResume")'
+
+    };
+</script>
+<script src="~/JS/Resources/Resume/EmployeeResumeJS.js"></script>

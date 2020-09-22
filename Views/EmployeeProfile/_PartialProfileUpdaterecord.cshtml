@@ -1,0 +1,982 @@
+﻿<style>
+    .ccstyle {
+        position: absolute;
+    }
+
+    .colon_spc {
+        display: inline-block;
+        float: right;
+        text-align: center;
+        width: 10px;
+    }
+
+    .col-md-6.fix_wid_colon {
+        width: 45%;
+        padding-left: 15px;
+        padding-right: 0px;
+        margin: 0;
+    }
+</style>
+<input type="hidden" id="TempSalaryID" value="@Model.TempSalaryID" />
+<input type="hidden" id="EmployeeRoleType" value="@Model.RoleType" />
+@if (Model.RoleType)
+{
+    <div class="dataTables_scrollBody" style="height:100%; position: relative; overflow-y: auto; overflow-x: hidden; width: 100%;">
+        <div class="row">
+
+            <div class="col-sm-6">
+
+                <div class="row marbot10">
+                    <label class="col-md-6">Customer Company Name</label>
+                    <div class="col-md-6 dropdown">
+                        <select class="form-control" id="drpCustomerCompany">
+                            @foreach (var item in Model.CoustomerCompanyList)
+                            {
+                                if (Model.SelectCustomerCompanyId == item.Value)
+                                {
+                                    <option value="@item.Value" selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Title*</label>
+                    <div class="col-md-6 dropdown">
+                        <select class="form-control" id="drpTitle">
+                            @foreach (var Title in Model.TitleList)
+                            {
+                                <option value="@Title.Value" @(Title.Selected ? "Selected" : "")>@Title.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">First Name*</label>
+                    <div class="col-md-6">
+                        <input type="text" name="FirstName" class="form-control" id="FirstName" value="@Model.FirstName" placeholder="First name">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidFirstName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Last Name*</label>
+                    <div class="col-md-6">
+                        <input type="text" name="LastName" class="form-control" id="LastName" value="@Model.LastName" placeholder="Last name">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidLastName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Other Name(s)</label>
+                    <div class="col-md-6">
+                        <input type="text" name="OtherName" class="form-control" id="OtherName" value="@Model.OtherNames" placeholder="Other name">
+                        <span class="form-control-bar"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidOtherName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Known as</label>
+                    <div class="col-md-6">
+                        <input type="text" name="Knownas" class="form-control" id="Knownas" value="@Model.KnownAs" placeholder="Know as">
+                        <span class="form-control-bar"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidKnownas" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Email*</label>
+                    <div class="col-md-6">
+                        <input type="text" name="Email" class="form-control" id="Email" value="@Model.UserNameEmail" placeholder="Email">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+
+                <div class="row marbot10 ">
+                    <label class="col-md-6">Gender*</label>
+                    <div class="col-md-6">
+                        @if (Model.Gender == 1)
+                        {
+                            <label class="radio-btn">
+                                <input type="radio" name="Gender" id="MaleId" value="1" checked>
+                                <span>Male</span>
+                            </label>
+                            <label class="radio-btn">
+                                <input type="radio" name="Gender" id="FemaleId" value="0">
+                                <span>Female</span>
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="radio-btn">
+                                <input type="radio" name="Gender" id="MaleId" value="1">
+                                <span>Male</span>
+                            </label>
+                            <label class="radio-btn">
+                                <input type="radio" name="Gender" id="FemaleId" value="0" checked>
+                                <span>Female</span>
+                            </label>
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        <span class="field-validation-error" id="ValidGender" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+                <div class="row marbot10 ">
+                    <label class="col-md-3">Date Of Birth*</label>
+                    <div class="col-md-6">
+                        <input type="text" name="DateOfBirth" class="form-control Datepiker" id="DateOfBirth" value="@Model.DateOfBirth">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validAge" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Valid DateOfBirth.</span>
+                        <span class="field-validation-error" id="ValidDateOfBirth" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 CCDetails hide">
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Customer Company Name <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCName"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Customer Short Name <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCShortName"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Customer Parent Company <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCParentCompany"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Website <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCWebsite"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Customer Currency <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCCustomerCurrency"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Customer Number <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCCustomerNumber"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Phone Number <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCPhoneNumber"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Email <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCEmail"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Secondary Phone Number <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCSecondaryPhoneNumber"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Business Address <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCBusinessAddress"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">Mailing Address <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCMailingAddress"></label>
+                    </div>
+                </div>
+
+                <div class="row marbot10">
+                    <label class="col-md-6 fix_wid_colon">General Notes <span class="colon_spc">:</span></label>
+                    <div class="col-md-6">
+                        <label id="CCGeneralNotes"></label>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row marbot10">
+            <label type="file" for="fileToUpload" class="col-md-3">
+                Upload Image
+            </label>
+            <div class="col-md-2">
+                <label type="file" for="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" class="btn btn-clr md-btn-primary">BROWSE</label>
+                <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+            </div>
+            <div class="col-md-3">
+                @if (!string.IsNullOrEmpty(Model.Picture))
+                {
+                    <img src="~/Upload/Resources/@Model.Picture" class="editpic" />
+                }
+                else
+                {
+                    <img src="~/Images/no-image.jpg" class="editpic" />
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="row marbot10 ">
+            <label class="col-md-3">Job Title*</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpJobTitle">
+                    @foreach (var Job in Model.JobTitleList)
+                    {
+                        <option value="@Job.Value" @(Job.Selected ? "Selected" : "")>@Job.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Location*</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpLocation">
+                    @foreach (var Location in Model.LocationList)
+                    {
+                        <option value="@Location.Value" @(Location.Selected ? "Selected" : "")>@Location.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Customer Care(s)</label>
+            @*<div class="col-md-6 dropdown">
+                <select class="form-control" id="drpCustomerCare"></select>
+            </div>*@
+            <div class="col-md-6">
+                <input type="hidden" id="selectIDCustomer" value="@Model.CustomerCareId"/>
+                <input type="text" class="awesomplete form-control" id="CustomerCare" size="70" value="@Model.CustomerCareName" placeholder="Employee Name" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidCustomerCare" data-valmsg-for="CustomerCare" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">House Number</label>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" name="HouseNumber" class="form-control" id="HouseNumber" value="">
+                        <span class="form-control-bar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidHouseNumber" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Postcode</label>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="Postcode" class="form-control" id="Postcode" value="@Model.PostalCode">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="md-btn md-btn-primary" id="FindAddess">FIND ADDRESS</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidPostCode" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Post Code is Required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Address</label>
+            <div class="col-md-6">
+                <textarea name="Address" class="form-control textarea-resizeNone" id="Address">@Model.Address</textarea>
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidAddress" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Work Phone</label>
+            <div class="col-md-6">
+                <input type="number" name="WorkPhone" class="form-control" id="WorkPhone" value="@Model.WorkPhone" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidWorkPhone" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <label class="col-md-3">Mobile</label>
+            <div class="col-md-6">
+                <input type="number" name="WorkMobile" class="form-control" id="Mobile" value="@Model.WorkMobile" />
+                <span class="form-control-bar"></span>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidWorkMobile" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <button type="submit" class="md-btn md-btn-success setting_btn" id="SaveProfileRecord">Save</button>
+            </div>
+        </div>
+    </div>
+}
+@if (!Model.RoleType)
+{
+    <div class="row marbot10">
+        <label class="col-md-3">Title*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpTitle">
+                @foreach (var Title in Model.TitleList)
+                {
+                    <option value="@Title.Value" @(Title.Selected ? "Selected" : "")>@Title.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">First Name*</label>
+        <div class="col-md-6">
+            <input type="text" name="FirstName" class="form-control" id="FirstName" value="@Model.FirstName" placeholder="First name">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidFirstName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Last Name*</label>
+        <div class="col-md-6">
+            <input type="text" name="LastName" class="form-control" id="LastName" value="@Model.LastName" placeholder="Last name">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLastName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Other Name(s)</label>
+        <div class="col-md-6">
+            <input type="text" name="OtherName" class="form-control" id="OtherName" value="@Model.OtherNames" placeholder="Other name">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidOtherName" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Known as</label>
+        <div class="col-md-6">
+            <input type="text" name="Knownas" class="form-control" id="Knownas" value="@Model.KnownAs" placeholder="Know as">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidKnownas" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">SSO *</label>
+        <div class="col-md-6">
+            <input type="text" name="SSO" class="form-control" id="SSO" value="@Model.SSO" disabled>
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidSSO" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Email*</label>
+        <div class="col-md-6">
+            <input type="text" name="Email" class="form-control" id="Email" value="@Model.UserNameEmail" placeholder="Email">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">IM Address</label>
+        <div class="col-md-6">
+            <input type="text" name="IMAddress" class="form-control" id="IMAddress" value="@Model.IMAddress" placeholder="IM Address">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Gender*</label>
+        <div class="col-md-6">
+            @if (Model.Gender == 1)
+            {
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="MaleId" value="1" checked>
+                    <span>Male</span>
+                </label>
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="FemaleId" value="0">
+                    <span>Female</span>
+                </label>
+            }
+            else
+            {
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="MaleId" value="1">
+                    <span>Male</span>
+                </label>
+                <label class="radio-btn">
+                    <input type="radio" name="Gender" id="FemaleId" value="0" checked>
+                    <span>Female</span>
+                </label>
+            }
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidGender" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Date Of Birth*</label>
+        <div class="col-md-6">
+            <input type="text" name="DateOfBirth" class="form-control Datepiker" id="DateOfBirth" value="@Model.DateOfBirth">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidDateOfBirth" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Nationality*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpNationality">
+                @foreach (var Nationality in Model.NationalityList)
+                {
+                    <option value="@Nationality.Value" @(Nationality.Selected ? "Selected" : "")>@Nationality.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidNationality" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">NI Number/SSN</label>
+        <div class="col-md-6">
+            <input type="text" name="NINumber" class="form-control" id="NINumber" value="@Model.NIN_SSN">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidDateOfBirth" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label type="file" for="fileToUpload" class="col-md-3">
+            Upload Image
+        </label>
+        <div class="col-md-2">
+            <label type="file" for="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" class="btn btn-clr md-btn-primary">BROWSE</label>
+            <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+        </div>
+        <div class="col-md-3">
+            @if (!string.IsNullOrEmpty(Model.Picture))
+            {
+                <img src="~/Upload/Resources/@Model.Picture" class="editpic" />
+            }
+            else
+            {
+                <img src="~/Images/no-image.jpg" class="editpic" />
+            }
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Start Date*</label>
+        <div class="col-md-6">
+            <input type="text" name="StartDate" class="form-control Datepiker" id="StartDate" value="@Model.StartDate" placeholder="Start Date">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidStartDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Continuous Service Date</label>
+        <div class="col-md-6">
+            <input type="text" name="StartDate" class="form-control Datepiker" id="ContinuousServiceDate" value="@Model.ContinuousServiceDate" placeholder="Continuous Service Date">
+            <span class="form-control-bar"></span>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidStartDate" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Resource Type*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpResourceType">
+                @foreach (var Resource in Model.ResourceTypeList)
+                {
+                    <option value="@Resource.Value" @(Resource.Selected ? "Selected" : "")>@Resource.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+
+        <label class="col-md-3">Reports to</label>
+        <div class="col-md-6">
+            <input type="hidden" id="selectID" value="@Model.RepoempId"/>
+            <input type="text" class="awesomplete form-control" id="empNameText" value="@Model.RepoempName" size="70" placeholder="Reports to" />         
+            @*<select class="form-control" id="drpReportsto">
+                @foreach (var ReportTo in Model.ReportstoList)
+                {
+                    <option value="@ReportTo.Value" @(ReportTo.Selected ? "Selected" : "")>@ReportTo.Text</option>
+                }
+            </select>*@
+
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Additional Reports to</label>        
+        <div class="col-md-6 dropdown">
+            <input type="hidden" id="AddRespID" value="@Model.AddReId" />
+            <input type="text" class="awesomplete form-control" id="empAdditionalReportTo" value="@Model.AddReName" size="70" placeholder="Additional Reports to" />
+            </div>
+            @*<div class="col-md-6 dropdown">
+                <select class="form-control" id="drpAdditionalReportsto">
+                    @foreach (var Additional in Model.AdditionalReportstoList)
+                    {
+                        <option value="@Additional.Value" @(Additional.Selected ? "Selected" : "")>@Additional.Text</option>
+                    }
+                </select>
+            </div>*@
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">HR Responsible</label>
+        <div class="col-md-6">
+            <input type="hidden" id="HRResID" value="@Model.HrId" />
+            <input type="text" class="awesomplete form-control" id="empHRReportTo" size="70" value="@Model.HRResponsibleName" placeholder="HR Responsible"/>
+        </div>
+        @*<div class="col-md-6 dropdown">
+            <select class="form-control" id="drpHRResponsible">
+                @foreach (var HR in Model.HRResponsibleList)
+                {
+                    <option value="@HR.Value" @(HR.Selected ? "Selected" : "")>@HR.Text</option>
+                }
+            </select>
+        </div>*@
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Job Title*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpJobTitle">
+                @foreach (var Job in Model.JobTitleList)
+                {
+                    <option value="@Job.Value" @(Job.Selected ? "Selected" : "")>@Job.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Salary</label>
+        <div class="col-md-6">
+            <div id="tableDivSalary">
+                @Html.Action("AddSalaryDetailsList", "EmployeeProfile", new { Id = Model.Id })
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Company*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpCompany">
+                @foreach (var Company in Model.CompanyList)
+                {
+                    <option value="@Company.Value" @(Company.Selected ? "Selected" : "")>@Company.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidCompany" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Location*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpLocation">
+                @foreach (var Location in Model.LocationList)
+                {
+                    <option value="@Location.Value" @(Location.Selected ? "Selected" : "")>@Location.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Business</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBusiness">
+                @foreach (var Business in Model.BusinessList)
+                {
+                    <option value="@Business.Value" @(Business.Selected ? "Selected" : "")>@Business.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Division</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpDivision">
+                @foreach (var Division in Model.DivisionList)
+                {
+                    <option value="@Division.Value" @(Division.Selected ? "Selected" : "")>@Division.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Pool</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpPool">
+                @foreach (var Pool in Model.PoolList)
+                {
+                    <option value="@Pool.Value" @(Pool.Selected ? "Selected" : "")>@Pool.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="row marbot10">
+        <label class="col-md-3">Function</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpFunction">
+                @foreach (var Function in Model.FunctionList)
+                {
+                    <option value="@Function.Value" @(Function.Selected ? "Selected" : "")>@Function.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <button type="submit" class="md-btn md-btn-success setting_btn" id="SaveProfileRecord">Save</button>
+        </div>
+    </div>
+}
+@*<script>
+    drpreportTo();
+    drpAddReportsto();
+    hrReportTo();
+    function hrReportTo()
+    {
+        $("#drpHRResponsible").select2();
+    }
+    function drpAddReportsto()
+    {
+        $("#drpAdditionalReportsto").select2();
+    }
+    function drpreportTo()
+    {
+        $("#drpReportsto").select2();
+    }
+</script>*@
+<script>
+    var getEmpployee = {
+        getEmpData: '@Url.Action("getEmployee", "EmployeeProfile")',
+    }
+
+</script>
+<script type="text/javascript">
+    var listData = [];
+    var listDataAdditionalReportTo = [];
+    var listDataHRResp = [];
+    var listDataCustomer = [];
+    //var dataList = { "Label": "", "Id": "" };
+    $(document).ready(function () {
+        var id = $("#EmployeeID").val();
+        $.ajax({
+            url: getEmpployee.getEmpData,
+            data: { Id: id },
+            success: function (data) {
+                $.each(data.ReportstoList, function (index, item) {
+                    listData.push(item.Text);                   
+                });
+                $.each(data.AdditionalReportstoList, function (index, item) {
+                    listDataAdditionalReportTo.push(item.Text);
+                });
+                $.each(data.HRResponsibleList, function (index, item) {
+                    listDataHRResp.push(item.Text);
+                });
+                //Report To
+                debugger;
+                var input = document.getElementById("empNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                var value = '';
+                var eid = '';
+                $('#empNameText').change(function () {
+                    
+                    value = $('#empNameText').val();
+                    for (var i = 0; i < data.ReportstoList.length; i++) {
+                        if (value == data.ReportstoList[i].Text) {
+                            eid = data.ReportstoList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectID").val(eid);
+                });
+               // Additional Report to
+                var inputAddrepTo = document.getElementById("empAdditionalReportTo");
+                var awsAddRepTo = new Awesomplete(inputAddrepTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsAddRepTo.list = listDataAdditionalReportTo;
+                var Addvalue = '';
+                var Addeid = '';
+                $('#empAdditionalReportTo').change(function () {
+                    Addvalue = $('#empAdditionalReportTo').val();
+                    for (var i = 0; i < data.AdditionalReportstoList.length; i++) {
+                        if (Addvalue == data.AdditionalReportstoList[i].Text) {
+                            Addeid = data.AdditionalReportstoList[i].Value;
+                            break;
+                        }
+                        else {
+                            Addeid = '';
+                        }
+                    }
+                    $("#AddRespID").val(Addeid);
+                });
+
+                //HR RespTo
+                var inputHRTo = document.getElementById("empHRReportTo");
+                var awsHRTo = new Awesomplete(inputHRTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsHRTo.list = listDataHRResp;
+                var HRvalue = '';
+                var HReid = '';
+                $('#empHRReportTo').change(function () {
+                    HRvalue = $('#empHRReportTo').val();
+                    for (var i = 0; i < data.HRResponsibleList.length; i++) {
+                        if (HRvalue == data.HRResponsibleList[i].Text) {
+                            HReid = data.HRResponsibleList[i].Value;
+                            break;
+                        }
+                        else {
+                            HReid = '';
+                        }
+                    }
+                    $("#HRResID").val(HReid);
+                });
+                //$.each(data.EmployeeCustomerCare, function (index, item) {
+                //    listDataCustomer.push(item.Text);
+                //});
+                ////Customer Care
+                //var inputCustomer = document.getElementById("CustomerCare");
+                //var awesompleteCustomer = new Awesomplete(inputCustomer, {
+                //    minChars: 1,
+                //    maxItems: 5,
+                //    autoFirst: true,
+                //    filter: function (text, input) {
+                //        return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
+                //    },
+                //    replace: function (text) {
+                //        var before = this.input.value.match(/^.+,\s*|/)[0];
+                //        this.input.value = before + text + ", ";
+                //    }
+                //});
+                //awesompleteCustomer.list = listDataCustomer;
+                //$('#CustomerCare').change(function () {
+                //    $("#ValidCustomerCare").hide();
+                //    var cid = [];
+                //    cvalue = $('#CustomerCare').val();
+                //    var x = new Array();
+                //    debugger;
+                //    x = cvalue.split(", ");
+                //    for (var i = 0; i < data.EmployeeCustomerCare.length; i++) {
+                //        for (var j = 0; j < x.length; j++) {
+                //            if (x[j] == data.EmployeeCustomerCare[i].Text) {
+                //                cid.push(data.EmployeeCustomerCare[i].Value);
+                //            }
+                //        }
+                //    }
+                //    $("#selectIDCustomer").val(cid);
+                //});
+            }
+        });
+    });
+    
+    @*$(document).ready(function () {
+        var userID = '@Model.CustomerCare';
+        if (userID == '') {
+        userID = '-- Select User --';
+        }
+        $.ajax({
+        url: '@Url.Action("CustomerCare", "EmployeeProfile")',
+        dataType: 'json',
+        success: function (data) {
+
+        var ddlValue = new Array();
+        $.each(data, function (index, item) {
+        ddlValue.push(item);
+        });
+
+        $("#drpCustomerCare").select2({
+        data: ddlValue
+        });
+
+        $("#drpCustomerCare").val(userID);
+        $("#select2-drpCustomerCare-container").html(userID);
+        $("#select2-drpCustomerCare-container").data('title', userID);
+
+
+        }
+        });
+});*@
+
+</script>

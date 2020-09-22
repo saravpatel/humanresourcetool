@@ -1,0 +1,181 @@
+﻿@model HRTool.Models.Resources.EmployeePlanner_MaternityPaternityViewModel
+
+@{
+    int comments = 1;
+}
+<div id="wizard" class="swMain">
+    <ul class="tablistnew three">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Comments
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span> Document
+            </a>
+        </li>
+    </ul>
+
+
+    <div id="step-1">
+        <input type="hidden" id="MaternityPaternityID" value="@Model.Id" />
+        <input type="hidden" value="@Model.yearId" id="HiddenYearId" />
+        <input type="hidden" value="@Model.monthId" id="HiddenMonthId" />
+        <input type="hidden" value="@Model.day" id="HiddendayId" />
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="DueDate">Due Date*</label>
+            </div>
+            <div class="col-md-6">
+                <input readonly type="text" value="@Model.DueDate" id="txt_DueDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-DueDate" style="display:none;" data-valmsg-for="DueDate" data-valmsg-replace="true">Due Date is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="ExptectedBirthWeek">Exptected Birth Week</label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.ExptectedBirthWeekStartDate" id="txt_ExptectedBirthWeekStartDate" class="form-control" />
+            </div>
+            <div class="col-md-1">
+                <p>To</p>
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.ExptectedBirthWeekEndDate" id="txt_ExptectedBirthWeekEndDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                @*<span class="field-validation-error" id="lbl-error-ExptectedBirthWeek" style="display:none;" data-valmsg-for="ExptectedBirthWeek" data-valmsg-replace="true">Start Date is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="Lengthofemployment">Length of employment</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" readonly="readonly" value="@Model.Lengthofemployment" id="txt_Lengthofemployment" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                @*<span class="field-validation-error" id="lbl-error-DueDate" style="display:none;" data-valmsg-for="DueDate" data-valmsg-replace="true">Due Date is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="EarliestStartDate">Earliest Start Date</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" readonly="readonly" value="@Model.EarliestBirthWeekStartDate" id="txt_EarliestBirthWeekStartDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                @*<span class="field-validation-error" id="lbl-error-DueDate" style="display:none;" data-valmsg-for="DueDate" data-valmsg-replace="true">Due Date is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="MaternityLeave">Period of Ordinary Maternity Leave</label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.OrdinaryMaternityLeaveStartDate" id="txt_OrdinaryMaternityLeaveStartDate" class="form-control" />
+            </div>
+            <div class="col-md-1">
+                To
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.OrdinaryMaternityLeaveEndDate" id="txt_OrdinaryMaternityLeaveEndDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                @*<span class="field-validation-error" id="lbl-error-ExptectedBirthWeek" style="display:none;" data-valmsg-for="ExptectedBirthWeek" data-valmsg-replace="true">Start Date is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="MaternityLeave">Period of Additional Maternity Leave</label>
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.AdditionalMaternityLeaveStartDate" id="txt_AdditionalMaternityLeaveStartDate" class="form-control" />
+            </div>
+            <div class="col-md-1">
+                To
+            </div>
+            <div class="col-md-2">
+                <input type="text" readonly="readonly" value="@Model.AdditionalMaternityLeaveEndDate" id="txt_AdditionalMaternityLeaveEndDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                @*<span class="field-validation-error" id="lbl-error-ExptectedBirthWeek" style="display:none;" data-valmsg-for="ExptectedBirthWeek" data-valmsg-replace="true">Start Date is required.</span>*@
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="ActualStartDate">Actual Start Date</label>
+            </div>
+            <div class="col-md-6">
+                <input readonly type="text" value="@Model.ActualStartDate" id="txt_ActualStartDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ActualStartDate" style="display:none;" data-valmsg-for="ActualStartDate" data-valmsg-replace="true">Due Date is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="ActualEndDate">Actual End Date</label>
+            </div>
+            <div class="col-md-6">
+                <input readonly type="text" value="@Model.ActualEndDate" id="txt_ActualEndDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ActualEndDate" style="display:none;" data-valmsg-for="ActualEndDate" data-valmsg-replace="true">Due Date is required.</span>
+                <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="ActualEndDate" data-valmsg-replace="true">Plase Select Valid End Date.</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="step-2">
+        <div id="MPCommentList">
+            @foreach (var item in Model.CommentList)
+            {
+                <div class="seccomments row" id="comment_@comments" data-commentid="0"><div class="col-lg-10"><p><span class="black postedby">@item.commentBy</span> - <span class="commentTime">@item.commentTime</span></p><div class="MPComments" data-commentstring="@item.comment"></div></div><div class="col-lg-2" style=""><i class="fa fa-pencil MPeditComment"></i><i class="fa fa-trash-o MPdeleteComment"></i></div></div>
+                comments = comments + 1;
+            }
+        </div>
+        <div>
+            <div id="froala-editor"></div>
+            <button class="md-btn md-btn-primary" id="MPbtnAddComment" style="margin-top:5px;float:right;"><i class="fa fa-plus"></i> Add Comment</button>
+            <button class="md-btn md-btn-primary" data-editid="" id="MPbtnEditComment" style="margin-top:5px;float:right;display:none;"><i class="fa fa-pencil"></i> Edit Comment</button>
+        </div>
+    </div>
+
+    <div id="step-3">
+        <div class="browse-attach">
+            <label type="file" for="MPfileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="MPfileToUpload" accept=".jpg,.jpeg,.bmp,.png,.pdf,.docx" style="display: none">
+        </div>
+
+        <div id="MPfilesList">
+            @foreach (var item in Model.DocumentList)
+            {
+                <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 MPfile-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+
+</div>

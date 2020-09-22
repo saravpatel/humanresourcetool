@@ -1,0 +1,158 @@
+﻿@model HRTool.Models.Admin.PerformanceIndexPageViewModel
+
+<h1 class="page-title">
+    Core Strengths
+    <small></small>
+</h1>
+<div class="row">
+    <div class="col-md-8">
+        <ul class="list-group list-inline" style="margin-left:10px;">
+            <li>
+                <label class="control-label" for="ReviewList">Review</label>
+                <select class="form-control" id="drpReviewList">
+                    <option value="0">--Select--</option>
+                    @foreach (var item in Model.PerformanceReviewList)
+                {
+                    if (Model.SelectedReviewId == item.Value)
+                    {
+                            <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                            <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                </select>
+            </li>
+            <li>
+                <label class="control-label" for="JobTitleList">JobTitle</label>
+                <select class="form-control" id="drpJobTitleList">
+                    <option value="0">--Select--</option>
+                    @foreach (var item in Model.JobTitleList)
+                {
+                    if (Model.SelectedJobTitleId == item.Value)
+                    {
+                            <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                            <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                </select>
+            </li>
+            <li>
+                <label class="control-label" for="PoolList">Pool</label>
+                <select class="form-control" id="drpPoolList">
+                    <option value="0">--Select--</option>
+                    @foreach (var item in Model.PoolList)
+                {
+                    if (Model.SelectedPoolId == item.Value)
+                    {
+                            <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                            <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                </select>
+            </li>
+            <li>
+                <label class="control-label" for="ManagerList">Manager</label>
+                <select class="form-control" id="drpManagerList">
+                    <option value="0">--Select--</option>
+                    @foreach (var item in Model.ManagerResourceList)
+                {
+                    if (Model.SelectedManagerId == item.Value)
+                    {
+                            <option value="@item.Value" selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                            <option value="@item.Value">@item.Text</option>
+                    }
+                }
+                </select>
+            </li>
+
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group list-inline pull-right">
+            <li style="margin-top:30px;">
+                <button class="btn btn-success pull-right" onclick="ApplyFilterOnPerformanceCoreList()">Apply Filter</button>
+            </li>
+            <li style="margin-top:30px;">
+                <button class="btn btn-success pull-right" onclick="ClearFilterCoreList()">Clear Filter</button>
+            </li>
+            <li>
+                <button class="btn btn-danger btn-circle  btn-export2excel-Resoure" href="@Url.Action("ExportToExcelCoreScore", "AdminPearformance")" title="export2excel"style="margin-top:-26px;"><i class="fa fa-upload"></i></button>
+            </li>
+        </ul>
+    </div>    
+</div>
+<br/>
+<div class="uk-overflow-container">
+    <div class="table-responsive">
+        <table id="OverAllEmployeeList" class="table-bordered display table style2 table-striped">
+            <thead>
+                <tr class="tblHeading">
+                    <th>Employee Name</th>
+                    <th>Score</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GetOverAllEmployeeList)
+               {
+                <tr id="@item.PerfReviewId">
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.EmployeeImage))
+        {
+                <img src="~/Upload/Resources/@item.EmployeeImage" id="imgPicture" class="smoll-img" />
+}
+else
+{
+                <img id="imgPicture" class="smoll-img" src="~/Images/932e6d39-740e-44d9-b5fb-6f70469c939b_93765572mat2614615602761465210075.jpg" />
+}
+                    <h5 class="pull-right">@item.EmployeeName</h5>
+                    <td>@item.CoreScore &nbsp;&nbsp;<a class="material-icons" href="@Url.Action("EmployeePerformance", "EmployeePerformance",new { EmployeeId =item.EmployeeId})">navigate_next</a></td>
+
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>
+                        <input type="text" class="form-control EmployeeName" placeholder="Employee Name">
+                    </th>
+                    <th>
+                        <input type="text" class="form-control OverallScoreVal" placeholder="Overall Score">
+                    </th>
+                    <th>                        
+                    </th>                 
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>    
+   
+<script>
+    PerformanceOverAllDataTableDesign();
+    function PerformanceOverAllDataTableDesign() {
+        $('#OverAllEmployeeList tfoot tr').appendTo('#OverAllEmployeeList thead');
+        var table = $("#OverAllEmployeeList").DataTable({
+            "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+            "scrollX": true
+        });
+        $("#OverAllEmployeeList").find(".dataTables_filter").hide();
+        $("#OverAllEmployeeList").find(".dataTables_info").hide();
+        $("#contantBody").on('keyup', '.EmployeeName', function () {            
+            table.column(0).search(this.value).draw();
+        });
+        $("#contantBody").on('keyup', '.OverallScoreVal', function () {
+            table.column(1).search(this.value).draw();
+        });
+    }
+</script>

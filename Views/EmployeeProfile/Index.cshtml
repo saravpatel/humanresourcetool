@@ -1,0 +1,75 @@
+﻿@model HRTool.Models.Resources.MainResoureViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+
+<style>
+    .ZebraDialog {
+        z-index:9999;
+    }
+    .ZebraDialogOverlay {
+        z-index: 9999;
+    }
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        min-height: 34px;
+    }
+    
+</style>
+
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/select2.min.js"></script>
+<div id="page_content_inner">
+    <input type="hidden" id="UserId" value="@Model.Id" />
+    <input type="hidden" id="EmployeeID" value="@Model.Id">
+
+    <h1 class="page-title">
+        Resource Profile
+
+    </h1>
+
+
+
+
+
+
+    <div class="md-card" style="height:auto;">
+        <div >
+            <div id="tableDivResource">
+                @Html.Action("ProfileRecord", "EmployeeProfile", new { EmployeeId = @Model.Id })
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/Resources/Profile/EmployeeProfileJS.js"></script>
+<script>
+    var constantSet = {
+        SaveProject: '@Url.Action("SaveData", "EmployeeProfile")',
+        addEdit: '@Url.Action("AddEditSalarytSet", "EmployeeProfile")',
+        DeleteProjectUrl: '@Url.Action("DeleteSalaryRecord", "EmployeeProfile")',
+        Saveprofile: '@Url.Action("UpdateProfile", "EmployeeProfile")',
+        ImageData: '@Url.Action("ImageData", "EmployeeProfile")',
+        bindDiv: '@Url.Action("bindDivisionList", "EmployeeProfile")',
+        bindpool: '@Url.Action("bindPoolList", "EmployeeProfile")',
+        bindFuncation: '@Url.Action("bindFuncationList", "EmployeeProfile")',
+        addEditDeduction: '@Url.Action("AddEditSalarytDeduction", "EmployeeProfile")',
+        addEditEntitlement: '@Url.Action("AddEditSalarytEntitlement", "EmployeeProfile")',
+        SaveSalaryDeduction: '@Url.Action("SaveSalarytDeduction", "EmployeeProfile")',
+        SaveSalaryEntitlement: '@Url.Action("SaveSalarytEntitlement", "EmployeeProfile")',
+        DeleteDeduction: '@Url.Action("DeleteSalaryDeduction", "EmployeeProfile")',
+        DeleteEntitlement: '@Url.Action("DeleteSalaryEntitlement", "EmployeeProfile")',
+        SaveSalary: '@Url.Action("SaveSalaryTemp", "EmployeeProfile")',
+        SaveEntitlement:'@Url.Action("SaveSalaryEntitlementTemp", "EmployeeProfile")',
+        addEditDeductionTemp: '@Url.Action("AddEditSalarytDeductionTemp", "EmployeeProfile")',
+        addEditEntitlementTemp: '@Url.Action("AddEditSalarytEntitlementTemp", "EmployeeProfile")',
+        SaveSalaryDeductionTemp: '@Url.Action("SaveSalarytDeductionTemp", "EmployeeProfile")',
+        SaveSalaryEntitlementTemp: '@Url.Action("SaveSalarytEntitlementTemp", "EmployeeProfile")',
+        DeleteDeductionTemp: '@Url.Action("DeleteSalaryDeductionTemp", "EmployeeProfile")',
+        DeleteEntitlementTemp: '@Url.Action("DeleteSalaryEntitlementTemp", "EmployeeProfile")',
+        DeleteTemp: '@Url.Action("DeleteTemp", "EmployeeProfile")',
+        SaveChange: '@Url.Action("AmountChangeTemp", "EmployeeProfile")',
+        CCDetails:'@Url.Action("CustomerComapanyDetails", "EmployeeProfile")'
+    };
+</script>

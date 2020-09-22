@@ -1,0 +1,169 @@
+﻿@model HRTool.Models.Settings.SegmentViewModel
+<style>
+
+    .btn-border {
+        border: 3px solid #2b3643 !important;
+    }
+    .active {
+    }
+ 
+.over-btnTest {
+    background-color: #4caf50;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 23px;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    border: 1px solid #4caf50;
+    margin-left: 20px;
+}
+ </style>
+<div class=" col-md-12" align="center">
+    <input class="form-control" type="hidden" value="@Model.Id" id="PerCusDetailId" />
+    <input type="hidden" value="@Model.JsonQuestionString" id="CustomerJSONString" />
+    <input type="hidden" value="@Model.IsJobRoleCustomer" id="IsJobroleCustomer" />
+    <input type="hidden" value="@Model.Id" id="CustomerDetailID" />
+    <input type="hidden" id="CustomerPerfromceDetailID" value="@Model.EmpPerDetailId" />
+    @if (Model.Flag == 2)
+    {
+        if (Model.OverallScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working " style="float:left;">Overall Score</label>
+                <select class="form-control" id="drpOverAllScore">
+                    @foreach (var item in Model.OverallScoreList)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Overall Score is required</span>
+            </div><br />
+
+        }
+        if (Model.CoreScoreList != null)
+        {
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working" style="float:  left;">Core Score</label>
+                <select class="form-control" id="drpCoreScore">
+                    @foreach (var item in Model.CoreScoreList)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Core Score is required</span>
+            </div><br />
+        }
+
+        if (Model.JobRoleScoreList != null)
+        {
+            <br />
+            <div class="col-md-offset-3 col-md-6 OverallScore">
+                <label for="normal_working "style="float:left;">Job Role Score</label>
+                <select class="form-control" id="drpJobRoleScore">
+                    @foreach (var item in Model.JobRoleScoreList)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span class="field-validation-error" id="label_coreScore" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Job Role Score is required</span>
+            </div> <br />
+        }
+        <div class="col-md-offset-3 col-md-6 OverallScore">
+            <label class="control-label" style="float:  left;">Comments</label>
+            <textarea rows="4" cols="90" class="" id="OverviewComments" data-toggle="tooltip" data-placement="right" placeholder="Comments" name="Comments" title="Any further comments" style="margin: 0px; height: 200px;width: 522px;"></textarea>
+            <button id="btn-SaveCustomerReviewDetails" onclick="saveCustomerInviteDetails(@Model.Flag)" class="btn btn-success" value="Submit">Submit</button>
+        </div>
+        <br />
+    }
+    else if (Model.Flag == 1)
+    {
+        for (int i = 1; i <= Model.CustomerQueList.Count(); i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getCustomerQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag);">@i</button>
+        }
+        @*foreach (var item in Model.CustomerQueList)
+            {
+             <div class="col-md-8">
+                 <div class="QuestionData">
+                     <div style="display:none;" class="EditSegmetId" data-id="@item.QueId"></div>
+                     <lable id="QuetionHelpText">@item.FiledText</lable>
+                     <div>
+                         @if (item.QuFiledValue == "Text Box" || item.QuFiledValue == "Text Field")
+                        {
+                               <input type="text" class="form-control QuetionValue" id="TextFild_@item.QueId"   value="@item.Score" />
+                         }
+                         else if (item.QuFiledValue == "Number Field")
+                         {
+                             <input type="number" class="form-control QuetionValue" min="0" id="TextFild_@item.QueId"   value="@item.Score" />
+                         }
+                         else if (item.QuFiledValue == "Scrollbar")
+                         {
+                             <input class="form-control Question_ID" type="hidden"  id="QuestionProgress_@item.QueId" value="@item.QueId" />
+                             <input  class="form-control Question_NAME" type="hidden"   id="QuestionName_@item.QueId" value="@item.questionData" />
+                             <input  class="form-control Question_Score QuetionValue" type="text" value="@item.Score"   id="Competecy_@item.QueId" name="@item.questionData" />
+                         }
+                         else
+                         {
+                             <input class="form-control QuetionValue" type="text" min="0" id="TextFild_@item.QueId"   />
+                         }
+                     </div>
+                 </div>
+             </div>
+            }*@
+    }
+    else if (Model.Flag == 0)
+    {
+        for (int i = 1; i <= Model.JobroleQueList.Count(); i++)
+        {
+            <button class="btn-border over-btnTest active" id="CoreQuestion_@i" onclick="getCustomerQuestionData(@i,@Model.IsActivePastFlag,@Model.Flag);">@i</button>
+        }
+
+        @*foreach (var item in Model.JobroleQueList)
+            {
+             <div class="QuestionData">
+                 <div style="display:none;" class="EditSegmetId" data-id="@item.QueId"></div>
+
+                 <label id="QuetionHelpText">@item.FiledText</label>
+
+                 <div>
+                     @if (item.QuFiledValue == "Text Box" || item.QuFiledValue == "Text Field")
+                     {
+                         <input class="form-control QuetionValue" type="text" id="TextFild_@item.QueId"   value="@item.Score" />
+                     }
+                     else if (item.QuFiledValue == "Number Field")
+                     {
+                         <input   class="form-control QuetionValue" type="number" min="0" id="TextFild_@item.QueId"   value="@item.Score" />
+                     }
+                     else if (item.QuFiledValue == "Scrollbar")
+                     {
+                         <input class=" Question_ID form-control" type="hidden"   id="QuestionProgress_@item.QueId" value="@item.QueId" />
+                             <input  class=" Question_NAME form-control" type="hidden"  id="QuestionName_@item.QueId" value="@item.questionData" />
+                                 <input class="form-control Question_Score QuetionValue" type="text" value="@item.Score"  id="Competecy_@item.QueId" name="@item.questionData" />
+                     }
+                     else
+                     {
+                         <input class="form-control QuetionValue" type="text" min="0" id="TextFild_@item.QueId"/>
+                     }
+                 </div>
+             </div>
+            }*@
+    }
+    <div id="customerQuestionDetails"></div>
+</div>
+<script>
+    var saveCusto = {
+        saveCustomerInviteDetails:'@Url.Action("saveCustomerInviteDetails", "EmployeePerformance")',
+    }
+</script>
+<script>
+    displayProgressbar();
+    function displayProgressbar() {
+        $(".Question_Score").ionRangeSlider({
+            type: "single",
+            min: 0,
+            max: 5
+        });
+    }
+
+</script>

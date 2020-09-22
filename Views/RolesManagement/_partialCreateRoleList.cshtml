@@ -1,0 +1,38 @@
+﻿@model IList<HRTool.Models.RolesManagement.CreateRoleViewModel>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-CreateRole" title="Add Case" data-backdrop="static"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-CreateRole" title="Edit" data-backdrop="static" disabled="disabled"><i class="fa fa-pencil"></i></a>
+</div>
+
+<table id="AdminCreateRoleTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th>Role Name</th>
+            <th>Description</th>
+            <th>isActive</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (item.Active)
+                    { <b>Active</b>}
+                    else
+                    { <b>Inactive</b>}
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th ><input type="text" class="form-control SearchName" placeholder="Name"></th>
+            <th ><input type="text" class="form-control SearchDescription" placeholder="Description"></th>
+            <th ><input type="text" class="form-control SearchisActive" placeholder="isActive"></th>
+        </tr>
+    </tfoot>
+</table>

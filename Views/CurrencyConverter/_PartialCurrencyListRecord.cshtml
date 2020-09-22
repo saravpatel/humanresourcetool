@@ -1,0 +1,88 @@
+﻿@model HRTool.Models.Settings.CurrencyConverterModel
+
+<div >
+    <div class="row uk-margin-bottom">
+        <div class="col-sm-8">
+            <h3 class="ng-binding">Rates in terms of British Pound  - GBP</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-btns">
+                <a class="btn btn-success btn-circle " title="Apply Live Rates" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#ModelCurrency"><i class="fa fa-usd"></i></a>
+                <a class="btn btn-primary btn-circle " href="@Url.Action("ExportCurrencyList", "CurrencyConverter")" data-toggle="tooltip" data-placement="right" target="_blank" title="Export" id="ExportCurreny"><i class="fa fa-rocket"></i></a>            </div>
+            <div class="table-responsive" style="max-height:500px;">
+                <table ng-table="model.tableParams" show-filter="true" class="table-bordered display table style2 table-striped  dataTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div>Name</div>
+                            </th>
+                            <th>
+                                <div>Code</div>
+                            </th>
+                            <th>
+                                <div>Fixed rate</div>
+                            </th>
+                            <th>
+                                <div>Date Of Freezing</div>
+                            </th>
+                            <th>
+                                <div>Live Rate</div>
+                            </th>
+                            <th>
+                                <div>Fixed?</div>
+                            </th>
+                            <th>
+                                <div>Action</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.CurrencyList)
+                        {
+                            <tr class="noselect1 ng-scope" data-id="@item.Id">
+                                <td>@item.Name</td>
+                                <td>@item.Code</td>
+                                <td>
+                                    <input type="number" class="form-control ng-pristine ng-valid ng-valid-required ng-valid-pattern ng-touched test" placeholder="Fixed Rate" value="@item.FixedRate" id="FixedRate_@item.Id" ng-required="false" disabled="disabled">
+                                </td>
+                                <td>@item.FreezingDate</td>
+                                <td>@item.LiveRate</td>
+                                <td>
+                                    @if (item.IsFixed)
+                                    {
+                                        <input type="checkbox" id="FixedId_@item.Id" checked="checked" class="ng-valid ng-dirty ng-valid-parse ng-touched" disabled="disabled">
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="FixedId_@item.Id" class="ng-valid ng-dirty ng-valid-parse ng-touched" disabled="disabled">
+                                    }
+                                </td>
+                                <td>
+                                    <a data-id="@item.Id" class="btn btn-success btnChangeDisplayOrder" id="change_@item.Id">Change</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+              </div>
+
+            <div ng-table-pagination="params" template-url="templates.pagination" class="ng-scope ng-isolate-scope">
+                <div ng-include="templateUrl" class="ng-scope">
+                    <div class="ng-table-pager ng-scope">
+                        <ul class="pagination ng-table-pagination"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".test").keypress(function (event) {        
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

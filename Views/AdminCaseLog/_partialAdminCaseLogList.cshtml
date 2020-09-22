@@ -1,0 +1,94 @@
+﻿@model IList<HRTool.Models.Admin.AdminCaseLogViewModel>
+@using HRTool.CommanMethods;
+<div id="AdminCaseLogModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Case Details</h4>
+            </div>
+            <div class="modal-body" id="AdminCaseLogBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-AdminCaseLog">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if (SessionProxy.IsCustomer == true)
+{    
+}
+else
+{
+    <div class="table-btns">
+        <a class="btn btn-success btn-circle  btn-add-AdminCaseLog" title="Add Case" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCaseLogModal"><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary btn-circle  btn-edit-AdminCaseLog" title="Edit" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AdminCaseLogModal" disabled="disabled"><i class="fa fa-pencil"></i></a>
+        <a class="btn btn-danger btn-circle  btn-delete-AdminCaseLog" data-toggle="tooltip" data-placement="bottom" title="Delete" disabled="disabled"><i class="fa fa-trash-o"></i> </a>
+        <button title="Refresh" class="btn btn-primary btn-circle  btn-Refresh-AdminCaseLog" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-reply"></i></button>
+        <button title="Clear Sorting" class="btn btn-warning btn-circle  btn-ClearSorting-AdminCaseLog" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-upload"></i></button>
+        <button class="btn btn-danger btn-circle  btn-clearFilter-AdminCaseLog" data-toggle="tooltip" data-placement="bottom" title="Clear Filter"><i class="fa fa-filter"></i></button>
+    </div>
+}
+
+<div class="table-responsive profile-table">
+    <table id="AdminCaseLogModalTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr class="tblHeading">
+            <th>Case #</th>
+            <th>Employee-SSO</th>
+            <th>Summary</th>
+            <th>Status</th>
+            <th>Category</th>
+            @if (SessionProxy.IsCustomer == true)
+            { }
+            else
+            {
+            <th>Created By</th>
+            <th>Created</th>}
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTr">
+                <td>@item.Id</td>
+                <td>@item.EmployeeName</td>
+                <td>@item.Summary</td>
+                <td>@item.Status</td>
+                <td>@item.CategoryName</td>
+                @if (SessionProxy.IsCustomer == true)
+                {
+                }
+                else
+                {
+                <td>@item.CreatedName</td>
+                <td>@item.CreatedDate</td>
+                }                
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th ><input type="text"  class="form-control SearchCaseId" placeholder="Case #"></th>
+            <th ><input type="text"  class="form-control SearchEmployee" placeholder="Employee - SSO"></th>
+            <th ><input type="text"  class="form-control SearchSummary" placeholder="Summary"></th>
+            <th ><input type="text"  class="form-control SearchStatus" placeholder="Status"></th>
+            <th ><input type="text"  class="form-control SearchCategory" placeholder="Category"></th>
+            @if (SessionProxy.IsCustomer == true)
+            {
+            }
+            else
+            {
+            <th ><input type="text"  class="form-control SearchCreatedBy" placeholder="Created By"></th>
+            <th ><input type="text"  class="form-control SearchCreated" placeholder="Created"></th>
+            }
+        </tr>
+    </tfoot>
+</table>
+</div>

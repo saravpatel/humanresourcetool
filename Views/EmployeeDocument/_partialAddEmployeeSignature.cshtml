@@ -1,0 +1,27 @@
+﻿@model HRTool.Models.Resources.EmployeeSignatureViewModel
+
+<input type="hidden" id="Document_ID" value="@Model.DocumentID" />
+<input type="hidden" id="Employee_ID" value="@Model.EmployeeID" />
+<input type="hidden" id="IpAddress" value="@Model.IpAddress">
+<div class="employeeSignature">
+    <div class="topContent">
+        <label id="lbl_DocumentName">@Model.DocumentName</label>
+        <span class="txt_IpAddress">IP : @Model.IpAddress</span>
+        <span class="txt_Createdate">@Model.CreateDate</span>
+    </div>
+    <p>By signing this document you are declaring that you have read and understood the contents contained within.</p>
+</div>
+
+<div class="row marbot10">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 Signature_Div" style="width:100%">
+        <input type="text" maxlength="30" id="txt_SignatureText" placeholder="Enter Your Name" />
+        <textarea  class="textarea-resizeNone" readonly="readonly" id="text_Signature"></textarea>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="lbl-error-SignatureText" style="display:none;" data-valmsg-for="SignatureText" data-valmsg-replace="true">SignatureText  is required.</span>
+    </div>
+</div>
+
+

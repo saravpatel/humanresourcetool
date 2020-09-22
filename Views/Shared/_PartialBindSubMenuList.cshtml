@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>
+@{}
+<ul class="nav child_menu">
+    @foreach (var item in Model.OrderBy(x => x.DisplayOrder))
+    {
+        <li id="@item.menuId">
+            @if (string.IsNullOrEmpty(item.actionName) || string.IsNullOrEmpty(item.actionName))
+            {
+                <a href="#">
+                    @item.menuName
+                    @if (item.menulist.Count > 0)
+                    {
+                        <span id="span_@item.menuId" class="fa fa-chevron-down"></span>
+                    }
+                    else if (item.menuName == System.Configuration.ConfigurationManager.AppSettings["PendingLeaveCount"])
+                    {
+                        <label class="pendingCount">@item.PendingLeave</label>
+                    }
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action(item.actionName, item.controllerName)">
+                    @item.menuName
+                    @if (item.menulist.Count > 0)
+                    {
+                        <span id="span_@item.menuId" class="fa fa-chevron-down"></span>
+                    }
+                    else if (item.menuName == System.Configuration.ConfigurationManager.AppSettings["PendingLeaveCount"])
+                    {
+                        <label class="pendingCount">@item.PendingLeave</label>
+                    }
+                </a>
+            }
+            @if (item.menulist.Count > 0)
+            {
+                @Html.Partial("_PartialBindSubMenuList", item.menulist);
+            }
+        </li>
+    }
+
+</ul>
+

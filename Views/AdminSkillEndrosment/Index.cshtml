@@ -1,0 +1,317 @@
+﻿@model HRTool.Models.Resources.EmployeeSkillsEndorsementViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page_content_inner">
+    <input type="hidden" id="UserId" value="@Model.Id" />
+    <input type="hidden" id="EmployeeUserId" value="@Model.EmployeeId" />
+    <h1 class="page-title">
+        Skills Endorsement      
+    </h1>
+
+    <div class="row">
+            <div class="col-md-2  ">
+                <a class="btn btn-success" id="AskForEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">Ask for Endorsement</a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-info" id="AskSomeBodyEndorsement" data-toggle="modal" data-target="#EditAskForEndorsementModelSkill">ENDORSE SOMEBODY</a>
+            </div>
+
+            </div>
+    <br/>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Skills Set</label>
+                <div class="dropdown">
+                    <select class="form-control" id="drpSkillsSet">
+                        @foreach (var Skills in Model.AllSkillSetList)
+                        {
+                        <option value="@Skills.Value">@Skills.Text</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Resource</label>
+                <div class="dropdown">
+                    <select class="form-control" id="drpResource">
+                        @foreach (var Resource in Model.AllResourceList)
+                        {
+                        <option value="@Resource.Value">@Resource.Text</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-3 dropdown">
+                <label>Business</label>
+                <select class="form-control" id="drpBusiness">
+                    @foreach (var Business in Model.BusinessList)
+                    {
+                        <option value="@Business.Value">@Business.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 dropdown">
+                <label>Division</label>
+                <select class="form-control" id="drpDivision">
+                    @*@foreach (var Division in Model.DivisionList)
+                {
+                <option value="@Division.Value">@Division.Text</option>
+                }*@
+                </select>
+            </div>
+
+        </div>
+        
+           
+                <div class="row">
+                   <div class="col-md-3 dropdown">
+                            <label>Pool</label>
+                            <select class="form-control" id="drpPool">
+                       
+                            </select>
+                        </div>
+                        <div class="col-md-3 dropdown">
+                            <label>Function</label>
+                            <select class="form-control" id="drpFunction">
+                             
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>APPLY FILTER</label><br>
+                            <a class="btn md-btn-success" id="FilterAskForEndorsement">APPLY FILTER</a>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>RESET</label><br>
+                            <a class="btn md-btn-danger  " id="ResetAskSomeBodyEndorsement">RESET</a>
+                        </div>              
+            </div>
+      
+        <div class="row endorsement_row_btn">
+             
+            
+        </div>
+  
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="badgeboxnew red col">
+                <h5>Most Popular Technical Skill Sets:</h5>
+                <div style="padding-bottom: 8px; position: relative; overflow: visible;" class="mCustomScrollbar _mCS_10 mCS-autoHide">
+                    <div id="mCSB_10" class="mCustomScrollBox mCS-minimal mCSB_vertical_horizontal mCSB_outside" style="max-height: none;" tabindex="0">
+                        <div id="mCSB_10_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0px; left: 0px; width: 1342px;" dir="ltr">
+                            <div class="fixwdiv">
+                                @foreach (var item in Model.AllSkillSetList)
+                                {
+                                       <div class="details">
+                                    <div class="number ng-binding">8</div>
+                                    <div class="desc ng-binding">ok</div>
+                                </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mCSB_10_scrollbar_vertical" class="mCSB_scrollTools mCSB_10_scrollbar mCS-minimal mCSB_scrollTools_vertical" style="display: none;">
+                    <div class="mCSB_draggerContainer">
+                    <div id="mCSB_10_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px; height: 0px;" oncontextmenu="return false;">
+                         
+                        </div>
+                    <div class="mCSB_draggerRail"></div>
+                        </div>
+                        </div>
+                    <div id="mCSB_10_scrollbar_horizontal" class="mCSB_scrollTools mCSB_10_scrollbar mCS-minimal mCSB_scrollTools_horizontal" style="display: block;">
+                    <div class="mCSB_draggerContainer">
+                     <div id="mCSB_10_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 50px; width: 174px; left: 0px; display: block; max-width: 488px;" oncontextmenu="return false;">
+                       
+                         
+                         </div>
+                        <div class="mCSB_draggerRail">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <i class="icn-skill"> </i>
+
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="badgeboxnew blue">
+                <h5>Most Popular General Skill Sets:</h5>
+                <div style="padding-bottom:8px;">
+                    <div class="fixwdiv">
+                        <div class="details">
+                            <div class="number">14</div>
+                            <div class="desc">Excel</div>
+                        </div>
+                        <div class="details">
+                            <div class="number">12</div>
+                            <div class="desc">Tour</div>
+                        </div>
+                        <div class="details">
+                            <div class="number">8</div>
+                            <div class="desc">ok cool badge</div>
+                        </div>
+                        <div class="details">
+                            <div class="number">7</div>
+                            <div class="desc">ok</div>
+                        </div>
+                        <div class="details">
+                            <div class="number">3</div>
+                            <div class="desc">g1</div>
+                        </div>
+                        <div class="details">
+                            <div class="number">0</div>
+                            <div class="desc">Skill</div>
+                        </div>
+                    </div>
+                </div>
+                <i class="icn-skill"></i>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div id="AssignskillsListRecords">
+             @Html.Action("EndorsementList", "AdminSkillEndrosment")
+        <input type="hidden" id="EndrosementId" value="@Model.EndrosementId">
+    </div>
+</div>
+
+<div class="modal fade" id="ViewTask_Details">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Add Skill Set</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="ViewSkillsDetailsBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button style="background-color:#dd5600;color:#ffffff;" type="button" class="btn btn-warning"data-dismiss="modal" id="cancelDetailViewModel">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AskForEndorsementModel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Ask For Ensorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="AskForEndorsementBody">
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditAskForEndorsementModelSkill">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Ask For SomeBody Ensorsement</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="EditAskForEndorsementModelSkillBody">
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer" align="right">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="PreviewRecipientEndorsementModelSkill">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header" style="border-bottom:none;">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryTitle" id="myModalLabelDetails">Confirm</h4>
+            </div>
+            <hr>
+            <!-- Modal Body -->
+            <div class="modal-body" id="PreviewRecipientEndorsementModelSkillBody">
+
+            </div>
+            <!-- Modal Footer -->
+
+           
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="background-color:#dd5600;color:#ffffff;" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="btn-Project-PostModel">Post</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/JS/Admin/SkilEndrosement/SkilEndrosementJS.js"></script>
+<script>
+    var constantSet = {
+        ViewSkillslUrl: '@Url.Action("ViewSkillSTechnicalDetails", "AdminSkillEndrosment")',
+        ViewSkillsGenerallUrl: '@Url.Action("ViewSkillSGeneralDetails", "AdminSkillEndrosment")',
+        AskForEndorsementUrl: '@Url.Action("AskForEndorsement", "AdminSkillEndrosment")',
+        AskSomebodyEndorsementUrl: '@Url.Action("AskSomeBodyEndrosment", "AdminSkillEndrosment")',
+        GenerallUrl: '@Url.Action("GeneralSetDetails", "AdminSkillEndrosment")',
+        technicalUrl: '@Url.Action("TechnicalSetDetails", "AdminSkillEndrosment")',
+        AssignskillsUrl: '@Url.Action("AssignEndrosementSkills", "AdminSkillEndrosment")',
+        EditAssignskillsUrl: '@Url.Action("GetEditAssignEndrosementSkills", "AdminSkillEndrosment")',
+        AddCommentsUrl: '@Url.Action("AddComments", "AdminSkillEndrosment")',
+        SaveCommentUrl: '@Url.Action("SaveCommentsRecvords", "AdminSkillEndrosment")',
+        EditCommentUrl: '@Url.Action("EditCommentsRecord", "AdminSkillEndrosment")',
+        DeleteCommentUrl: '@Url.Action("DeleteComment", "AdminSkillEndrosment")',
+        DeleteEndrosment: '@Url.Action("DeleteEndrosment", "AdminSkillEndrosment")',
+        bindDiv: '@Url.Action("bindDivisionList", "AdminSkillEndrosment")',
+        bindpool: '@Url.Action("bindPoolList", "AdminSkillEndrosment")',
+        bindFuncation: '@Url.Action("bindFuncationList", "AdminSkillEndrosment")',
+        FilterSkillsEndrocement: '@Url.Action("FilterRecords", "AdminSkillEndrosment")',
+        bindSkillData: '@Url.Action("getGkillData", "AdminSkillEndrosment")',
+        bindEndorPreviewData:'@Url.Action("AssignEndrosementSkillsPreview", "AdminSkillEndrosment")',
+    }
+</script>

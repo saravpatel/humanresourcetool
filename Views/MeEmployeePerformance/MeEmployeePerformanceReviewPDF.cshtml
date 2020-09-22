@@ -1,0 +1,176 @@
+﻿@model HRTool.Models.Settings.PrintPerformancePDF
+
+@{
+    ViewBag.Title = "Export";
+    Layout = null;
+}
+
+
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,90" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+<style type="text/css">
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-text-size-adjust: 100% !important;
+        -ms-text-size-adjust: 100% !important;
+        -webkit-font-smoothing: antialiased !important;
+    }
+
+    img {
+        border: 0 !important;
+        outline: none !important;
+    }
+
+    p {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+    table {
+        border-collapse: collapse;
+        mso-table-lspace: 0px;
+        mso-table-rspace: 0px;
+    }
+
+    td, a, span {
+        border-collapse: collapse;
+        mso-line-height-rule: exactly;
+    }
+
+    .ExternalClass * {
+        line-height: 100%;
+    }
+
+    .table_border {
+        width: 100%;
+        border: 1px solid;
+    }
+
+        .table_border tr {
+            border-bottom: 1px solid #000;
+        }
+
+            .table_border tr td {
+                font-family: 'Lato', Arial, sans-serif;
+                font-size: 14px;
+                line-height: 30px;
+                font-weight: normal;
+                letter-spacing: normal;
+                color: #000;
+                vertical-align: middle;
+                word-break: break-all;
+            }
+
+            .table_border tr:first-child td {
+                font-weight: bold;
+            }
+
+    span.fix_wid {
+        float: left;
+        width: 140px;
+    }
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+</style>
+<div style="margin:0px;padding:0px; background-color:#fafaf9;">
+    <!--Full width table start-->
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th align="center"> Performance Management</th>
+            <th align="center"> @Model.ReviewName</th>
+        </tr>
+        <tr>
+            <td>Review Complition Date</td>
+            <td>@Model.ReviewComplitionDate</td>
+        </tr>
+        <tr>
+            <td>Employee(E)</td>
+            <td>@Model.EmployeeName</td>
+        </tr>
+        <tr>
+            <td>Manager(M)</td>
+            <td>@Model.ManagerName</td>
+        </tr>
+        <tr>
+            <td>Customer</td>
+            <td>@Model.CustomerName</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h4>Core Segment</h4>
+        @foreach (var data in Model.CoreSeg)
+        {
+        <div><h4>@data.Title</h4></div>
+            foreach(var item in data.CoreQueListData)
+            {
+                <br />
+                @item.questionData
+                <br />
+                @item.FiledText
+                <br />
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="5" value="@item.Score">
+                </div>
+                @*<input class="Question_Score QuetionValue" type="text" value="@item.Score" />*@                
+                <br />
+                @item.Comments                
+            }    
+        }
+    <h4>JobRole Segment</h4>
+    @foreach(var data in Model.JobRoleSeg)
+    {
+        <div><h4>@data.Title</h4></div>
+        foreach(var item in data.JobRoleQueListData)
+        {
+            <br />
+            @item.questionData
+            <br />
+            @item.FiledText
+            <br />
+            <div class="slidecontainer">
+                <input type="range" min="0" max="5" value="@item.Score">
+           </div>
+
+            @*<input class="form-control Question_Score QuetionValue" style="background-color:red;"  type="text" value="@item.Score" id="CompetecyScroll" name="@item.Score" />*@            
+            <br />
+            @item.Comments
+        }
+    }
+
+</div>
+

@@ -1,0 +1,95 @@
+﻿@model HRTool.Models.Resources.ViewSkillsViewModel
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-warning" id="AskForEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">Ask for Endorsement</a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-success" id="AskSomeBodyEndorsement" data-toggle="modal" data-target="#AskForEndorsementModel">ENDORSE SOMEBODY</a>
+        </div>
+        <div class="col-md-3">
+            <div class="row marbot10">
+                <label class="col-md-4">Skills Set</label>
+                <div class="col-md-6 dropdown">
+                    <select class="form-control" id="drpCopyFrom">
+                        @*@foreach (var Copy in Model.CopyFromList)
+                            {
+                                <option value="@Copy.Value">@Copy.Text</option>
+                            }*@
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row marbot10">
+                <label class="col-md-3">Resource</label>
+                <div class="col-md-6 dropdown">
+                    <select class="form-control" id="drpCopyFrom">
+                        @*@foreach (var Copy in Model.CopyFromList)
+                            {
+                                <option value="@Copy.Value">@Copy.Text</option>
+                            }*@
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row marbot10">
+            <label class="col-md-3">Business</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpBusiness">
+                    @foreach (var Business in Model.BusinessList)
+                    {
+                        <option value="@Business.Value">@Business.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Division</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpDivision">
+                    @*@foreach (var Division in Model.DivisionList)
+                    {
+                        <option value="@Division.Value">@Division.Text</option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Pool</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpPool">
+                    @*@foreach (var Pool in Model.PoolList)
+                    {
+                        <option value="@Pool.Value">@Pool.Text</option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3">Function</label>
+            <div class="col-md-6 dropdown">
+                <select class="form-control" id="drpFunction">
+                    @*@foreach (var Function in Model.FunctionList)
+                    {
+                        <option value="@Function.Value">@Function.Text</option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+    </div>

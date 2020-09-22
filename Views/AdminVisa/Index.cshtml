@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .stepContainer {
+        height: 600px !important;
+    }
+
+    #filesList {
+        height: 350px;
+    }
+
+    .bottom {
+        margin-top: 10px;
+    }
+</style>
+
+
+<h1 class="page-title">
+    Visa
+    <small>Select a visa to view more option. You can filter the visas using the tabs on the left.
+.</small>
+</h1>
+
+<div class="col-md-2">
+    <ul class="nav in-submenu listVisa">
+        @Html.Action("VisaMenu", "AdminVisa")
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div id="page_content_inner" class="tbl-border">
+       <div id="tableDiv">
+                    @Html.Action("List", "AdminVisa")
+                </div>    </div>
+</div>
+
+<script type="text/javascript">
+    var constantAdminVisa = {
+        addEdit: '@Url.Action("AddEditVisa", "AdminVisa")',
+        ImageUrl: '@Url.Action("ImageData", "AdminVisa")',
+        SaveData: '@Url.Action("SaveData", "AdminVisa")',
+        DeleteData: '@Url.Action("DeleteData", "AdminVisa")',
+        ListData: '@Url.Action("List", "AdminVisa")',
+        updateCount: '@Url.Action("VisaMenu", "AdminVisa")',
+    };
+
+</script>
+<script src="~/JS/Admin/AdminVisa/AdminVisaJS.js"></script>
+
+

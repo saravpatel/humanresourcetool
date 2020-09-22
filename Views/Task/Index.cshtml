@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class=" mCustomScrollbar">
+    <ul class="in-submenu">
+        <li title="My Tasks">
+            <a class="mytask active">
+                My Tasks <span class="colormy">6</span>
+            </a>
+        </li>
+        <li title="Overdue">
+            <a class="overdue">
+                Overdue <span class="colormy">6</span>
+            </a>
+        </li>
+        <li title="New">
+            <a class="New">
+                New <span class="colormy">6</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="content-part-right">
+    <div id="page_content_inner">
+        <h4 class="heading_a uk-margin-bottom">
+            <div class="icon"><img src="~/Images/listicons/icn-task.png" alt=""></div>
+            <div class="titletext">
+                Tasks
+                <p>Select a task to view more options. You can filter the tasks using the tabs on the left.</p>
+            </div>
+            <div class="clearfix"></div>
+        </h4>
+        <div class="md-card">
+            <div >
+                <div id="tableDiv">
+                    @Html.Action("List", "Task", new { FilterValue = "All" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/JS/Task/TaskJS.js" type="text/javascript"></script>

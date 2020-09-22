@@ -1,0 +1,333 @@
+﻿@model HRTool.Models.BulkActions.BulkActionTraining
+@*<div id="EmployeeBenefitModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+         Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    @*<h4 class="modal-title">Add Employee Benefit</h4>
+                </div>*@
+        @* <div class="modal-body" id="EmployeeBenefitBody">
+            </div>
+        </div>
+    </div>
+</div>*@
+<div id="AddNewFieldModel" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog">
+         Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Field</h4>
+            </div>
+            <div class="modal-body" id="AddNewFieldList">
+
+            </div>
+           <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-FiledType">Add</button>
+                <button type="button" class="btn btn-warning btnclose">Close</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div id="showHeadder">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Employee Information</h4>
+    </div>
+</div>
+<div id="findBtn">
+           @*<h4 class="modal-title trainingTitle" align="left">Add Employee Training</h4>*@
+    
+    <div id="wizard" class="swMain">
+        <ul class="tablistnew two">
+            <li class="active">
+                <a href="#step-1" class="s1">
+                    <span>1</span>Details
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span>Files
+                </a>
+            </li>
+        </ul>
+
+        @*<ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#step-1" class="s1">
+                        <span>1</span>Details
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-2" class="s2">
+                        <span>2</span>Files
+                    </a>
+                </li>
+            </ul>*@
+        <div id="step-1">
+            <div class="row marbot10">
+                <div class="form-group">
+                    @*<label class="col-md-3">Employee-SSO*</label>*@
+                    <input type="hidden" id="hidden-Id" value="@Model.Id" />
+                    <input type="hidden" id="CutomiseFiled" value="@Model.CustomFieldsJSON" />
+                    @*<div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Select Location">
+                            <select class="form-control" id="EmployeeId">
+                                @foreach (var Employee in Model.BindEmployeeList)
+                                {
+                                    <option value="@Employee.Value" @(Employee.Selected ? "Selected" : "")>@Employee.Text</option>
+                                }
+                            </select>
+                        </div>*@
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageEmployeeName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Training*</label>
+                </div>
+                <div class="col-md-6 dropdown-selectlist" data-toggle="tooltip" data-placement="right" title=" Select General Skills this Project represents">
+                    <select class="form-control" id="drp-Training">
+                        @foreach (var BindTrainingList in Model.BindTrainingList)
+                        {
+                            <option value="@BindTrainingList.Value" @(BindTrainingList.Selected ? "Selected" : "")>@BindTrainingList.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="validationmessageTrainingId" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none">Training is required.</span>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="col-md-3">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" id="txt-SystemListDescription" value="@Model.Description" placeholder="Description" data-toggle="tooltip" name="Description" data-placement="right" title="" data-original-title="Skill Description">@Model.Description</textarea>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="col-md-3">Importance*</label>
+                    <div class="col-md-6">
+                        <div class="resource-report-radio-btn">
+                            @if (Model.Importance == 1)
+                            {
+                                <label class="radio-btn">
+                                    <input type="radio" name="Importance" id="MandatoryId" value="1" checked>
+                                    <span>Mandatory</span>
+                                </label>
+                                    <label class="radio-btn">
+                                        <input type="radio" name="Importance" id="OptionalId" value="0">
+                                        <span>Optional</span>
+                                    </label>
+                            }
+                            else
+                            {
+                                <label class="radio-btn">
+                                    <input type="radio" name="Importance" id="MandatoryId" value="1">
+                                    <span>Mandatory</span>
+                                </label>
+                                    <label class="radio-btn">
+                                        <input type="radio" name="Importance" id="OptionalId" value="0" checked>
+                                        <span>Optional</span>
+                                    </label>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageImportance" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none">Importance is required.</span>
+                    </div>
+                </div>f
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Status</label>
+                </div>
+                <div class="col-md-6 dropdown-selectlist" data-toggle="tooltip" data-placement="right" title=" Select General Skills this Project represents">
+                    <select class="form-control" id="drp-TrainingStatus">
+                        @foreach (var Status in Model.BindTrainingStatusList)
+                        {
+                            <option value="@Status.Value" @(Status.Selected ? "Selected" : "")>@Status.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+
+            @if (Model.Progress == null)
+            {
+                <div class="row marbot10" id="Progresshideshow" style="display:none">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Progress</label>
+                        <div class="col-md-6">
+                            <input type="hidden" id="Progress">
+                            <input type="text" id="example_id" name="example_name" value="" />
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row marbot10" id="Progresshideshow">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Progress</label>
+                        <div class="col-md-6">
+                            <input type="hidden" id="Progress">
+                            <input type="text" id="example_id" name="example_name" value="@Model.Progress" />
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Start Date*</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control mrg-btm datepicker" id="StartDate" placeholder="Start Date" value="@Model.StartDate" name="StartDate" title="Start Date">
+                    </div>
+
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageStartDate" data-valmsg-for="StartDate" data-valmsg-replace="true" style="display:none">Startdate is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="control-label col-md-3">End Date*</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control mrg-btm datepicker" id="EndDate" value="@Model.EndDate" placeholder="End Date" name="EndDate" title="End Date">
+                    </div>
+
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageEndDate" data-valmsg-for="EndDate" data-valmsg-replace="true" style="display:none">Enddate is required.</span>
+                        <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Expiry Date*</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control mrg-btm datepicker" id="ExpiryDate" value="@Model.ExpiryDate" placeholder="Expiry Date" name="ExpiryDate" title="Expiry Date">
+                    </div>
+
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageExpiryDate" data-valmsg-for="ExpiryDate" data-valmsg-replace="true" style="display:none">Expirydate is required.</span>
+                        <span class="field-validation-error" id="valdExpiryDate" data-valmsg-for="ExpiryDate" data-valmsg-replace="true" style="display:none">Plaese Select Valid Expirydate.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="col-md-3">Provider</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Name Of the Provider">
+                        <input type="text" name="Provider" id="Provider" value="@Model.Provider" class="form-control" ng-required="false">
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="col-md-3">Cost</label>
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Values Of the Cost">
+                        <input type="number" min="0" step="any" name="Cost" id="Cost" value="@Model.Cost" class="form-control" ng-required="false">
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="form-group">
+                    <label class="col-md-3">Note</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" id="Notes" value="@Model.Notes" placeholder="Notes">@Model.Notes</textarea>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="CoustomeAdd" class="CustomeFiled">
+                <input type="hidden" id="lastId" value="0" />
+            </div>
+
+            <button class="md-btn md-btn-primary add-new-timesheet-btn" id="btn_bulk_AddNewField" onclick="AddNewFiledTraining()" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#AddNewFieldModel">Add New Field</button>
+        </div>
+        <div id="step-2">
+            <div class="browse-attach">
+                <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                    <p>Drop docs,pdfs or images here or click to upload</p>
+                    <span class="btn">BROWSE</span>
+                </label>
+                <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png,.docx,.pdf" style="display: none">
+            </div>
+            <div id="filesList">
+                @foreach (var item in Model.ListDocument)
+            {
+                    <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+                }
+            </div>
+
+        </div>
+    </div>
+      
+    @*<button type="button" class="btn btn-success" id="btnBulkEmpTrainig">Add</button>*@
+    
+</div>
+<script>
+    var bulkActionTraning = {
+        ImageData_Traning: '@Url.Action("TraningImageData", "BulkActions")',
+    }
+</script>
+@*<script src="~/JS/BulkAction/BulkActionJs.js"></script>*@
+<script>
+    $("#EmployeeBenefitModal").on('change', '#fileToUpload', function (e) {
+        $(".hrtoolLoader").show();
+        var files = e.target.files;
+        var imageData = "";
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                imageData = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    imageData.append("file" + x, files[x]);
+                }
+                setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: bulkActionTraning.ImageData_Traning,
+                        contentType: false,
+                        processData: false,
+                        data: imageData,
+                        success: function (result) {
+                            var string = '<div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newFileName="' + result.NewFileName + '">' + result.originalFileName + '</label><br /><input type="text" class="ImageDescription form-control" placeholder="Add Description Here" /></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>';
+                            var isEmpty = $("#EmployeeBenefitModal").find("#filesList").html();
+                            if (isEmpty = "") {
+                                $("#EmployeeBenefitModal").find("#filesList").html(string);
+                            }
+                            else {
+                                $("#EmployeeBenefitModal").find("#filesList").append(string);
+                            }
+                            $(".hrtoolLoader").hide();
+                            $(".modal-backdrop").hide();
+                        }
+                    });
+                }, 500);
+            }
+        }
+    });
+    $("#EmployeeBenefitModal").on('click', '.file-deleteicon', function () {
+        $(this).parent().remove();
+    });
+</script>

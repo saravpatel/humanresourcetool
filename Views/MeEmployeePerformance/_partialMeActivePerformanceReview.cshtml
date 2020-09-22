@@ -1,0 +1,111 @@
+﻿@model HRTool.Models.Resources.EmployeePerformanceViewModel
+@*<input type="hidden" value="@Model.EmployeeId" />
+<input type="hidden" value="@Model.ReviewId" />*@
+
+
+ <div >
+    @foreach (var item in Model.ListofPerformance)
+    {
+        if (item.CompletionDate > DateTime.Now)
+        {
+        @*<div class="noselect1" id="@item.Id" onclick="openReviewSegments(@item.Id,@item.ReviewId,@Model.EmployeeId,@Model.IsActivePastFlag);">
+            @*<td style="position:relative;" class="ef-par">*@
+            @*<div style="position:relative;z-index:1;height:100px" class="progress skill-bar">
+                <div class="progress-bar fillcolor" role="progressbar" aria-valuenow="@item.OverAllScore" aria-valuemin="0" aria-valuemax="100"></div>
+                <h3 class="sm-heading text-center"><b>@item.ReviewName - @item.CompletionDate </b></h3> 
+                <ul class="list-group list-inline">
+                        <li>
+                        <i class="material-icons font50">person</i></li>
+                    <li>
+                        <i class="fa fa-user"></i>
+                        <h5 class="uk-margin-remove">Employee Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons">star</i>
+                        <h5 class="uk-margin-remove">Customer Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons">star</i>
+                        <h5 class="uk-margin-remove">Manager Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                        
+                    </ul>
+                  
+            </div>*@
+        @*</div>*@
+
+        <div class="noselect1" id="@item.Id" onclick="openReviewSegments(@item.Id,@item.ReviewId,@Model.EmployeeId,@Model.IsActivePastFlag);">
+            <div style="position:relative;z-index:1;height:100px" class="progress skill-bar">
+                <div class="progress-bar fillcolor" role="progressbar" aria-valuenow="@item.OverAllScore" aria-valuemin="0" aria-valuemax="5"></div>
+                <h3 class="sm-heading text-center"><b>@item.ReviewName - @item.CreatedDate</b></h3>
+                <ul class="list-group list-inline" style="position:absolute;top:-8px;">
+                    <li style="position:relative;top:16px;">
+                        <i class="material-icons font50">person</i>
+                    </li>
+                    <li>
+                        <i class="fa fa-user"></i>
+                        <h5 class="uk-margin-remove">Employee Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons">star</i>
+                        <h5 class="uk-margin-remove">Customer Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons">star</i>
+                        <h5 class="uk-margin-remove">Manager Status</h5>
+                    </li>
+                    <li>
+                        <i class="material-icons hide">insert_drive_file</i>
+                        <i class="material-icons">folder</i>
+                        <h5 class="uk-margin-remove">Unshared</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        }
+    }
+
+</div>
+<label class="startnewreview-lab">
+    <a href="#" class="btn-startnewreview" data-backdrop="static" data-keyboard="false">
+        <span class="icnnewmission"></span>
+        <span class="title">Start a New Review</span>
+    </a>
+</label>
+
+
+<script>
+    $(document).ready(function () {
+        $('.progress .progress-bar').css("width",
+                  function () {
+                      return $(this).attr("aria-valuenow") + "%";
+                  }
+          )
+    });
+</script>

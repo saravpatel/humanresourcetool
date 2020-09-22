@@ -1,0 +1,254 @@
+﻿@model HRTool.Models.BulkActions.BulkEmployeeSetting
+<div id="finBtn">
+    <div class="row marbot10">
+        <label class="col-md-3">Reports to</label>
+        <div class="col-md-6 dropdown">
+            <input type="hidden" id="selectReportToID" value="" />
+            <input type="text" class="awesomplete form-control" id="empReportTo" size="70" value="" placeholder="Employee Name" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Additional Reports to</label>
+        <div class="col-md-6 dropdown">
+            <input type="hidden" id="AddRespID" value="" />
+            <input type="text" class="awesomplete form-control" id="empAdditionalReportTo" size="70" value="" placeholder="Employee Name" />
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">HR Responsible</label>
+        <div class="col-md-6 dropdown">
+            <input type="hidden" id="HRResID" value="" />
+            <input type="text" class="awesomplete form-control" id="empHRReportTo" value="" size="70" placeholder="Employee Name" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Job Title*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpJobTitle">
+                @foreach (var Job in Model.JobTitle)
+            {
+                    <option value="@Job.Value" @(Job.Selected ? "Selected" : "")>@Job.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Resource Type*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkResourceType">
+                @foreach (var Resource in Model.ResourceType)
+            {
+                    <option value="@Resource.Value" @(Resource.Selected ? "Selected" : "")>@Resource.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Notice Period*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkNoticePeriod">
+                @foreach (var notice in Model.NoticePeriod)
+            {
+                    <option value="@notice.Value" @(notice.Selected ? "Selected" : "")>@notice.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Location*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkLocation">
+                @foreach (var location in Model.Location)
+            {
+                    <option value="@location.Value" @(location.Selected ? "Selected" : "")>@location.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Company*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkCompany">
+                @foreach (var company in Model.CompanyList)
+            {
+                    <option value="@company.Value" @(company.Selected ? "Selected" : "")>@company.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidJobTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Business*</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkBusiness">
+                @foreach (var business in Model.BusinessList)
+            {
+                    <option value="@business.Value" @(business.Selected ? "Selected" : "")>@business.Text</option>
+            }
+            </select>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Division</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkDivision">
+                @foreach (var Division in Model.DivisionList)
+            {
+                    <option value="@Division.Value" @(Division.Selected ? "Selected" : "")>@Division.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Pool</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkPool">
+                @foreach (var Pool in Model.PoolList)
+            {
+                    <option value="@Pool.Value" @(Pool.Selected ? "Selected" : "")>@Pool.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Function</label>
+        <div class="col-md-6 dropdown">
+            <select class="form-control" id="drpBulkFunction">
+                @foreach (var Function in Model.FunctionList)
+            {
+                    <option value="@Function.Value" @(Function.Selected ? "Selected" : "")>@Function.Text</option>
+            }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidLocation" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btnResourceSetting">Add</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>
+</div>
+<script>
+    var constantvar = {
+                getEmp: '@Url.Action("getEmpCopyData", "Employee")',
+    }
+</script>
+<script>
+    searchCopyFrom();
+    function searchCopyFrom() {
+        $("#drpCopyFrom").html("");
+        var listData = [];
+        var listRepTo = [];
+        var listDataAdditionalReportTo = [];
+        var listDataHRResp = [];
+        $.ajax({
+            url: constantvar.getEmp,
+            data: {},
+            success: function (data) {             
+                $.each(data.ReportstoList, function (index, item) {
+                    listRepTo.push(item.Text);
+                });
+                $.each(data.AdditionalReportstoList, function (index, item) {
+                    listDataAdditionalReportTo.push(item.Text);
+                });
+                $.each(data.HRResponsibleList, function (index, item) {
+                    listDataHRResp.push(item.Text);
+                });         
+                //Report To
+                var inpRpTo = document.getElementById("empReportTo");
+                var awsRpTo = new Awesomplete(inpRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsRpTo.list = listRepTo;
+                $('#empReportTo').change(function () {
+                    value = $('#empReportTo').val();
+                    for (var i = 0; i < data.ReportstoList.length; i++) {
+                        if (value == data.ReportstoList[i].Text) {
+                          var eid = data.ReportstoList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectReportToID").val(eid);
+                });
+                //Add Report To
+                var addRpTo = document.getElementById("empAdditionalReportTo");
+                var awsAdRpTo = new Awesomplete(addRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsAdRpTo.list = listDataAdditionalReportTo;
+                $('#empAdditionalReportTo').change(function () {
+                    value = $('#empAdditionalReportTo').val();
+                    for (var i = 0; i < data.AdditionalReportstoList.length; i++) {
+                        if (value == data.AdditionalReportstoList[i].Text) {
+                            var eid = data.AdditionalReportstoList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#AddRespID").val(eid);
+                });
+                //Hr Report To
+                var HRRpTo = document.getElementById("empHRReportTo");
+                var awsHrRpTo = new Awesomplete(HRRpTo, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awsHrRpTo.list = listDataHRResp;
+                $('#empHRReportTo').change(function () {
+                    value = $('#empHRReportTo').val();
+                    for (var i = 0; i < data.HRResponsibleList.length; i++) {
+                        if (value == data.HRResponsibleList[i].Text) {
+                            var eid = data.HRResponsibleList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#HRResID").val(eid);
+                });
+            }
+        });
+    }
+</script>

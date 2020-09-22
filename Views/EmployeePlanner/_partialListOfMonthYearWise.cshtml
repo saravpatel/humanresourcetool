@@ -1,0 +1,243 @@
+﻿@model HRTool.Models.Resources.EmployeePlannerYearViewModel
+
+
+<div id="EmployeePlanner_SickLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title SickLeaveTitle">Add Sick Leave</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_SickLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_SickLeave">Add</button>
+                <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_AnnualLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Holiday</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_AnnualLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_AnnualLeave">Add</button>
+                <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_LateLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Late</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_LateLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_LateLeave">Add</button>
+                <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_OtherLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Other Leave</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_OtherLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_TravelLeaveModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Travel</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_TravelLeaveBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_TimeSheetModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">TimeSheet</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_TimeSheetBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-success" id="btn-submit-EmployeePlanner_OtherLeave">Add</button>
+                    <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_PublicholidayModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Public Holiday</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_PublicHolidayBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="EmployeePlanner_MaternityPaternityModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModel" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Maternity/Paternity Leave</h4>
+            </div>
+            <div class="modal-body" id="EmployeePlanner_MaternityPaternityBody">
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-warning closeModel" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@foreach (var month in Model.MonthList)
+{
+    <div id="accordion_row_@month.monthId" class="accordion_row" data-yearid="@Model.yearId" data-monthid="@month.monthId">
+        <a class="accordion-section-title accordion_head">
+            @month.MonthName
+            <ul>
+                <li>@month.TimesheetCount<span class="spritesheet_img icnholidays"></span></li>
+                <li>@month.TravelCount<span class="spritesheet_img icnleave"></span></li>
+                <li>@month.SumAnnualLeave<span class="spritesheet_img icnsick"></span></li>
+                <li>@month.OtherLeaveCount<span class="spritesheet_img icnlate"></span></li>
+                <li>@month.SickLeaveCount<span class="spritesheet_img icnpubhol"></span></li>
+                <li>@month.sumLateLeave<span class="spritesheet_img icnmatpat"></span></li>
+                <li>@month.PublicHolidaysCount<span class="spritesheet_img icnpubholiday"></span></li>
+                <li>@month.MaternityorPaternity<span class="spritesheet_img icntimes"></span></li>
+                <li><span class="spritesheet_img icnarrow"></span></li>
+            </ul>
+        </a>
+    </div>
+    
+    <div class="accordion_body panel-body" style="display:none;">
+        <div class="tablefull">
+            <div class="fixedtable ">
+                <div class="fixedleftcolumn">
+                    <div class="fixedHead">
+                        <table id="accordion_table_@month.monthId" class="first-table">
+                            <tbody>
+                                <tr class="controlsbutton">
+                                    <td class="move">
+                                        <a class="scrollleft active" data-monthid="@month.monthId">
+                                            <span class="spritesheet icnarrowleft"></span>
+                                        </a>
+                                        <a class="scrollright active" data-monthid="@month.monthId">
+                                            <span class="spritesheet icnarrowright"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdtype">Type</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Timesheet</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Travel</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Annual Leave</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Other Leave</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Sick Leave</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Late</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Public Holidays</td>
+                                </tr>
+                                <tr>
+                                    <td height="50px">Maternity/Paternity</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="fixedrightcolumn" id="fixedrightcolumn_@month.monthId">
+                    @Html.Partial("_partialListOfDayMonthYearWise", month.DayList)
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,64 @@
+﻿@model IList<HRTool.Models.Resources.AddSalaryEntitlementViewModel>
+
+<div class="modal fade" id="addsalaryEntitlementTemp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btn-close-SalaryEntitlementTemp">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title salaryEntitlementTempTitle" id="myModalLabel">Add Entitlement</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="AddSalaryEntitlementTempBody">
+
+            </div>
+            <br />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn-submit-SalaryEntitlementTemp">ADD</button>
+                <button type="button" class="btn btn-warning" id="btn-Cancel-SalaryEntitlementTemp">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-btns">
+    <a class="btn btn-success btn-circle  btn-add-SalaryEntitlementTemp" id="btn-Show-SalaryEntitlementTemp" @*data-toggle="modal" data-target="#addsalaryEntitlementTemp"*@><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-circle  btn-edit-SalaryEntitlementTemp" id="btn-Edit-SalaryEntitlementTemp" title="Edit" disabled="disabled" @*data-toggle="modal" data-target="#addsalaryEntitlementTemp"*@><i class="fa fa-pencil"></i></a>
+    <a class="btn btn-danger btn-circle  btn-delete-SalaryEntitlementTemp" title="Delete" disabled="disabled">
+        <i class="fa fa-trash-o"></i>
+    </a>
+</div>
+
+<table id="salaryEntitlementTempTable" class="table-bordered display table style2 table-striped  dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Entitlement</th>
+            <th>Fixed Amount</th>
+            <th>% of Salary</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id" class="dataTrEntitlementTemp">
+                <td>@item.Entitlement</td>
+                <td>@item.FixedAmount</td>
+                <td>@item.PercentOfSalary</td>
+                <td>@item.Comments</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<script type="text/javascript">
+
+   
+
+</script>

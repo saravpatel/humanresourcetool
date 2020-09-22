@@ -1,0 +1,67 @@
+﻿@model HRTool.Models.RolesManagement.RolesManagementMenuViewModel
+<div class="row ">
+    <div class="form-group col-md-12">
+        <input type="hidden" id="hidden-Id" value="@Model.Id" />
+        <label class="col-md-3">Menu Name*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Name Of the project">
+            <input type="text" name="name" id="MenuName" value="@Model.MenuName" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row ">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Action Name</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Name Of the project">
+            <input type="text" name="name" id="ActionName" value="@Model.ActionName" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="form-group col-md-12">
+        <label class="col-md-3">Controller Name</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title=" Name Of the project">
+            <input type="text" name="name" id="ControllerName" value="@Model.ControllerName" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required" ng-required="false">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageName" data-valmsg-for="Name" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+<div class="row marbot10">
+    <div class="form-group col-md-12" data-ng-class="{ 'has-error' : assetForm.selectedAssetType2.$invalid &amp;&amp; formSubmitted }">
+
+        <label class="control-label col-md-3">Parent Menu</label>
+        <div class="col-md-6">
+            @Html.DropDownListFor(m => m.SubmenuId, Model.MenuList, new { @class = "form-control col-md-7 col-xs-12" })
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageAsset2" data-valmsg-for="Asset2" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row marbot10">
+    <div class="form-group col-md-12" data-ng-class="{ 'has-error' : assetForm.selectedAssetType2.$invalid &amp;&amp; formSubmitted }">
+
+        <label class="control-label col-md-3">Add Menu Key</label>
+        <div class="col-md-6">
+            <select id="menuKey" class="form-control">
+                <option value="0"> Select Menu Key..</option>
+                @foreach (var item in Model.MenuKeyList)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageAsset2" data-valmsg-for="Asset2" data-valmsg-replace="true" style="display:none"></span>
+        </div>
+    </div>
+</div>

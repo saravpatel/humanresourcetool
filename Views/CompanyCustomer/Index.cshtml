@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+
+<div id="page_content_inner">
+    <br />
+    
+
+
+
+
+    <h1 class="page-title">
+        Customer List
+        <small>Add Or Manage Customer Profile.</small>
+    </h1>
+
+
+
+
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("CustomerComapnyList", "CompanyCustomer")
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var constantCmpCustomer = {
+        addEdit: '@Url.Action("AddEditCustomerCompany", "CompanyCustomer")',
+        ImageUrl: '@Url.Action("ImageData", "CompanyCustomer")',
+        SaveCmp: '@Url.Action("SaveCustomerCompany", "CompanyCustomer")',
+        DeleteCmp:'@Url.Action("DeleteCustomerCompany", "CompanyCustomer")',
+        validSSo: '@Url.Action("validateSSo", "CompanyCustomer")',
+
+    };
+
+</script>
+<script src="~/JS/Settings/CompanyCustomer/CompanyCustomerJS.js"></script>

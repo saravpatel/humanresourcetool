@@ -1,0 +1,85 @@
+﻿@model HRTool.Models.BulkActions.SendCVResumeToCustomer
+
+<div id="findbtn">
+    <div class="row marbot10">
+        <label class="col-md-3">Select receiver within the system</label>
+        <div class="col-md-6 dropdown">
+            <input type="hidden" id="selectID" />
+            <input type="text" class="awesomplete form-control" id="customerNameText" size="70" value="" placeholder="Employee Name" />
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Customer</span>
+        </div>
+    </div>
+    <div class="row marbot10">
+        <label class="col-md-3">Send to the following emails</label>
+        <div class="col-md-6"> 
+            <textarea id="customerEmailText" rows="10" cols="50"></textarea>                       
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="ValidEmail" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Enter Email.</span>
+        </div>        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="sendResumeCV">Send</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>
+</div>
+<script>
+    var constatntBulkResource = {
+        getEmp: '@Url.Action("getBulkResourceData", "BulkActions")',
+        getemployeEmail: '@Url.Action("getEmployeeEmail", "BulkActions")',
+    }
+</script>
+<script>
+    searchCustomerFrom();
+    function searchCustomerFrom() {        
+        var listData = [];     
+        $.ajax({
+            url: constatntBulkResource.getEmp,
+            data: {},
+            success: function (data) {
+                $.each(data.CustomerList, function (index, item) {
+                    listData.push(item.Text);
+                });            
+                //Copy From
+                var input = document.getElementById("customerNameText");
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                });
+                awesomplete.list = listData;
+                $('#customerNameText').change(function () {
+                    value = $('#customerNameText').val();
+                    for (var i = 0; i < data.CustomerList.length; i++) {
+                        if (value == data.CustomerList[i].Text) {
+                            var eid = data.CustomerList[i].Value;
+                            break;
+                        }
+                        else {
+                            eid = '';
+                        }
+                    }
+                    $("#selectID").val(eid);
+
+                    if(eid!="" && eid!=0)
+                    {
+                        $.ajax({
+                            url: constatntBulkResource.getemployeEmail,
+                            data: {EmployeeId :eid },
+                            success:function(data)
+                            {
+                                var email = JSON.stringify(data.CustomerEmail);
+                                email = email.split('"');
+                                $("#customerEmailText").val(email);
+                            }
+                        });
+                        
+                    }
+
+                });  
+            }
+        });
+    }
+</script>

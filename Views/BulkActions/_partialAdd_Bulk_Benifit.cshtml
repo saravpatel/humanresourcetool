@@ -1,0 +1,208 @@
+﻿@model HRTool.Models.BulkActions.BenefitsViewModel
+@*<div>
+    <h4 class="modal-title" align="left">Benefit</h4>
+</div>*@
+@*<div id="findBtn">*@
+    <div id="wizard" class="swMain">
+    <ul class="tablistnew two">
+        <li class="active">
+            <a href="#step-1" class="s1">
+                <span>1</span>Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Comment
+            </a>
+        </li>
+    </ul>
+    @*<ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#step-1" class="s1">
+                    <span>1</span>Details
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span>Comment
+                </a>
+            </li>
+        </ul>*@
+
+
+    <div id="step-1">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Benifits *</label>
+            </div>
+            <div class="col-md-6">
+                <select id="drp-Benifits" class="form-control">
+                    @foreach (var item in Model.BenefitList)
+                    {
+                        if (Model.BenefitID.ToString() == item.Value)
+                        {
+                            <option value=@item.Value selected="selected">@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-BenifitsList" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Status is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Date Awarded *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.DateAwarded" id="txt_DateAwarded" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-DateAwarded" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Date Awarded is required.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Expiry Date *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="@Model.ExpiryDate" id="txt_ExpiryDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-ExpiryDate" style="display:none;" data-valmsg-for="ExpiryDate" data-valmsg-replace="true">Expiry Date is required.</span>
+                <span class="field-validation-error" id="lbl-error-ValidExpiryDate" style="display:none;" data-valmsg-for="ExpiryDate" data-valmsg-replace="true">Please Select Valid Expiry Date.</span>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Value</label>
+            </div>
+            <div class="col-md-6">
+                <input type="number" value="@Model.FixedAmount" id="txt_FixedAmount" min="0" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="drpCurrency">
+                    @foreach (var Currency in Model.CurrencyList)
+                    {
+                        if (Model.Currency.ToString() == Currency.Value)
+                        {
+                            <option value="@Currency.Value" selected="selected">@Currency.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@Currency.Value">@Currency.Text</option>
+                        }
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Comments</label>
+            </div>
+            <div class="col-md-6">
+                <textarea id="textArea_comments" class="form-control textarea-resizeNone">@Model.Comments</textarea>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Recover on Termination?</label>
+            </div>
+            <div class="col-md-6">
+                @if (Model.RecoverOnTermination)
+                {
+                    <input type="checkbox" id="chk_RecoverOnTermination" checked="checked" />
+                }
+                else
+                {
+                    <input type="checkbox" id="chk_RecoverOnTermination" />
+                }
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    <div id="step-2">
+        <div class="browse-attach">
+            <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                <p>Drop docs,pdfs or images here or click to upload</p>
+                <span class="btn">BROWSE</span>
+            </label>
+            <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png,.docx,.pdf" style="display: none">
+        </div>
+        <div id="filesList" class="filesListSmall">
+            @foreach (var item in Model.BenefitDocumentList)
+            {
+                <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+            }
+        </div>
+    </div>
+</div>
+
+    @*<div class="modal-footer">
+        <button type="submit" class="btn btn-success" id="btnBulkBenifitData">Add</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>*@
+    @*</div>*@
+<script>
+    var bulkActionBenefit = {
+        ImageData_Benefit: '@Url.Action("BenefitImageData", "BulkActions")',
+    }
+</script>
+
+<script src="~/JS/BulkAction/BulkActionJs.js"></script>
+<script>
+    $("#EmployeeBenefitModal").on('change', '#fileToUpload', function (e) {
+        $(".hrtoolLoader").show();
+        var files = e.target.files;
+        var imageData = "";
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                imageData = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    imageData.append("file" + x, files[x]);
+                }
+                setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: bulkActionBenefit.ImageData_Benefit,
+                        contentType: false,
+                        processData: false,
+                        data: imageData,
+                        success: function (result) {
+                            var string = '<div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newFileName="' + result.NewFileName + '">' + result.originalFileName + '</label><br /><input type="text" class="ImageDescription form-control" placeholder="Add Description Here" /></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>';
+                            var isEmpty = $("#EmployeeBenefitModal").find("#filesList").html();
+                            if (isEmpty = "") {
+                                $("#EmployeeBenefitModal").find("#filesList").html(string);
+                            }
+                            else {
+                                $("#EmployeeBenefitModal").find("#filesList").append(string);
+                            }
+                            $(".hrtoolLoader").hide();
+                            $(".modal-backdrop").hide();
+                        }
+                    });
+                }, 500);
+            }
+        }
+    });
+    $("#EmployeeBenefitModal").on('click', '.file-deleteicon', function () {
+        $(this).parent().remove();
+    });  
+    $("#txt_FixedAmount").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

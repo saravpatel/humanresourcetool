@@ -1,0 +1,132 @@
+.swMain .stepContainer {
+    /*display:block;
+  position: relative;*/
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;
+  overflow-y: auto;*/
+    /*clear:both;
+  height:300px;*/
+}
+.swMain .stepContainer div.content .radio-btn {margin-right: 20px;}
+
+.swMain .stepContainer div.content {
+        display: block;
+        position: inherit;
+        float: left;
+        margin: 0;
+        padding: 5px;
+        color: #5A5655;
+        min-height: auto;
+        text-align: left;
+        overflow: visible;
+        z-index: 88;
+        width: 100%;
+        clear: both;
+        margin-bottom: 20px;
+    }
+
+.swMain div.actionBar {
+    /*float: right;*/
+    display: block;
+    position: relative;
+    clear: both;
+    margin: 3px 0 0 0;
+    padding: 0;
+    text-align: left;
+    z-index: 88;
+    left: 0;
+}
+
+.swMain .stepContainer .StepTitle {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 5px;
+    color: #5A5655;
+    background-color: #E0E0E0;
+    clear: both;
+    text-align: left;
+    z-index: 88;
+}
+
+.swMain .buttonNext {
+    display: block;
+    float: right;
+    margin: 5px 3px 0 3px;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+    color: #FFF;
+    outline-style: none;
+    background-color: #7cb342!important;
+}
+
+.swMain .buttonDisabled {
+    color: #F8F8F8 !important;
+    /*background-color: #CCCCCC !important;
+  border: 1px solid #CCCCCC  !important;*/
+    cursor: text;
+    display: none !important;
+}
+
+.swMain .buttonPrevious {
+    display: block;
+    float: right;
+    margin: 5px 3px 0 3px;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+    color: #FFF;
+    outline-style: none;
+    background-color: #dd5600;
+}
+
+.swMain .buttonFinish {
+    display: block;
+    float: right;
+    margin: 5px 3px 0 3px;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+    color: #FFF;
+    outline-style: none;
+}
+
+.swMain .loader {
+    display: none;
+}
+
+.swMain .msgBox {
+    display: none;
+}
+
+    .swMain .msgBox .close {
+        display: none;
+    }
+
+.browse-attach {
+    margin: 0 auto;
+    float: none;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+}
+
+.swMain .stepContainer .btn-upload {
+    background: #f5f5f5 !important;
+    border: none;
+    box-shadow: none !important;
+    color: #212121 !important;
+    width: 100%;
+    float: left;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.modal-body .stepContainer {
+    height: auto !important;
+}

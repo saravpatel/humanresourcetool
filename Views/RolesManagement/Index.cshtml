@@ -1,0 +1,81 @@
+﻿@model HRTool.Models.RolesManagement.RoleListViewModel
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<style>
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        min-height: 34px;
+    }
+</style>
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/select2.min.js"></script>
+<div id="page_content_inner">
+    <br />
+    
+
+    <h1 class="page-title">
+        Role Management
+        <small>View company Role Management.</small>
+    </h1>
+
+
+
+
+
+    <div class="md-card">
+        <div >
+            <div class="row">
+                <div class="col-md-5 col-sm-6 col-xs-12" style="padding:20PX;">
+                    <select class="form-control" id="roleid" name="roleid">
+                        <option value="0">-- Select Role --</option>
+                        @foreach (var item in Model.RoleList)
+                        {
+                            <option value="@item.roleId">@item.roleName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-12" style="padding:20PX;">
+                    <select class="form-control" id="ddlUser" name="ddlUser">
+                        <option value="0">-- Select User --</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="x_panel">
+                    <div class="col-md-12">
+                        <h4 class="heading_a uk-margin-bottom">
+                            <div class="icon"></div>
+                            <div class="titletext" style="width:100%">
+                                Menu List
+                                <ul class="nav navbar-right panel_toolbox menu-list-btn" style="float:left">
+                                    <li>
+                                        <button id="btnSave" style="display:none;" class="btn btn-success">Save</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </h4>
+                    </div>
+                    <div class="x_content">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/JS/RolesManagement/RolesManagementJS.js"></script>
+<script>
+    var constantrole = {
+        roleWiseUsersUrl: '@Url.Action("roleWiseUsers", "RolesManagement")',
+        menuBreadcumUrl: '@Url.Action("menuBreadcum", "RolesManagement")',
+        saveMenuUserWiseUrl: '@Url.Action("saveMenuUserWise", "RolesManagement")'
+    };
+</script>

@@ -1,0 +1,57 @@
+﻿@model HRTool.Models.Resources.ViewSkillsViewModel
+<div class="panel-body modalaboutbadge">
+    <div class="badgeinfo">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="img">
+                    <img id="imgBadgeIcon" src="~/Upload/SkillSets/@Model.Picture" class="listpic" /><span></span>
+                </div>
+                <div class="left">
+                    <div class="mb20">
+                        <label class="block">Skill Set Name</label>
+                        <span id="spnBadgeName" class="tag biggest blue2">@Model.Name</span>
+                    </div>
+                    <label class="block">Who Deserves This Skill Set?</label>
+                    <p id="pDesc" class="ng-binding">@Model.Description</p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="skills">
+                    <label class="block">Skills</label>
+                    <p>This skill set adds these skills to the recipient's profile:</p>
+                    <ul class="ng-hide">
+                        @foreach (var item in Model.SkillValueList)
+                        {
+                            <li>
+                                <span id="spnBadgeName" class="tag biggest blue2">@item</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="statistics">
+        <label class="block">Statistics</label>
+        <ul class="actions">
+            <li>
+                <div class="withborder">
+                    <span id="spnThisMonth">0</span>
+                    <span>This Month</span>
+                </div>
+            </li>
+            <li>
+                <div class="withborder">
+                    <span id="spnTotalCount">0</span>
+                    <span>Total</span>
+                </div>
+            </li>
+            <li>
+                <div class="withborder">
+                    <span id="spnMostPopular">9st</span>
+                    <span id="spnMostPopularTitle">Most Popular</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@model HRTool.Models.Resources.EmployeeContactViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MeLayout.cshtml";
+}
+<div id="page_content_inner">
+    <input type="hidden" value="@Model.Id" id="UserId" />
+   
+
+
+    <h1 class="page-title">
+        Contact Details
+        <small></small>
+    </h1>
+
+
+
+    <div id="UpdateContacts">
+        @Html.Action("ContectRecordRecord", "MeEmployeeContacts", new { EmployeeId = @Model.Id })
+    </div>
+    
+</div>
+<script type="text/javascript">
+    var constantEmergencyContact = {
+        addEdit: '@Url.Action("AddEditEmergencyContacts", "MeEmployeeContacts")',
+        SaveEmergencyContact: '@Url.Action("SaveEmergencyContacts", "MeEmployeeContacts")',
+        DeleteEmergencyContact: '@Url.Action("DeleteEmergencyContact", "MeEmployeeContacts")',
+        BindStateUrl: '@Url.Action("BindStateDropdown", "MeEmployeeContacts")',
+        BindCityIDUrl: '@Url.Action("BindCityDropdown", "MeEmployeeContacts")',
+        BindAirPortIDUrl: '@Url.Action("BindAirportDropdown", "MeEmployeeContacts")',
+        SaveContactUrl: '@Url.Action("UpdateContactsRecord", "MeEmployeeContacts")'
+    };
+</script>
+<script src="~/JS/Me/Contacts/MeEmployeeContactsJS.js"></script>

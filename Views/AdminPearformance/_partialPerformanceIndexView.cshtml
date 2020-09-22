@@ -1,0 +1,303 @@
+﻿@model HRTool.Models.Admin.PerformanceIndexPageViewModel
+<style>
+    .center-data {
+        padding-top: 20px;
+        padding-right: 10px;
+        padding-bottom: 20px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 page-title">
+        Performance Overview
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <label for="normal_working"><b>Review :</b></label>
+        <select class="form-control" id="drpReviewList" onchange="getDataByPerformanceReview()" value="1">
+            <option value="0">--Select--</option>
+            @foreach (var item in Model.PerformanceReviewList)
+            {
+                if (Model.SelectedPerformanceId == Convert.ToInt32(item.Value))
+                {
+                    <option value="@item.Value" selected="selected">@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+        <div id="container" style="width: 350px; height: 280px;">
+        </div>
+        <br />
+        <div class="col-md-12 work-outstanding" id="TotalNumberOfQuestionDiv" style="display:none;">
+
+            @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+            <div class="col-md-4 col-pad-left-none">
+                <img src="~/assets/img/Manager-Outstanding.png" style="width:55px;" />
+
+            </div>
+            <div class="col-md-8 col-pad-left-none">
+                <span class="title-text-area">This Performance Review Has</span>
+            </div>
+            <span class="big timer title-text-area-nomber" id="CountTotalQuesByReview">@Model.CountTotalQuestionByReview Question </span>
+            <span class="title-text-area"></span>
+
+        </div>
+        <br />
+        <div class="col-md-12 work-outstanding" style="margin-top:5px;">
+
+
+
+
+            @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+            <div class="col-md-4 col-pad-left-none">
+                <img src="~/assets/img/Manager-Outstanding.png" style="width:55px;" />
+
+            </div>
+            <div class="col-md-8 col-pad-left-none">
+                <span class="title-text-area">Worker Outstanding</span>
+            </div>
+            <span class="big timer title-text-area-nomber" id="WorkerOutStandingReview">@Model.WorkerOutstanding</span>
+
+
+
+
+
+            @*<img src="~/img/TMSDashboard/warningTMS.jpg" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+
+
+        </div>
+
+    </div>
+    <div class="col-md-3">
+
+
+
+        <div class=" image-chart-box">
+            <div class="panel-body">
+                @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+                <div class="col-md-4 col-pad-left-none">
+                    <img src="~/assets/img/review.png" style="width:55px;" />
+                </div>
+                <div class="col-md-8 col-pad-left-none">
+                    <span class="title-text-area">Number of Reviews Opened this Year</span>
+                </div>
+                <span class="big timer title-text-area-nomber" id="OpenReview">@Model.NumberofReviewsOpenthisYear</span>
+            </div>
+        </div>
+
+
+
+
+
+        <div class=" image-chart-box">
+            <div class="panel-body">
+                @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+                <div class="col-md-4 col-pad-left-none">
+                    <img src="~/assets/img/Reviews-complated.png" style="width:55px;" />
+                </div>
+                <div class="col-md-8 col-pad-left-none">
+                    <span class="title-text-area">Number of Reviews Completed this Year</span>
+                    <span class="big timer title-text-area-nomber" id="CompletedReview">@Model.NumberofCompletedReviewthisYear</span>
+                </div>
+
+            </div>
+        </div>
+        <div class=" image-chart-box">
+            <div class="panel-body">
+                @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+                <div class="col-md-4 col-pad-left-none">
+                    <img src="~/assets/img/OutstandingReviews.png" style="width:55px;" />
+
+                </div>
+                <div class="col-md-8 col-pad-left-none">
+                    <span class="title-text-area">Outstanding Reviews</span>
+                </div>
+                <span class="big timer title-text-area-nomber" id="OutStandingReview">@Model.OutstandingReview</span>
+            </div>
+        </div>
+
+
+        <div class=" image-chart-box">
+            <div class="panel-body">
+                @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+                <div class="col-md-4 col-pad-left-none">
+                    <img src="~/assets/img/Manager-Outstanding.png" style="width:55px;" />
+
+                </div>
+                <div class="col-md-8 col-pad-left-none">
+                    <span class="title-text-area">Manager outstanding</span>
+                </div>
+                <span class="big timer title-text-area-nomber" id="ManagerOutStandingReview">@Model.ManagerOutstanding</span>
+            </div>
+        </div>
+        <div class=" image-chart-box">
+            <div class="panel-body">
+                @*<img src="~/img/TMSDashboard/talantPool.png" height="20" width="20" id="imgPicture" class="mCS_img_loaded" />*@
+                <div class="col-md-4 col-pad-left-none">
+                    <img src="~/assets/img/Customer-Outstanding.png" style="width:55px;" />
+                </div>
+
+                <div class="col-md-8 col-pad-left-none">
+                    <span class="title-text-area">Customer Outstanding</span>
+                </div>
+                <span class="big timer title-text-area-nomber" id="CustomerOutStandingReview">@Model.CustomerOutstanding</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5 main-card main-area-box">
+
+        <div class="section-area">
+            <div class="col-md-3">
+                <img src="~/assets/img/chat.png" style="width:91px;padding:8px  0px  0px  0px;" />
+            </div>
+            <div class="col-md-9 progres-div" style="background-color:#00c0ef;color:#ffffff;height:115px;padding:20px;">
+                <span class="text">Number of Reviews Opened (All Years)</span>
+                <span class="big timer" id="AllYearOpenReview">@Model.NumberofOpenReviewAllYear</span>
+                <div class="progress proj-div">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:10px;background-color:red;width:@Model.PerformanceIncrease%;">
+                    </div>
+                </div>
+                <ul class="list-group list-inline">
+                    <li>@Model.PerformanceIncrease % increase</li>
+                    <li><button style="background-color: #ffffff;color: #0a0000;font-weight: bold;" class="btn btn-success">from last year</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 main-card main-area-box">
+        <div class="section-area">
+            <div class="col-md-3">
+                <img src="~/assets/img/chat.png" style="width:91px;padding:8px  0px  0px  0px;" />
+            </div>
+            <div class="col-md-9 progres-div" style="background-color:#00c0ef;color:#ffffff;height:115px;padding:20px;">
+                <span class="text">Total Reviews Completed (All Years)</span>
+                <span class="big timer" id="AllYearCompletedReview">@Model.NumberofCompletedReviewAllYear</span>
+                <div class="progress proj-div ">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:10px;background-color:red;width:@Model.PerformanceCompletedReviewInce%"></div>
+                </div>
+                <ul class="list-group list-inline">
+                    <li>@Model.PerformanceCompletedReviewInce % increase</li>
+                    <li><button style="background-color: #ffffff;color: #0a0000;font-weight: bold;" class="btn btn-success">from last year</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    var AdminPerformanceGraph = {
+        GetOutstandingGraph: '@Url.Action("GetOutstandingGraph", "AdminPearformance")',
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var ReviewId = $("#drpReviewList").val();
+        $.ajax({
+            url: AdminPerformanceGraph.GetOutstandingGraph,
+            data: { ReviewId: ReviewId },
+            success: function (data) {
+                debugger;
+                var chart = {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                };
+                var title = {
+                    text: 'Outstanding<br>Reviews',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 20
+                };
+                var tooltip = {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                };
+                var plotOptions = {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            distance: -50,
+
+                            style: {
+                                fontWeight: 'bold',
+                                color: 'white',
+                                textShadow: '0px 1px 2px black'
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '75%']
+                    }
+                };
+                var series = [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    innerSize: '50%',
+                    data: [
+                        ['Customer', data.CustomerOutstanding],
+                        ['Worker', data.WorkerOutstanding],
+                        ['Manager', data.ManagerOutstanding],
+                        //{
+                        //    name: 'Others',
+                        //    y: 0.7,
+                        //    dataLabels: {
+                        //        enabled: false
+                        //    }
+                        //}
+                    ]
+                }];
+
+                var json = {};
+                json.chart = chart;
+                json.title = title;
+                json.tooltip = tooltip;
+                json.series = series;
+                json.plotOptions = plotOptions;
+                $('#container').highcharts(json);
+            }
+        });
+
+    });
+    $("#PerformanceTabPanel").on('click', '.btn-click-PerformanceIndex', function () {
+        $(".hrtoolLoader").show();
+        $.ajax({
+            url: AdminPerformance.Index,
+            success: function (data) {
+                $("#contantBody").html('');
+                $('#contantBody').html(data);
+                $(".OverallScoreSection, .CoreStrengthsSection, .PerformanceReviewChart").removeClass('active');
+                $(".PerformanceIndex").addClass('active');
+                $(".hrtoolLoader").hide();
+                $(".modal-backdrop").hide();
+            }
+        });
+    });
+    $("#PerformanceTabPanel").on('click', '.btn-OverallScoreSection', function () {
+        $(".PerformanceIndex,.CoreStrengthsSection,.PerformanceReviewChart").removeClass('active');
+        $(".OverallScoreSection").addClass('active');
+    });
+    $("#PerformanceTabPanel").on('click', '.btn-CoreStrengthsSection', function () {
+        $(".PerformanceIndex,.OverallScoreSection,.PerformanceReviewChart").removeClass('active');
+        $(".CoreStrengthsSection").addClass('active');
+    });
+    $("#PerformanceTabPanel").on('click', '.btn-PerformanceReviewChart', function () {
+        $(".PerformanceIndex,.OverallScoreSection,.CoreStrengthsSection").removeClass('active');
+        $(".PerformanceReviewChart").addClass('active');
+    });
+</script>

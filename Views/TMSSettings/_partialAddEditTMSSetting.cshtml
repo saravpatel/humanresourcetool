@@ -1,0 +1,57 @@
+﻿@model HRTool.Models.Settings.TMSSettingsViewModel
+
+<div class="uk-grid">
+    <input type="hidden" id="RecruitmentProcessId" value="@Model.Id">
+    <div class="row marbot10">
+        <label class="col-md-3" for="RecruitmentProcess">Recruitment Process*</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Recruitment Process">
+            <input type="text" name="RecruitmentProcess" value="@Model.Name" id="txt_RecruitmentProcess" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <span class="field-validation-error" id="validationmessageRecruitmentProcess" data-valmsg-for="RecruitmentProcess" data-valmsg-replace="true" style="display:none">Recruitment Process Name Is Require.</span>
+            <span class="field-validation-error" id="lbl-error-ProcessNameExist" data-valmsg-for="RecruitmentProcess" data-valmsg-replace="true" style="display:none">This Recruitment Process Name Is Exist.</span>
+        </div>
+    </div>
+
+    <div class="row marbot10" data-toggle="tooltip" data-placement="right">
+        <label class="col-md-3" for="TMSList">Copy From</label>
+        <div class="col-md-6" data-toggle="tooltip" data-placement="right" title="Copy From">
+            <select class="form-control" id="selTMS">
+                <option class="selTMS" id="0" value="0">-- Select Title --</option>
+                @foreach (var items in Model.TMSSettingSaveList)
+                {
+                    if (Model.SelectCopyId == items.Id)
+                    {
+                        <option class="selTMS" selected="selected"  id="@items.Id" value="@items.Id">@items.Name</option>
+                    }
+                    else 
+                    {
+                        <option class="selTMS" id="@items.Id" value="@items.Id">@items.Name</option>
+                    
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-copy-TMSSetting">COPY</button>
+        </div>
+        <div class="col-md-2">
+            <span class="field-validation-error" id="lbl-error-selTMS" style="display:none;" data-valmsg-for="TMSList" data-valmsg-replace="true">The TMS Setting Name is required.</span>
+
+        </div>
+    </div>
+
+    <div id="CopyExistProcess">
+        <div id="StepsSegmentSection">
+            @Html.Action("SegmentStepSectionCreate", "TMSSettings", new { model = Model })
+        </div><br /><br /> 
+        <div id="CompetenciesSegmentSection">
+            @Html.Action("SegmentCompetencieSectionCreate", "TMSSettings", new { model = Model })
+        </div>
+    </div>
+    <div class="col-md-offset-9 col-md-3">
+
+        <button type="button" class="btn btn-success btn-save-TMSSetting">Add</button>
+        <button type="button" class="btn btn-danger btn-Cancel-TMSSetting">CanCel</button>
+    </div>
+</div>

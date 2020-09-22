@@ -1,0 +1,34 @@
+﻿<div id="formDisplatData">
+    <div align="LEFT">Responsible For Following Resources: </div>
+    <table class="table-bordered display table style2 table-striped  dataTable" style="margin-bottom:0px;" id="tblData">
+        <thead>
+            <tr class="tblHeading">
+                <th>Select Employee </th>
+                <th>Employee Name</th>
+                <th>Job Title</th>
+                <th>Business Name</th>
+                <th>Division Name</th>
+                <th>Pool Name</th>
+                <th>Function Name</th>
+                <th>Country Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+             {
+                <tr>
+                    <td style="display:none" id="@item.EmpId"><input type="hidden" value="@item.EmpId"></td>
+                    <td align="center"  >@Html.CheckBox("select employee", false, new { @id = "right", onclick="test()"})</td>
+                    <td >@item.FirstName @item.LastName - @item.SSOID</td>
+                    <td >@item.JobTitle</td>
+                    <td >@item.BusinessName  </td>
+                    <td >@item.DivisionName</td>
+                    <td >@item.PoolName</td>
+                    <td >@item.FunctionName</td>
+                    <td >@item.CountryName</td>
+                </tr>
+    }
+        </tbody>
+    </table>
+</div>
+@*<script src="~/JS/BulkAction/BulkActionJs.js"></script>*@

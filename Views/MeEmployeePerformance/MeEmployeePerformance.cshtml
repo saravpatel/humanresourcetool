@@ -1,0 +1,102 @@
+﻿@model HRTool.Models.Resources.EmployeePerformanceViewModel
+@{
+    ViewBag.Title = "EmployeePerformance";
+    Layout = "~/Views/Shared/_MeLayout.cshtml";
+}
+<input type="hidden" value="@Model.EmployeeId" id="Hiddemn_EmployeeId" />
+<div id="StartNewPerformanceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Performance Review</h4>
+            </div>
+            <div class="modal-body" id="StartNewPerformanceTaskBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-Add-Edit" id="btn-saveReview">Start Review</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="CoDetailsView">    
+</div>
+
+<form>
+    <div class="optionblue employeeperformanceform">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active ActiveReview">
+                <a href="#">
+                    <span class="icnactivereview"></span>
+                    <span class="title">Active Reviews</span>
+                </a>
+            </li>
+            <li class="PastReview">
+                <a href="#">
+                    <span class="icnpastreview"></span>
+                    <span class="title">Past Reviews</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div id="page_content_inner" class="ActiveReviewDiv">
+                    <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                        <div class="md-card-content" id="ActiveReviewHTML">
+                            @Html.Action("ActiveReviews", "MeEmployeePerformance", new { Model.EmployeeId })
+                        </div>
+                    </div>
+                </div>
+                <div id="page_content_inner" class="PastReviewDiv" style="display:none;">
+                    <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                        <div class="md-card uk-margin-medium-bottom uk-margin-top">
+                            <div class="md-card-content" id="PastReviewHTML">
+                                @Html.Action("PastReviews", "MeEmployeePerformance", new { Model.EmployeeId })
+                            </div>
+                        </div>
+                        
+                        <div class="reviewblankstate hide">
+                            <span class="spritesheet icnblankstatemission"></span>
+                            <p class="title">There are no previous reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/JS/Me/Performances/MeEmployeePerformance.js"></script>
+<script>
+
+
+    var MeconstantEmpPerformance = {
+        StartNewReview: '@Url.Action("StartNewReview", "MeEmployeePerformance")',
+        SaveNewReview: '@Url.Action("SaveNewReview", "MeEmployeePerformance")',
+        getReviewDetails: '@Url.Action("getReviewDetails", "MeEmployeePerformance")',
+        GetEmployeeSegmentData: '@Url.Action("GetEmployeeSegmentData", "MeEmployeePerformance")',
+        GetEmployeeSegmentsDetailsById: '@Url.Action("GetEmployeeSegmentsDetailsById", "MeEmployeePerformance")',
+        getQuestionDataByID: '@Url.Action("getQuestionDataByID", "MeEmployeePerformance")',
+        saveEmployeePerformanceDetails: '@Url.Action("saveEmployeePerformanceDetails", "MeEmployeePerformance")',
+        EmployeeObjectiveOfPerformance: '@Url.Action("EmployeeObjectiveOfPerformance", "MeEmployeePerformance")',
+        saveEmployeePerformanceGoal: '@Url.Action("saveEmployeePerformanceGoal", "MeEmployeePerformance")',
+        ViewPerformanceObjectiveProgress: '@Url.Action("ViewPerformanceObjectiveProgress", "MeEmployeePerformance")',
+        GoalImageData: '@Url.Action("GoalImageData", "MeEmployeePerformance")',
+        SavePerfromanceGoalDocument: '@Url.Action("SavePerfromanceGoalDocument", "MeEmployeePerformance")',
+        GetGoalComment: '@Url.Action("GetGoalComment", "MeEmployeePerformance")',
+        SaveGoalComment: '@Url.Action("SaveGoalComment", "MeEmployeePerformance")',
+        FilterByGoalStatus: '@Url.Action("FilterByGoalStatus", "MeEmployeePerformance")',
+        GetGoalChart: '@Url.Action("GetGoalChart", "MeEmployeePerformance")',
+        UpdateGoalChart: '@Url.Action("UpdateGoalChart", "MeEmployeePerformance")',
+        CheckIsPerformanceReviewExist: '@Url.Action("CheckIsPerformanceReviewExist", "MeEmployeePerformance")',
+        GetCoworkerDetailForReview: '@Url.Action("GetCoworkerDetailForReview", "MeEmployeePerformance")',
+        GetCustomerDetailForReview: '@Url.Action("GetCustomerDetailForReview", "MeEmployeePerformance")',
+        sendMailtoshareperformnce: '@Url.Action("sendMailtoshareperformnce", "MeEmployeePerformance")',
+        sendMailtoUnshareperformnce: '@Url.Action("sendMailtoUnshareperformnce", "MeEmployeePerformance")',
+
+    }
+</script>
+
+

@@ -1,0 +1,166 @@
+﻿@model HRTool.Models.Resources.CaseLogViewModel
+@{
+    int comments = 1;
+}
+@*<ul class="nav nav-tabs">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span>Details
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span>Comment
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span>Document
+            </a>
+        </li>
+    </ul>*@
+    <div id="wizard" class="swMain">
+        <input type="hidden" value="@Model.Id" id="CaseHiddenId" />
+        <ul class="tablistnew three">
+            <li>
+                <a href="#step-1" class="s1">
+                    <span>1</span>Details
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span>Comment
+                </a>
+            </li>
+            <li>
+                <a href="#step-3" class="s3">
+                    <span>3</span>Document
+                </a>
+            </li>
+        </ul>
+        <div id="step-1">
+            @if (Model.Id > 0)
+            {
+                <div class="row marbot10">
+                    <div class="col-md-2">
+                        <label class="control-label" for="Summary">Case Id</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="@Model.Id" readonly="readonly" />
+                    </div>
+                    <div class="col-md-4">
+                        <span class="field-validation-error" id="lbl-error-Summary" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Summary is required.</span>
+                    </div>
+                </div>
+            }
+            <div class="row marbot10">
+                <div class="col-md-2">
+                    <label class="control-label" for="StatusList">Status *</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="drp-StatusId" class="form-control">
+                        @foreach (var item in Model.StatusList)
+                        {
+                            if (Model.StatusId.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-StatusList" style="display:none;" data-valmsg-for="StatusList" data-valmsg-replace="true">Status is required.</span>
+                </div>
+            </div>
+
+            <div class="row marbot10">
+                <div class="col-md-2">
+                    <label class="control-label" for="CategoryList">Category *</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="drp-CategoryId" class="form-control">
+                        @foreach (var item in Model.CategoryList)
+                        {
+                            if (Model.CategoryId.ToString() == item.Value)
+                            {
+                                <option value=@item.Value selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-CategoryList" style="display:none;" data-valmsg-for="CategoryList" data-valmsg-replace="true">Category is required.</span>
+                </div>
+            </div>
+
+
+
+            <div class="row marbot10">
+                <div class="col-md-2">
+                    <label class="control-label" for="Summary">Summary</label>
+                </div>
+                <div class="col-md-6">
+                    <textarea class="form-control textarea-resizeNone" id="SummaryText" data-toggle="tooltip" data-placement="right" name="Summary" title="Summary">@Model.Summary</textarea>
+                </div>
+                <div class="col-md-4">
+                    <span class="field-validation-error" id="lbl-error-Summary" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Summary is required.</span>
+                </div>
+            </div>
+
+            @if (Model.Id > 0)
+            {
+                <div class="row marbot10">
+                    <div class="col-md-2">
+                        <label class="control-label" for="Summary">Created By</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6" style="padding-left:0px;"><input type="text" class="form-control" value="@Model.CreatedName" readonly="readonly" /></div>
+                        <div class="col-md-6" style="padding-right:0px;"><input type="text" class="form-control" value="@Model.CreatedDate" readonly="readonly" /></div>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="field-validation-error" id="lbl-error-Summary" style="display:none;" data-valmsg-for="Summary" data-valmsg-replace="true">Summary is required.</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div id="step-2">
+            <div id="CommentList">
+                @foreach (var item in Model.CommentList)
+            {
+                    <div class="seccomments row" id="comment_@comments" data-commentid="0"><div class="col-lg-10"><p><span class="black postedby">@item.commentBy</span> - <span class="commentTime">@item.commentTime</span></p><div class="sickComments" data-commentstring="@item.comment"></div></div><div class="col-lg-2" style=""><i class="fa fa-pencil editComment"></i><i class="fa fa-trash-o deleteComment"></i></div></div>
+                    comments = comments + 1;
+                }
+            </div>
+            <div>
+                <div id="froala-editor"></div>
+                <button class="md-btn md-btn-primary" id="btnAddComment" style="margin-top:5px;float:right;"><i class="fa fa-plus"></i> Add Comment</button>
+                <button class="md-btn md-btn-primary" data-editid="" id="btnEditComment" style="margin-top:5px;float:right;display:none;"><i class="fa fa-pencil"></i> Edit Comment</button>
+            </div>
+        </div>
+
+        <div id="step-3">
+            <div class="browse-attach">
+                <label type="file" for="fileToUpload" class="btn btn-sm btn-purple btn-upload md-btn-primary">
+                    <p>Drop docs,pdfs or images here or click to upload</p>
+                    <span class="btn">BROWSE</span>
+                </label>
+                <input type="file" id="fileToUpload" accept=".jpg,.jpeg,.bmp,.png" style="display: none">
+            </div>
+
+            <div id="filesList">
+                @foreach (var item in Model.DocumentList)
+            {
+                    <div class="row ListData"><div class="col-lg-1 icon"><i class="fa fa-paperclip"></i></div><div class="col-lg-10 attach-disc"><label class="fileName" data-newfilename="@item.newName">@item.originalName</label><br><input type="text" class="ImageDescription form-control" value="@item.description" placeholder="Add Description Here"></div><div class="col-lg-1 file-deleteicon"><i class="fa fa-trash-o"></i></div></div>
+                }
+            </div>
+        </div>
+    </div>

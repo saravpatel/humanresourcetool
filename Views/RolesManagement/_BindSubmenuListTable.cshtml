@@ -1,0 +1,34 @@
+﻿@model Tuple<IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>, int>
+
+@foreach (var item in Model.Item1.Where(x => x.submenuId == Model.Item2).ToList())
+{
+    <tr id="table_@item.submenuId" class="@(item.submenuId == 0 ? "" : "displayClass")" data-parentid="@(item.submenuId == 0 ? "0" : item.submenuId.ToString())">
+        <td>
+            @if (Model.Item1.Where(x => x.submenuId == item.menuId).ToList().Count > 0)
+            {
+                <i class="fa fa-plus-square openTr" style="cursor:pointer;" data-id="@item.menuId"></i>
+            }
+        </td>
+        <td class="roleManagment-leftMargin">
+            @item.menuName
+        </td>
+        <td>
+            @if (item.isAlreadyAssign)
+            {
+                <input type="checkbox" class="checkbox" checked="checked" id="@item.menuId">
+            }
+            else
+            {
+                <input type="checkbox" class="checkbox" id="@item.menuId">
+            }
+        </td>
+    </tr>
+
+    if (Model.Item1.Where(x => x.submenuId == item.menuId).ToList().Count > 0)
+    {
+        @Html.Partial("_BindSubmenuListTable", new Tuple<IEnumerable<HRTool.Models.RolesManagement.MenuRoleViewModel>, int>(Model.Item1, item.menuId))
+    }
+}
+
+
+

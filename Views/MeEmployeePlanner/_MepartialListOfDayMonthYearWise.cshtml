@@ -1,0 +1,308 @@
+﻿@model IList<HRTool.Models.Resources.EmployeePlannerDayViewModel>
+<div class="fixedTable_inner">
+    <table class="FixedTables">
+        <tbody>
+            <tr class="days">
+                @foreach (var day in Model)
+                {
+                    <td>@day.day</td>
+                }
+            </tr>
+            <tr class="head">
+                @foreach (var day in Model)
+                {
+                    <td>@day.DayName[0].ToString()</td>
+                }
+            </tr>
+            <tr class="sgreen">
+                  @foreach (var day in Model)
+                  {
+                       <td id="timeSheet_@day.day">
+                           @if (day.Flag == 1)
+                           {
+                                  if (day.isTimeSheetTaken)
+                                     {
+                                           <span class="icnfilled btn_AddEdit_TimeSheet" data-id="@day.TimeSheetId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_TimeSheetModel"></span>
+                                     }
+                                     else
+                                     { 
+                                       <span class="icn" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick="getEmployeeWorkPatternExist()"></span>
+                                 }
+                           }
+                           else
+                           {
+                               if (day.isTimeSheetTaken)
+                               {
+                                <span class="icnfilled btn_AddEdit_TimeSheet" data-id="@day.TimeSheetId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_TimeSheetModel"></span>
+                               }
+                               else
+                               {
+                                <span class="icn btn_AddEdit_TimeSheet" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_TimeSheetModel"></span>
+                               }
+                           }
+                       </td>
+                    }
+            </tr>
+            <tr class="sblue">
+                @foreach (var day in Model)
+                {
+                    <td id="travel_leave_@day.day">                       
+                            @if (day.isTravelLeaveTaken)
+                            {
+                                <span class="icnfilled btn_AddEdit_TravelLeave" data-id="@day.TravelLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_TravelLeaveModel"></span>
+                            }
+                            else
+                            {
+                                <span id="travel_leave_2" class="icn btn_AddEdit_TravelLeave"data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_TravelLeaveModel"></span>
+                            }
+                        
+                    </td>
+                }
+            </tr>
+            <tr class="annual_leave">
+                @foreach (var day in Model)
+                {                 
+                      <td id="annual_leave_@day.day">
+                    @if (day.Flag == 1)
+                    {
+                        if (!day.isWorkPatternLeaveTaken)
+                        {
+                            if (day.isLeave)
+                            {
+                                if (day.isAnnualLeaveTaken)
+                                {
+                                        <span class="icnfilled btn_AddEdit_AnnualLeave" data-id="@day.AnnualLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_AnnualLeaveModel"></span>
+                                }
+                            }
+                            else
+                            {
+                                    <span class="icn btn_AddEdit_AnnualLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick="getEmployeeWorkPatternExist()"></span>
+                            }
+                        }
+                        else { }
+                    }
+                    else
+                    {
+                        if (!day.isWorkPatternLeaveTaken)
+                        {
+                            if (day.isLeave)
+                            {
+                                if (day.isAnnualLeaveTaken)
+                                {
+                                    <span class="icnfilled btn_AddEdit_AnnualLeave" data-id="@day.AnnualLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_AnnualLeaveModel"></span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="icn btn_AddEdit_AnnualLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_AnnualLeaveModel"></span>
+                            }
+                        }
+                        else { }
+                    }
+                    </td>
+                }
+            </tr>
+            <tr class="sotherleave">
+                @foreach (var day in Model)
+                {
+                    <td id="other_leave_@day.day">
+                        
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isOtherLeaveTaken)
+                                    {
+                                        <span class="icnfilled btn_AddEdit_OtherLeave" data-id="@day.OtherLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_OtherLeaveModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn " data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick = "getEmployeeWorkPatternExist()"></span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isOtherLeaveTaken)
+                                    {
+                                        <span class="icnfilled btn_AddEdit_OtherLeave" data-id="@day.OtherLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_OtherLeaveModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn btn_AddEdit_OtherLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_OtherLeaveModel"></span>
+                                }
+                            }
+                        }
+                    </td>
+                }
+
+            </tr>
+
+            <tr class="sred">
+                @foreach (var day in Model)
+                {
+                    <td>
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+
+                                    if (day.isSickLeaveTaken)
+                                    {
+                                    <span class="icnfilled btn_AddEdit_SickLeave mytextwithicon text-center" data-id="@day.SickLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_SickLeaveModel"></span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="icn mytextwithicon text-center" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick = "getEmployeeWorkPatternExist()"></span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+
+                                    if (day.isSickLeaveTaken)
+                                    {
+                                        <span class="icnfilled mytextwithicon text-center" data-id="@day.SickLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_SickLeaveModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn btn_AddEdit_SickLeave mytextwithicon text-center" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_SickLeaveModel"></span>
+                                }
+                            }
+                        }
+                    </td>
+                }
+
+            </tr>
+
+            
+            <tr class="syellow">
+                @foreach (var day in Model)
+                {
+                    <td id="late_leave_@day.day">
+                        
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                            if (day.isLeave)
+                            {
+                                if (day.isLateLeaveTaken)
+                                {
+                                    <span class="icnfilled btn_AddEdit_LateLeave" data-id="@day.LateLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_LateLeaveModel"></span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="icn btn_AddEdit_LateLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick = "getEmployeeWorkPatternExist()"></span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isLateLeaveTaken)
+                                    {
+                                        <span class="icnfilled btn_AddEdit_LateLeave" data-id="@day.LateLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_LateLeaveModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn btn_AddEdit_LateLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_LateLeaveModel"></span>
+                                }
+                            }
+                        }
+                    </td>
+                }
+
+            </tr>
+
+            <tr class="spurple">
+                @foreach (var day in Model)
+                {
+                    <td>
+                        
+                        @*  <span class="icn"></span> *@
+                        @*@if (!day.isWorkPatternLeaveTaken)
+                        {*@
+                            @if(day.isLeave)
+                            {
+                                if (day.isPublicHoliday)
+                                {
+                                    <span class="icnfilled btn_AddEdit_PublicHoliday" data-id="@day.PublicholidayId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_PublicholidayModel"></span>
+                                }
+                            }
+                            else
+                            {
+
+                            }
+                        @*}*@
+                    </td>
+                }
+            </tr>
+
+            <tr class="spink">
+                @foreach (var day in Model)
+                {
+                    <td>
+                        
+                        @if (day.Flag == 1)
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isMaternityPaternityLeaveTaken)
+                                    {
+                                    <span class="icnfilled btn_AddEdit_MPLeave" data-id="@day.MaternityLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_MaternityPaternityModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" onclick = "getEmployeeWorkPatternExist()"></span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (!day.isWorkPatternLeaveTaken)
+                            {
+                                if (day.isLeave)
+                                {
+                                    if (day.isMaternityPaternityLeaveTaken)
+                                    {
+                                        <span class="icnfilled btn_AddEdit_MPLeave" data-id="@day.MaternityLeaveId" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_MaternityPaternityModel"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="icn btn_AddEdit_MPLeave" data-id="0" data-yearid="@day.yearId" data-monthid="@day.monthId" data-dayid="@day.day" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#MeEmployeePlanner_MaternityPaternityModel"></span>
+                                }
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+
+        </tbody>
+    </table>
+</div>

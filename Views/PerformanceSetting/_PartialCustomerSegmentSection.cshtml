@@ -1,0 +1,173 @@
+﻿@model IList<HRTool.Models.Settings.EditSegmentViewModel>
+@{
+    int i = 1;
+}
+<div class="segments-box">
+    <div class="color-st purple"></div>
+    <h4 class="heading_a">Customer Segments</h4>
+    <div class="performance-grid">
+        <div class="cf nestable-lists">
+            <div class="dd CustomerSegmentNestable" style="width:100%">
+                <ol id="MainPageCustomerSegmentQuestionList" class="dd-list" data-uk-nestable="{maxDepth:0}">
+                    @foreach (var item in Model)
+                    {
+                        <li class="dd-item liCustomerSegment_@i" data-id="@i" id="@i">
+                            <div class="dd-handle dd3-handle" data-id="@i" id="@i"><i class="fa fa-bars"></i></div>
+                            <div class="dd3-content row AddEditCustomerSegmentRow">
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-6 customerSegmentTitle">@item.Title</div>
+                                        <div class="col-lg-6 customerSegmentTotalQuestion">@item.TotalQueastion Questions</div>
+                                        <div class="col-lg-6 customerSegmentDescription">@item.Description</div>
+                                    </div>
+                                </div><div class="col-lg-1">
+                                    <div class="icons">
+                                        <a><i class="material-icons uk-text-success EditMainCustomerSegmet" data-title="@item.Title" data-description="@item.Description" data-questionjsonstring="@item.QueationType" data-id="@i" data-toggle="modal" data-target="#CustomerSegmentModel">edit</i></a>
+                                        <a class="removeMainLiCustomerSegment">
+                                            <i class="material-icons uk-text-danger">delete</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                                i = i + 1;
+                            }
+                        </li>
+                                }
+                </ol>
+            </div>
+        </div>
+        <div data-toggle="modal" data-target="#CustomerSegmentModel">
+            <a class="btn btn-success" style="width:100%;background: #9a59b5;border-color:#9a59b5;" id="CustomerSegmentclass">Add Segments</a>
+        </div>
+    </div>
+</div>
+
+<div id="CustomerSegmentModel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Customer Segment</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="CustomerSegmentAddQuestionModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="segmentsBox">
+                <div class="performance-grid">
+                    <div class="">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Question</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Question*</label>
+                                    <div class="col-md-6">
+                                        <input type="hidden" id="hidden_CustomerSegment_Question_id" value="" />
+                                        <input type="text" class="form-control" id="CustomerQuestion" placeholder="Question" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="label_Customersegment_Question" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Question is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Help Text*</label>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control" id="Cusomer_HelpText" placeholder="Help Text" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorHelpText" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Help Text is Required.</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Type *</label>
+                                    <div class="col-md-6 dropdown">
+                                        <select class="col-md-6 form-control" id="Customer_Question_Type">
+                                            @foreach (var item in ViewBag.CustomerFiledList)
+                                            {
+                                                <option value=@item.Key>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorFiledType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Type is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row marbot10">
+                                    <label class="col-md-3">Core Value *</label>
+                                    <div class="col-md-6 dropdown">
+                                        <select class="col-md-6 form-control" id="Customer_Question_CoreValue">
+                                            @foreach (var item in ViewBag.Customer_ValueList)
+                                            {
+                                                <option value=@item.Key>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="field-validation-error" id="lblerrorCoreValue" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Core Value is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btn-submit-AddCustomerSegmentQuestion">Add</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $("#Customer_Question_Type").on("change", function () {
+            $("#lblerrorFiledType").hide();
+        })
+        $("#Customer_Question_CoreValue").on("change", function () {
+            $("#Createperformance").find("#CustomerSegmentAddQuestionModel").find("#lblerrorCoreValue").hide();
+        })
+        var updateOutput = function (e) {
+            var list = e.length ? e : $(e.target),
+                    output = list.data('output');
+            if (window.JSON) {
+                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+            }
+            else {
+                output.val('JSON browser support required for this demo.');
+            }
+        };
+        $(document).ready(function () {
+            $('.CustomerSegmentNestable').nestable({
+                maxDepth: 1,
+            });
+            function changeTable() {
+            }
+            updateOutput($('.CustomerSegmentNestable').data('output', $('.CustomerSegmentNestable-output')));
+        });
+    </script>

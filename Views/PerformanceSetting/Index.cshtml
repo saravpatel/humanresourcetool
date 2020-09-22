@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<style>
+    .fa-bars {
+        float: left;
+        margin-left: -8px;
+        font-size: 17px;
+    }
+
+    .icons a {
+        cursor: pointer;
+    }
+
+    .dd3-content {
+        height: auto !important;
+    }
+
+    .icons {
+        width: 50px;
+    }
+</style>
+<div id="page_content_inner">
+    <h1 class="page-title">
+        Performance Review Settings
+        <small>Here you can create and edit the contents of your company's performance review.</small>
+    </h1>
+    <div id="ListOfPerformance">
+        @Html.Action("List", "PerformanceSetting")
+    </div>
+    <div id="Createperformance">
+
+    </div>
+    <div id="sendemailtoallemployees" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Email</h4>
+                </div>
+                <div class="modal-body" id="Mail">
+                    <p>All employees will received email shortly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="btn-submit-ProjectRecord">Ok</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sendemailemployees" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Email</h4>
+                </div>
+                <div class="modal-body" id="Mail">
+                    <p>All employees will received email shortly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="btn-submit-ProjectRecord">Ok</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/JS/Settings/PerformanceSetting/PerformanceSettingJS.js"></script>
+<script>
+    var constantSet = {
+        Index: '@Url.Action("Index", "PerformanceSetting")',
+        SaveProject: '@Url.Action("SavePerformance", "PerformanceSetting")',
+        List: '@Url.Action("List", "PerformanceSetting")',
+        addEdit: '@Url.Action("AddEditPerformancetSet", "PerformanceSetting")',
+        AddMorephoneUrl: '@Url.Action("CreateMultipleOverallScore", "PerformanceSetting")',
+        CopyFromUrl: '@Url.Action("CopyFrom", "PerformanceSetting")',
+        AddEditCoreSagment: '@Url.Action("AddEditCoreSegment", "PerformanceSetting")',
+        AddEditJobRoleSegment: '@Url.Action("AddEditJobRoleSegment", "PerformanceSetting")',
+        AddEditCustomerSegment: '@Url.Action("AddEditCustomerSegment", "PerformanceSetting")',
+        AddEditCoWorkerSegment: '@Url.Action("AddEditCoWorkerSegment", "PerformanceSetting")',
+        SendMailToAll: '@Url.Action("SendMailToAll", "PerformanceSetting")',
+        deleteDocument: '@Url.Action("DeleteDocument", "PerformanceSetting")',
+    };
+
+</script>

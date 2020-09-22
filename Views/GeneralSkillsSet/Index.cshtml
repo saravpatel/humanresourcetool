@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "General Skills Set";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+    <br />
+    
+
+
+
+    <h1 class="page-title">
+        General Skills Set
+        <small>Choose which badges can be awarded, or create a new badge.</small>
+    </h1>
+
+
+
+
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("List", "GeneralSkillsSet")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var constantGeneralSkillsSet = {
+        addEdit: '@Url.Action("AddEditGeneralSkillsSet", "GeneralSkillsSet")',
+        saveData: '@Url.Action("SavData", "GeneralSkillsSet")'
+    }
+</script>
+<script src="~/JS/Settings/SkillsSet/GeneralSkillsSetJS.js"></script>

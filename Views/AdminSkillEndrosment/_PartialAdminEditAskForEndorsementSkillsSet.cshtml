@@ -1,0 +1,250 @@
+﻿@model HRTool.Models.Resources.ViewSkillsViewModel
+<style>
+    
+    .inner-Listskils span img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .inner-Listskils p {
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+
+</style>
+<input type="hidden" value="@Model.Id" id="z" />
+<input type="hidden" value="@Model.EndrosementId" id="EditEndrosemenetId" />
+<input type="hidden" value="@Model.Comments" id="EditEndrosemeneComments" />
+<div id="wizard" class="swMain">
+    <ul class="tablistnew two somebody-indorsment">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Choose a Skill Set
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Comments
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span> Select Person
+            </a>
+        </li>
+    </ul>
+    @*<ul class="two somebody-indorsment nav nav-tabs ">
+            <li>
+                <a href="#step-1" class="s1">
+                    <span>1</span> Choose a Skill Set
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="s2">
+                    <span>2</span> Comments
+                </a>
+            </li>
+            <li>
+                <a href="#step-3" class="s3">
+                    <span>3</span> Select Person
+                </a>
+            </li>
+        </ul>*@
+
+    <div class="row" id="step-1">
+        <input type="hidden" value="@Model.flag" id="isModalEdit" />
+        <div class="col-md-6" align="center">
+            <input type="radio" name="Skills" id="Generl" value="1" checked onclick="fillSkillDataEndorsesomebody(1)">
+            <span>General Skill Set</span>
+        </div>
+        <div class="col-md-6" align="center">
+            <input type="radio" name="Skills" id="Technical" value="0" onclick="fillSkillDataEndorsesomebody(0)">
+            <span>Technical Skill Set</span>
+        </div>
+        <div class="row">
+            <div id="technicalDiv1">
+                @foreach (var item in Model.GeneralSkillSet)
+            {
+                if (item.SelectedSkills == true)
+                {
+                        <div class="col-md-6 Listskilss" align="center" id="@item.Id" style="border-color: rgba(74, 127, 173, 1); ">
+                            <div class="inner-Listskils" id="EditAskForEndorsementModelSkillBody">
+                                <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="60px" /></span><p> @item.Name</p>
+
+                                <span class="radio-btn"><input type="radio" class="GeneralSkillSet" data-id="@item.Id " value="@item.Id" name="GeneralSkillSet" id="SelectGeneralskill_@item.Id" checked /></span>
+                            </div>
+                            <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal" data-target="#ViewTask_Details">View</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 Listskilss" align="center" id="@item.Id">
+                            <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="60px" /></span><p> @item.Name</p>
+                            <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal" data-target="#ViewTask_Details">View</a>
+                            <span class="radio-btn"><input type="radio" class="GeneralSkillSet" data-id="@item.Id " value="@item.Id" id="SelectGeneralskill_@item.Id" name="GeneralSkillSet" /></span>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+        @*<label class="radio-btn col-md-6">
+                <input type="radio" name="Skills" id="Generl" value="1" checked onclick="fillSkillDataEndorsesomebody(1)">
+                <span>General Skill Set</span>
+            </label>
+
+
+            <label class="radio-btn col-md-6">
+                <input type="radio" name="Skills" id="Technical" value="0" onclick="fillSkillDataEndorsesomebody(0)">
+                <span>Technical Skill Set</span>
+            </label>*@
+
+
+
+
+
+
+
+        @*<div  class="desc">
+                            <div class="row">
+
+                </div>
+
+            </div>*@
+        <div id="technicalDiv0" class="desc" style="display: none;">
+            <div class="row">
+                @foreach (var item in Model.TechnicalSkillSet)
+                {
+                    if (item.SelectedSkills == true)
+                    {
+                        <div class="col-md-6 Listskilss" id="@item.Id" style="border-color: rgba(74, 127, 173, 1);">
+                            <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="112" /></span><p> @item.Name</p>
+                            <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal" data-target="#ViewTask_Details">View</a>
+                            <span><input type="radio" class="TechnicalSkillSet" value="@item.Id" data-id="@item.Id" name="TechnicalSkillSet" id="SelectGeneralskill_@item.Id" checked /></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 Listskilss" align="center" id="@item.Id">
+                            <span><img class="img-layout" src="~/Upload/SkillSets/@item.Picture" width="112" /></span><p> @item.Name</p>
+                            <a class="btn btn-success ViewRecordOfSkills" data-id="@item.Id" id="Viewrecord_@item.Id" data-toggle="modal" data-target="#ViewTask_Details">View</a>
+                            <span><input type="radio" class="TechnicalSkillSet" value="@item.Id" data-id="@item.Id" id="SelectGeneralskill_@item.Id" name="TechnicalSkillSet" /></span>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="row">
+            <span class="field-validation-error" id="Validskillss" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please select skill set.</span>
+        </div>
+    </div>
+    <div id="step-2">
+        <div id="froala-editor"></div>
+        <input type="hidden" id="EditCommnent" value="@Model.commenet" />
+    </div>
+    <div id="step-3">
+        <div class="row marbot10" id="Emp_sso">
+            <label class="col-md-3">Employee-SSO</label>
+            <div class="col-md-6 dropdown-selectlist">
+                <input type="hidden" id="drpEmployeeSkill" value="@Model.selectEmpId" />
+                <input type="text" class="awesomplete form-control" id="AssignToEmployeeSkillName" value="@Model.selectEmpName" size="70" placeholder="Employee Name" />
+                @*<select class="form-control" id="drpEmployee" multiple="multiple">
+                        @foreach (var Employee in Model.EmployeesUserList)
+                        {
+                            if (Model.selectedemployee.Contains(Employee.Value))
+                            {
+                                <option value="@Employee.Value" selected="selected">@Employee.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@Employee.Value">@Employee.Text</option>
+                            }
+                        }
+                    </select>*@
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidEmployee" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none">Please Select Employee.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <label class="col-md-3"><input type="checkbox" id="InvitationMail" onchange="valueChanged()" /> Invitation by Email</label>
+            <div class="col-md-6 dropdown" style="display:none" id="EmailShowHide">
+                <div class="col-md-6" align="center">
+                    <input type="text" id="name" placeholder="Name & Surname" class="form-control" />
+                </div>
+                <div class="col-md-6" align="center">
+                    <input type="email" id="emailid" placeholder="valid Email" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="ValidResourceType" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var cvarSkillEndorsemnt = {
+        getEmpList:'@Url.Action("getEmployeeData", "AdminSkillEndrosment")',
+    };
+
+</script>
+<script>
+    function valueChanged() {
+        if ($('#InvitationMail').is(":checked")) {
+            $("#EmailShowHide").show();
+            $("#Emp_sso").hide();
+        }
+        else {
+            $("#EmailShowHide").hide();
+            $("#Emp_sso").show();
+        }
+    }
+    getEmployeeEndorsementData();
+    function getEmployeeEndorsementData() {
+        var listData = [];
+        $.ajax({
+            url: cvarSkillEndorsemnt.getEmpList,
+            data: {},
+            success: function (data) {
+                $.each(data.EmployeesUserList, function (index, item) {
+                    listData.push(item.Text, item.Value);
+                });
+                var input = document.getElementById("AssignToEmployeeSkillName");
+                debugger;
+                var awesomplete = new Awesomplete(input, {
+                    minChars: 1,
+                    maxItems: 5,
+                    autoFirst: true,
+                    filter: function (text, input) {
+                        return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
+                    },
+                    replace: function (text) {
+                        var before = this.input.value.match(/^.+,\s*|/)[0];
+                        this.input.value = before + text + ", ";
+
+                    }
+                });
+                awesomplete.list = listData;
+                $('#AssignToEmployeeSkillName').change(function () {
+                    $("#ValidEmployee").hide();
+                    var eid = [];
+                    value = $("#EditAskForEndorsementModelSkillBody").find('#AssignToEmployeeSkillName').val();
+                    var x = new Array();
+                    debugger;
+                    x = value.split(", ");
+                    for (var i = 0; i < data.EmployeesUserList.length; i++) {
+                        for (var j = 0; j < x.length; j++) {
+                            if (x[j] == data.EmployeesUserList[i].Text) {
+                                eid.push(data.EmployeesUserList[i].Value);
+                            }
+                        }
+                    }                    
+                    $("#EditAskForEndorsementModelSkillBody").find("#drpEmployeeSkill").val(eid);
+                });
+            }
+        });        
+    }
+
+</script>

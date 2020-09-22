@@ -1,0 +1,202 @@
+﻿@model HRTool.Models.Resources.EmployeeAbsenceLeavesPdfViewModel
+@{
+    ViewBag.Title = "Export";
+    Layout = null;
+}
+
+
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,90" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+<style type="text/css">
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-text-size-adjust: 100% !important;
+        -ms-text-size-adjust: 100% !important;
+        -webkit-font-smoothing: antialiased !important;
+    }
+
+    img {
+        border: 0 !important;
+        outline: none !important;
+    }
+
+    p {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+    table {
+        border-collapse: collapse;
+        mso-table-lspace: 0px;
+        mso-table-rspace: 0px;
+    }
+
+    td, a, span {
+        border-collapse: collapse;
+        mso-line-height-rule: exactly;
+    }
+
+    .ExternalClass * {
+        line-height: 100%;
+    }
+
+    .table_border {
+        width: 100%;
+        border: 1px solid;
+    }
+
+        .table_border tr {
+            border-bottom: 1px solid #000;
+        }
+
+            .table_border tr td {
+                font-family: 'Lato', Arial, sans-serif;
+                font-size: 14px;
+                line-height: 30px;
+                font-weight: normal;
+                letter-spacing: normal;
+                color: #000;
+                vertical-align: middle;
+                word-break: break-all;
+            }
+
+            .table_border tr:first-child td {
+                font-weight: bold;
+            }
+
+    span.fix_wid {
+        float: left;
+        width: 140px;
+    }
+</style>
+<div style="margin:0px;padding:0px; background-color:#fafaf9;">
+    <!--Full width table start-->
+    <table border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#fafaf9">
+        <tr>
+            <td align="center" valign="top">
+                <table align="center" class="inx_main_table" width="1200" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
+                     <tr>
+                            <td>
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="25" class="inx_aside">&nbsp;</td>
+                                        <td>
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" valign="top" class="inx_center" style="font-family:'Lato', Arial, sans-serif; font-size:24px; line-height:30px; font-weight:bold; color:#55a1e2; text-decoration:underline; text-transform:uppercase;">Absence Leave Detail</td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; color:#000;"><span class="fix_wid">Employee Name </span>: @Model.EmployeeName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-family:'Lato', Arial, sans-serif; font-size:16px; line-height:24px; font-weight:normal; color:#000;"><span class="fix_wid">Hire Date </span>: @Model.HireDate</td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="10" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table border="0" cellspacing="0" cellpadding="0" align="left" class="table_border">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="100" align="left" valign="top" style="">Start Date</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="100" align="left" valign="top" style="">End Date</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="100" align="left" valign="top" style="">Duration</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="100" align="left" valign="top" style="">Paid</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="100" align="left" valign="top" style="">Unpaid</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="150" align="left" valign="top" style="">Paid At Other Rate</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="150" align="left" valign="top" style="">Emergency Leave</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="1" style="width:1px; background:#000;"></th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                    <th width="" align="left" valign="top" style="">Comments</th>
+                                                                    <th width="10">&nbsp;</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var value in Model.DetailList)
+                                                                {
+                                                                    <tr>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="100" align="left" valign="top" style="">@value.StartDate</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="100" align="left" valign="top" style="">@value.EndDate</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="100" align="left" valign="top" style="">@value.Duration</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="100" align="left" valign="top" style="">@value.Paid</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="100" align="left" valign="top" style="">@value.UnPaid</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="150" align="left" valign="top" style="">@value.PaidAtOtherRate</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="150" align="left" valign="top" style="">@value.EmergencyLeave</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="1" style="width:1px; background:#000;"></td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                        <td width="" align="left" valign="top" style="">@value.Comments</td>
+                                                                        <td width="10">&nbsp;</td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20" style="line-height:1px; font-size:1px;" class="inx_h20">&nbsp;</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="25" class="inx_aside">&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    
+                    <tr>
+                        <td class="inx_aside">&nbsp;</td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

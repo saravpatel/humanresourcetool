@@ -1,0 +1,120 @@
+﻿@model HRTool.Models.Settings.EditSegmentViewModel
+@{
+    int i = 0;
+    ViewBag.Title = "CustomerPerformanceReview";
+}
+<style>
+    .detail-box {
+        height: 100px;
+        width: 225px;
+        background-color: #b1b1b1;
+        color: #ffffff;
+        margin-top: 5px;
+        text-align: center;
+        vertical-align: top;
+    }
+
+        .detail-box a {
+            color: #ffffff;
+        }
+
+    .main-area {
+        width: 2110px;
+        overflow: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1px;
+    }
+
+    .detail-box.active {
+        background-color: #2b3643;
+    }
+
+    .btn-customs {
+        border-radius: 50%;
+        background-color: #4CAF50;
+        color: #ffffff;
+        border-color: #4CAF50;
+    }
+
+     
+
+    .no-of-box {
+        font-size: 29px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+    .btn-customsAdd{
+        border-radius: 50%;
+        background-color: #4CAF50;
+        color: #ffffff;
+        border-color: #4CAF50;
+    }
+</style>
+
+@*<div class="planner_calendar_header">
+        <div class="changemonth">
+            <a href="#" class="changemonth_previous">
+                <span class="fa fa-chevron-left"></span>
+            </a>
+            <span></span>
+            <a href="#" class="changemonth_next">
+                <span class="fa fa-chevron-right"></span>
+            </a>
+        </div>
+    </div>*@
+<div class="boxes" id="AllSegmentsList">
+    @{
+        int ind = 0;
+    }
+    <ul class="list-group list-inline main-area ">
+        <li class="segmentList detail-box active ">
+            <span class="no-of-box">@{ind++;} @ind</span>
+            <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+            <a class="segmentListLink" id="overview_Segment" onclick="GetCustomerSegmentsDetails(0,0,2,2)">Overview</a>
+        </li>
+        @foreach (var item in Model.CustomerSeg)
+        {
+        <li class="segmentList segmentListData detail-box" data-content="@item.CustoIds" onclick="GetCustomerSegmentsDetails(@item.CustoIds,@item.QueationType,1,1)">
+            <span class="no-of-box">@{ind++;} @ind</span>
+            <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+            @item.Title
+            <a id="SegmentList_@item.CustoIds"></a>
+        </li>
+        }
+        @foreach (var item in Model.JobRoleSeg)
+        {
+        <li class="JobRolesegmentList JobRolesegmentListData detail-box" data-content="@item.JobRoleIds" onclick="GetCustomerSegmentsDetails(@item.JobRoleIds,@item.QueationType,0,0)">
+            <span class="no-of-box">@{ind++;} @ind</span>
+            <button class="btn btn-success btn-customs btn-center"><i class="fa fa-check" aria-hidden="true"></i></button><br />
+            @item.Title
+            <a id="JobRoleSegmentList_@item.JobRoleIds"></a>
+        </li>
+        }
+    </ul>
+</div>
+
+
+<div class="col-md-12">
+    <div class="portlet light">
+        <div class="portlet-title tabbable-line full-tab-width tab-full">
+            <input type="text" style="display:none;" id="ReviewId" value="@TempData["ReviewId"]" />
+            <input type="text" style="display:none;" id="PerReviewId" value="@TempData["PerReviewId"]" />
+            <input type="text" style="display:none;" id="CustomerID" value="@TempData["CustomerId"]" />
+            <input type="text" style="display:none;" id="EmpId" value="@TempData["EmpId"]" />
+        </div>
+    </div>
+    <div id="TableQueData" class="tablescompany">
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+<script src="~/JS/Resources/Performance/EmployeePerformanceSegments.js"></script>
+
+<script>
+    var getCustomerSegments={
+        GetCustomerSegmentsDetailsById: '@Url.Action("GetCustomerSegmentsDetailsById", "EmployeePerformance")',
+        getCustomerQuestionDataByID: '@Url.Action("getCustomerQuestionDataByID", "EmployeePerformance")',
+        }
+</script>

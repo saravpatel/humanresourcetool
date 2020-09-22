@@ -1,0 +1,47 @@
+﻿@model List<HRTool.Models.BulkActions.EmployeeHolidayEntitNextYear>
+@{
+    int count = 0;
+}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Add Employee Information</h4>
+</div>
+<div id="findBtn">
+    @if (Model.Count > 0)
+    {
+        <table class="table-bordered display table style2 table-striped  dataTable" style="margin-bottom:0px;" id="tblEData">
+            <thead>
+                <tr class="tblHeading">
+                    <th style="display:none"></th>
+                    <th>Employee Name</th>
+                    <th>Current</th>
+                    <th>New</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    count += 1;
+                    //string NewValue = Convert.ToInt32(item.newVal) > 0 ? Convert.ToString(item.newVal) : string.Empty;
+                    <tr>
+                        <td style="display:none" id="@item.EmpId">
+                            <input type="hidden" value="@item.EmpId" id="hidden_@count">@item.EmpId
+                        </td>
+                        <td >@item.EmpName</td>
+                        <td>@item.current</td>
+                        <td>
+                            <input type="text" id="Value_@count" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btnBulkEmpHolidayData1" onclick="addEmpHolidayNextyearInfo(@count)">Add</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+
+<script src="~/JS/BulkAction/BulkActionJs.js"></script>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Add Skills";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+
+<div id="page_content_inner">
+
+    
+        <h1 class="page-title">
+            Add Skills
+
+        </h1>
+
+
+       
+    <div id="skillstats">
+        <ul class="nav nav-tabs nav-justified">
+            <li     title="Technical Skills" id="tab-Technical-Skills" class="ng-isolate-scope active">
+                <a class="ng-binding">Technical Skills</a>
+            </li>
+            <li title="General Skills" id="tab-General-Skills" class="ng-isolate-scope">
+                <a class="ng-binding">General Skills</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="md-card">
+        <div >
+            <div id="tableDiv">
+                @Html.Action("List", "AddSkills", new { SkillType = "Technical" })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var constantAddSkills = {
+        bindList: '@Url.Action("List", "AddSkills")',
+        addEdit: '@Url.Action("AddEditAddSkills", "AddSkills")',
+        saveData: '@Url.Action("SaveAddSkills", "AddSkills")',
+        expoertTechnical: '@Url.Action("ExportExcel", "AddSkills", new { SkillType = "Technical" })',
+        expoertGeneral: '@Url.Action("ExportExcel", "AddSkills", new { SkillType = "General" })'
+    }
+</script>
+<script src="~/JS/Settings/AddSkills/AddSkillsJS.js"></script>

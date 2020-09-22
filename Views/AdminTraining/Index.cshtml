@@ -1,0 +1,32 @@
+﻿@model HRTool.Models.Resources.EmployeeTrainingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page_content_inner">
+   
+    <h1 class="page-title">
+        Training Matrix
+        <small>Check the progress of each Resource in your team's training programs.</small>
+    </h1>
+    
+    <div class="">
+        <div >
+            <div id="tableDivTraining">
+                @Html.Action("List", "AdminTraining")
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/JS/Admin/AdminTraining/AdminTrainingJS.js"></script>
+<script>
+    var constantSet = {
+        Savetraining: '@Url.Action("SavData", "AdminTraining")',
+        addEdit: '@Url.Action("AddEditTrainingSet", "AdminTraining")',
+        DeleteProjectUrl: '@Url.Action("DeleteTrainingRecord", "AdminTraining")',
+        FiledTypelistUrl: '@Url.Action("FiledTypeList", "AdminTraining")',
+        ImageUrl: '@Url.Action("ImageData", "AdminTraining")',
+    };
+</script>

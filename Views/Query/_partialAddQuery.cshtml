@@ -1,0 +1,489 @@
+﻿@model HRTool.Models.Query.QueryViewModel
+@*<div class="row marbot10">*@
+    @*<ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Build The Query</a></li>
+        <li><a href="#tab2" data-toggle="tab">Filters & Options</a></li>
+        <li><a href="#tab3" data-toggle="tab">Name & Description</a></li>
+    </ul>*@
+ 
+<div id="wizard" class="swMain">
+    <ul class="tablistnew four">
+        <li>
+            <a href="#step-1" class="s1">
+                <span>1</span> Build The Query
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="s2">
+                <span>2</span> Filter & Options
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="s3">
+                <span>3</span> Name & Description
+            </a>
+        </li>
+        <li>
+            <a href="#step-4" class="s4">
+                <span>4</span> Assignation
+            </a>
+        </li>
+    </ul>
+    @*<ul class="nav nav-tabs" role="tablist">
+        <li class="active" role="presentation">
+            <a role="tab" aria-expanded="true" aria-controls="buildTheQuery" href="#buildTheQuery" data-toggle="tab">Build The Query</a>
+        </li>
+        <li>
+            <a role="tab" aria-expanded="false" aria-controls="filterAndOptions" href="#filterAndOptions" data-toggle="tab">Filters & Options</a>
+        </li>
+        <li>
+            <a role="tab" aria-expanded="false" aria-controls="nameAndDescription" href="#nameAndDescription" data-toggle="tab">Name & Description </a>
+        </li>
+    </ul>*@
+    @*<div class="tab-content" style="padding-top:15px;">*@
+    <div id="step-1">
+    @*<div class="tab-pane active" id="buildTheQuery" role="tabpanel">*@
+        <div class="row">
+       
+            <div class="col-md-4">
+                <select id="TableList" class="form-control" onchange="ChangeColumnList(this.value)">
+                    <option value="">Select Table</option>
+                    @foreach (var item in Model.TableNameList)
+                        {
+                        <option value="@item.Value">@item.Text</option>
+                        }
+                </select>
+                </div>
+            <div class="col-md-4">
+                <select id="ChildTableList" class="form-control" onchange="ChangeColumnList(this.value)" style="display:none;">
+                    <option value="">Select Table</option>
+                    @foreach (var item in Model.ChildTableList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+
+                @*<select id="TableList2" class="form-control" onchange="ChangeColumnList(this.value)">
+                <option value="">Select Table</option>
+                @foreach (var item in Model.MasterTable)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>*@
+                <div class="clearfix"><br /></div>
+            </div>
+        
+        <div class=" col-md-12">
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-5">
+                @*<button id="Up" onclick="moveUp(); return false;">Up</button>*@
+
+                <button id="Up" onclick="Move_Items('up')" class="fa fa-arrow-up btn-success pad-btn"></button>
+                <button id="Down" onclick="Move_Items('down')" class="fa fa-arrow-down btn-primary pad-btn"></button>
+            </div>
+        </div>
+       
+            <div class="col-md-5">
+                <select id="LeftColumn" multiple="multiple" style="min-height:200px;width:100%" classs="form-control"></select>
+            </div>
+            <div class="col-md-2" align="center" style="padding-right:0px;padding-left:0px;">
+                <button id="left" class="fa fa-arrow-left btn-danger pad-btn"></button>
+                <br><br>
+                <button id="right" class="fa fa-arrow-right btn-info pad-btn"></button>
+            </div>
+            <div class="col-md-5">
+                <select id="RightColumn" multiple="multiple" style="min-height:200px;width:100%" classs="form-control"></select>
+            </div>
+            <div class="col-md-5">
+                <span class="field-validation-error" id="lbl-error-FiledVal" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Filed is Required.</span>
+            </div>
+      
+      
+        </div>
+        <div align="center">
+            @*<a class="btn btn-center btn-primary Next" id="btnqueryNext">Next</a>*@
+        </div>
+    </div>
+    <div id="step-2">        
+        <div class="row marbot10">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <span class="icheck-inline icheck-inline-custome text-center">
+                    <label class="inline-label">
+                        @if (Model.IsDisplayAny == true)
+                        {
+                            <input type="radio" name="divAl" id="divAll" class="Query_radio">
+                        }
+                        else
+                        {
+                            <input type="radio" name="divAl" id="divAll" class="Query_radio" checked="checked">
+                        }
+                        All
+                        </label>
+                 </span>
+                <span class="icheck-inline icheck-inline-custome text-center">
+                    <label class="inline-label">
+                        @if (Model.IsDisplayAny == true)
+                        {
+                            <input type="radio" name="divAl" id="divAnyOfThis" class="Query_radio" checked="checked">
+                        }
+                        else
+                        {
+                            <input type="radio" name="divAl" id="divAnyOfThis" class="Query_radio">
+                       }
+                       Any of the filters
+                    </label>
+                </span>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>   
+        <div id="div_divAll">
+            <input type="radio" id="radioAllAnd" name="radioAllAnd" checked="checked"/>And
+            <input type="radio" id="radioAllOr" name="radioAllAnd" />Or
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">First Name</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txt_FirstName" class="form-control"/>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Last Name</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="txt_LastName" class="form-control" />
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Start Date *</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="txt_StartDate" class="form-control"/>                   
+                </div>                
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">End Date *</label>
+                </div>
+                <div class="col-md-6">
+                        <input type="text" id="txt_EndDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-EndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">End Date is required.</span>
+                    <span class="field-validation-error" id="lbl-error-GreaterEndDate" style="display:none;" data-valmsg-for="DateAwarded" data-valmsg-replace="true">Please select end date is grater then start date.</span>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Business</label>
+
+                </div>
+                <div class="col-md-2">
+                <select class="form-control" id="drpBusiness">
+                    @foreach(var item in Model.BusinessList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>                    
+                </div>                
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Division </label>
+                </div>
+                <div class="col-md-2">
+                            <select class="form-control" id="drpDivision">
+                                <option value="0">All</option>
+                            </select>
+                </div>
+                </div>    
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Pool </label>
+                </div>
+                <div class="col-md-2">                    
+                        <select class="form-control" id="drpPool">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Function </label>
+                </div>                
+                <div class="col-md-2">
+                    <select class="form-control" id="drpFunction">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+            </div>   
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Job Title </label>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="drpJobTitle">
+                        <option value="0">All</option>
+                        @foreach (var item in Model.JobTitleList)
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row marbot10">
+                <div class="col-md-3">
+                    <label class="control-label" for="StatusList">Customer </label>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="drpCustomer">
+                        <option value="0">All</option>
+                        @foreach (var item in Model.CustomerList)
+                        {
+                            <option value=@item.Value>@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="div_divAnyOfThis" style="display:none;">
+            <input type="button" id="AddFilter" name="AddFilter" onclick="AddFilter()" value="Add Filter" />
+            <div id="filterOption">
+            </div>
+        </div>
+        <a class="btn btn-primary" onclick="SaveQuery()">Run Query</a>
+    </div>
+    <div id="step-3">
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label">Name *</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="assigNameText" value="" size="70" placeholder="Name"/>
+            </div>
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-Resource" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Name is Required.</span>
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <label class="control-label" for="StatusList">Description </label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="assigDescription" class="form-control" />
+            </div>
+        </div>
+        <div class="row marbot10">
+            <div class="col-md-3">
+                <span class="field-validation-error" id="lbl-error-QueryText" style="display:none;" data-valmsg-for="Customer" data-valmsg-replace="true">Please Run Query.</span>
+            </div>
+        </div>
+    </div>
+    <div id="step-4">
+    </div>
+</div>
+
+    @*</div>*@
+    <script type="text/javascript">
+        //$(function () {
+        (function () {
+            var previous;
+            $("#TableList").on('focus', function () {
+                // Store the current value on focus and on change
+                previous = this.value;
+            }).change(function () {
+                if (previous == 17) {
+                    $("#RightColumn").html('');
+                }
+                if (previous == 16) {
+                    $("#RightColumn").html('');
+                }
+                if (previous == 13) {
+                    $("#RightColumn").html('');
+                }
+                else if (previous == 14) {
+                    $("#RightColumn").html('');
+                }
+                else if (previous == 31) {
+                    $("#RightColumn").html('');
+                }
+                else if (previous == 26) {
+                    $("#RightColumn").html('');
+                }
+                // Make sure the previous value is updated
+                previous = this.value;
+            });
+            $("#ChildTableList").on('focus', function () {
+                // Store the current value on focus and on change
+                previous = this.value;
+            }).change(function () {
+                var tableIdd = $("#TableList").val();
+                if (tableIdd != 1)
+                {
+                    $("#RightColumn").html('');
+                }                
+                previous = this.value;
+            });
+        })();
+        function moveItems(origin, dest) {
+            $(origin).find(':selected').appendTo(dest);
+        }
+        $('#left').click(function () {
+            moveItems('#RightColumn', '#LeftColumn');
+        });
+
+        $('#right').on('click', function () {
+            moveItems('#LeftColumn', '#RightColumn');
+        });
+        //})
+
+        $('.Next').click(function () {
+            $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        });
+        $('.back').click(function () {
+            $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        });
+
+        function ChangeColumnList(TableId) {
+            var TableListId = $("#TableList").val();            
+            if (TableListId == 1)
+            {
+                $("#ChildTableList").show();
+            }
+            $.ajax({
+                url: ConstantQuery.BindColumnList,
+                data: { TableID: TableId },
+                success: function (data) {
+                    debugger;
+                    var index = null;
+                    //$("#RightColumn").html('');
+                    if (TableId == 13) {
+                        $("#RightColumn").html('');
+                    }
+                    else if (TableId == 14) {
+                        $("#RightColumn").html('');
+                    }
+                    else if (TableId == 17) {
+                        $("#RightColumn").html('');
+                    }
+                    else if (TableId == 16) {
+                        $("#RightColumn").html('');
+                    }
+                    else if (TableId == 31) {
+                        $("#RightColumn").html('');
+                    }
+                    else if (TableId == 26) {
+                        $("#RightColumn").html('');
+                    }
+                    else {
+                        $("#RightColumn option").each(function () {
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].Value == this.value) {
+                                    index = i;
+                                }
+                            }
+                            if (index != null) {
+                                data.splice(index, 1);
+                            }
+                        });
+                    }
+                    $('#LeftColumn').html('');
+                    var HtmlString = '';
+                    if (data != null) {
+                        $.each(data, function (index, item) {
+                            HtmlString += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                        });
+                    }
+                    else {
+                        HtmlString += "<option value=''></option>";
+                    }
+                    $('#LeftColumn').html(HtmlString);
+                    $(".hrtoolLoader").hide();
+                    $(".modal-backdrop").hide();
+                }
+            });
+        }
+
+        function moveUp() {
+            var ddl = document.getElementById('RightColumn');
+            var selectedItems = new Array();
+            var temp = { innerHTML: null, value: null };
+            for (var i = 0; i < ddl.length; i++)
+                if (ddl.options[i].selected)
+                    selectedItems.push(i);
+
+            if (selectedItems.length > 0)
+                if (selectedItems[0] != 0)
+                    for (var i = 0; i < selectedItems.length; i++) {
+                        temp.innerHTML = ddl.options[selectedItems[i]].innerHTML;
+                        temp.value = ddl.options[selectedItems[i]].value;
+                        ddl.options[selectedItems[i]].innerHTML = ddl.options[selectedItems[i] - 1].innerHTML;
+                        ddl.options[selectedItems[i]].value = ddl.options[selectedItems[i] - 1].value;
+                        ddl.options[selectedItems[i] - 1].innerHTML = temp.innerHTML;
+                        ddl.options[selectedItems[i] - 1].value = temp.value;
+                        ddl.options[selectedItems[i] - 1].selected = true;
+                        ddl.options[selectedItems[i]].selected = false;
+                    }
+        }
+
+        function moveDown() {
+            var ddl = document.getElementById('RightColumn');
+            var selectedItems = new Array();
+            var temp = { innerHTML: null, value: null };
+            for (var i = 0; i < ddl.length; i++)
+                if (ddl.options[i].selected)
+                    selectedItems.push(i);
+
+            if (selectedItems.length > 0)
+                if (selectedItems[selectedItems.length - 1] != ddl.length - 1)
+                    for (var i = selectedItems.length - 1; i >= 0; i--) {
+                        temp.innerHTML = ddl.options[selectedItems[i]].innerHTML;
+                        temp.value = ddl.options[selectedItems[i]].value;
+                        ddl.options[selectedItems[i]].innerHTML = ddl.options[selectedItems[i] + 1].innerHTML;
+                        ddl.options[selectedItems[i]].value = ddl.options[selectedItems[i] + 1].value;
+                        ddl.options[selectedItems[i] + 1].innerHTML = temp.innerHTML;
+                        ddl.options[selectedItems[i] + 1].value = temp.value;
+                        ddl.options[selectedItems[i] + 1].selected = true;
+                        ddl.options[selectedItems[i]].selected = false;
+                    }
+        }
+        function Move_Items(direction) {
+            var listbox = document.getElementById('RightColumn');
+            var selIndex = listbox.selectedIndex;
+
+            if (selIndex == -1) {
+                alert("Please select an option to move.");
+                return;
+            }
+
+            var increment = -1;
+            if (direction == 'up')
+                increment = -1;
+            else
+                increment = 1;
+
+            if ((selIndex + increment) < 0 ||
+                (selIndex + increment) > (listbox.options.length - 1)) {
+                return;
+            }
+
+            var selValue = listbox.options[selIndex].value;
+            var selText = listbox.options[selIndex].text;
+            listbox.options[selIndex].value = listbox.options[selIndex + increment].value
+            listbox.options[selIndex].text = listbox.options[selIndex + increment].text
+
+            listbox.options[selIndex + increment].value = selValue;
+            listbox.options[selIndex + increment].text = selText;
+
+            listbox.selectedIndex = selIndex + increment;
+        }
+    </script>
+
+    <script src="~/JS/Query/QueryJS.js"></script>

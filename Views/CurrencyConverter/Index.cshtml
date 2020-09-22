@@ -1,0 +1,124 @@
+﻿@model HRTool.Models.Settings.CurrencyConverterModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<div id="page_content_inner">
+    <br />
+    <form role="form" name="currencyForm" class="uk-form-stacked ng-pristine ng-valid-email ng-valid-min ng-valid-max ng-valid-pattern ng-valid ng-valid-required">
+         
+        <h1 class="page-title">
+            Currency Converter
+            <small>Manage currency related settings.</small>
+        </h1>
+
+
+        <div class="md-card" style="padding:20px;">
+            <div >
+                <div class="uk-form-row row">
+                    <label for="selectedFromCurrency" class="uk-form-label col-md-3">From  Currency</label>
+                    <div class="form-group col-md-6" title="Select the Default Currency" data-toggle="tooltip" data-placement="right">
+                        <select class="form-control" id="fromCurrency" name="SelectedFromCurrency">
+                            @foreach (var item in Model.BindCurrencyList)
+                            {
+                                <option value="@item.Value" @(item.Selected ? "Selected" : "")>@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row   ">
+                    <label class="col-md-3" for="fromAmount">From Amount</label>
+                    <div class="form-control-filled col-md-6" title="Enter From Amount" data-toggle="tooltip" data-placement="right">
+                        <input type="number" name="FromAmount" id="FromAmount" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-required="true">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="field-validation-error" id="validationmessage" data-valmsg-for="Fromamount" data-valmsg-replace="true" style="display:none"></span>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <label for="selectedToCurrency" class="uk-form-label col-md-3">To Currency</label>
+                    <div class="form-group col-md-6" title="Select the Default Currency" data-toggle="tooltip" data-placement="right">
+                        <select class="form-control" id="ToCurrency" name="SelectedToCurrency">
+                            @foreach (var item in Model.BindCurrencyList)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="row   ">
+                    <label class="col-md-3" for="toAmount">To Amount</label>
+                    <div class="form-control-filled col-md-6">
+                        <input type="number" name="ToAmount" id="ToAmount" class="form-control ng-pristine ng-untouched ng-valid ng-valid-pattern" readonly="" disabled="">
+                        <span class="form-control-bar"></span>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="uk-form-row row">
+                    <div class=" col-md-3">
+                        <button type="button" class="btn btn-success" id="isSubmittingData">Convert</button>
+                        <div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            @Html.Partial("_PartialCurrencyListRecord")
+        </div>
+    </form>
+
+    <div id="ModelCurrency" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Warning</h4>
+
+                </div>
+                <div class="modal-body ng-scope">
+                    <p class="ng-binding">
+                        This will apply(copy) live rates to fixed rates for all currencies. Are you sure?
+                    </p>
+                </div>
+                <div class="modal-footer ng-scope">
+                    <button class="btn btn-success ng-binding" id="ChangeCurrenyRate">Ok</button>
+                    <button class="btn btn-warning ng-binding" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@*Java Script*@
+<script src="~/JS/Settings/CurrencyConverter/CurrencyConverterJS.js"></script>
+<script>
+    var constant = {
+        CurrencyConvertUrl: '@Url.Action("ConvertCurrency", "CurrencyConverter")',
+        ApplyLiveRateUrl: '@Url.Action("ApplyLiveRates", "CurrencyConverter")',
+        ChangeCurrencyUrl: '@Url.Action("ChangeCurrency", "CurrencyConverter")',
+        ExportCurrencyUrl: '@Url.Action("ExportCurrencyList", "CurrencyConverter")'
+    };
+</script>
+<script>
+    $("#FromAmount").keypress(function (event) {        
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>

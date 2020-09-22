@@ -1,0 +1,72 @@
+﻿
+
+<input type="hidden" id="taskid" value="@Model.Id"/>
+<div class="row marbot10">
+    <label class="col-md-3">Title*</label>
+    <div class="col-md-6">
+        <input type="text" name="NewTaskTitle" class="form-control" id="NewTaskTitle" value="@Model.Title">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidNewTaskTitle" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Assign To</label>
+    <div class="col-md-6">
+        <select class="form-control" id="drpAssign">
+            @foreach (var Assign in Model.AssignList)
+            {
+                <option value="@Assign.Value" @(Assign.Selected ? "Selected" : "")>@Assign.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Due Date</label>
+    <div class="col-md-6">
+        <input type="text" name="DueDate" class="form-control Datepiker" id="DueDate" value="@Model.DueDate">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Alert Before Days</label>
+    <div class="col-md-6">
+        <input type="number" name="AlertBeforeDays" class="form-control" id="AlertBeforeDays" value="@Model.AlertBeforeDays">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Description</label>
+    <div class="col-md-6">
+        <input type="text" name="NewTaskDescription" class="form-control" id="NewTaskDescription" value="@Model.Description">
+        <span class="form-control-bar"></span>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+<div class="row marbot10">
+    <label class="col-md-3">Status </label>
+    <div class="col-md-6">
+        <select class="form-control" id="drpStatus">
+            @foreach (var Status in Model.StatusList)
+            {
+                <option value="@Status.Value" @(Status.Selected ? "Selected" : "")>@Status.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <span class="field-validation-error" id="ValidDaysPerWeek" data-valmsg-for="Title" data-valmsg-replace="true" style="display:none"></span>
+    </div>
+</div>
+

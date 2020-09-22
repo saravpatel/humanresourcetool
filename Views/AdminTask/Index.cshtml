@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .stepContainer {
+        height: 455px !important;
+    }
+
+    #filesList {
+        height: 350px;
+    }
+
+    .bottom {
+        margin-top: 10px;
+    }
+</style>
+<h1 class="page-title">
+    Tasks
+    <small>Select a task to view more options. You can filter the tasks using the tabs on the left.</small>
+</h1>
+<div class="col-md-2">
+    <ul class="nav in-submenu listTask">
+        @Html.Action("TaskMenu", "AdminTask")
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div id="page_content_inner">
+        
+          
+ <div class="clearfix"></div>
+       
+        <div class="md-card">
+            <div class="">
+                <div id="tableDiv">
+                    @Html.Action("List", "AdminTask")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var constantAdminTask = {
+        addEdit: '@Url.Action("AddEditTask", "AdminTask")',
+        ImageUrl: '@Url.Action("ImageData", "AdminTask")',
+        SaveData: '@Url.Action("SaveData", "AdminTask")',
+        DeleteData: '@Url.Action("DeleteData", "AdminTask")',
+        ListData: '@Url.Action("List", "AdminTask")',
+        updateCount: '@Url.Action("TaskMenu", "AdminTask")',
+    };
+
+</script>
+
+<script src="~/JS/Admin/AdminTask/AdminTaskJS.js"></script>

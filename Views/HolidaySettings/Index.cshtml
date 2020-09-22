@@ -1,0 +1,485 @@
+﻿@model HRTool.Models.Settings.HolidayNAbsenceViewModel
+@{
+    ViewBag.Title = "Holidays & Absence Settings";
+    Layout = "~/Views/Shared/_SettingLayout.cshtml";
+}
+<style>
+    .form-control {
+        width: 100% !important;
+    }
+
+    .Zebra_DatePicker_Icon_Wrapper {
+        width: 100% !important;
+    }
+
+    .Display {
+        display: none;
+    }
+    .row{
+        margin-top:10px;
+    }
+</style>
+<div id="page_content_inner">
+    <br />
+    
+
+    <h1 class="page-title">
+        Holidays & Absence Settings
+        <small>Here you can customise the system’s default settings to match the values set by your company</small>
+    </h1>
+
+
+
+
+
+    
+        <div >
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <input type="hidden" id="hidden-Id" value="@Model.Id" />
+                    <label class="control-label" for="systemListName">Normal Working Hours (Daily)</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="0.5" min="1" max="24" value="@Model.WorkingHours" id="txt_NormalWorkingHours" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Default Work Pattern (Weekly)</label>
+                </div>
+                <div class="col-md-6">
+                    <div id="DefaultWorkPatternModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add Work Pattern</h4>
+                                </div>
+                                <div class="modal-body" id="DefaultWorkPatternBody">
+                                    <p>Some text in the modal.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success" id="btn-submit-DefaultWorkPattern">Add</button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-9"style="padding:0;width:80%;">
+                       
+                        <select class="form-control" id="drp_DefaultWorkPattern">
+                            @foreach (var item in Model.workPatternList)
+                            {
+                                if (item.Text == Model.WorkPatternValue)
+                                {
+                                    <option selected="selected" value=@item.Value>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+
+                            }
+                            <option value="AddNew_WorkPattern" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal"> + Manage List</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding:0;text-align:right;width:20%;">
+                        <button data-backdrop="static" id="EditWorkPattern" data-keyboard="false" data-toggle="modal" data-target="#DefaultWorkPatternModal" class="md-btn md-btn-success DefaultWorkPattern_Edit @(Model.WorkPatternValue != null ? "" : "Display")">EDIT</button>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-DefaultWorkPattern" style="display:none;" data-valmsg-for="DefaultWorkPattern" data-valmsg-replace="true">Default WorkPattern is required.</span>
+                    <span class="field-validation-error" id="lbl-error-ValidDefaultWorkPattern" style="display:none;" data-valmsg-for="DefaultPublicHoliday" data-valmsg-replace="true">Please Select Valid Default WorkPattern.</span>
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Maximum Duration of Consecutive Annual Leave</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="1" min="1" max="99" value="@Model.AnnualLeave" id="txt_MaximumDurationofConsecutiveAnnualLeave" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Max Holiday Carry Over Days</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="1" min="1" max="99" value="@Model.CarryOverDays" id="txt_MaxHolidayCarryOverDays" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Max Holiday Carry Over Hours</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="1" min="1" max="99" value="@Model.CarryOverHours" id="txt_MaxHolidayCarryOverHours" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Holiday Year</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" id="drp_Holiday_Year">
+                        @foreach (var item in Model.holidayYearList)
+                        {
+                            if (item.Text == Model.HolidayYearValue)
+                            {
+                                <option selected="selected" value=@item.Value>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-Holiday_Year" style="display:none;" data-valmsg-for="Holiday_Year" data-valmsg-replace="true">Holiday Year is required.</span>
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Default Public Holiday Template</label>
+                </div>
+                <div class="col-md-6">
+                    <div id="DefaultPublicHolidayTemplateModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add Public Holiday Template</h4>
+                                </div>
+                                <div class="modal-body" id="DefaultPublicHolidayTemplateBody">
+                                    <p>Some text in the modal.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success" id="btn-submit-DefaultPublicHolidayTemplate">Add</button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-9" style="padding:0;width:80%;">
+                        <select class="form-control" id="drp_DefaultPublicHolidayTemplate">
+                            @foreach (var item in Model.countryList)
+                            {
+                                if (item.Text == Model.PublicHolidayTemplateValue)
+                                {
+                                    <option selected="selected" value="@item.Value">@item.Text</option>}
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            <option value="AddNew_DefaultPublicHolidayTemplate" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#DefaultPublicHolidayTemplateModal"> + Add New</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding:0;text-align:right;width:20%;">
+                        <button data-backdrop="static" id="EditPublicHoliday" data-keyboard="false" data-toggle="modal" data-target="#DefaultPublicHolidayTemplateModal" class="md-btn md-btn-success DefaultPublicHolidayTemplate_Edit @(Model.PublicHolidayTemplateValue != null ? "" : "Display")">EDIT</button>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-DefaultPublicHoliday" style="display:none;" data-valmsg-for="DefaultPublicHoliday" data-valmsg-replace="true">Default Public Holiday is required.</span>
+                    <span class="field-validation-error" id="lbl-error-ValidDefaultPublicHoliday" style="display:none;" data-valmsg-for="DefaultPublicHoliday" data-valmsg-replace="true">Please Select Valid Default Public Holiday.</span>
+
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Does the Total Holiday Entitlement include Public Holidays?</label>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.TotalHolidayEntitlement)
+                    {
+                        <input type="checkbox" checked="checked" value="@Model.TotalHolidayEntitlement" id="txt_DoestheTotalHolidayEntitlement" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@Model.TotalHolidayEntitlement" id="txt_DoestheTotalHolidayEntitlement" />
+
+                    }
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Holiday Entitlement %</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="0.1" min="0" max="100" value="@Model.HolidayEntitlement" id="txt_HolidayEntitlement" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Holiday Return To Work Form</label>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.HolidayReturn)
+                    {
+                        <input type="checkbox" checked="checked" value="@Model.HolidayReturn" id="chk_HolidayReturnToWorkForm" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@Model.HolidayReturn" id="chk_HolidayReturnToWorkForm" />
+                    }
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+            </div>
+             
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Authorise Holidays From Email</label>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.AuthoriseHolidays)
+                    {
+                        <input type="checkbox" checked="checked" value="@Model.AuthoriseHolidays" id="chk_AuthoriseHolidaysFromEmail" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@Model.AuthoriseHolidays" id="chk_AuthoriseHolidaysFromEmail" />
+                    }
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">TOIL Period</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" step="1" min="0" max="100" value="@Model.TOILPeriod" id="txt_TOILPeriod" class="form-control" />
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Enable Bradford Factor Alerts?</label>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.BradfordFactorAlerts)
+                    {
+                        <input type="checkbox" checked="checked" value="@Model.BradfordFactorAlerts" id="chk_EnableBradfordFactorAlerts" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@Model.BradfordFactorAlerts" id="chk_EnableBradfordFactorAlerts" />
+                    }
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Calculation Period</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" id="drp_CalculationPeriod">
+                        @foreach (var item in Model.calculationPeriodList)
+                        {
+                            if (item.Text == Model.CalculationPeriodValue)
+                            {
+                                <option selected="selected" value=@item.Value>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <span class="field-validation-error" id="lbl-error-CalculationPeriod" style="display:none;" data-valmsg-for="CalculationPeriod" data-valmsg-replace="true">Default Calculation Period is required.</span>
+                </div>
+            </div>
+
+            <div class="row  ">
+                <div class="col-md-3">
+                    <label class="control-label" for="systemListName">Bradford Factor Trigger Points</label>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="table-responsive">
+                        <table class="table-bordered display table style2 table-striped  dataTable">
+                            <thead>
+                                <tr>
+                                    <th>TRIGGER POINT</th>
+                                    <th>LOWER VALUE</th>
+                                    <th>UPPER VALUE</th>
+                                    <th>ALERT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>@Model.BradfordFactor.LowerValue1</td>
+                                    <td>@Model.BradfordFactor.UpperValue1</td>
+                                    <td>@Model.BradfordFactor.Alert1</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>@Model.BradfordFactor.LowerValue2</td>
+                                    <td>@Model.BradfordFactor.UpperValue2</td>
+                                    <td>@Model.BradfordFactor.Alert2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>@Model.BradfordFactor.LowerValue3</td>
+                                    <td>@Model.BradfordFactor.UpperValue3</td>
+                                    <td>@Model.BradfordFactor.Alert3</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>@Model.BradfordFactor.LowerValue4</td>
+                                    <td>@Model.BradfordFactor.UpperValue4</td>
+                                    <td>@Model.BradfordFactor.Alert4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    <div id="BradfordFactorModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Bradford Factor Trigger Points</h4>
+                                </div>
+                                <div class="modal-body" id="BradfordFactorBody" >
+                                    @*<p>Some text in the modal.</p>*@
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success" id="btn-submit-BradfordFactor">Save</button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-lg-12" align="right" style="margin-bottom:20px;">
+                    <button data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#BradfordFactorModal" class="btn btn-info" id="BradfordFactorModal">EDIT</button>
+                    <button id="btn-save-HolidaySetting" class="btn btn-success">Save</button>
+                </div><br />
+            </div>
+        </div>
+     
+</div>
+
+<script>
+    var constantHolidaySetting = {
+        saveSettings: '@Url.Action("Index", "HolidaySettings")',
+        publicHoliday: '@Url.Action("PublicHoliday", "HolidaySettings")',
+        savePublicHoliday: '@Url.Action("SaveHolidayData", "HolidaySettings")',
+        updateHoliday: '@Url.Action("updateHoliday", "HolidaySettings")',
+        deleteHoliday: '@Url.Action("deleteHoliday", "HolidaySettings")',
+        BradfordFactor: '@Url.Action("BradfordFactor", "HolidaySettings")',
+        SaveBradfordFactor: '@Url.Action("SaveBradfordFactor", "HolidaySettings")',
+        workPatten: '@Url.Action("workPatten", "HolidaySettings")',
+        TrueIsRotating: '@Url.Action("TrueIsRotating", "HolidaySettings")',
+        SaveFalseRoatingData: '@Url.Action("SaveFalseRoatingData", "HolidaySettings")',
+        SaveTrueRoatingData: '@Url.Action("SaveTrueRoatingData", "HolidaySettings")',
+        FalseIsRotating: '@Url.Action("FalseIsRotating", "HolidaySettings")',
+    }
+</script>
+<script>
+    $("#txt_NormalWorkingHours").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_MaximumDurationofConsecutiveAnnualLeave").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    
+    $("#txt_MaxHolidayCarryOverDays").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_MaxHolidayCarryOverHours").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_HolidayEntitlement").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+    $("#txt_TOILPeriod").keypress(function (event) {
+        if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+            return false;
+        }
+    });
+</script>
+<script src="~/JS/Settings/HolidayNAbsenceSetting/HolidayNAbsenceJS.js"></script>
+<script src="~/JS/Settings/HolidayNAbsenceSetting/HolidaysNAbsenceSeveJS.js"></script>

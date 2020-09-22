@@ -1,0 +1,81 @@
+﻿@model HRTool.Models.Resources.Coworker
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" media="all">
+<link rel="stylesheet" href="~/Content/login_page.min.css" media="all">
+<link rel="stylesheet" href="~/Content/custom.css" media="all">
+<link rel="stylesheet" href="~/Content/Site.css" media="all">
+
+<div class="fotfix">
+    <div data-ui-view="" class="">
+        <div class="container ">
+            <section id="loginForm">
+
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="loginbox">
+                        <div class="formbox">
+                            <h2>Please enter your password below to complete review process</h2>
+                            <div class="form tool">
+                                <div class="block">
+                                    <label class="block">Password</label>
+                                    <input type="hidden" class="form-control" id="hdnPerWorkerID" value="@Model.cororkerId" />
+
+                                    <input type="password" class="form-control" id="txtReviewPassword" />
+                                </div>
+                            </div>
+                            <div class="block">
+                                <button type="button" onclick="VerifyGuestcredentials(@Model.cororkerId)" class="pull-right md-btn md-btn-primary login-btn" value="Submit">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/Ajjquery.smartWizard.js"></script>
+<script src="~/JS/SmartWizard/jquery.smartWizard.min.js"></script>
+<script src="~/JS/SmartWizard/jquery.smartWizard.js"></script>
+
+<script src="~/Scripts/jquery.smartWizard.js"></script>
+<link href="~/assets/css/progress-wizard.min.css" rel="stylesheet" />
+<script src="~/jquery_selectlist/scripts/jquery.selectlist.min.js"></script>
+<script src="~/Zebra_Dialog-master/javascript/zebra_dialog.js"></script>
+<script src="~/Zebra_Datepicker-master/public/javascript/zebra_datepicker.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/ion.rangeSlider-2.1.7/ion.rangeSlider-2.1.7/js/ion-rangeSlider/ion.rangeSlider.js"></script>
+<script src="~/ion.rangeSlider-2.1.7/ion.rangeSlider-2.1.7/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+<script src="~/JS/Resources/Performance/EmployeePerformanceSegments.js"></script>
+<script>
+    var constantvar = {
+        verify: '@Url.Action("verifyPasswordOfGuestCustomer", "MeEmployeePerformance")',
+    }
+</script>
+<script>
+    function VerifyGuestcredentials(id) {
+        debugger;
+        $.ajax({
+            url: constantvar.verify,
+            data: { id: id, password: $('#txtReviewPassword').val() },
+            success: function (data) {
+                if (data.message == false) {
+                    Alert('password is invalid')
+                }
+                else
+                {
+                    var link = '@Url.Action("CustomerQueDetailsForMe", "MeEmployeePerformance", new { Id = "true", PerCoworkerId = "replace" })';
+                    link = link.replace("replace", id);
+                    var win = window.open(link, '_blank');
+                    win.focus();
+                }
+            }
+        });
+    }
+
+</script>
+
+
